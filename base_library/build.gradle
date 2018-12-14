@@ -1,18 +1,28 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+final String support_design_version = "28.0.0"
+final String ktx_version = "0.3"
+final String constraint_version = "1.1.3"
+final String circle_image_version = "2.2.0"
+final String glide_version = "4.7.1"
+final String rx_android_version = "2.1.0"
+final String rx_java_version = "2.1.1"
+final String retrofit_version = "2.3.0"
+final String logging_version = "3.9.0"
+final String leak_canary_version = "1.6.1"
+final String paging_version = "1.0.1"
+final String lifecycle_version = "1.1.1"
 
 android {
     compileSdkVersion 28
-
-
-
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -21,7 +31,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -31,4 +40,40 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api "com.android.support:appcompat-v7:$support_design_version"
+    api "com.android.support:appcompat-v7:$support_design_version"
+    api "com.android.support:support-v4:$support_design_version"
+    api "com.android.support:design:$support_design_version"
+    api "com.android.support:cardview-v7:$support_design_version"
+    api "com.android.support:recyclerview-v7:$support_design_version"
+    api "com.android.support:gridlayout-v7:$support_design_version"
+    api "com.android.support.constraint:constraint-layout:$constraint_version"
+    api "de.hdodenhof:circleimageview:$circle_image_version"
+
+    api "android.arch.paging:runtime:$paging_version"
+    api "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    //noinspection GradleDependency
+    api "androidx.core:core-ktx:$ktx_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    api "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+    api "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    api "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    api "com.squareup.okhttp3:logging-interceptor:$logging_version"
+
+    debugApi "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
+    releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+
+}
+repositories {
+    mavenCentral()
 }

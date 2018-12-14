@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>   <!--提示框是否有边框-->
+        <item name="android:windowIsFloating">true</item>   <!--提示框是否是浮动的-->
+        <item name="android:windowIsTranslucent">true</item>    <!--提示框是不是透明的-->
+        <item name="android:windowNoTitle">true</item>  <!--提示框是否有标题-->
+        <item name="android:windowBackground">@android:color/transparent</item> <!--提示框的背景颜色是什么-->
+        <item name="android:windowContentOverlay">@null</item>  <!--是否有遮盖 -->
+        <item name="android:backgroundDimEnabled">true</item>   <!--是否充许对话框的背景变暗。为true则充许变暗-->
+        <item name="android:backgroundDimAmount">0.3</item>     <!--对话框的背景灰度-->
+    </style>
+
+    <style name="AnimBottomIn" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <style name="AnimTopIn" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_top_in</item>
+        <item name="android:windowExitAnimation">@anim/push_top_out</item>
+    </style>
+
+    <!-- 通用错误页面的样式 -->
+    <style name="MultipleStatusView" />
+
+    <style name="MultipleStatusView.Content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:textColor">#a9b7b7</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>
