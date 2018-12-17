@@ -17,6 +17,7 @@ abstract class BaseMvpActivity<V : BaseMvpViewImpl, P : BaseMvpPresenter<V>> : B
     override fun onCreate(savedInstanceState: Bundle?) {
         mPresenter = initPresenter()
         super.onCreate(savedInstanceState)
+        /* 注册 lifecycle */
         lifecycle.addObserver(mPresenter)
     }
 

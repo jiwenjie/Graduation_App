@@ -20,12 +20,23 @@ abstract class BaseFragment : Fragment() {
         return inflater.inflate(getLayoutId(), container, false)
     }
 
+    /**
+     * 多种状态的 View 切换
+     */
+    protected var mLayoutStatusView: MultipleStatusView? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initFragment(savedInstanceState)
+        mLayoutStatusView?.setOnRetryClickListener {
+            loadData()
+        }
+        loadData()
         setListener()
         handleRxBus()
     }
+
+    protected abstract fun loadData()
 
     protected abstract fun getLayoutId(): Int
 

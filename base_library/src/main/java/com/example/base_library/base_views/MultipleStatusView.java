@@ -48,7 +48,7 @@ public class MultipleStatusView extends RelativeLayout {
 
    private int             mViewStatus;
    private LayoutInflater mInflater;
-   private View.OnClickListener mOnRetryClickListener;
+   private OnClickListener mOnRetryClickListener;
 
    private final ArrayList<Integer> mOtherIds = new ArrayList<>();
 
@@ -101,7 +101,7 @@ public class MultipleStatusView extends RelativeLayout {
     *
     * @param onRetryClickListener 重试点击事件
     */
-   public void setOnRetryClickListener(View.OnClickListener onRetryClickListener) {
+   public void setOnRetryClickListener(OnClickListener onRetryClickListener) {
       this.mOnRetryClickListener = onRetryClickListener;
    }
 
