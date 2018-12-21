@@ -1,18 +1,5 @@
 <resources>
 
-    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
-        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
-        <!--&lt;!&ndash; 状态栏和导航栏都会显示成半透明的状态。并且布局会拓展到系统栏的后面。 &ndash;&gt;-->
-        <!--<item name="windowNoTitle">true</item>      &lt;!&ndash; 去除标题 &ndash;&gt;-->
-        <!--<item name="windowActionBar">false</item>   &lt;!&ndash; 去除 ActionBar &ndash;&gt;-->
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
-        <!--<item name="android:windowTranslucentNavigation">true</item>-->
-    <!--</style>-->
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>   <!-- 去除 ActionBar -->
         <item name="windowNoTitle">true</item>      <!-- 去除标题 -->
@@ -59,5 +46,47 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
+    <!-- 约束布局的样式，左右部分 -->
+    <style name="ConstraintStartAndEndStyle">
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
+    <!--&lt;!&ndash; 约束布局的样式，左右上部分 &ndash;&gt;-->
+    <style name="ConstraintStartEndAndTop" parent="ConstraintStartAndEndStyle">
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <!--&lt;!&ndash; 约束布局的样式，四周部分 &ndash;&gt;-->
+    <style name="ConstraintStartEndTopAndBottom" parent="ConstraintStartEndAndTop">
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <!-- InputLayout 的 style -->
+    <style name="InputStyle">
+        <item name="android:textColor">@color/alpha_90_white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/alpha_90_white</item>
+        <item name="android:textCursorDrawable">@null</item>    <!-- 设置 EditText 光标和字同色 -->
+        <item name="android:textSize">@dimen/common_sp_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textview_style">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">41dp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

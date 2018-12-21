@@ -1,6 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true">
 
-</android.support.constraint.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:background="@color/alpha_40_black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/common_16dp"
+        android:layout_marginEnd="@dimen/common_16dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_40dp">
+
+            <TextView
+                android:id="@+id/activity_login_icon"
+                android:layout_width="@dimen/common_40dp"
+                android:layout_height="@dimen/common_40dp"
+                tools:text="文杰"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:background="@drawable/login_icon_left"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/activity_login_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="新用户注册"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/common_sp_14" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/activity_login_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_40dp"
+            android:text="欢迎使用"
+            android:textColor="@color/color_white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:text="Hello!文杰\n欢迎回来" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColorHint="@color/alpha_60_white"
+            app:hintTextAppearance="@style/InputStyle">
+
+            <EditText
+                android:id="@+id/activity_login_phone"
+                style="@style/EditTextStyle"
+                android:background="@null"
+                android:maxLength="11"
+                android:hint="请输入手机号"
+                android:inputType="number" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_below="@id/activity_login_phone"
+                android:background="@drawable/horizontal_line" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_15dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColorHint="@color/alpha_60_white"
+            app:hintTextAppearance="@style/InputStyle">
+
+            <EditText
+                android:id="@+id/activity_login_password"
+                style="@style/EditTextStyle"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:hint="请输入密码" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_below="@id/activity_login_password"
+                android:background="@drawable/horizontal_line" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_login_btn_active"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="@dimen/common_25dp"
+            android:alpha="0.7"
+            android:background="@drawable/login_btn_no_press"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="登 陆"
+            android:textColor="@color/alpha_90_white"
+            android:textSize="@dimen/common_sp_16" />
+
+        <TextView
+            android:id="@+id/activity_login_more"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/common_35dp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:text="更多"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/common_sp_14" />
+    </LinearLayout>
+
+</FrameLayout>

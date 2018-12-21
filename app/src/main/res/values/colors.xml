@@ -4,10 +4,13 @@
     <color name="colorPrimaryDark">#FE6D4B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="transparent">#00000000</color>
+    <color name="translucent_white">#61FFFFFF</color>
     <color name="color_gray">#9a9a9a</color>
 
     <color name="color_gray_translucent">#5000</color>
 
+    <color name="theme">#3399ff</color>
     <color name="app_color_theme_1">#EF5362</color> <!-- Grapefruit -->
     <color name="app_color_theme_2">#FE6D4B</color> <!-- Bittersweet -->
     <color name="app_color_theme_3">#FFCF47</color> <!-- Sunflower -->
@@ -17,6 +20,13 @@
     <color name="app_color_theme_7">#00b0ff</color> <!-- Blue Jeans -->
     <color name="app_color_theme_8">#AC8FEF</color> <!-- Lavender -->
     <color name="app_color_theme_9">#EE85C1</color> <!-- Pink Rose -->
+
+    <color name="base_bg">#ffeeeeee</color>
+    <color name="base_msg_color">#ff999999</color>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#427fed</color>
+    <color name="gplus_color_4">#b23424</color>
 
     <color name="color_pink">#ff4081</color>
     <color name="color_orange">#dd2c00</color>
@@ -50,4 +60,61 @@
 
     <color name="md_grey_700">#616161</color>
     <color name="md_grey_500">#9e9e9e</color>
+
+    <!--transparent-->
+    <color name="container_background">#EBEBEB</color>
+    <color name="item_background">#FAFAFA</color>
+
+    <color name="primary_text_white">#deffffff</color>
+    <!--87%white-->
+    <color name="primary_text">#de000000</color>
+    <!--87%black-->
+    <color name="secondary_text">#8a000000</color>
+    <!--54%black-->
+    <color name="tertiary_text">#8a000000</color>
+    <!--54%black-->
+    <color name="image_place_holder">#DFDFDF</color>
+    <color name="image_place_holder_night">#272B2F</color>
+    <!--87%white-->
+    <color name="progress_bar_unfinished">#D4D4D4</color>
+
+    <color name="alpha_05_white">#0DFFFFFF</color>
+    <color name="alpha_10_white">#1AFFFFFF</color>
+    <color name="alpha_15_white">#26FFFFFF</color>
+    <color name="alpha_20_white">#33FFFFFF</color>
+    <color name="alpha_25_white">#40FFFFFF</color>
+    <color name="alpha_30_white">#4DFFFFFF</color>
+    <color name="alpha_35_white">#59FFFFFF</color>
+    <color name="alpha_40_white">#66FFFFFF</color>
+    <color name="alpha_45_white">#73FFFFFF</color>
+    <color name="alpha_50_white">#80FFFFFF</color>
+    <color name="alpha_55_white">#8CFFFFFF</color>
+    <color name="alpha_60_white">#99FFFFFF</color>
+    <color name="alpha_65_white">#A6FFFFFF</color>
+    <color name="alpha_70_white">#B3FFFFFF</color>
+    <color name="alpha_75_white">#BFFFFFFF</color>
+    <color name="alpha_80_white">#CCFFFFFF</color>
+    <color name="alpha_85_white">#D9FFFFFF</color>
+    <color name="alpha_90_white">#E6FFFFFF</color>
+    <color name="alpha_95_white">#F2FFFFFF</color>
+
+    <color name="alpha_05_black">#0D000000</color>
+    <color name="alpha_10_black">#1A000000</color>
+    <color name="alpha_15_black">#26000000</color>
+    <color name="alpha_20_black">#33000000</color>
+    <color name="alpha_25_black">#40000000</color>
+    <color name="alpha_30_black">#4D000000</color>
+    <color name="alpha_35_black">#59000000</color>
+    <color name="alpha_40_black">#66000000</color>
+    <color name="alpha_45_black">#73000000</color>
+    <color name="alpha_50_black">#80000000</color>
+    <color name="alpha_55_black">#8C000000</color>
+    <color name="alpha_60_black">#99000000</color>
+    <color name="alpha_65_black">#A6000000</color>
+    <color name="alpha_70_black">#B3000000</color>
+    <color name="alpha_75_black">#BF000000</color>
+    <color name="alpha_80_black">#CC000000</color>
+    <color name="alpha_85_black">#D9000000</color>
+    <color name="alpha_90_black">#E6000000</color>
+    <color name="alpha_95_black">#F2000000</color>
 </resources>

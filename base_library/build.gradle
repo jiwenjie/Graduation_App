@@ -43,7 +43,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     api "com.android.support:appcompat-v7:$support_design_version"
-    api "com.android.support:appcompat-v7:$support_design_version"
     api "com.android.support:support-v4:$support_design_version"
     api "com.android.support:design:$support_design_version"
     api "com.android.support:cardview-v7:$support_design_version"
@@ -72,7 +71,9 @@ dependencies {
 
     debugApi "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
     releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
-
+    // 设置状态栏的 Utils 库
+    api 'com.jaeger.statusbarutil:library:1.5.1'
+    api 'com.alibaba:fastjson:1.2.54'
 }
 repositories {
     mavenCentral()

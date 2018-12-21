@@ -4,9 +4,12 @@ import android.annotation.TargetApi
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.base_library.ActivityStackManager
+import com.example.base_library.R
+import com.jaeger.library.StatusBarUtil
 
 /**
  *  author:Jiwenjie
@@ -27,7 +30,10 @@ abstract class BaseActivity : AppCompatActivity() {
       if (needTransparentStatus()) transparentStatusBar()
       setContentView(getLayoutId())
 
+      StatusBarUtil.setTransparent(this)
+//      StatusBarUtil.setColor(this, ContextCompat.getColor(applicationContext, R.color.colorPrimary), 0)
       ActivityStackManager.addActivity(this)
+
       initActivity(savedInstanceState)
 //      mLayoutStatusView?.setOnRetryClickListener { loadData() }
         mLayoutStatusView?.setOnClickListener {

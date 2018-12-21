@@ -18,30 +18,30 @@ import com.pgyersdk.crash.PgyCrashManager;
  */
 public class TestOneActivity extends AppCompatActivity {
 
-//    private Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one);
 
-        TabLayout layout = findViewById(R.id.tabLayout);
-        TabItem dayItem = layout.findViewById(R.id.dayItem);
-        TabItem weekItem = layout.findViewById(R.id.weekItem);
-        TabItem monthItem = layout.findViewById(R.id.monthItem);
-
-        layout.removeAllTabs();
+//        TabLayout layout = findViewById(R.id.tabLayout);
+//        TabItem dayItem = layout.findViewById(R.id.dayItem);
+//        TabItem weekItem = layout.findViewById(R.id.weekItem);
+//        TabItem monthItem = layout.findViewById(R.id.monthItem);
+//
+//        layout.removeAllTabs();
 
 //        layout.addView(weekItem);
 //        layout.addView(dayItem);
 //        layout.addView(monthItem);
 
 //        try {
-//            toolbar.setTitle("测试是否崩溃");
+            toolbar.setTitle("测试是否崩溃");
 //        } catch (Exception e) {
 //            // 异常上传 蒲公英
 //            e.printStackTrace();
-//            PgyCrashManager.reportCaughtException(e);
+////            PgyCrashManager.reportCaughtException(e);
 //        }
     }
 }

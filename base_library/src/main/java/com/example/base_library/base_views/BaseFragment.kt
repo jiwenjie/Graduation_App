@@ -3,9 +3,12 @@ package com.example.base_library.base_views
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.base_library.R
+import com.jaeger.library.StatusBarUtil
 
 /**
  *  author:Jiwenjie
@@ -28,6 +31,7 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initFragment(savedInstanceState)
+        StatusBarUtil.setColor(activity, ContextCompat.getColor(activity!!, R.color.colorPrimary), 0)
         mLayoutStatusView?.setOnRetryClickListener {
             loadData()
         }

@@ -46,14 +46,36 @@
 
         <!-- 程序首页 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".mvp.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!-- 程序的登陆界面 -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".mvp.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 用户的注册页面 -->
+        <activity
+            android:name=".mvp.activity.RegisterActivity"
             android:screenOrientation="portrait" />
+
+        <!-- 输入验证码的页面 -->
+        <activity
+            android:name=".mvp.activity.InputVerificationCodeActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 蒲公英的 sdk 引入 start -->
+        <provider
+            android:name="com.pgyersdk.PgyerProvider"
+            android:authorities="${applicationId}.com.pgyer.provider"
+            android:exported="false" />
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="eef566fce6ff5df19a67b8b3a965b403" />
+        <!-- 蒲公英的 sdk 引入 end -->
+
 
         <!-- 专用于测试的 Activity start -->
         <activity
@@ -64,22 +86,5 @@
             android:name=".test.TestOneActivity"
             android:screenOrientation="portrait" />
         <!-- 专用于测试的 Activity end -->
-
-        <!-- 蒲公英的 appkey eef566fce6ff5df19a67b8b3a965b403 -->
-
-        <!-- 蒲公英的 sdk 引入 start -->
-        <!-- 可选-->
-        <activity android:name="com.pgyersdk.feedback.FeedbackActivity" />
-        <!-- 必选-->
-        <provider
-            android:name="com.pgyersdk.PgyerProvider"
-            android:authorities="${applicationId}.com.pgyer.provider"
-            android:exported="false" />
-        <meta-data
-            android:name="PGYER_APPID"
-            android:value="eef566fce6ff5df19a67b8b3a965b403" />
-        <!-- 蒲公英的 sdk 引入 end -->
-
     </application>
-
 </manifest>

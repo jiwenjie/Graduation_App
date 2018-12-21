@@ -2,6 +2,7 @@ package com.example.base_library.base_utils
 
 import android.content.Context
 import androidx.core.content.edit
+import com.alibaba.fastjson.JSON
 
 /**
  *  author:Jiwenjie
@@ -12,7 +13,8 @@ import androidx.core.content.edit
  */
 object SharePreferencesUtil {
 
-    private const val SHARED_PREFERENCES_NAME = "com.base.share.preference"
+    /** SharePreference 的存储关键字 **/
+    private const val SHARED_PREFERENCES_NAME = "graduation_app_file"
 
     @JvmStatic
     fun saveString(context: Context, key: String, value: String) {
@@ -84,5 +86,28 @@ object SharePreferencesUtil {
     fun getStringSet(context: Context, key: String): Set<String>? {
         val sp = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
         return sp.getStringSet(key, null)
+    }
+
+    /**
+     * 保存任何类型，所以可以传递任何类型对象
+     */
+    @JvmStatic
+    fun saveAny(context: Context, key: String,  `object`: Any) {
+        val sp = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+        sp.edit {
+            putString(key, JSON.toJSONString(`object`))
+        }
+    }
+
+    /**
+     * 获取任何的 bean 类型，所以需要传你要获取的类型，
+     * `object` 就是获取的值转化的类型
+     */
+    @JvmStatic
+    fun getAny(context: Context, key: String, `object`: Any): Any? {
+        val sp = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+        val stringAny = sp.getString(key, "")
+        if (stringAny.isNullOrEmpty()) return null
+        return JSON.parseObject(stringAny, `object`::class.java)
     }
 }

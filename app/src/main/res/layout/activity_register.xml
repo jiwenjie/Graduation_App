@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:paddingStart="@dimen/common_20dp"
+    android:paddingEnd="@dimen/common_20dp"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-20dp">
+
+        <ImageView
+            android:id="@+id/activity_register_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_return" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/activity_register_new_user"
+        style="@style/ConstraintStartAndEndStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_20dp"
+        android:text="新用户注册"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/activity_register_toolbar" />
+
+    <TextView
+        android:id="@+id/activity_register_phoneText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_50dp"
+        android:text="手机号码"
+        android:textColor="@color/alpha_85_black"
+        android:textSize="@dimen/common_sp_12" />
+
+    <LinearLayout
+        android:id="@+id/activity_register_inputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/activity_register_selectLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="+86"
+                android:textColor="@color/alpha_90_black"
+                android:textSize="@dimen/common_sp_18" />
+
+            <TextView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/icon_down"
+                android:drawableTint="@color/alpha_90_black"
+                android:rotation="90"
+                tools:targetApi="m" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/line_1px"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/alpha_60_black" />
+
+        <EditText
+            android:id="@+id/activity_register_inputPhone"
+            style="@style/EditTextStyle"
+            android:layout_marginStart="14dp"
+            android:background="@null"
+            android:hint="请输入手机号码"
+            android:lines="1"
+            android:maxLength="11" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_split"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_1px"
+        android:layout_marginTop="8dp"
+        android:background="@color/alpha_60_black" />
+
+    <TextView
+        android:id="@+id/activity_register_btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="@dimen/common_16dp"
+        android:background="@drawable/login_btn_is_press"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="下一步"
+        android:textColor="@color/alpha_90_white"
+        android:textSize="@dimen/common_sp_16" />
+
+</LinearLayout>

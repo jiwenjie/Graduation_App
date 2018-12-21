@@ -40,6 +40,6 @@ class TestActivity : BaseActivity() {
     }
 
 //   override fun needTransparentStatus(): Boolean {
-////      return true
+////      ic_return true
 ////   }
 }
