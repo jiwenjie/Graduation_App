@@ -59,7 +59,8 @@ class SplashActivity : BaseActivity() {
                 if (user != null) {     // 说明已经注册过，则直接跳转登陆页面之后在登陆
                     intent = if (user.isSignOut!!) {     // 说明有本地账号但是已经点击过退出登陆，即此时未登录
                         Intent(this@SplashActivity, LoginActivity::class.java)
-                    } else {       // 说明有本地账号但是已经点击过退出登陆，即此时未登录
+
+                    } else {       // 说明有本地账号 即此时已登录
                         Intent(this@SplashActivity, MainActivity::class.java)
                     }
                     intent.putExtra("user", user)

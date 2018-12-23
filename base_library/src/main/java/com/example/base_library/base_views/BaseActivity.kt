@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.base_library.ActivityStackManager
 import com.example.base_library.R
+import com.example.base_library.widget.MProgressDialog
+import com.example.base_library.widget.config.MDialogConfig
 import com.jaeger.library.StatusBarUtil
 
 /**
@@ -86,5 +88,27 @@ abstract class BaseActivity : AppCompatActivity() {
    fun colorSetTargetLollipop() {
       window.navigationBarColor = Color.TRANSPARENT
       window.statusBarColor = Color.TRANSPARENT
+   }
+
+   fun showProgress(msg: String?) {
+      showProgress(msg, null)
+   }
+
+   fun showProgress(msg: String?, config: MDialogConfig?) {
+      MProgressDialog.showProgress(this, msg, config)
+   }
+
+   fun dismissProgress() {
+      MProgressDialog.dismissProgress()
+   }
+
+   fun getProgressConfig(): MDialogConfig {
+      return MDialogConfig.Builder()
+              .isCanceledOnTouchOutside(false)  //点击外部是否可以取消
+              //全屏背景窗体的颜色
+              .setBackgroundWindowColor(ContextCompat.getColor(this, R.color.alpha_60_black))
+              //View背景的圆角
+              .setCornerRadius(20f)
+              .build()
    }
 }

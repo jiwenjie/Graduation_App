@@ -36,9 +36,9 @@ object ScreenUtils {
     }
 
     @JvmStatic
-    fun dip2px(context: Context, dpValue: Float): Float {
+    fun dip2px(context: Context, dpValue: Float): Int {
         val scale = getScreenDensity(context)
-        return (dpValue * scale + 0.5f)
+        return (dpValue * scale + 0.5f).toInt()
     }
 
     @JvmStatic
@@ -91,8 +91,8 @@ object ScreenUtils {
 
                     val params = tabView.layoutParams as LinearLayout.LayoutParams
                     params.width = width
-                    params.leftMargin = tabMargin.toInt()
-                    params.rightMargin = tabMargin.toInt()
+                    params.leftMargin = tabMargin
+                    params.rightMargin = tabMargin
                     tabView.layoutParams = params
                     tabView.invalidate()
                 }

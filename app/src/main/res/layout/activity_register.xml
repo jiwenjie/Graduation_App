@@ -97,10 +97,11 @@
             android:layout_marginStart="14dp"
             android:background="@null"
             android:hint="请输入手机号码"
-            android:inputType="number"
             android:lines="1"
-            android:maxLength="11"
-            android:textColor="@color/alpha_80_black" />
+            android:inputType="number|phone"
+            android:maxLength="13"
+            android:textColor="@color/alpha_80_black"
+            app:clear_showBottomLine="false" />
 
     </LinearLayout>
 

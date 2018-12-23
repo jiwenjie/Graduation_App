@@ -1,13 +1,16 @@
 package com.example.root.graduation_app.mvp.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.LoginUser
+import com.example.root.graduation_app.utils.CommonUtils
 import com.example.root.graduation_app.utils.SimpleTextWatcher
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -20,9 +23,23 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 class LoginActivity : BaseActivity() {
 
-   private var user: LoginUser? = null
    private var inputPhone: String? = null
    private var inputPass: String? = null
+
+   private var user: LoginUser? = null
+   private var haveLocal: Boolean = false
+
+   companion object {
+      private val LOGIN_USER = "login_user"
+      private val IS_SIGNUP = "is_signup"
+
+      fun runActivity(activity: Activity, user: LoginUser?, haveLocal: Boolean) {
+         val intent = Intent(activity, LoginActivity::class.java)
+         intent.putExtra(LOGIN_USER, user)
+         intent.putExtra(IS_SIGNUP, haveLocal)
+         activity.startActivity(intent)
+      }
+   }
 
    override fun loadData() {
 
@@ -35,8 +52,8 @@ class LoginActivity : BaseActivity() {
     * 否则显示 欢迎使用
     */
    override fun initActivity(savedInstanceState: Bundle?) {
-      user = intent.getSerializableExtra("user") as LoginUser?
-      inputPhone = activity_login_phone.text.toString()
+      user = intent.getSerializableExtra(LOGIN_USER) as LoginUser?
+      inputPhone = CommonUtils.formatPhoneNum(activity_login_phone.text.toString())
 //      inputPass = activity_login_password.text.toString()
       isLocalUserPhone()
       initView()
@@ -47,7 +64,12 @@ class LoginActivity : BaseActivity() {
       /** 监听用户对手机号的输入 **/
       activity_login_phone.addTextChangedListener(object : SimpleTextWatcher() {
          override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            compareInputAntLocalUser()
+            compareInputAntLocalUser(s, count)
+         }
+
+         override fun afterTextChanged(s: Editable?) {
+            //将光标移动到末尾
+            activity_login_phone.setSelection(activity_login_phone.text.toString().length)
          }
       })
       /** 监听用户对密码的输入 **/
@@ -61,9 +83,32 @@ class LoginActivity : BaseActivity() {
    /**
     * 比较用户输入和本地保存的值是否相同
     */
-   private fun compareInputAntLocalUser() {
-      inputPhone = activity_login_phone.text.toString()
-      if (inputPhone!!.length < 11) return
+   @SuppressLint("SetTextI18n")
+   private fun compareInputAntLocalUser(s: CharSequence?, count: Int) {
+      val length = s.toString().length
+      //删除数字
+      if (count == 0) {
+         if (length == 4) {
+            activity_login_phone.setText(s?.subSequence(0, 3))
+         }
+         if (length == 9) {
+            activity_login_phone.setText(s?.subSequence(0, 8))
+         }
+      }
+      //添加数字
+      if (count == 1) {
+         if (length == 4) {
+            val part1 = s?.subSequence(0, 3).toString()
+            val part2 = s?.subSequence(3, length).toString()
+            activity_login_phone.setText("$part1 $part2")
+         }
+         if (length == 9){
+            val part1 = s?.subSequence(0, 8).toString()
+            val part2 = s?.subSequence(8, length).toString()
+            activity_login_phone.setText("$part1 $part2")
+         }
+      }
+
       isLocalUserPhone()
    }
 
@@ -99,7 +144,8 @@ class LoginActivity : BaseActivity() {
     * 根据用户的输入判断登陆按钮是否变色
     */
    private fun judgeTextBtnChange() {
-      inputPhone = activity_login_phone.text.toString()
+      inputPhone = activity_login_phone.text.toString()  // 此时获取的值带有空格
+      val inputPhone = CommonUtils.formatPhoneNum(inputPhone)
       inputPass = activity_login_password.text.toString()
       if (!inputPhone.isNullOrEmpty() && !inputPass.isNullOrEmpty()) {
          activity_login_btn_active.isEnabled = true
@@ -131,7 +177,6 @@ class LoginActivity : BaseActivity() {
          /**
           * 此处调用接口访问后台，验证成功在跳转，否则给出错误提示
           */
-
          startActivity(Intent(this@LoginActivity, MainActivity::class.java))
          finish()
          overridePendingTransition(R.anim.abc_popup_enter, R.anim.abc_popup_exit)

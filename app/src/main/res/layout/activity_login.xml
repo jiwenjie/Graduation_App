@@ -72,9 +72,9 @@
                 android:id="@+id/activity_login_phone"
                 style="@style/EditTextStyle"
                 android:background="@null"
-                android:maxLength="11"
+                android:maxLength="13"
                 android:hint="请输入手机号"
-                android:inputType="number" />
+                android:inputType="number|phone" />
 
             <View
                 android:layout_width="match_parent"
