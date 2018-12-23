@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -9,10 +11,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_0"
-            style="@style/textview_style" />
+            style="@style/textView_style" />
 
         <View
             android:layout_width="0dp"
@@ -21,7 +27,7 @@
 
         <TextView
             android:id="@+id/tv_1"
-            style="@style/textview_style" />
+            style="@style/textView_style" />
 
         <View
             android:layout_width="0dp"
@@ -30,7 +36,7 @@
 
         <TextView
             android:id="@+id/tv_2"
-            style="@style/textview_style" />
+            style="@style/textView_style" />
 
         <View
             android:layout_width="0dp"
@@ -39,26 +45,12 @@
 
         <TextView
             android:id="@+id/tv_3"
-            style="@style/textview_style" />
+            style="@style/textView_style" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/tv_4"
-            style="@style/textview_style" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/tv_5"
-            style="@style/textview_style" />
-
 
     </LinearLayout>
 
@@ -68,12 +60,16 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <View
-            android:layout_width="41dp"
-            android:layout_height="2dp"
+            android:layout_width="60dp"
+            android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="@color/translucent_white" />
+            android:background="@color/alpha_25_black" />
 
         <View
             android:layout_width="0dp"
@@ -81,10 +77,10 @@
             android:layout_weight="1" />
 
         <View
-            android:layout_width="41dp"
-            android:layout_height="2dp"
+            android:layout_width="60dp"
+            android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="@color/translucent_white" />
+            android:background="@color/alpha_25_black" />
 
         <View
             android:layout_width="0dp"
@@ -92,10 +88,10 @@
             android:layout_weight="1" />
 
         <View
-            android:layout_width="41dp"
-            android:layout_height="2dp"
+            android:layout_width="60dp"
+            android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="@color/translucent_white" />
+            android:background="@color/alpha_25_black" />
 
         <View
             android:layout_width="0dp"
@@ -103,32 +99,15 @@
             android:layout_weight="1" />
 
         <View
-            android:layout_width="41dp"
-            android:layout_height="2dp"
+            android:layout_width="60dp"
+            android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="@color/translucent_white" />
+            android:background="@color/alpha_25_black" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-
-        <View
-            android:layout_width="41dp"
-            android:layout_height="2dp"
-            android:layout_gravity="bottom"
-            android:background="@color/translucent_white" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <View
-            android:layout_width="41dp"
-            android:layout_height="2dp"
-            android:layout_gravity="bottom"
-            android:background="@color/translucent_white" />
 
     </LinearLayout>
 
@@ -137,8 +116,9 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@android:color/transparent"
-        android:textColor="@color/transparent"
+        android:inputType="number"
         android:longClickable="false"
-        android:maxLength="6"
-        android:inputType="number" />
+        android:maxLength="4"
+        android:textColor="@color/transparent" />
+
 </RelativeLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ClearEditText">
+        <!-- 是否展示底部线：默认显示 -->
+        <attr name="clear_showBottomLine" format="boolean" />
+        <!-- 底部线的颜色 -->
+        <attr name="clear_bottomLineColor" format="color" />
+        <!-- 底部线的宽度 -->
+        <attr name="clear_bottomLine_width" format="dimension" />
+        <!-- 左边图片的大小 -->
+        <attr name="clear_leftDrawableSize" format="dimension" />
+        <!-- 是否显示右边删除按钮：默认显示 -->
+        <attr name="clear_disableClear" format="boolean" />
+        <!-- 右边图片的大小 -->
+        <attr name="clear_rightDrawableSize" format="dimension" />
+    </declare-styleable>
+
+</resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

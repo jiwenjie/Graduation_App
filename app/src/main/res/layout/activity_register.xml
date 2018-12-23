@@ -5,17 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    android:clipToPadding="true"
+    android:clipToPadding="false"
     android:fitsSystemWindows="true"
-    android:paddingStart="@dimen/common_20dp"
-    android:paddingEnd="@dimen/common_20dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_register_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-20dp">
+        android:layout_height="?attr/actionBarSize">
 
         <ImageView
             android:id="@+id/activity_register_return"
@@ -30,6 +29,7 @@
         style="@style/ConstraintStartAndEndStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_20dp"
         android:layout_marginTop="@dimen/common_20dp"
         android:text="新用户注册"
         android:textColor="@android:color/black"
@@ -40,6 +40,7 @@
         android:id="@+id/activity_register_phoneText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_20dp"
         android:layout_marginTop="@dimen/common_50dp"
         android:text="手机号码"
         android:textColor="@color/alpha_85_black"
@@ -49,6 +50,8 @@
         android:id="@+id/activity_register_inputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_20dp"
+        android:layout_marginEnd="@dimen/common_20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -88,14 +91,16 @@
             android:layout_marginBottom="6dp"
             android:background="@color/alpha_60_black" />
 
-        <EditText
+        <com.example.root.graduation_app.widget.ClearEditText
             android:id="@+id/activity_register_inputPhone"
             style="@style/EditTextStyle"
             android:layout_marginStart="14dp"
             android:background="@null"
             android:hint="请输入手机号码"
+            android:inputType="number"
             android:lines="1"
-            android:maxLength="11" />
+            android:maxLength="11"
+            android:textColor="@color/alpha_80_black" />
 
     </LinearLayout>
 
@@ -103,14 +108,18 @@
         android:id="@+id/line_split"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_1px"
+        android:layout_marginStart="@dimen/common_20dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/common_20dp"
         android:background="@color/alpha_60_black" />
 
     <TextView
         android:id="@+id/activity_register_btn_next"
         android:layout_width="match_parent"
         android:layout_height="42dp"
+        android:layout_marginStart="@dimen/common_20dp"
         android:layout_marginTop="@dimen/common_16dp"
+        android:layout_marginEnd="@dimen/common_20dp"
         android:background="@drawable/login_btn_is_press"
         android:gravity="center"
         android:paddingTop="8dp"

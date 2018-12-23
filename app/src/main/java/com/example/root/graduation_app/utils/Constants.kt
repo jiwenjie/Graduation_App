@@ -9,6 +9,8 @@ package com.example.root.graduation_app.utils
  */
 object Constants {
 
-    const val SHARE_LOGINUSER_NAME = "share_loginUser"
+    const val SHARE_LOGIN_USER_NAME = "share_loginUser"
+
+    const val LOCAL_URL = "http://" + "ip" + "8080/"
 
 }

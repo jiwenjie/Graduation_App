@@ -77,6 +77,6 @@ class SplashActivity : BaseActivity() {
      * 这里遇到一个问题，就是 as 后面需要加上 ?
      */
     private fun getLoginUser(): LoginUser? {
-        return SharePreferencesUtil.getAny(applicationContext, Constants.SHARE_LOGINUSER_NAME, LoginUser::class.java) as LoginUser?
+        return SharePreferencesUtil.getAny(applicationContext, Constants.SHARE_LOGIN_USER_NAME, LoginUser::class.java) as LoginUser?
     }
 }

@@ -68,7 +68,7 @@
             android:textColorHint="@color/alpha_60_white"
             app:hintTextAppearance="@style/InputStyle">
 
-            <EditText
+            <com.example.root.graduation_app.widget.ClearEditText
                 android:id="@+id/activity_login_phone"
                 style="@style/EditTextStyle"
                 android:background="@null"
@@ -78,7 +78,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2px"
+                android:layout_height="@dimen/line_1px"
                 android:layout_below="@id/activity_login_phone"
                 android:background="@drawable/horizontal_line" />
 
@@ -93,16 +93,16 @@
             android:textColorHint="@color/alpha_60_white"
             app:hintTextAppearance="@style/InputStyle">
 
-            <EditText
+            <com.example.root.graduation_app.widget.ClearEditText
                 android:id="@+id/activity_login_password"
                 style="@style/EditTextStyle"
                 android:background="@null"
                 android:inputType="textPassword"
-                android:hint="请输入密码" />
+                android:hint="请输入密码"  />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2px"
+                android:layout_height="@dimen/line_1px"
                 android:layout_below="@id/activity_login_password"
                 android:background="@drawable/horizontal_line" />
 
@@ -133,5 +133,4 @@
             android:textColor="@color/color_white"
             android:textSize="@dimen/common_sp_14" />
     </LinearLayout>
-
 </FrameLayout>

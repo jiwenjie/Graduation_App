@@ -29,9 +29,9 @@ class TestActivity : BaseActivity() {
 
     @SuppressLint("CheckResult")
     override fun initActivity(savedInstanceState: Bundle?) {
-        btn_test.setOnClickListener {
-            startActivity(Intent(applicationContext, TestOneActivity::class.java))
-        }
+//        btn_test.setOnClickListener {
+//            startActivity(Intent(applicationContext, TestOneActivity::class.java))
+//        }
 //       StatusUtils.darkMode(this)
 //      StatusUtils.setPaddingSmart(this, ttoo)
 //       mLayoutStatusView = multipleStatusView
