@@ -1,21 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.example.root.graduation_app.widget.NoScrollViewPager
+        android:id="@+id/home_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".mvp.activity.MainActivity">
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <TextView
-            android:layout_width="wrap_content"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:alpha="0.6"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/indexLyt"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="MainActivity"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/common_20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="4dp">
 
-</android.support.constraint.ConstraintLayout>
+            <ImageView
+                android:id="@+id/indexLyt_img"
+                android:layout_width="@dimen/common_30dp"
+                android:layout_height="@dimen/common_30dp"
+                android:src="@drawable/ic_home_selected" />
+
+            <TextView
+                android:id="@+id/indexLyt_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页"
+                android:textSize="@dimen/common_sp_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/discoveryLyt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/discoveryLyt_img"
+                android:layout_width="@dimen/common_30dp"
+                android:layout_height="@dimen/common_30dp"
+                android:src="@drawable/ic_discovery_normal" />
+
+            <TextView
+                android:id="@+id/discoveryLyt_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发现"
+                android:textSize="@dimen/common_sp_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/entertainmentLyt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/entertainmentLyt_img"
+                android:layout_width="@dimen/common_30dp"
+                android:layout_height="@dimen/common_30dp"
+                android:src="@drawable/ic_hot_normal" />
+
+            <TextView
+                android:id="@+id/entertainmentLyt_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热门"
+                android:textSize="@dimen/common_sp_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mineLyt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/mineLyt_img"
+                android:layout_width="@dimen/common_30dp"
+                android:layout_height="@dimen/common_30dp"
+                android:src="@drawable/ic_mine_normal" />
+
+            <TextView
+                android:id="@+id/mineLyt_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收藏"
+                android:textSize="@dimen/common_sp_14" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

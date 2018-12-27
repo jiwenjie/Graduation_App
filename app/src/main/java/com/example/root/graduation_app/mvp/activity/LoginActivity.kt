@@ -27,16 +27,13 @@ class LoginActivity : BaseActivity() {
    private var inputPass: String? = null
 
    private var user: LoginUser? = null
-   private var haveLocal: Boolean = false
 
    companion object {
-      private val LOGIN_USER = "login_user"
-      private val IS_SIGNUP = "is_signup"
+      private const val LOGIN_USER = "login_user"
 
-      fun runActivity(activity: Activity, user: LoginUser?, haveLocal: Boolean) {
+      fun runActivity(activity: Activity, user: LoginUser?) {
          val intent = Intent(activity, LoginActivity::class.java)
          intent.putExtra(LOGIN_USER, user)
-         intent.putExtra(IS_SIGNUP, haveLocal)
          activity.startActivity(intent)
       }
    }
@@ -53,9 +50,14 @@ class LoginActivity : BaseActivity() {
     */
    override fun initActivity(savedInstanceState: Bundle?) {
       user = intent.getSerializableExtra(LOGIN_USER) as LoginUser?
-      inputPhone = CommonUtils.formatPhoneNum(activity_login_phone.text.toString())
-//      inputPass = activity_login_password.text.toString()
-      isLocalUserPhone()
+
+      if (user == null) {  // if user is null show it is first open app
+         activity_login_phone.text = null
+      } else {    // else show local have user data but now it sign out
+         activity_login_phone.setText(user?.userphone.toString())
+         inputPhone = CommonUtils.formatPhoneNum(activity_login_phone.text.toString())
+         isLocalUserPhone()
+      }
       initView()
       initEvent()
    }
@@ -108,7 +110,6 @@ class LoginActivity : BaseActivity() {
             activity_login_phone.setText("$part1 $part2")
          }
       }
-
       isLocalUserPhone()
    }
 

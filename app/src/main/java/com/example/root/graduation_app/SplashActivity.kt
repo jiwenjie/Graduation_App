@@ -57,16 +57,13 @@ class SplashActivity : BaseActivity() {
             .subscribe {
                 val intent: Intent
                 if (user != null) {     // 说明已经注册过，则直接跳转登陆页面之后在登陆
-                    intent = if (user.isSignOut!!) {     // 说明有本地账号但是已经点击过退出登陆，即此时未登录
-                        Intent(this@SplashActivity, LoginActivity::class.java)
-
+                    if (user.isSignOut!!) {     // 说明有本地账号但是已经点击过退出登陆，即此时未登录
+                        LoginActivity.runActivity(this@SplashActivity, user)
                     } else {       // 说明有本地账号 即此时已登录
                         Intent(this@SplashActivity, MainActivity::class.java)
                     }
-                    intent.putExtra("user", user)
-                    startActivity(intent)
                 } else {        // 说明是第一次打开，还未注册，所以去登陆页面注册
-                    startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                    LoginActivity.runActivity(this@SplashActivity, null)
                 }
 
                 finish()
