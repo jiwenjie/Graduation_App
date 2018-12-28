@@ -39,7 +39,6 @@ class SplashActivity : BaseActivity() {
     @SuppressLint("CheckResult", "PrivateResource")
     override fun initActivity(savedInstanceState: Bundle?) {
         fullScreen()
-
         val objAlphaIv = ObjectAnimator.ofFloat(ivSplash, "alpha", 0f, 1f)
         val animatorX = ObjectAnimator.ofFloat(ivSplash, "scaleX", 0f, 1f)
         val animatorY = ObjectAnimator.ofFloat(ivSplash, "scaleY", 0f, 1f)
@@ -60,19 +59,19 @@ class SplashActivity : BaseActivity() {
                     if (user.isSignOut!!) {     // 说明有本地账号但是已经点击过退出登陆，即此时未登录
                         LoginActivity.runActivity(this@SplashActivity, user)
                     } else {       // 说明有本地账号 即此时已登录
-                        Intent(this@SplashActivity, MainActivity::class.java)
+//                        Intent(this@SplashActivity, MainActivity::class.java)
+                        MainActivity.runActivity(this@SplashActivity, user)
                     }
                 } else {        // 说明是第一次打开，还未注册，所以去登陆页面注册
                     LoginActivity.runActivity(this@SplashActivity, null)
                 }
-
                 finish()
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
             }
     }
 
     /**
-     * 这里遇到一个问题，就是 as 后面需要加上 ?
+     * after word "as" need add "?", otherwise it is not null
      */
     private fun getLoginUser(): LoginUser? {
         return SharePreferencesUtil.getAny(applicationContext, Constants.SHARE_LOGIN_USER_NAME, LoginUser::class.java) as LoginUser?

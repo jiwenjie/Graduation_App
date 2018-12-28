@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android.support.design="http://schemas.android.com/tools">
+    <!--<group android:id="@+id/g1">-->
+        <!--<item-->
+            <!--android:id="@+id/zhihuitem"-->
+            <!--android:checkable="true"-->
+            <!--android:icon="@drawable/zhihu"-->
+            <!--android:title="@string/zhihu"-->
+            <!--android.support.design:itemTextColor="@color/nev_item"-->
+            <!--app:itemIconTint="@color/nev_item"-->
+           <!--/>-->
+        <!--<item-->
+            <!--android:id="@+id/topnewsitem"-->
+            <!--android:checkable="true"-->
+            <!--android:icon="@drawable/wangyi"-->
+            <!--android:title="@string/topnews"-->
+            <!--android.support.design:itemTextColor="@color/nev_item"-->
+            <!--app:itemIconTint="@color/nev_item"/>-->
+        <!--<item-->
+            <!--android:id="@+id/meiziitem"-->
+            <!--android:checkable="true"-->
+            <!--android:icon="@drawable/look2"-->
+            <!--android:title="@string/meizi"-->
+            <!--android.support.design:itemTextColor="@color/nev_item"-->
+            <!--app:itemIconTint="@color/nev_item"/>-->
+    <!--</group>-->
+    <!--&lt;!&ndash;<group android:id="@+id/g2">&ndash;&gt;-->
+        <!--&lt;!&ndash;<item&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/setting"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:checkable="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:icon="@drawable/settin"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:title="设置" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</group>&ndash;&gt;-->
+    <!--<item android:title="设置">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_theme"-->
+                <!--android:icon="@drawable/ic_menu_theme"-->
+                <!--android:title="Theme"-->
+                <!--app:actionLayout="@layout/action_view_switch" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/settin"-->
+                <!--android:title="设置" />-->
+        <!--</menu>-->
+    <!--</item>-->
+    <!--<item-->
+        <!--android:id="@+id/menu_about"-->
+        <!--android:title="关于"-->
+        <!--android.support.design:itemTextColor="@color/nev_item"-->
+        <!--/>-->
+
+</menu>

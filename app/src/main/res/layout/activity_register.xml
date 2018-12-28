@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Roots"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    android:clipToPadding="false"
-    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
@@ -97,8 +96,8 @@
             android:layout_marginStart="14dp"
             android:background="@null"
             android:hint="请输入手机号码"
-            android:lines="1"
             android:inputType="number|phone"
+            android:lines="1"
             android:maxLength="13"
             android:textColor="@color/alpha_80_black"
             app:clear_showBottomLine="false" />

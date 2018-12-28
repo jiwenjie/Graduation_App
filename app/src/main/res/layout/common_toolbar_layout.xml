@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/common_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    android:elevation="8dp"
     android:gravity="center_vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/common_35dp"
-        android:layout_height="@dimen/common_35dp"
-        android:layout_gravity="start"
+        android:id="@+id/common_toolbar_icon"
+        android:layout_width="@dimen/common_40dp"
+        android:layout_height="@dimen/common_40dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/common_10dp"
         android:src="@drawable/img_avatar" />
 
     <TextView
-        tools:text="标题标题"
+        android:id="@+id/common_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/color_white"
         android:textSize="@dimen/common_sp_18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        tools:text="标题标题" />
 
+    <ImageView
+        android:id="@+id/common_toolbar_search"
+        android:layout_width="@dimen/common_35dp"
+        android:layout_height="@dimen/common_35dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_action_search_white"
+        android:tint="@color/color_white"
+        android:visibility="gone" />
 
 </android.support.v7.widget.Toolbar>

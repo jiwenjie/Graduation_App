@@ -2,11 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Roots"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
-    android:clipToPadding="false"
-    android:fitsSystemWindows="true">
+    android:background="@drawable/login_background">
 
     <View
         android:layout_width="match_parent"
@@ -30,12 +29,12 @@
                 android:id="@+id/activity_login_icon"
                 android:layout_width="@dimen/common_40dp"
                 android:layout_height="@dimen/common_40dp"
-                tools:text="文杰"
+                android:background="@drawable/login_icon_left"
                 android:ellipsize="middle"
                 android:gravity="center"
+                android:singleLine="true"
                 android:textColor="@color/color_white"
-                android:background="@drawable/login_icon_left"
-                android:singleLine="true" />
+                tools:text="文杰" />
 
             <TextView
                 android:id="@+id/activity_login_register"
@@ -72,9 +71,9 @@
                 android:id="@+id/activity_login_phone"
                 style="@style/EditTextStyle"
                 android:background="@null"
-                android:maxLength="13"
                 android:hint="请输入手机号"
-                android:inputType="number|phone" />
+                android:inputType="number|phone"
+                android:maxLength="13" />
 
             <View
                 android:layout_width="match_parent"
@@ -97,8 +96,8 @@
                 android:id="@+id/activity_login_password"
                 style="@style/EditTextStyle"
                 android:background="@null"
-                android:inputType="textPassword"
-                android:hint="请输入密码"  />
+                android:hint="请输入密码"
+                android:inputType="textPassword" />
 
             <View
                 android:layout_width="match_parent"

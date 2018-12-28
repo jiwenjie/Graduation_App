@@ -13,6 +13,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //使用renderscript 兼容包
+        renderscriptTargetApi 28
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -38,8 +42,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.roughike:bottom-bar:2.3.1'
-
+    // 查看图片的库
+    implementation 'com.github.chrisbanes:PhotoView:1.3.1'
+    // 高斯模糊的库
+    implementation 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
     implementation project(':base_library')
     implementation files('libs/pgyer_sdk_3.0.2.jar')
 }

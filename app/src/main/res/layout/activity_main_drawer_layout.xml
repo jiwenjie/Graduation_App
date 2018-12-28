@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 首页的侧滑栏部分的布局 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/color_white">
+
+    <!-- 高斯模糊图片 -->
+    <ImageView
+        android:id="@+id/activity_main_drawer_layoutImg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/placeholder_banner" />
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userAvatarImg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/common_35dp"
+            android:src="@drawable/img_avatar" />
+
+        <TextView
+            android:id="@+id/userNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userAvatarImg"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/alpha_85_black"
+            android:textSize="@dimen/common_sp_16"
+            tools:text="迎着风" />
+
+        <TextView
+            android:id="@+id/signUpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/common_20dp"
+            android:layout_marginBottom="@dimen/common_20dp"
+            android:background="@drawable/shape_primary_color_100"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp"
+            android:text="签到"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/common_sp_16" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_main_drawer_layoutImg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/watch_historyLyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_16dp">
+
+            <ImageView
+                android:layout_width="@dimen/common_20dp"
+                android:layout_height="@dimen/common_20dp"
+                android:src="@drawable/ic_history" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_16dp"
+                android:text="观看历史" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/study_bookLyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_16dp">
+
+            <ImageView
+                android:layout_width="@dimen/common_20dp"
+                android:layout_height="@dimen/common_20dp"
+                android:alpha="0.7"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_edit" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_16dp"
+                android:text="学习笔记" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/person_profileLyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_16dp">
+
+            <ImageView
+                android:layout_width="@dimen/common_20dp"
+                android:layout_height="@dimen/common_20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_my_profile" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_16dp"
+                android:text="个人主页" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/night_moonLyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_16dp">
+
+            <ImageView
+                android:layout_width="@dimen/common_20dp"
+                android:layout_height="@dimen/common_20dp"
+                android:alpha="0.7"
+                android:src="@drawable/ic_night_moon" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_16dp"
+                android:text="夜间模式" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/settingLyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_16dp">
+
+            <ImageView
+                android:layout_width="@dimen/common_20dp"
+                android:layout_height="@dimen/common_20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_setting" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_16dp"
+                android:text="设置" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

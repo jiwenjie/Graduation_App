@@ -23,6 +23,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //使用renderscript 兼容包
+//        renderscriptTargetApi 25
+//        renderscriptSupportModeEnabled true
     }
 
     buildTypes {
@@ -69,8 +73,10 @@ dependencies {
     api "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     api "com.squareup.okhttp3:logging-interceptor:$logging_version"
 
+    //noinspection GradleDependency
     debugApi "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
     releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+
     // 设置状态栏的 Utils 库
     api 'com.jaeger.statusbarutil:library:1.5.1'
     api 'com.alibaba:fastjson:1.2.54'

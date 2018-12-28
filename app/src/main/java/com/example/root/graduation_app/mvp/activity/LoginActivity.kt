@@ -12,6 +12,7 @@ import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.LoginUser
 import com.example.root.graduation_app.utils.CommonUtils
 import com.example.root.graduation_app.utils.SimpleTextWatcher
+import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -49,6 +50,7 @@ class LoginActivity : BaseActivity() {
     * 否则显示 欢迎使用
     */
    override fun initActivity(savedInstanceState: Bundle?) {
+      StatusBarUtil.setTranslucent(this)
       user = intent.getSerializableExtra(LOGIN_USER) as LoginUser?
 
       if (user == null) {  // if user is null show it is first open app

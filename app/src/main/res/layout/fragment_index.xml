@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
         android:text="首页"
         android:textColor="@color/alpha_90_black"
-        android:gravity="center"
-        android:textSize="@dimen/common_20dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:textSize="@dimen/common_20dp" />
 
 </android.support.constraint.ConstraintLayout>

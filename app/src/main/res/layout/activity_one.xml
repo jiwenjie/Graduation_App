@@ -1,118 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Roots"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <!--<com.example.root.graduation_app.widget.NoScrollViewPager-->
-        <!--android:id="@+id/home_container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1" />-->
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:alpha="0.6"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
+    <Button
+        android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="数组越界" />
 
-        <LinearLayout
-            android:id="@+id/indexLyt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="4dp">
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="空指针" />
 
-            <ImageView
-                android:id="@+id/indexLyt_img"
-                android:layout_width="@dimen/common_30dp"
-                android:layout_height="@dimen/common_30dp"
-                android:src="@drawable/ic_home_selected" />
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="除数为0" />
 
-            <TextView
-                android:id="@+id/indexLyt_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="首页"
-                android:textSize="@dimen/common_sp_14" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/discoveryLyt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="4dp">
+    <!--<com.example.root.graduation_app.widget.NoScrollViewPager-->
+    <!--android:id="@+id/home_container"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1" />-->
 
-            <ImageView
-                android:id="@+id/discoveryLyt_img"
-                android:layout_width="@dimen/common_30dp"
-                android:layout_height="@dimen/common_30dp"
-                android:src="@drawable/ic_discovery_normal" />
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.5dp"-->
+    <!--android:alpha="0.6"-->
+    <!--android:background="@android:color/darker_gray" />-->
 
-            <TextView
-                android:id="@+id/discoveryLyt_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="发现"
-                android:textSize="@dimen/common_sp_14" />
-        </LinearLayout>
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal">-->
 
-        <LinearLayout
-            android:id="@+id/entertainmentLyt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="4dp">
+    <!--<LinearLayout-->
+    <!--android:id="@+id/indexLyt"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="4dp">-->
 
-            <ImageView
-                android:id="@+id/entertainmentLyt_img"
-                android:layout_width="@dimen/common_30dp"
-                android:layout_height="@dimen/common_30dp"
-                android:src="@drawable/ic_hot_normal" />
+    <!--<ImageView-->
+    <!--android:id="@+id/indexLyt_img"-->
+    <!--android:layout_width="@dimen/common_30dp"-->
+    <!--android:layout_height="@dimen/common_30dp"-->
+    <!--android:src="@drawable/ic_home_selected" />-->
 
-            <TextView
-                android:id="@+id/entertainmentLyt_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="热门"
-                android:textSize="@dimen/common_sp_14" />
-        </LinearLayout>
+    <!--<TextView-->
+    <!--android:id="@+id/indexLyt_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="首页"-->
+    <!--android:textSize="@dimen/common_sp_14" />-->
+    <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/mineLyt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="4dp">
+    <!--<LinearLayout-->
+    <!--android:id="@+id/discoveryLyt"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="4dp">-->
 
-            <ImageView
-                android:id="@+id/mineLyt_img"
-                android:layout_width="@dimen/common_30dp"
-                android:layout_height="@dimen/common_30dp"
-                android:src="@drawable/ic_mine_normal" />
+    <!--<ImageView-->
+    <!--android:id="@+id/discoveryLyt_img"-->
+    <!--android:layout_width="@dimen/common_30dp"-->
+    <!--android:layout_height="@dimen/common_30dp"-->
+    <!--android:src="@drawable/ic_discovery_normal" />-->
 
-            <TextView
-                android:id="@+id/mineLyt_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的"
-                android:textSize="@dimen/common_sp_14" />
-        </LinearLayout>
-    </LinearLayout>
+    <!--<TextView-->
+    <!--android:id="@+id/discoveryLyt_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="发现"-->
+    <!--android:textSize="@dimen/common_sp_14" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/entertainmentLyt"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="4dp">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/entertainmentLyt_img"-->
+    <!--android:layout_width="@dimen/common_30dp"-->
+    <!--android:layout_height="@dimen/common_30dp"-->
+    <!--android:src="@drawable/ic_hot_normal" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/entertainmentLyt_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="热门"-->
+    <!--android:textSize="@dimen/common_sp_14" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/mineLyt"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="4dp">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/mineLyt_img"-->
+    <!--android:layout_width="@dimen/common_30dp"-->
+    <!--android:layout_height="@dimen/common_30dp"-->
+    <!--android:src="@drawable/ic_mine_normal" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/mineLyt_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="我的"-->
+    <!--android:textSize="@dimen/common_sp_14" />-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 </LinearLayout>

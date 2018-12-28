@@ -32,7 +32,6 @@ class InputVerificationCodeActivity : BaseActivity() {
 
     override fun initActivity(savedInstanceState: Bundle?) {
         StatusBarUtil.setColor(this@InputVerificationCodeActivity, ContextCompat.getColor(applicationContext, R.color.color_white))
-
         initView()
         initEvent()
     }

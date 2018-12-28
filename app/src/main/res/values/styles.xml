@@ -89,4 +89,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- style root (add attribute fitsSystemWindows="true") -->
+    <style name="Roots">
+        <item name="android:fitsSystemWindows">true</item>
+        <!-- this attribute is can make recyclerView's item can under the toolbar -->
+        <item name="android:clipToPadding">false</item>
+    </style>
+
 </resources>
