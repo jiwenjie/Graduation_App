@@ -29,14 +29,33 @@ class SplashActivity : BaseActivity() {
     /**
      * 判断本地是否有保存登陆用户的信息，有就直接跳转首页，没有就跳转登陆页面
      */
-
+    @SuppressLint("CheckResult", "PrivateResource")
     override fun loadData() {
+        val user = getLoginUser()
 
+        Observable.timer(4, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    // 此时测试直接进入首页
+                    MainActivity.runActivity(this@SplashActivity, null)
+//                    if (user != null) {     // 说明已经注册过，则直接跳转登陆页面之后在登陆
+//                        if (user.isSignOut!!) {     // 说明有本地账号但是已经点击过退出登陆，即此时未登录
+//                            LoginActivity.runActivity(this@SplashActivity, user)
+//                        } else {       // 说明有本地账号 即此时已登录
+//                            MainActivity.runActivity(this@SplashActivity, user)
+//                        }
+//                    } else {        // 说明是第一次打开，还未注册，所以去登陆页面注册
+//                        LoginActivity.runActivity(this@SplashActivity, null)
+//                    }
+                    finish()
+                    overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                }
     }
 
     override fun getLayoutId(): Int = R.layout.activity_splash
 
-    @SuppressLint("CheckResult", "PrivateResource")
     override fun initActivity(savedInstanceState: Bundle?) {
         fullScreen()
         val objAlphaIv = ObjectAnimator.ofFloat(ivSplash, "alpha", 0f, 1f)
@@ -46,28 +65,6 @@ class SplashActivity : BaseActivity() {
         animatorSet.playTogether(objAlphaIv, animatorX, animatorY)
         animatorSet.duration = 2000
         animatorSet.start()
-
-        val user = getLoginUser()
-
-        Observable.timer(4, TimeUnit.SECONDS)
-            .subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                val intent: Intent
-                if (user != null) {     // 说明已经注册过，则直接跳转登陆页面之后在登陆
-                    if (user.isSignOut!!) {     // 说明有本地账号但是已经点击过退出登陆，即此时未登录
-                        LoginActivity.runActivity(this@SplashActivity, user)
-                    } else {       // 说明有本地账号 即此时已登录
-//                        Intent(this@SplashActivity, MainActivity::class.java)
-                        MainActivity.runActivity(this@SplashActivity, user)
-                    }
-                } else {        // 说明是第一次打开，还未注册，所以去登陆页面注册
-                    LoginActivity.runActivity(this@SplashActivity, null)
-                }
-                finish()
-                overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
-            }
     }
 
     /**

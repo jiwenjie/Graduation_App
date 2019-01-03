@@ -2,8 +2,11 @@ package com.example.root.graduation_app.test
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import com.example.base_library.base_utils.ScreenUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
@@ -25,6 +28,10 @@ class TestActivity : BaseActivity() {
 
     @SuppressLint("CheckResult")
     override fun initActivity(savedInstanceState: Bundle?) {
+
+//        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+//            (toolbar.getLayoutParams() as Toolbar.LayoutParams).bottomMargin = ScreenUtils.dip2px(this, 24f)
+//        }
 //        btn_test.setOnClickListener {
 //            startActivity(Intent(applicationContext, TestOneActivity::class.java))
 //        }

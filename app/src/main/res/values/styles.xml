@@ -4,6 +4,7 @@
         <item name="windowActionBar">false</item>   <!-- 去除 ActionBar -->
         <item name="windowNoTitle">true</item>      <!-- 去除标题 -->
 
+        <item name="colorPrimary">@color/transparent</item>
         <!-- 状态栏和导航栏都会显示成半透明的状态。并且布局会拓展到系统栏的后面。 -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
@@ -94,6 +95,43 @@
         <item name="android:fitsSystemWindows">true</item>
         <!-- this attribute is can make recyclerView's item can under the toolbar -->
         <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="AppTheme.Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">@color/color_gray</item>
+    </style>
+
+    <style name="AppTheme.Label.Title">
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">@dimen/common_sp_16</item>
+    </style>
+
+    <style name="AppTheme.Label.Description">
+        <item name="android:gravity">top</item>
+        <item name="android:lineSpacingExtra">@dimen/common_5dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:singleLine">false</item>
+    </style>
+
+    <style name="AppTheme.Label.Layout">
+        <item name="android:paddingTop">@dimen/padding_common_v</item>
+        <item name="android:paddingBottom">@dimen/padding_common_v</item>
+        <item name="android:paddingStart">@dimen/padding_common_h</item>
+        <item name="android:paddingEnd">@dimen/padding_common_h</item>
+    </style>
+
+    <style name="AppTheme.DiverLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:dividerHeight">0.5dp</item>
+        <item name="android:divider">@color/color_division_line</item>
+        <item name="android:background">@color/color_division_line</item>
     </style>
 
 </resources>

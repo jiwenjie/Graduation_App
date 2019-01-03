@@ -41,9 +41,9 @@ abstract class BaseActivity : AppCompatActivity() {
       ActivityStackManager.addActivity(this)
       initActivity(savedInstanceState)
 //      mLayoutStatusView?.setOnRetryClickListener { loadData() }
-        mLayoutStatusView?.setOnClickListener {
-            loadData()
-        }
+      mLayoutStatusView?.setOnClickListener {
+         loadData()
+      }
       loadData()
       setListener()
       handleRxBus()

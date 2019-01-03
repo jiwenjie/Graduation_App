@@ -31,6 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <!--<activity android:name=".SplashActivity">-->
         <activity android:name=".test.TestPhotoView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,10 +41,10 @@
         </activity>
 
         <!-- 程序首页 -->
-        <!--<activity-->
-        <!--android:name=".mvp.activity.MainActivity"-->
-        <!--android:screenOrientation="portrait"-->
-        <!--android:theme="@style/AppTheme" />-->
+        <activity
+            android:name=".mvp.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <!-- 程序的登陆界面 -->
         <activity
@@ -64,6 +65,11 @@
         <!-- 个人主页 -->
         <activity
             android:name=".mvp.activity.ProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 打开 WebView 界面，去 github -->
+        <activity
+            android:name=".mvp.activity.GithubActivity"
             android:screenOrientation="portrait" />
 
         <!-- 滑动头部和折叠的有关页面 -->

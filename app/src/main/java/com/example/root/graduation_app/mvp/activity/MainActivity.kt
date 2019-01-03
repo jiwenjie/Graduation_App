@@ -37,7 +37,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
    companion object {
       private const val KEY_USER = "key_user"
 
-      fun runActivity(activity: Activity, user: LoginUser) {
+      fun runActivity(activity: Activity, user: LoginUser?) {
          val intent = Intent(activity, MainActivity::class.java)
          intent.putExtra(KEY_USER, user)
          activity.startActivity(intent)
@@ -53,7 +53,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
    override fun initActivity(savedInstanceState: Bundle?) {
       StatusBarUtil.setColorForDrawerLayout(this, drawerLyt, ContextCompat.getColor(this, R.color.colorPrimary), 0)
-      user = intent.getSerializableExtra(KEY_USER) as LoginUser
+      user = intent.getSerializableExtra(KEY_USER) as LoginUser?
       initView()
       initEvent()
    }
@@ -136,7 +136,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
          }
          R.id.person_profileLyt -> {
-
+            ProfileActivity.runActivity(this@MainActivity)
          }
          R.id.night_moonLyt -> {
 

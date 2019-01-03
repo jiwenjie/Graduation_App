@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.root.graduation_app.R;
 import uk.co.senab.photoview.PhotoView;
 
@@ -38,10 +39,10 @@ public class PhotoSlideAdapter extends PagerAdapter {
 
 //        Drawable drawable = (Drawable) mList.get(position);
 
-//        Glide.with(activity)
-//                .load(sDrawables[position])
-//                .into(photoView);
-//        container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        Glide.with(activity)
+                .load(sDrawables[position])
+                .into(photoView);
+        container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return photoView;
     }
 
