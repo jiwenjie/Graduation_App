@@ -1,6 +1,7 @@
 package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
+import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
 
@@ -8,18 +9,28 @@ import com.example.root.graduation_app.R
  *  author:Jiwenjie
  *  email:278630464@qq.com
  *  time:2018/12/24
- *  desc:
+ *  desc: 存放新闻页面
  *  version:1.0
  */
 class DiscoverFragment : BaseFragment() {
 
+   /* BaseFragmentPagerAdapter Demo */
+   private lateinit var mFragmentAdapter: BaseFragmentPagerAdapter
+   private val mFragments = ArrayList<BaseFragment>()
+   private val mTitles = arrayOf("头条", "社会")
+   private val mKeys = arrayOf("top", "shehui")
+
+   private var types: Array<String>? = null         //顶部 tab 英文内容数组
+   private var typesCN: Array<String>? = null       //顶部 tab 中文内容数组
+
    companion object {
       @JvmStatic
        fun newInstance() : DiscoverFragment {
-          val fragment = DiscoverFragment()
-          val bundle = Bundle()
-          fragment.arguments = bundle
-          return fragment
+          return DiscoverFragment().apply {
+             arguments = Bundle().apply {
+                putString("", "")
+             }
+          }
        }
    }
 
@@ -30,6 +41,7 @@ class DiscoverFragment : BaseFragment() {
    override fun getLayoutId(): Int = R.layout.fragment_discovery
 
    override fun initFragment(savedInstanceState: Bundle?) {
-
+      types = resources.getStringArray(R.array.news_type_en)
+      typesCN = resources.getStringArray(R.array.news_type_cn)
    }
 }

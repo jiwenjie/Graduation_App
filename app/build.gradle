@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        vectorDrawables.useSupportLibrary = true
         //使用renderscript 兼容包
         renderscriptTargetApi 28
         renderscriptSupportModeEnabled true

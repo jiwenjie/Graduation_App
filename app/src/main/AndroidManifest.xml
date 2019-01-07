@@ -32,7 +32,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <!--<activity android:name=".SplashActivity">-->
-        <activity android:name=".test.TestPhotoView">
+        <activity android:name=".mvp.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,10 +41,10 @@
         </activity>
 
         <!-- 程序首页 -->
-        <activity
-            android:name=".mvp.activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+        <!--<activity-->
+            <!--android:name=".mvp.activity.MainActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/AppTheme" />-->
 
         <!-- 程序的登陆界面 -->
         <activity
@@ -63,9 +63,10 @@
             android:screenOrientation="portrait" />
 
         <!-- 个人主页 -->
-        <activity
-            android:name=".mvp.activity.ProfileActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".mvp.activity.ProfileActivity"-->
+        <!--android:theme="@style/AppTheme.NoActionBar"-->
+            <!--android:screenOrientation="portrait" />-->
 
         <!-- 打开 WebView 界面，去 github -->
         <activity

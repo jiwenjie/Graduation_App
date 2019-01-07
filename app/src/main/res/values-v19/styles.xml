@@ -1,9 +1,0 @@
-<resources>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>   <!-- 去除 ActionBar -->
-        <item name="windowNoTitle">true</item>      <!-- 去除标题 -->
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
-
-</resources>

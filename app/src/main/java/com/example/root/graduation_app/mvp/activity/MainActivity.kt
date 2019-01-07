@@ -59,7 +59,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
    }
 
    private fun initView() {
-      common_toolbar_title.text = "推荐"
       // set header style and data
       setHeader()
       mFragments.add(IndexFragment.newInstance())
@@ -86,10 +85,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
       discoveryLyt.setOnClickListener(this)
       entertainmentLyt.setOnClickListener(this)
       mineLyt.setOnClickListener(this)
-
-      common_toolbar_icon.setOnClickListener {
-         drawerLyt.openDrawer(Gravity.START)
-      }
 
       // set listener on function button in the Sidebar(侧滑栏)
       watch_historyLyt.setOnClickListener(this)

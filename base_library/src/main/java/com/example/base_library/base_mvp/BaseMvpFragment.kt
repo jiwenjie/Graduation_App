@@ -16,8 +16,8 @@ abstract class BaseMvpFragment<V : BaseMvpViewImpl, P : BaseMvpPresenter<V>> : B
     protected lateinit var mPresenter: P
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         mPresenter = initPresenter()
+        super.onViewCreated(view, savedInstanceState)
         lifecycle.addObserver(mPresenter)
     }
 

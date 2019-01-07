@@ -10,6 +10,14 @@ import android.webkit.WebViewClient;
 
 import com.example.root.graduation_app.R;
 
+import javax.xml.transform.Transformer;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * author:Jiwenjie
@@ -48,4 +56,15 @@ public class TestPhotoView extends AppCompatActivity {
       else
          return mobileNums.matches(telRegex);
    }
+
+   public  <T> ObservableTransformer<T, T> applyObservableAsync() {
+      return new ObservableTransformer<T, T>() {
+         @Override
+         public ObservableSource<T> apply(Observable<T> upstream) {
+            return upstream.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+         }
+      };
+   }
+
 }

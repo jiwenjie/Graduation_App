@@ -182,7 +182,7 @@ abstract class BaseRecyclerAdapter<T: Any>(context: Context, dataList: ArrayList
         }
     }
 
-    fun addDataList(dataList: ArrayList<T>) {
+    fun addAllData(dataList: ArrayList<T>) {
         if (mDataList != null) {
             this.mDataList!!.addAll(dataList)
             notifyDataSetChanged()

@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/color_white"
-        android:visibility="gone"
         android:textSize="@dimen/common_sp_18"
+        android:visibility="gone"
         tools:text="标题标题" />
 
     <ImageView

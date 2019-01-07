@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_click"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginEnd="8dp"
+    android:foreground="@drawable/item_touch_bg"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="4dp"
+    app:contentPadding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/txt_black"
+                android:textSize="@dimen/common_sp_16"
+                tools:text="fehsjd"
+                tools:ignore="NestedWeights" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_who"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/common_20dp"
+                    android:layout_gravity="bottom|start"
+                    android:layout_marginStart="@dimen/common_10dp"
+                    android:layout_weight="1"
+                    android:gravity="start|center"
+                    android:textColor="@color/md_grey_500"
+                    android:textSize="@dimen/common_sp_10" />
+
+                <TextView
+                    android:id="@+id/tv_item_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:gravity="end|center"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/md_grey_500"
+                    android:textSize="10sp"
+                    tools:ignore="RtlSymmetry,SmallSp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_item_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/placeholder_banner" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
