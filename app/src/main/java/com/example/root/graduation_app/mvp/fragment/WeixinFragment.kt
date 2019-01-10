@@ -30,6 +30,7 @@ class WeixinFragment : BaseMvpFragment<WeixinContract.WeixinView, WeixinPresente
    private var loadingMore = false
 
    companion object {
+      @JvmStatic
       fun getInstance(): WeixinFragment {
          val fragment = WeixinFragment()
          val bundle = Bundle()

@@ -15,10 +15,10 @@ import retrofit2.http.Path
  */
 interface WangyiApi {
 
-    @GET("/nc/article/headline/T1348647909107/{id}-20.html")
+    @GET("headline/T1348647909107/{id}-20.html")
     fun getNewsList(@Path("id") id: Int): Observable<WangyiNewsListBean>
 
-    @GET("/nc/article/{id}/full.html")
+    @GET("{id}/full.html")
     fun getNewsDetail(@Path("id") id: String): Observable<ResponseBody>
 
 }

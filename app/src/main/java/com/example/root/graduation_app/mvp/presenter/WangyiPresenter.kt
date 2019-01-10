@@ -14,40 +14,31 @@ import com.example.root.graduation_app.mvp.model.WangyiModel
  *  desc:
  *  version:1.0
  */
-class WangyiPresenter(view: WangyiContract.WangyiView): BaseMvpPresenter<WangyiContract.WangyiView>(view),
+class WangyiPresenter(view: WangyiContract.WangyiView) : BaseMvpPresenter<WangyiContract.WangyiView>(view),
         WangyiContract.WangyiPresenter {
 
-    private val mModel by lazy { WangyiModel() }
+   private val mModel by lazy { WangyiModel() }
 
-    override fun loadLatestList(currentIndex: Int) {
-        mView?.showLoading()
-        addSubscription(mModel.getNewsList(currentIndex)
-            .subscribe({
-//                LogUtils.e(it.newsList.size)
-                mView?.dismissLoading()
-                val list = it.newsList
-                // 过滤无效的返回值
-                list.forEach { bean ->
-                    if (TextUtils.isEmpty(bean.url)) list.remove(bean)
-                }
-                mView?.updateContentList(list)
-            }, {
-                mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
-            }))
-    }
-
-//    override fun loadMoreList(currentIndex: Int) {
-//        addSubscription(mModel.getNewsList(currentIndex)
-//            .subscribe({
-//                if (it.newsList.size > 0) {
-//                    mView?.updateContentList(it.newsList)
-//                } else {
-//                    mView?.showNoData()
-//                }
-//            }, {
-//                mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
-//            }))
-//    }
+   override fun loadLatestList(currentIndex: Int) {
+      if (currentIndex == 0) {
+         mView?.showLoading()
+      }
+      addSubscription(
+              mModel.getNewsList(currentIndex)
+                      .subscribe({
+                         LogUtils.e(it.newsList)
+                         mView?.dismissLoading()
+                         val list = it.newsList
+                         // 过滤无效的返回值
+                         list.forEach { bean ->
+                            if (TextUtils.isEmpty(bean.url)) list.remove(bean)
+                         }
+                         mView?.updateContentList(list)
+                      }, {
+                         LogUtils.e(it.cause)
+                         mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
+                      }))
+   }
 }
 
 

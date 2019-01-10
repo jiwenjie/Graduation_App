@@ -20,12 +20,13 @@ class WeixinPresenter(view: WeixinContract.WeixinView): BaseMvpPresenter<WeixinC
    private val mModel by lazy { WeixinModel() }
 
    override fun loadLatestList(page: Int, pageStrip: Int, key: String) {
-      mView?.showLoading()
+      if (page == 1) {
+         mView?.showLoading()
+      }
       addSubscription(
           mModel.getWeixinChoiceList(page, pageStrip, key)
               .subscribe({
                  mView?.dismissLoading()
-                 LogUtils.e(it.result)
                  if (it.error_code == "0") {
                     mView?.updateContentList(it.result.list)
                  } else {

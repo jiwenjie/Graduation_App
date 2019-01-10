@@ -38,7 +38,7 @@ class DiscoverFragment : BaseFragment() {
 
    }
 
-   override fun getLayoutId(): Int = R.layout.fragment_discovery
+   override fun getLayoutId(): Int = R.layout.common_tablayout_viewpager
 
    override fun initFragment(savedInstanceState: Bundle?) {
       types = resources.getStringArray(R.array.news_type_en)

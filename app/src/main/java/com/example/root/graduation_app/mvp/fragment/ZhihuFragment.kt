@@ -27,6 +27,7 @@ class ZhihuFragment : BaseMvpFragment<ZhihuContract.ZhihuView, ZhihuPresenter>()
    private val zhihuAdapter by lazy { ZhihuAdapter(activity!!, beanList) }
 
    companion object {
+      @JvmStatic
       fun getInstance(): ZhihuFragment {
          val fragment = ZhihuFragment()
          val bundle = Bundle()

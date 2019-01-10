@@ -39,7 +39,6 @@ interface WangyiContract {
          * 已加载完
          */
         fun showNoData()
-
     }
 
     /**
@@ -51,7 +50,6 @@ interface WangyiContract {
          */
         fun loadLatestList(currentIndex: Int)
     }
-
 }
 
 

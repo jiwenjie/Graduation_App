@@ -13,6 +13,7 @@ import com.example.base_library.base_utils.ScreenUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
+import com.example.root.graduation_app.base.api.WangyiApi
 import com.example.root.graduation_app.base.api.WeixinApi
 import com.example.root.graduation_app.utils.Constants
 import com.example.root.graduation_app.utils.RxJavaUtils
@@ -36,10 +37,10 @@ class TestActivity : BaseActivity() {
     @SuppressLint("CheckResult")
     override fun initActivity(savedInstanceState: Bundle?) {
 
-        RetrofitManager.setBaseUrl(Constants.WEIXIN_BASE_URL)
+//        RetrofitManager.setBaseUrl(Constants.WEIXIN_BASE_URL)
 
-        RetrofitManager.mRetrofit.create(WeixinApi::class.java)
-            .getWeixinChoiceList(1, 20, Constants.JU_HE_APP_KEY)
+        RetrofitManager.provideClient(Constants.WANGYI_BASE_URL).create(WangyiApi::class.java)
+            .getNewsList(0)
             .compose(RxJavaUtils.applyObservableAsync())
             .subscribe({
                 AlertDialog.Builder(this@TestActivity)
@@ -47,7 +48,7 @@ class TestActivity : BaseActivity() {
                     .setTitle("测试")
                     .create()
                     .show()
-                LogUtils.e(it.result)
+                LogUtils.e(it.newsList)
             }, {
                 LogUtils.e(it.message)
             })

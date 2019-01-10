@@ -16,7 +16,7 @@ object Constants {
    const val ZHIHU_BASE_URL = "http://news-at.zhihu.com/"   // 知乎接口的 host 地址
    const val DOUBAN_BASE_URL = "Https://api.douban.com/"   // 豆瓣接口的 host 地址
    const val WEIXIN_BASE_URL = "http://v.juhe.cn/weixin/"         // 微信精选的 host 地址
-   const val WANGYI_BASE_URL = "http://c.m.163.com/"       // 网易新闻的 host 地址
+   const val WANGYI_BASE_URL = "http://c.m.163.com/nc/article/"       // 网易新闻的 host 地址
 
    const val SHARE_LOGIN_USER_NAME = "share_loginUser"
 

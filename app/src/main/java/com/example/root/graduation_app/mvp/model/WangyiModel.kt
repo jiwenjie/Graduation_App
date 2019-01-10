@@ -18,11 +18,10 @@ import io.reactivex.Observable
  */
 class WangyiModel : WangyiContract.WangyiModel {
 
-    override fun getNewsList(id: Int): Observable<WangyiNewsListBean> {
-//        RetrofitManager.setBaseUrl(Constants.WANGYI_BASE_URL)
-//        LogUtils.e(RetrofitManager.mRetrofit.baseUrl())
-        return RetrofitManager.provideClient(Constants.WANGYI_BASE_URL).create(WangyiApi::class.java)
-            .getNewsList(id)
-            .compose(RxJavaUtils.applyObservableAsync())
-    }
+   override fun getNewsList(id: Int): Observable<WangyiNewsListBean> {
+      return RetrofitManager.provideClient(Constants.WANGYI_BASE_URL)
+              .create(WangyiApi::class.java)
+              .getNewsList(id)
+              .compose(RxJavaUtils.applyObservableAsync())
+   }
 }

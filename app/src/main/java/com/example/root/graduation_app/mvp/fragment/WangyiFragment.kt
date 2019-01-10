@@ -31,6 +31,7 @@ class WangyiFragment : BaseMvpFragment<WangyiContract.WangyiView, WangyiPresente
     private val wangyiAdapter by lazy { WangyiAdapter(activity!!, beanList) }
 
     companion object {
+        @JvmStatic
         fun getInstance(): WangyiFragment {
             val fragment = WangyiFragment()
             val bundle = Bundle()

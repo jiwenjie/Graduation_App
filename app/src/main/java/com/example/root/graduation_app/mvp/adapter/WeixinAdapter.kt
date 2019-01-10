@@ -30,5 +30,6 @@ class WeixinAdapter(context: Context, beanList: ArrayList<WeixinChoiceItemBean>)
 
       itemView.tv_item_title.text = data.title
       itemView.tv_item_who.text = data.source
+      itemView.iv_item_image.visibility = View.INVISIBLE
    }
 }

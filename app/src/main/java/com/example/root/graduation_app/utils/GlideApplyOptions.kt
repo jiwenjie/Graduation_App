@@ -13,18 +13,18 @@ import com.example.root.graduation_app.R
  */
 object GlideApplyOptions {
 
-    fun getRequestOptions(): RequestOptions {
-        return RequestOptions()
-            .centerCrop()
-            .placeholder(R.drawable.placeholder_banner)
-    }
+   fun getRequestOptions(): RequestOptions {
+      return RequestOptions()
+              .centerCrop()
+              .placeholder(R.drawable.placeholder_banner)
+              .error(R.mipmap.ic_error)
+   }
 
-    fun getRequestDefaultAvatar(): RequestOptions {
-        return RequestOptions()
-            .placeholder(R.drawable.img_avatar)
-            .circleCrop()
-    }
-
+   fun getRequestDefaultAvatar(): RequestOptions {
+      return RequestOptions()
+              .placeholder(R.drawable.img_avatar)
+              .circleCrop()
+   }
 }
 
 
