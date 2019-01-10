@@ -1,10 +1,11 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.base_library
 
 import android.text.TextUtils
 import android.util.Log
-import okhttp3.Interceptor
+import com.example.base_library.base_utils.LogUtils
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -25,6 +26,9 @@ object RetrofitManager {
     private const val READ_TIME = 10
     private const val WRITE_TIME = 30
     private var BASE_URL: String = ""
+
+    private var mRetrofits: Retrofit? = null
+    private var url: String? = null
 
     /**
      * 需要在调用 mRetrofit 之前必须优先调用设置请求的服务器地址
@@ -59,6 +63,9 @@ object RetrofitManager {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
+            //SSL证书
+            .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
+            .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
             .connectTimeout(CONN_TIME.toLong(), TimeUnit.SECONDS)
             .readTimeout(READ_TIME.toLong(), TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIME.toLong(), TimeUnit.SECONDS)
@@ -74,6 +81,27 @@ object RetrofitManager {
 //
 //        }
 //    }
+
+    fun provideClient(baseUrl: String): Retrofit {
+        if (!TextUtils.equals(url, baseUrl) && mRetrofits != null) {
+            mRetrofits = null
+            url = baseUrl
+        }
+
+        if (mRetrofits == null) {
+            synchronized(RetrofitManager::class.java) {
+                if (mRetrofits == null) {
+                    mRetrofits = Retrofit.Builder()
+                        .baseUrl(baseUrl)
+                        .client(getOkClient())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                }
+            }
+        }
+        return mRetrofits!!
+    }
 
 }
 

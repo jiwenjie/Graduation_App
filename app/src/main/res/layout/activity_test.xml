@@ -6,9 +6,18 @@
     android:background="@color/color_white"
     android:fitsSystemWindows="true">
 
-    <com.example.root.graduation_app.test.FixedViewPager
-        android:id="@+id/viewpager"
+    <!--<com.example.root.graduation_app.test.FixedViewPager-->
+    <!--android:id="@+id/viewpager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:textSize="@dimen/common_16dp"
+        android:text="scaac"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>

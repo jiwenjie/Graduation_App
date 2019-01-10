@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.example.root.graduation_app.R;
 
@@ -17,6 +18,9 @@ import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -32,13 +36,23 @@ public class TestPhotoView extends AppCompatActivity {
    private PhotoSlideAdapter adapter;
    WebView webView;
 
+   private TextView count;
+
+   private List<String> list;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-       viewPager = findViewById(R.id.viewpager);
-       viewPager.setAdapter(adapter = new PhotoSlideAdapter(this));
+        count = findViewById(R.id.tvCount);
+
+
+        list = new ArrayList<>();
+        list.add(null);
+        list.add(null);
+        list.add(null);
+       count.setText(String.valueOf(list.size()));
     }
 
    public static boolean isMobileNO(String mobileNums) {

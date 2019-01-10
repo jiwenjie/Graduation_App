@@ -52,6 +52,7 @@ class IndexFragment : BaseFragment() {
       fragmentList.add(ZhihuFragment.getInstance())
       fragmentList.add(WangyiFragment.getInstance())
       fragmentList.add(WeixinFragment.getInstance())
+//      indexViewpager.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, arrayOf("网易新闻", "微信精选"))
       indexViewpager.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, arrayOf("知乎日报", "网易新闻", "微信精选"))
       indexTabLayout.setupWithViewPager(indexViewpager)
    }

@@ -18,15 +18,15 @@ import io.reactivex.Observable
 class ZhihuModel : ZhihuContract.ZhihuModel {
 
    override fun getDailyList(): Observable<ZhihuDailyListBean> {
-      RetrofitManager.setBaseUrl(Constants.ZHIHU_BASE_URL)
-      return RetrofitManager.mRetrofit.create(ZhihuApi::class.java)
+//      RetrofitManager.setBaseUrl(Constants.ZHIHU_BASE_URL)
+      return RetrofitManager.provideClient(Constants.ZHIHU_BASE_URL).create(ZhihuApi::class.java)
               .getLastDailyList()
               .compose(RxJavaUtils.applyObservableAsync())
    }
 
    override fun getDailyList(date: String): Observable<ZhihuDailyListBean> {
-      RetrofitManager.setBaseUrl(Constants.ZHIHU_BASE_URL)
-      return RetrofitManager.mRetrofit.create(ZhihuApi::class.java)
+//      RetrofitManager.setBaseUrl(Constants.ZHIHU_BASE_URL)
+      return RetrofitManager.provideClient(Constants.ZHIHU_BASE_URL).create(ZhihuApi::class.java)
               .getDailyListWithDate(date)
               .compose(RxJavaUtils.applyObservableAsync())
    }

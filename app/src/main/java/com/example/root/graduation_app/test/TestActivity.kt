@@ -4,12 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import com.example.base_library.RetrofitManager
+import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ScreenUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
+import com.example.root.graduation_app.base.api.WeixinApi
+import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.RxJavaUtils
+import io.reactivex.Observable
 
 /**
  *  author:Jiwenjie
@@ -28,6 +35,22 @@ class TestActivity : BaseActivity() {
 
     @SuppressLint("CheckResult")
     override fun initActivity(savedInstanceState: Bundle?) {
+
+        RetrofitManager.setBaseUrl(Constants.WEIXIN_BASE_URL)
+
+        RetrofitManager.mRetrofit.create(WeixinApi::class.java)
+            .getWeixinChoiceList(1, 20, Constants.JU_HE_APP_KEY)
+            .compose(RxJavaUtils.applyObservableAsync())
+            .subscribe({
+                AlertDialog.Builder(this@TestActivity)
+                    .setMessage("成功")
+                    .setTitle("测试")
+                    .create()
+                    .show()
+                LogUtils.e(it.result)
+            }, {
+                LogUtils.e(it.message)
+            })
 
 //        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
 //            (toolbar.getLayoutParams() as Toolbar.LayoutParams).bottomMargin = ScreenUtils.dip2px(this, 24f)

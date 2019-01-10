@@ -76,7 +76,7 @@ abstract class BaseRecyclerAdapter<T: Any>(context: Context, dataList: ArrayList
     }
 
     /** position is the data position in list, not item position **/
-    abstract fun convertView(itemView: View, t: T, position: Int)
+    abstract fun convertView(itemView: View, data: T, position: Int)
 
     @Deprecated("we suggest to use addHeadView")
     fun addHeader(header: View) {

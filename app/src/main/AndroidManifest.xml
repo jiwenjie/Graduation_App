@@ -89,9 +89,9 @@
         <!-- 蒲公英的 sdk 引入 end -->
 
         <!-- 专用于测试的 Activity start -->
-        <activity
-            android:name=".test.TestActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".test.TestActivity"-->
+            <!--android:screenOrientation="portrait" />-->
 
         <!--<activity-->
         <!--android:name=".test.TestOneActivity"-->
