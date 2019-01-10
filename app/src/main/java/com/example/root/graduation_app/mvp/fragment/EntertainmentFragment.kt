@@ -2,8 +2,12 @@ package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
+import com.example.root.graduation_app.R.id.container_tab
+import com.example.root.graduation_app.R.id.container_vp
+import kotlinx.android.synthetic.main.common_tablayout_viewpager.*
 
 /**
  *  author:Jiwenjie
@@ -14,8 +18,8 @@ import com.example.root.graduation_app.R
  */
 class EntertainmentFragment : BaseFragment() {
 
-   private val mTitles by lazy { ArrayList<String>() }
-   private val fragmentList by lazy { ArrayList<Fragment>() }
+   private val mTitles = ArrayList<String>()
+   private val fragmentList = ArrayList<Fragment>()
 
    companion object {
       @JvmStatic
@@ -41,11 +45,13 @@ class EntertainmentFragment : BaseFragment() {
       mTitles.add("文学")
       mTitles.add("文化")
       mTitles.add("生活")
-      mTitles.add("影视")    // 单独调用接口
+//      mTitles.add("影视")    // 单独调用接口
 
-      fragmentList.add(LiteratureFragment.getInstance())
-      fragmentList.add(LiteratureFragment.getInstance())
-      fragmentList.add(LiteratureFragment.getInstance())
-      fragmentList.add(LiteratureFragment.getInstance())
+      fragmentList.add(LiteratureFragment.getInstance(mTitles[0]))
+      fragmentList.add(LiteratureFragment.getInstance(mTitles[1]))
+      fragmentList.add(LiteratureFragment.getInstance(mTitles[2]))
+//      fragmentList.add(LiteratureFragment.getInstance(mTitles[3]))
+      container_tab.setupWithViewPager(container_vp)
+      container_vp.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, mTitles)
    }
 }

@@ -37,11 +37,6 @@ interface ZhihuContract {
        * 展示数据
        */
       fun updateContentList(ItemList: ArrayList<ZhihuDailyItemBean>)
-
-      /**
-       * 显示错误信息
-       */
-      fun showError(errorMsg: String, errorCode: Int)
    }
 
    /**

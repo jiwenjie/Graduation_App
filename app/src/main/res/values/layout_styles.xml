@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="BookItemStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/common_20dp</item>
+        <item name="android:layout_gravity">bottom|start</item>
+        <item name="android:layout_marginStart">@dimen/common_5dp</item>
+        <item name="android:paddingStart">@dimen/common_5dp</item>
+        <item name="android:paddingEnd">@dimen/common_5dp</item>
+    </style>
+
+</resources>

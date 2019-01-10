@@ -22,6 +22,7 @@ class IndexFragment : BaseFragment() {
 
    private var user: LoginUser? = null
    private val fragmentList = ArrayList<Fragment>()
+   private val titles = ArrayList<String>()
 
    companion object {
       @JvmStatic
@@ -49,11 +50,15 @@ class IndexFragment : BaseFragment() {
       common_toolbar_icon.setOnClickListener {
          activity!!.drawerLyt.openDrawer(Gravity.START)
       }
+
+      titles.add("知乎日报")
+      titles.add("网易新闻")
+      titles.add("微信精选")
+
       fragmentList.add(ZhihuFragment.getInstance())
       fragmentList.add(WangyiFragment.getInstance())
       fragmentList.add(WeixinFragment.getInstance())
-//      indexViewpager.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, arrayOf("网易新闻", "微信精选"))
-      indexViewpager.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, arrayOf("知乎日报", "网易新闻", "微信精选"))
+      indexViewpager.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, titles)
       indexTabLayout.setupWithViewPager(indexViewpager)
    }
 }

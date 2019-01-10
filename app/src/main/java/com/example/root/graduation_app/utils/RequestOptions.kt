@@ -11,7 +11,7 @@ import com.example.root.graduation_app.R
  *  desc:
  *  version:1.0
  */
-object GlideApplyOptions {
+object RequestOptions {
 
    fun getRequestOptions(): RequestOptions {
       return RequestOptions()

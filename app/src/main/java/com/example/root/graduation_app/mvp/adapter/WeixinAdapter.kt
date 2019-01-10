@@ -3,14 +3,9 @@ package com.example.root.graduation_app.mvp.adapter
 import android.content.Context
 import android.graphics.Color
 import android.view.View
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
-import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WeixinChoiceItemBean
-import com.example.root.graduation_app.utils.GlideApplyOptions
 import kotlinx.android.synthetic.main.fragment_home_item.view.*
 
 /**

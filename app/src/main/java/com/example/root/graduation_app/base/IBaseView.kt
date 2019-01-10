@@ -14,6 +14,8 @@ interface IBaseView : BaseMvpViewImpl {
     fun showLoading()
 
     fun dismissLoading()
+
+    fun showError(errorMsg: String, errorCode: Int)
 }
 
 

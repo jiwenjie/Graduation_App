@@ -7,7 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.ZhihuDailyItemBean
-import com.example.root.graduation_app.utils.GlideApplyOptions
+import com.example.root.graduation_app.utils.RequestOptions
 import kotlinx.android.synthetic.main.fragment_home_item.view.*
 
 /**
@@ -26,7 +26,7 @@ class ZhihuAdapter(context: Context, beanList: ArrayList<ZhihuDailyItemBean>): B
       itemView.tv_item_title.text = data.title
       Glide.with(mContext)
               .load(data.images[0])
-              .apply(GlideApplyOptions.getRequestOptions())
+              .apply(RequestOptions.getRequestOptions())
               .transition(DrawableTransitionOptions().crossFade())
               .into(itemView.iv_item_image)
    }

@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WangyiNewsItemBean
-import com.example.root.graduation_app.utils.GlideApplyOptions
+import com.example.root.graduation_app.utils.RequestOptions
 import kotlinx.android.synthetic.main.fragment_home_item.view.*
 
 /**
@@ -31,7 +31,7 @@ class WangyiAdapter(context: Context, beanList: ArrayList<WangyiNewsItemBean>)
         itemView.tv_item_time.text = data.ptime
         Glide.with(mContext)
             .load(data.imgsrc)
-            .apply(GlideApplyOptions.getRequestOptions())
+            .apply(RequestOptions.getRequestOptions())
             .transition(DrawableTransitionOptions().crossFade())
             .into(itemView.iv_item_image)
     }

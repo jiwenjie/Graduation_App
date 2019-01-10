@@ -31,11 +31,6 @@ interface WangyiContract {
         fun updateContentList(list: ArrayList<WangyiNewsItemBean>)
 
         /**
-         * 显示错误信息
-         */
-        fun showError(errorMsg: String, errorCode: Int)
-
-        /**
          * 已加载完
          */
         fun showNoData()

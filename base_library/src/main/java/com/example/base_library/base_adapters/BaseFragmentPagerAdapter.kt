@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter
  *  desc:
  *  version:1.0
  */
-class BaseFragmentPagerAdapter(fragmentManager: FragmentManager, fragmentList: ArrayList<Fragment>, titles: Array<String>): FragmentPagerAdapter(fragmentManager) {
+class BaseFragmentPagerAdapter(fragmentManager: FragmentManager, fragmentList: ArrayList<Fragment>, titles: ArrayList<String>): FragmentPagerAdapter(fragmentManager) {
 
     private var mFragments = fragmentList
     private var mTitles = titles

@@ -32,11 +32,6 @@ interface WeixinContract {
    interface WeixinView : IBaseView {
       fun updateContentList(list: ArrayList<WeixinChoiceItemBean>)
 
-      /**
-       * 显示错误信息
-       */
-      fun showError(errorMsg: String, errorCode: Int)
-
       fun showNetWorkError()
    }
 
