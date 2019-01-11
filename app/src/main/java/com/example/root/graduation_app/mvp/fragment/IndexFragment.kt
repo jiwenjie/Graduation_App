@@ -7,6 +7,8 @@ import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.LoginUser
+import com.example.root.graduation_app.mvp.activity.CommonWebViewActivity
+import com.example.root.graduation_app.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.common_toolbar_layout.*
 import kotlinx.android.synthetic.main.fragment_index.*
@@ -35,7 +37,9 @@ class IndexFragment : BaseFragment() {
    }
 
    override fun loadData() {
-
+      fab_download.setOnClickListener {
+         CommonWebViewActivity.runActivity(activity!!, "github", Constants.GITHUB_URL)
+      }
    }
 
    override fun getLayoutId(): Int = R.layout.fragment_index

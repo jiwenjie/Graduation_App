@@ -54,13 +54,13 @@ abstract class BaseActivity : AppCompatActivity() {
       ActivityStackManager.removeActivity(this)
    }
 
+   protected abstract fun initActivity(savedInstanceState: Bundle?)
+
    protected abstract fun loadData()
 
    protected abstract fun getLayoutId(): Int
 
    protected open fun needTransparentStatus(): Boolean = false
-
-   protected abstract fun initActivity(savedInstanceState: Bundle?)
 
    protected open fun setListener() {}
 
@@ -98,7 +98,7 @@ abstract class BaseActivity : AppCompatActivity() {
    }
 
    fun showProgress(msg: String?, config: MDialogConfig?) {
-      MProgressDialog.showProgress(this, msg, config)
+      MProgressDialog.showProgress(this@BaseActivity, msg, config)
    }
 
    fun dismissProgress() {

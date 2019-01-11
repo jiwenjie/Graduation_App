@@ -42,9 +42,9 @@
 
         <!-- 程序首页 -->
         <!--<activity-->
-            <!--android:name=".mvp.activity.MainActivity"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/AppTheme" />-->
+        <!--android:name=".mvp.activity.MainActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/AppTheme" />-->
 
         <!-- 程序的登陆界面 -->
         <activity
@@ -62,16 +62,21 @@
             android:name=".mvp.activity.InputVerificationCodeActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 公共的 WebView 界面 -->
+        <activity
+            android:name=".mvp.activity.CommonWebViewActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 个人主页 -->
         <!--<activity-->
-            <!--android:name=".mvp.activity.ProfileActivity"-->
+        <!--android:name=".mvp.activity.ProfileActivity"-->
         <!--android:theme="@style/AppTheme.NoActionBar"-->
-            <!--android:screenOrientation="portrait" />-->
+        <!--android:screenOrientation="portrait" />-->
 
         <!-- 打开 WebView 界面，去 github -->
-        <activity
-            android:name=".mvp.activity.GithubActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".mvp.activity.GithubActivity"-->
+            <!--android:screenOrientation="portrait" />-->
 
         <!-- 滑动头部和折叠的有关页面 -->
         <activity
@@ -83,6 +88,7 @@
             android:name="com.pgyersdk.PgyerProvider"
             android:authorities="${applicationId}.com.pgyer.provider"
             android:exported="false" />
+
         <meta-data
             android:name="PGYER_APPID"
             android:value="eef566fce6ff5df19a67b8b3a965b403" />
@@ -90,8 +96,8 @@
 
         <!-- 专用于测试的 Activity start -->
         <!--<activity-->
-            <!--android:name=".test.TestActivity"-->
-            <!--android:screenOrientation="portrait" />-->
+        <!--android:name=".test.TestActivity"-->
+        <!--android:screenOrientation="portrait" />-->
 
         <!--<activity-->
         <!--android:name=".test.TestOneActivity"-->

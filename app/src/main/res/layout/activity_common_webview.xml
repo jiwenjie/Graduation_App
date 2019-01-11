@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Roots"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,16 +9,17 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/activity_github_toolbar"
+            android:id="@+id/commonWebViewToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
-            android:backgroundTint="@color/colorPrimary"
             android:elevation="8dp"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.ToolbarPopupOverlay">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -26,13 +28,17 @@
                 android:src="@drawable/ic_return"
                 android:tint="@color/color_white" />
 
+            <View
+                android:layout_width="@dimen/common_18dp"
+                android:layout_height="wrap_content" />
+
             <TextView
+                android:id="@+id/commonWebViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="GitHub 地址"
                 android:textColor="@color/color_white"
-                android:textSize="@dimen/common_sp_16" />
+                android:textSize="@dimen/common_sp_16"
+                tools:text="公共 webView" />
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
@@ -43,7 +49,7 @@
         android:layout_height="match_parent">
 
         <WebView
-            android:id="@+id/activity_github_webView"
+            android:id="@+id/commonWebView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/activity_github_toolbar" />
