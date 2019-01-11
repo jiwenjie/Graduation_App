@@ -1,8 +1,7 @@
 package com.example.root.graduation_app.mvp.constract
 
 import com.example.root.graduation_app.base.IBaseView
-import com.example.root.graduation_app.bean.DoubanBookBean
-import com.example.root.graduation_app.bean.DoubanBookItemDetail
+import com.example.root.graduation_app.bean.*
 import io.reactivex.Observable
 
 /**
@@ -15,7 +14,41 @@ import io.reactivex.Observable
 interface DoubanContract {
 
    /**
-    * book model 的接口
+    * douban movie -> model
+    */
+   interface DoubanMovieModel {
+      fun getDoubanHotMovie(): Observable<DoubanMovieBean>  // get hot movie
+
+      fun getDoubanMovieDetail(id: String): Observable<DoubanMovieDetail>  // get movie detail
+
+      fun getDoubanMovieTop250(start: Int, count: Int): Observable<DoubanMovieBean> // get movie top 250
+   }
+
+   /**
+    * douban movie -> view
+    */
+   interface DoubanMovieView: IBaseView {
+      fun updateDoubanContentList(subjectList: ArrayList<DoubanSubjectBean>)
+
+      fun showDetail(bean: DoubanMovieDetail)
+   }
+
+   /**
+    * douban movie -> presenter
+    */
+   interface DoubanMoviePresenter {
+      fun getDoubanHotMovie()
+
+      fun getDoubanMovieDetail(id: String)
+
+      fun getDoubanMovieTop250(start: Int, count: Int)
+   }
+
+
+   /*********************************************************************************************/
+
+   /**
+    * douban book model
     */
    interface DoubanBookModel {
       fun getBookListWithTag(tag: String, start: Int, count: Int): Observable<DoubanBookBean>
@@ -24,14 +57,14 @@ interface DoubanContract {
    }
 
    /**
-    * book view 的接口
+    * book view
     */
    interface DoubanBookView: IBaseView {
       fun updateDoubanContentList(itemList: ArrayList<DoubanBookItemDetail>)
    }
 
    /**
-    * book presenter 接口
+    * book presenter
     */
    interface DoubanBookPresenter {
       fun loadBookList(tag: String, start: Int, count: Int)

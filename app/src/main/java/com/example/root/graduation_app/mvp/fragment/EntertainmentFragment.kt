@@ -2,12 +2,13 @@ package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.Gravity
 import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.R.id.container_tab
-import com.example.root.graduation_app.R.id.container_vp
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.common_tablayout_viewpager.*
+import kotlinx.android.synthetic.main.common_toolbar_layout.*
 
 /**
  *  author:Jiwenjie
@@ -42,15 +43,20 @@ class EntertainmentFragment : BaseFragment() {
    }
 
    private fun initView() {
+      common_toolbar_title.text = "休闲文娱"
+      common_toolbar_icon.setOnClickListener {
+         activity!!.drawerLyt.openDrawer(Gravity.START)
+      }
+
       mTitles.add("文学")
       mTitles.add("文化")
       mTitles.add("生活")
-//      mTitles.add("影视")    // 单独调用接口
+      mTitles.add("影视")    // 单独调用接口
 
-      fragmentList.add(LiteratureFragment.getInstance(mTitles[0]))
-      fragmentList.add(LiteratureFragment.getInstance(mTitles[1]))
-      fragmentList.add(LiteratureFragment.getInstance(mTitles[2]))
-//      fragmentList.add(LiteratureFragment.getInstance(mTitles[3]))
+      fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[0]))
+      fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[1]))
+      fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[2]))
+      fragmentList.add(DoubanMovieFragment.newInstance())
       container_tab.setupWithViewPager(container_vp)
       container_vp.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, mTitles)
    }

@@ -4,7 +4,7 @@ import com.example.base_library.base_mvp.BaseMvpPresenter
 import com.example.base_library.base_utils.ExceptionHandle
 import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.mvp.constract.DoubanContract
-import com.example.root.graduation_app.mvp.model.DoubanBookModel
+import com.example.root.graduation_app.mvp.model.DoubanModel
 
 /**
  *  author:Jiwenjie
@@ -16,7 +16,7 @@ import com.example.root.graduation_app.mvp.model.DoubanBookModel
 class DoubanBookPresenter(view: DoubanContract.DoubanBookView) : BaseMvpPresenter<DoubanContract.DoubanBookView>(view),
         DoubanContract.DoubanBookPresenter {
 
-   private val mModel by lazy { DoubanBookModel() }
+   private val mModel by lazy { DoubanModel() }
 
    override fun loadBookList(tag: String, start: Int, count: Int) {
       mView?.showLoading()

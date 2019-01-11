@@ -1,5 +1,7 @@
 package com.example.root.graduation_app.bean
 
+import com.google.gson.annotations.SerializedName
+
 
 /**
  *  author:Jiwenjie
@@ -109,7 +111,7 @@ package com.example.root.graduation_app.bean
 },
  */
 
-
+/** 书籍部分的 bean **/
 data class DoubanBookBean(
         val count: Int,
         val start: Int,
@@ -162,3 +164,81 @@ data class DoubanSeries(
         val id: String,
         val title: String)
 
+
+/** 豆瓣电影的 bean **/
+data class DoubanMovieBean(
+        val count: Int,
+        val start: Int,
+        val total: Int,
+        val subjects: ArrayList<DoubanSubjectBean>,
+        val title: String
+)
+
+data class DoubanSubjectBean(
+        val rating: DoubanMovieRating,
+        val genres: ArrayList<String>,
+        val title: String,
+        val casts: ArrayList<DoubanCastsBean>,
+        val collect_count: Int,
+        val original_title: String,
+        val subtype: String,
+        val directors: ArrayList<DoubanCastsBean>,
+        val year: String,
+        val images: DoubanImg,
+        val alt: String,
+        val id: String
+)
+
+data class DoubanMovieRating(
+        val max: Int,
+        val average: Double,
+        val stars: String,
+        val min: Int
+)
+
+data class DoubanCastsBean(
+        val alt: String,
+        // 导演或演员
+        @SerializedName("type")
+        var type: String,
+        val avatars: DoubanAvatars,
+        val name: String,
+        val id: String
+)
+
+data class DoubanAvatars(
+        val small: String,
+        val large: String,
+        val medium: String
+)
+
+/** 豆瓣书籍详情 **/
+data class DoubanMovieDetail(
+        val rating: DoubanMovieRating,
+        val reviews_count: Int,
+        val wish_count: Int,
+        val douban_site: String,
+        val year: String,
+        val images: DoubanImg,
+        val alt: String,
+        val id: String,
+        val mobile_url: String,
+        val title: String,
+        val do_count: Any,
+        val share_url: String,
+        val seasons_count: Any,
+        val schedule_url: String,
+        val episodes_count: Any,
+        val countries: ArrayList<String>,
+        val genres: ArrayList<String>,
+        val collect_count: Int,
+        val casts: ArrayList<DoubanCastsBean>,
+        val current_season: Any,
+        val original_title: String,
+        val summary: String,
+        val subtype: String,
+        val directors: ArrayList<DoubanCastsBean>,
+        val comments_count: Int,
+        val ratings_count: Int,
+        val aka: ArrayList<String>
+)

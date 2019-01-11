@@ -1,7 +1,6 @@
 package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.example.base_library.base_mvp.BaseMvpFragment
@@ -9,7 +8,7 @@ import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanBookItemDetail
-import com.example.root.graduation_app.mvp.adapter.DoubanAdapter
+import com.example.root.graduation_app.mvp.adapter.DoubanBookAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanBookPresenter
 import com.example.root.graduation_app.utils.Constants
@@ -22,7 +21,7 @@ import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
  *  desc:
  *  version:1.0
  */
-class LiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, DoubanBookPresenter>(),
+class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, DoubanBookPresenter>(),
         DoubanContract.DoubanBookView {
 
    private var tags: String? = null
@@ -30,14 +29,14 @@ class LiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, DoubanB
    private var loadingMore = false
 
    private val beanList by lazy { ArrayList<DoubanBookItemDetail>() }
-   private val adapter by lazy { DoubanAdapter(activity!!, beanList) }
+   private val adapter by lazy { DoubanBookAdapter(activity!!, beanList) }
 
    companion object {
       private const val KEY_TAG = "key_tag"
 
       @JvmStatic
-      fun getInstance(tag: String): LiteratureFragment {
-         return LiteratureFragment().apply {
+      fun getInstance(tag: String): DoubanLiteratureFragment {
+         return DoubanLiteratureFragment().apply {
             arguments = Bundle().apply {
                putString(KEY_TAG, tag)
             }
@@ -75,7 +74,7 @@ class LiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, DoubanB
       })
    }
 
-   override fun initPresenter(): DoubanBookPresenter = DoubanBookPresenter(this@LiteratureFragment)
+   override fun initPresenter(): DoubanBookPresenter = DoubanBookPresenter(this@DoubanLiteratureFragment)
 
    override fun updateDoubanContentList(itemList: ArrayList<DoubanBookItemDetail>) {
       loadingMore = false

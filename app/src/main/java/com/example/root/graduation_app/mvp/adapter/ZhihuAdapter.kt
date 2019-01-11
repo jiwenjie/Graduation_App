@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_home_item.view.*
  *  version:1.0
  */
 @Suppress("PLUGIN_WARNING")
-class ZhihuAdapter(context: Context, beanList: ArrayList<ZhihuDailyItemBean>): BaseRecyclerAdapter<ZhihuDailyItemBean>(context, beanList) {
+class ZhihuAdapter(context: Context, beanList: ArrayList<ZhihuDailyItemBean>) : BaseRecyclerAdapter<ZhihuDailyItemBean>(context, beanList) {
 
    override fun getAdapterLayoutId(viewType: Int): Int = R.layout.fragment_home_item
 
@@ -27,7 +27,8 @@ class ZhihuAdapter(context: Context, beanList: ArrayList<ZhihuDailyItemBean>): B
       Glide.with(mContext)
               .load(data.images[0])
               .apply(RequestOptions.getRequestOptions())
-              .transition(DrawableTransitionOptions().crossFade())
+              .transition(DrawableTransitionOptions().crossFade(300))
+              .thumbnail(0.5f)   // 缩略图
               .into(itemView.iv_item_image)
    }
 }

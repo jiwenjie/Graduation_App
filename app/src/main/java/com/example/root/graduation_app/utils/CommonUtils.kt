@@ -41,4 +41,20 @@ object CommonUtils {
       else
          mobileNum.matches(telRegex.toRegex())
    }
+
+   fun splicing(authers: ArrayList<String>): String {
+      var name = ""
+      return when {
+         authers.isEmpty() -> name
+         authers.size == 1 -> authers[0]
+         else -> {
+            name = authers[0]
+
+            authers.forEach {
+               name = " / $it"
+            }
+            name
+         }
+      }
+   }
 }

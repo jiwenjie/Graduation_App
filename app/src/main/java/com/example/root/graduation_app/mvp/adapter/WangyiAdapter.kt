@@ -19,20 +19,21 @@ import kotlinx.android.synthetic.main.fragment_home_item.view.*
  *  version:1.0
  */
 class WangyiAdapter(context: Context, beanList: ArrayList<WangyiNewsItemBean>)
-            : BaseRecyclerAdapter<WangyiNewsItemBean>(context, beanList) {
+   : BaseRecyclerAdapter<WangyiNewsItemBean>(context, beanList) {
 
-    override fun getAdapterLayoutId(viewType: Int): Int = R.layout.fragment_home_item
+   override fun getAdapterLayoutId(viewType: Int): Int = R.layout.fragment_home_item
 
-    override fun convertView(itemView: View, data: WangyiNewsItemBean, position: Int) {
-        itemView.tv_item_title.setTextColor(Color.BLACK)
+   override fun convertView(itemView: View, data: WangyiNewsItemBean, position: Int) {
+      itemView.tv_item_title.setTextColor(Color.BLACK)
 
-        itemView.tv_item_title.text = data.title
-        itemView.tv_item_who.text = data.source
-        itemView.tv_item_time.text = data.ptime
-        Glide.with(mContext)
-            .load(data.imgsrc)
-            .apply(RequestOptions.getRequestOptions())
-            .transition(DrawableTransitionOptions().crossFade())
-            .into(itemView.iv_item_image)
-    }
+      itemView.tv_item_title.text = data.title
+      itemView.tv_item_who.text = data.source
+      itemView.tv_item_time.text = data.ptime
+      Glide.with(mContext)
+              .load(data.imgsrc)
+              .apply(RequestOptions.getRequestOptions())
+              .transition(DrawableTransitionOptions().crossFade(300))
+              .thumbnail(0.5f)   // 缩略图
+              .into(itemView.iv_item_image)
+   }
 }
