@@ -50,5 +50,5 @@ abstract class BaseFragment : Fragment() {
 
     protected open fun handleRxBus() {}
 
-    fun startActivty(clazz: Class<*>) = activity!!.startActivity(Intent(activity, clazz))
+    fun startActivity(clazz: Class<*>) = activity!!.startActivity(Intent(activity, clazz))
 }

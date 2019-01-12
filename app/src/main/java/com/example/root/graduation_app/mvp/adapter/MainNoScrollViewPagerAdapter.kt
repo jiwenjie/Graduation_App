@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter
  *  version:1.0
  */
 class MainNoScrollViewPagerAdapter constructor(fragmentManager: FragmentManager,
-                                               private val list: List<Fragment>?) :
+                                               val list: List<Fragment>?) :
     FragmentPagerAdapter(fragmentManager) {
 
     override fun getItem(i: Int): Fragment {

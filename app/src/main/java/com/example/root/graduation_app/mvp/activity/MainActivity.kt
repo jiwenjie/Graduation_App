@@ -67,6 +67,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
       mFragments.add(MineFragment.newInstance())
       home_container.adapter = MainNoScrollViewPagerAdapter(supportFragmentManager, mFragments)
       home_container.currentItem = currentIndex
+      home_container.offscreenPageLimit = 3
    }
 
    /** set blur background **/

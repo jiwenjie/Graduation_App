@@ -19,7 +19,9 @@ class DoubanBookPresenter(view: DoubanContract.DoubanBookView) : BaseMvpPresente
    private val mModel by lazy { DoubanModel() }
 
    override fun loadBookList(tag: String, start: Int, count: Int) {
-      mView?.showLoading()
+      if (start == 0) {
+         mView?.showLoading()
+      }
       addSubscription(
               mModel.getBookListWithTag(tag, start, count)
                       .subscribe({
