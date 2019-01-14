@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.Gravity
 import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
+import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.LoginUser
@@ -23,8 +24,8 @@ import kotlinx.android.synthetic.main.fragment_index.*
 class IndexFragment : BaseFragment() {
 
    private var user: LoginUser? = null
-   private val fragmentList = ArrayList<Fragment>()
-   private val titles = ArrayList<String>()
+   private val fragmentList by lazy {  ArrayList<Fragment>() }
+   private val titles by lazy {  ArrayList<String>() }
 
    companion object {
       @JvmStatic
@@ -45,6 +46,7 @@ class IndexFragment : BaseFragment() {
    override fun getLayoutId(): Int = R.layout.fragment_index
 
    override fun initFragment(savedInstanceState: Bundle?) {
+      LogUtils.e("IndexFragment initFragment()")
       initView()
    }
 
@@ -55,13 +57,18 @@ class IndexFragment : BaseFragment() {
          activity!!.drawerLyt.openDrawer(Gravity.START)
       }
 
-      titles.add("知乎日报")
-      titles.add("网易新闻")
-      titles.add("微信精选")
+      /**
+       * 生命周期判断每次都会调用该方法，所以为了避免 bug，也为了减少内存开销，此处做一个判断
+       */
+      if (titles.size != 3 && fragmentList.size != 3) {
+         titles.add("知乎日报")
+         titles.add("网易新闻")
+         titles.add("微信精选")
 
-      fragmentList.add(ZhihuFragment.getInstance())
-      fragmentList.add(WangyiFragment.getInstance())
-      fragmentList.add(WeixinFragment.getInstance())
+         fragmentList.add(ZhihuFragment.getInstance())
+         fragmentList.add(WangyiFragment.getInstance())
+         fragmentList.add(WeixinFragment.getInstance())
+      }
       indexViewpager.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, titles)
       indexTabLayout.setupWithViewPager(indexViewpager)
    }

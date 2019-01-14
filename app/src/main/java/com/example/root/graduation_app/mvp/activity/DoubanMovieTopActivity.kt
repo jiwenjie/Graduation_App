@@ -3,7 +3,20 @@ package com.example.root.graduation_app.mvp.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.example.base_library.base_views.BaseActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
+import com.example.base_library.base_mvp.BaseMvpActivity
+import com.example.base_library.base_utils.ErrorStatus
+import com.example.base_library.base_utils.ToastUtils
+import com.example.root.graduation_app.R
+import com.example.root.graduation_app.bean.DoubanMovieDetail
+import com.example.root.graduation_app.bean.DoubanSubjectBean
+import com.example.root.graduation_app.mvp.adapter.DoubanTopMovieAdapter
+import com.example.root.graduation_app.mvp.constract.DoubanContract
+import com.example.root.graduation_app.mvp.presenter.DoubanMoviePresenter
+import com.example.root.graduation_app.utils.Constants
+import kotlinx.android.synthetic.main.common_toolbar_multiple_recyclerview.*
 
 /**
  *  author:Jiwenjie
@@ -12,7 +25,14 @@ import com.example.base_library.base_views.BaseActivity
  *  desc:douban 电影 top 250 的活动
  *  version:1.0
  */
-class DoubanMovieTopActivity : BaseActivity() {
+class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, DoubanMoviePresenter>(), DoubanContract.DoubanMovieView {
+
+   private var start = 0
+   private var loadingMore = false
+   private val beanList by lazy { ArrayList<DoubanSubjectBean>() }
+   private val adapter by lazy { DoubanTopMovieAdapter(this@DoubanMovieTopActivity, beanList) }
+
+   private val int_array by lazy { IntArray(3) }
 
    companion object {
       @JvmStatic
@@ -23,15 +43,61 @@ class DoubanMovieTopActivity : BaseActivity() {
    }
 
    override fun loadData() {
-
+      mPresenter.getDoubanMovieTop250(start, Constants.CONFIG_LIMIE)
    }
 
-   override fun getLayoutId(): Int {
-      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-   }
+   override fun getLayoutId(): Int = R.layout.common_toolbar_multiple_recyclerview
+
+   override fun initPresenter(): DoubanMoviePresenter = DoubanMoviePresenter(this)
 
    override fun initActivity(savedInstanceState: Bundle?) {
-      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+      mLayoutStatusView = common_toolbar_multipleStatusView
+
+      mLayoutStatusView?.showContent()
+      common_toolbarRv.adapter = adapter
+
+      common_toolbarRv.layoutManager = StaggeredGridLayoutManager(3,
+              StaggeredGridLayoutManager.VERTICAL)
+      common_toolbarRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            val itemCount = recyclerView.layoutManager?.itemCount
+
+            val mLastVisibleItemPosition = (common_toolbarRv.layoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(int_array)
+            if (!loadingMore && mLastVisibleItemPosition.max() == (itemCount!! - 1)) {
+               loadingMore = true
+               start += Constants.CONFIG_LIMIE
+               mPresenter.getDoubanMovieTop250(start, Constants.CONFIG_LIMIE)
+            }
+         }
+      })
+
+   }
+
+   override fun updateDoubanContentList(subjectList: ArrayList<DoubanSubjectBean>) {
+      loadingMore = false
+      adapter.addAllData(subjectList)
+   }
+
+   override fun showDetail(bean: DoubanMovieDetail) {
+
+   }
+
+   override fun showLoading() {
+      mLayoutStatusView?.showLoading()
+   }
+
+   override fun dismissLoading() {
+      mLayoutStatusView?.showContent()
+   }
+
+   override fun showError(errorMsg: String, errorCode: Int) {
+      ToastUtils.showToast(this@DoubanMovieTopActivity, errorMsg)
+      if (errorCode == ErrorStatus.NETWORK_ERROR) {
+         mLayoutStatusView?.showNoNetwork()
+      } else {
+         mLayoutStatusView?.showError()
+      }
    }
 }
 

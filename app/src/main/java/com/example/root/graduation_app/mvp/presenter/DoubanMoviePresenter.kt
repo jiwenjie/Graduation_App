@@ -53,7 +53,9 @@ class DoubanMoviePresenter(view: DoubanContract.DoubanMovieView)
    }
 
    override fun getDoubanMovieTop250(start: Int, count: Int) {
-      mView?.showLoading()
+      if (start == 0) {
+         mView?.showLoading()
+      }
       addSubscription(
               mModel.getDoubanMovieTop250(start, count)
                       .subscribe({

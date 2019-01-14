@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.base_library.ActivityStackManager
 import com.example.base_library.R
+import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.widget.MProgressDialog
 import com.example.base_library.widget.config.MDialogConfig
 import com.jaeger.library.StatusBarUtil
@@ -36,6 +37,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
+      LogUtils.e("onCreate()")
       if (needTransparentStatus()) transparentStatusBar()
       setContentView(getLayoutId())
       ActivityStackManager.addActivity(this)
@@ -49,8 +51,29 @@ abstract class BaseActivity : AppCompatActivity() {
       handleRxBus()
    }
 
+   override fun onStart() {
+      super.onStart()
+      LogUtils.e("onStart()")
+   }
+
+   override fun onResume() {
+      super.onResume()
+      LogUtils.e("onResume()")
+   }
+
+   override fun onPause() {
+      super.onPause()
+      LogUtils.e("onPause()")
+   }
+
+   override fun onStop() {
+      super.onStop()
+      LogUtils.e("onStop()")
+   }
+
    override fun onDestroy() {
       super.onDestroy()
+      LogUtils.e("onDestroy()")
       ActivityStackManager.removeActivity(this)
    }
 

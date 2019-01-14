@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.root.graduation_app.R;
@@ -40,6 +41,8 @@ public class TestPhotoView extends AppCompatActivity {
 
    private List<String> list;
 
+   private RadioGroup radioGroup;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +50,16 @@ public class TestPhotoView extends AppCompatActivity {
 
         count = findViewById(R.id.tvCount);
 
+//        radioGroup.check(2);
+
 
         list = new ArrayList<>();
         list.add(null);
         list.add(null);
         list.add(null);
        count.setText(String.valueOf(list.size()));
+
+       int[] int_array = new int[3];
     }
 
    public static boolean isMobileNO(String mobileNums) {

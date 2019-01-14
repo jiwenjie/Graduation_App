@@ -11,6 +11,7 @@ import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanMovieDetail
 import com.example.root.graduation_app.bean.DoubanSubjectBean
+import com.example.root.graduation_app.mvp.activity.DoubanMovieTopActivity
 import com.example.root.graduation_app.mvp.adapter.DoubanMovieAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanMoviePresenter
@@ -74,7 +75,7 @@ class DoubanMovieFragment : BaseMvpFragment<DoubanContract.DoubanMovieView, Doub
    private fun initView() {
       headerView = LayoutInflater.from(activity).inflate(R.layout.fragment_douban_movie_top_header, null)
       headerView!!.findViewById<View>(R.id.ll_movie_top).setOnClickListener {
-         /** 点击跳转新的 Activity，展示 top 250 电影 **/
+         DoubanMovieTopActivity.runActivity(activity!!)
       }
       adapter.addHeaderView(headerView!!)
    }

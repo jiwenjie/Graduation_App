@@ -1,10 +1,12 @@
 package com.example.root.graduation_app.mvp.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
+import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanBookItemDetail
@@ -53,6 +55,7 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
    }
 
    override fun initFragment(savedInstanceState: Bundle?) {
+      LogUtils.e("initFragment()")
       tags = arguments?.getString(KEY_TAG)
       mLayoutStatusView = common_multipleStatusView
       mLayoutStatusView?.showContent()
@@ -96,5 +99,50 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
 
    override fun dismissLoading() {
       mLayoutStatusView?.showContent()
+   }
+
+   override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      LogUtils.e("onCreate()")
+   }
+
+   override fun onStart() {
+      super.onStart()
+      LogUtils.e("onStart()")
+   }
+
+   override fun onResume() {
+      super.onResume()
+      LogUtils.e("onResume()")
+   }
+
+   override fun onPause() {
+      super.onPause()
+      LogUtils.e("onPause()")
+   }
+
+   override fun onStop() {
+      super.onStop()
+      LogUtils.e("onStop()")
+   }
+
+   override fun onDestroy() {
+      super.onDestroy()
+      LogUtils.e("onDestroy()")
+   }
+
+   override fun onDestroyView() {
+      super.onDestroyView()
+      LogUtils.e("onDestroyView()")
+   }
+
+   override fun onAttach(context: Context?) {
+      super.onAttach(context)
+      LogUtils.e("onAttach()")
+   }
+
+   override fun onDetach() {
+      super.onDetach()
+      LogUtils.e("onDetach()")
    }
 }
