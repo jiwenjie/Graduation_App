@@ -1,6 +1,10 @@
 package com.example.root.graduation_app.bean
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+import javax.xml.transform.Templates
 
 
 /**
@@ -116,7 +120,7 @@ data class DoubanBookBean(
         val count: Int,
         val start: Int,
         val total: Int,
-        val books: ArrayList<DoubanBookItemDetail>)
+        val books: ArrayList<DoubanBookItemDetail>): Serializable
 
 data class DoubanBookItemDetail(
         val rating: DoubanRating,
@@ -142,27 +146,27 @@ data class DoubanBookItemDetail(
         val author_intro: String,
         val summary: String,
         val series: DoubanSeries,
-        val price: String)
+        val price: String): Serializable
 
 data class DoubanRating(
         val max: Int,
         val numRaters: Int,
         val average: String,
-        val min: Int)
+        val min: Int): Serializable
 
 data class DoubanTags(
         val count: Long,
         val name: String,
-        val title: String)
+        val title: String): Serializable
 
 data class DoubanImg(
         val small: String,
         val large: String,
-        val medium: String)
+        val medium: String): Serializable
 
 data class DoubanSeries(
         val id: String,
-        val title: String)
+        val title: String): Serializable
 
 
 /** 豆瓣电影的 bean **/
@@ -171,8 +175,7 @@ data class DoubanMovieBean(
         val start: Int,
         val total: Int,
         val subjects: ArrayList<DoubanSubjectBean>,
-        val title: String
-)
+        val title: String): Serializable
 
 data class DoubanSubjectBean(
         val rating: DoubanMovieRating,
@@ -186,15 +189,13 @@ data class DoubanSubjectBean(
         val year: String,
         val images: DoubanImg,
         val alt: String,
-        val id: String
-)
+        val id: String) : Serializable
 
 data class DoubanMovieRating(
         val max: Int,
         val average: Double,
         val stars: String,
-        val min: Int
-)
+        val min: Int): Serializable
 
 data class DoubanCastsBean(
         val alt: String,
@@ -203,14 +204,12 @@ data class DoubanCastsBean(
         var type: String,
         val avatars: DoubanAvatars,
         val name: String,
-        val id: String
-)
+        val id: String): Serializable
 
 data class DoubanAvatars(
         val small: String,
         val large: String,
-        val medium: String
-)
+        val medium: String): Serializable
 
 /** 豆瓣书籍详情 **/
 data class DoubanMovieDetail(
@@ -240,5 +239,4 @@ data class DoubanMovieDetail(
         val directors: ArrayList<DoubanCastsBean>,
         val comments_count: Int,
         val ratings_count: Int,
-        val aka: ArrayList<String>
-)
+        val aka: ArrayList<String>): Serializable

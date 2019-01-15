@@ -7,6 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanSubjectBean
+import com.example.root.graduation_app.utils.CommonUtils
 import com.example.root.graduation_app.utils.RequestOptions
 import kotlinx.android.synthetic.main.activity_douban_movie_top.view.*
 
@@ -25,12 +26,8 @@ class DoubanTopMovieAdapter(context: Context, beanList: ArrayList<DoubanSubjectB
    override fun convertView(itemView: View, data: DoubanSubjectBean, position: Int) {
       itemView.tv_top_moive_name.text = data.title
       itemView.tv_top_moive_rate.text = "${data.rating.average}"
-      Glide.with(mContext)
-              .load(data.images.large)
-              .apply(RequestOptions.getRequestOptions())
-              .transition(DrawableTransitionOptions.withCrossFade())
-              .thumbnail(0.8f)
-              .into(itemView.iv_top_moive_photo)
+
+      CommonUtils.displayImg(mContext, data.images.large, itemView.iv_top_moive_photo)
    }
 }
 

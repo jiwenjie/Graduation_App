@@ -12,6 +12,7 @@ import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanMovieDetail
 import com.example.root.graduation_app.bean.DoubanSubjectBean
 import com.example.root.graduation_app.mvp.activity.DoubanMovieTopActivity
+import com.example.root.graduation_app.mvp.activity.MovieDetailActivity
 import com.example.root.graduation_app.mvp.adapter.DoubanMovieAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanMoviePresenter
@@ -27,7 +28,6 @@ import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
  */
 class DoubanMovieFragment : BaseMvpFragment<DoubanContract.DoubanMovieView, DoubanMoviePresenter>(), DoubanContract.DoubanMovieView {
 
-   private var start = 0
    private var loadingMore = false
 
    private val beanList by lazy { ArrayList<DoubanSubjectBean>() }
@@ -54,19 +54,9 @@ class DoubanMovieFragment : BaseMvpFragment<DoubanContract.DoubanMovieView, Doub
 
       commonRv.adapter = adapter
       commonRv.layoutManager = LinearLayoutManager(activity)
-//      commonRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//            super.onScrollStateChanged(recyclerView, newState)
-//            val itemCount = commonRv.layoutManager?.itemCount
-//            val lastVisibleItem =
-//                    (commonRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-//            if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
-//               loadingMore = true
-//               start += Constants.CONFIG_LIMIE
-//               mPresenter.loadBookList(tags!!, start, Constants.CONFIG_LIMIE)
-//            }
-//         }
-//      })
+      adapter.setOnItemClickListener { position, view ->
+         MovieDetailActivity.runActivity(activity!!, beanList.get(position))
+      }
    }
 
    /**
@@ -90,7 +80,7 @@ class DoubanMovieFragment : BaseMvpFragment<DoubanContract.DoubanMovieView, Doub
    }
 
    override fun showDetail(bean: DoubanMovieDetail) {
-      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
    }
 
    override fun showLoading() {

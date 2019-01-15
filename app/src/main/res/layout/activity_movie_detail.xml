@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <!--viewgroup会覆盖子类控件而直接获得焦点，避免RecycleView开始的时候获取焦点滚动到底部-->
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsv_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_movie_detail_header" />
+
+            <include layout="@layout/activity_movie_detail_mid" />
+
+            <!--导演&演员-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_movie_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_toolbar_bg"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:alpha="0"
+            android:scaleType="fitXY" />
+
+        <FrameLayout
+            android:id="@+id/toolbg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <include layout="@layout/common_toolbar_layout_return" />
+
+        </FrameLayout>
+    </FrameLayout>
+</FrameLayout>

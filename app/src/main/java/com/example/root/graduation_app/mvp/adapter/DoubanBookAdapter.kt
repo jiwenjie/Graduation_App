@@ -29,16 +29,12 @@ class DoubanBookAdapter(context: Context, beanList: ArrayList<DoubanBookItemDeta
    override fun convertView(itemView: View, data: DoubanBookItemDetail, position: Int) {
       LogUtils.e(data.title + data.publisher)
       itemView.tv_item_title.text = "《" + data.title + "》"
-      itemView.tv_item_author.text = "作者：${CommonUtils.splicing(data.author)}"
+      itemView.tv_item_author.text = "作者：${CommonUtils.splicingString(data.author)}"
       itemView.tv_item_publisher.text = "出版社：${data.publisher}"
       itemView.tv_item_pubdate.text = "出版日期：${data.pubdate}"
       itemView.tv_item_rate.text = "评分：${data.rating.average}"
-      Glide.with(mContext)
-              .load(data.image)
-              .apply(RequestOptions.getRequestOptions())
-              .transition(DrawableTransitionOptions().crossFade(300))
-              .thumbnail(0.5f)   // 缩略图
-              .into(itemView.iv_item_image)
+
+      CommonUtils.displayImg(mContext, data.image, itemView.iv_item_image)
    }
 }
 

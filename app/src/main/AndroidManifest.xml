@@ -67,21 +67,20 @@
             android:name=".mvp.activity.DoubanMovieTopActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 点击电影也没的详情页，带有共享动画 -->
+        <activity
+            android:name=".mvp.activity.MovieDetailActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 公共的 WebView 界面 -->
         <activity
             android:name=".mvp.activity.CommonWebViewActivity"
             android:screenOrientation="portrait" />
 
         <!-- 个人主页 -->
-        <!--<activity-->
-        <!--android:name=".mvp.activity.ProfileActivity"-->
-        <!--android:theme="@style/AppTheme.NoActionBar"-->
-        <!--android:screenOrientation="portrait" />-->
-
-        <!-- 打开 WebView 界面，去 github -->
-        <!--<activity-->
-        <!--android:name=".mvp.activity.GithubActivity"-->
-        <!--android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".mvp.activity.ProfileActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 滑动头部和折叠的有关页面 -->
         <activity

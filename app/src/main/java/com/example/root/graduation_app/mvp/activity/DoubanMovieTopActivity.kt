@@ -3,7 +3,6 @@ package com.example.root.graduation_app.mvp.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import com.example.base_library.base_mvp.BaseMvpActivity
@@ -32,7 +31,7 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
    private val beanList by lazy { ArrayList<DoubanSubjectBean>() }
    private val adapter by lazy { DoubanTopMovieAdapter(this@DoubanMovieTopActivity, beanList) }
 
-   private val int_array by lazy { IntArray(3) }
+   private val stagLayoutSpanCount by lazy { IntArray(3) }  // StaggeredGridLayoutManager 一行的 item 个数
 
    companion object {
       @JvmStatic
@@ -63,7 +62,7 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
             super.onScrollStateChanged(recyclerView, newState)
             val itemCount = recyclerView.layoutManager?.itemCount
 
-            val mLastVisibleItemPosition = (common_toolbarRv.layoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(int_array)
+            val mLastVisibleItemPosition = (common_toolbarRv.layoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(stagLayoutSpanCount)
             if (!loadingMore && mLastVisibleItemPosition.max() == (itemCount!! - 1)) {
                loadingMore = true
                start += Constants.CONFIG_LIMIE

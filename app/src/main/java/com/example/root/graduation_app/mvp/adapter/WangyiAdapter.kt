@@ -8,6 +8,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WangyiNewsItemBean
+import com.example.root.graduation_app.utils.CommonUtils
 import com.example.root.graduation_app.utils.RequestOptions
 import kotlinx.android.synthetic.main.fragment_home_item.view.*
 
@@ -29,11 +30,7 @@ class WangyiAdapter(context: Context, beanList: ArrayList<WangyiNewsItemBean>)
       itemView.tv_item_title.text = data.title
       itemView.tv_item_who.text = data.source
       itemView.tv_item_time.text = data.ptime
-      Glide.with(mContext)
-              .load(data.imgsrc)
-              .apply(RequestOptions.getRequestOptions())
-              .transition(DrawableTransitionOptions().crossFade(300))
-              .thumbnail(0.5f)   // 缩略图
-              .into(itemView.iv_item_image)
+
+      CommonUtils.displayImg(mContext, data.imgsrc, itemView.iv_item_image)
    }
 }

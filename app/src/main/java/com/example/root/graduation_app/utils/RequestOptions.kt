@@ -20,6 +20,13 @@ object RequestOptions {
               .error(R.mipmap.ic_error)
    }
 
+//    fun getRequestOptions(): RequestOptions {
+//        return RequestOptions()
+//            .centerCrop()
+//            .placeholder(R.drawable.placeholder_banner)
+//            .error(R.mipmap.ic_error)
+//    }
+
    fun getRequestDefaultAvatar(): RequestOptions {
       return RequestOptions()
               .placeholder(R.drawable.img_avatar)

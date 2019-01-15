@@ -7,6 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.ZhihuDailyItemBean
+import com.example.root.graduation_app.utils.CommonUtils
 import com.example.root.graduation_app.utils.RequestOptions
 import kotlinx.android.synthetic.main.fragment_home_item.view.*
 
@@ -24,12 +25,8 @@ class ZhihuAdapter(context: Context, beanList: ArrayList<ZhihuDailyItemBean>) : 
 
    override fun convertView(itemView: View, data: ZhihuDailyItemBean, position: Int) {
       itemView.tv_item_title.text = data.title
-      Glide.with(mContext)
-              .load(data.images[0])
-              .apply(RequestOptions.getRequestOptions())
-              .transition(DrawableTransitionOptions().crossFade(300))
-              .thumbnail(0.5f)   // 缩略图
-              .into(itemView.iv_item_image)
+
+      CommonUtils.displayImg(mContext, data.images[0], itemView.iv_item_image)
    }
 }
 

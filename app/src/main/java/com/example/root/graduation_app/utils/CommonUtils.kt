@@ -1,6 +1,21 @@
 package com.example.root.graduation_app.utils
 
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.TransitionDrawable
 import android.text.TextUtils
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
+import com.example.root.graduation_app.R
+import com.example.root.graduation_app.bean.DoubanCastsBean
+import com.zhouwei.blurlibrary.EasyBlur
+import kotlinx.android.synthetic.main.activity_movie_detail_person_item.view.*
 import java.util.regex.Pattern
 
 /**
@@ -42,7 +57,10 @@ object CommonUtils {
          mobileNum.matches(telRegex.toRegex())
    }
 
-   fun splicing(authers: ArrayList<String>): String {
+   /**
+    * 拼接 movie 中 bean 的名字
+    */
+   fun splicingString(authers: ArrayList<String>): String {
       var name = ""
       return when {
          authers.isEmpty() -> name
@@ -54,6 +72,81 @@ object CommonUtils {
                name = " / $it"
             }
             name
+         }
+      }
+   }
+
+
+   /**
+    * 格式化list为字符串
+    *
+    * @param list 类型list
+    * @return 字符串 A/B/C..
+    */
+   fun splicingAuthor(authers: ArrayList<DoubanCastsBean>): String {
+      var name = ""
+      return when {
+         authers.isEmpty() -> name
+         authers.size == 1 -> authers[0].name
+         else -> {
+            name = authers[0].name
+
+            authers.forEach {
+               name = " / ${it.name}"
+            }
+            name
+         }
+      }
+   }
+
+   /**
+    * 展示虚化图片
+    */
+   fun displayBlurImg(context: Context, url: String, imageView: ImageView) {
+      Glide.with(context)
+         .load(url)
+         .apply(RequestOptions.getRequestOptions())
+         .transition(DrawableTransitionOptions().crossFade(300))
+         .thumbnail(0.5f)   // 缩略图
+         .into(getTarget(context, imageView))
+   }
+
+   /**
+    * 展示网络加载图片
+    */
+   fun displayImg(context: Context, url: String, imageView: ImageView) {
+      Glide.with(context)
+              .load(url)
+              .apply(RequestOptions.getRequestOptions())
+              .transition(DrawableTransitionOptions().crossFade(300))
+              .thumbnail(0.5f)   // 缩略图
+              .into(imageView)
+   }
+
+   /**
+    * 获取图片的 target,
+    * when you not want to set image to imageView, use it
+    */
+   private fun getTarget(context: Context, imageView: ImageView): Target<Drawable> {
+      return object : SimpleTarget<Drawable>() {
+         override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+            val bitmapDrawable = resource as BitmapDrawable
+            val bitmapSource = bitmapDrawable.bitmap    // 获取 bitmap
+            val blurBitmap = EasyBlur.with(context)  // 得到模糊的 bitmap
+               .bitmap(bitmapSource)
+               .radius(20)
+               .blur()
+            imageView.setImageBitmap(blurBitmap)
+         }
+
+         override fun onLoadFailed(errorDrawable: Drawable?) {
+            super.onLoadFailed(errorDrawable)
+            val source = BitmapFactory.decodeResource(context.resources, R.drawable.load_pic_error)
+            val errorBitmap = EasyBlur.with(context)  // 得到模糊的 bitmap
+               .bitmap(source)
+               .radius(20)
+               .blur()
+            imageView.setImageBitmap(errorBitmap)
          }
       }
    }

@@ -32,6 +32,9 @@
     <color name="color_orange">#dd2c00</color>
     <color name="color_blue_dark">#ee447AA4</color>
 
+    <!--电影评分-->
+    <color name="colorRateRed">#FB5B81</color>
+
     <!-- title 半透明背景颜色 -->
     <color name="color_title_bg">#CCFFFFFF</color>
     <!-- 默认背景色 -->
