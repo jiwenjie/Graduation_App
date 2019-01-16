@@ -2,7 +2,6 @@ package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import com.example.base_library.base_mvp.BaseMvpFragment
@@ -12,11 +11,10 @@ import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanMovieDetail
 import com.example.root.graduation_app.bean.DoubanSubjectBean
 import com.example.root.graduation_app.mvp.activity.DoubanMovieTopActivity
-import com.example.root.graduation_app.mvp.activity.MovieDetailActivity
+import com.example.root.graduation_app.mvp.activity.DoubanMovieDetailActivity
 import com.example.root.graduation_app.mvp.adapter.DoubanMovieAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanMoviePresenter
-import com.example.root.graduation_app.utils.Constants
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
 
 /**
@@ -55,7 +53,7 @@ class DoubanMovieFragment : BaseMvpFragment<DoubanContract.DoubanMovieView, Doub
       commonRv.adapter = adapter
       commonRv.layoutManager = LinearLayoutManager(activity)
       adapter.setOnItemClickListener { position, view ->
-         MovieDetailActivity.runActivity(activity!!, beanList.get(position))
+         DoubanMovieDetailActivity.runActivity(activity!!, beanList.get(position))
       }
    }
 

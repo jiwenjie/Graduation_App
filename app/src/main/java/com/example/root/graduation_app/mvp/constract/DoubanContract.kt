@@ -69,4 +69,18 @@ interface DoubanContract {
    interface DoubanBookPresenter {
       fun loadBookList(tag: String, start: Int, count: Int)
    }
+
+   /**
+    * book detail View
+    */
+   interface DoubanBookDetailView: IBaseView {
+      fun getBookDetail(bean: DoubanBookItemDetail)
+   }
+
+   /**
+    * douban detail presenter
+    */
+   interface DoubanBookDetailPresenter {
+      fun getBookDetail(id: String)
+   }
 }

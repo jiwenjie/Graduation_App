@@ -33,18 +33,18 @@ import kotlinx.android.synthetic.main.common_toolbar_layout_return.*
  *  desc: movie detail activity
  *  version:1.0
  */
-class MovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, DoubanMoviePresenter>(), DoubanContract.DoubanMovieView {
+class DoubanMovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, DoubanMoviePresenter>(), DoubanContract.DoubanMovieView {
 
     private var bean: DoubanSubjectBean? = null
 
     private val beanList by lazy { ArrayList<DoubanCastsBean>() }
-    private val adapter by lazy { DoubanMovieDetailAdapter(this@MovieDetailActivity, beanList) }
+    private val adapter by lazy { DoubanMovieDetailAdapter(this@DoubanMovieDetailActivity, beanList) }
 
     companion object {
         private const val KEY_BEAN = "key_bean"
 
         fun runActivity(activity: Activity, subjectBean: DoubanSubjectBean) {
-            val intent = Intent(activity, MovieDetailActivity::class.java)
+            val intent = Intent(activity, DoubanMovieDetailActivity::class.java)
             intent.putExtra(KEY_BEAN, subjectBean)
             activity.startActivity(intent)
         }
@@ -65,23 +65,23 @@ class MovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, Doub
         tv_movie_casts.text = CommonUtils.splicingAuthor(bean!!.casts)
         tv_movie_genres.text = CommonUtils.splicingString(bean!!.genres)
         tv_movie_date.text = bean?.year
-        Glide.with(this@MovieDetailActivity)
+        Glide.with(this@DoubanMovieDetailActivity)
             .asBitmap()
             .load(bean?.images?.large)
             .apply(RequestOptions.getRequestOptions())
             .into(iv_movie_photo)
 
-        CommonUtils.displayBlurImg(this@MovieDetailActivity, bean!!.images.large, iv_header_bg)     // 显示虚化图片
-        CommonUtils.displayBlurImg(this@MovieDetailActivity, bean!!.images.large, iv_toolbar_bg)    // 显示虚化图片
+        CommonUtils.displayBlurImg(this@DoubanMovieDetailActivity, bean!!.images.large, iv_header_bg)     // 显示虚化图片
+        CommonUtils.displayBlurImg(this@DoubanMovieDetailActivity, bean!!.images.large, iv_toolbar_bg)    // 显示虚化图片
     }
 
     private fun initView() {
-        rv_movie_detail.layoutManager = LinearLayoutManager(this@MovieDetailActivity)
+        rv_movie_detail.layoutManager = LinearLayoutManager(this@DoubanMovieDetailActivity)
         rv_movie_detail.adapter = adapter
         rv_movie_detail.isNestedScrollingEnabled = false
         nsv_scrollview.setOnScrollChangeListener { nestedScrollView: NestedScrollView?, l: Int, t: Int, oldl: Int, oldt: Int ->
             var alpha = 1f
-            var slideValue = t - ScreenUtils.dip2px(this@MovieDetailActivity, 56f) + ScreenUtils.getStatusBarHeight(this@MovieDetailActivity)
+            var slideValue = t - ScreenUtils.dip2px(this@DoubanMovieDetailActivity, 56f) + ScreenUtils.getStatusBarHeight(this@DoubanMovieDetailActivity)
             if (slideValue < 0) {
                 slideValue = 0
             }
@@ -99,7 +99,7 @@ class MovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, Doub
         mPresenter.getDoubanMovieDetail(bean!!.id)
     }
 
-    override fun initPresenter(): DoubanMoviePresenter = DoubanMoviePresenter(this@MovieDetailActivity)
+    override fun initPresenter(): DoubanMoviePresenter = DoubanMoviePresenter(this@DoubanMovieDetailActivity)
 
     override fun updateDoubanContentList(subjectList: ArrayList<DoubanSubjectBean>) {
 
@@ -122,7 +122,7 @@ class MovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, Doub
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        ToastUtils.showToast(this@MovieDetailActivity, "$errorCode" + errorMsg)
+        ToastUtils.showToast(this@DoubanMovieDetailActivity, "$errorCode" + errorMsg)
         LogUtils.e("$errorCode" + errorMsg)
     }
 

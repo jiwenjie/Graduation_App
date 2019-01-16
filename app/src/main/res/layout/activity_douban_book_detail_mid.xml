@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical">
+    <!--别名-->
+    <LinearLayout
+        android:id="@+id/ll_book_sub_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/common_10dp">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="18dp"
+                android:background="?attr/colorPrimary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_5dp"
+                android:text="另称"
+                android:textColor="@color/alpha_70_black"
+                android:textSize="@dimen/common_sp_18"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_book_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:textColor="@color/alpha_85_black"/>
+    </LinearLayout>
+
+    <!--作者简介-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_5dp"
+        android:paddingTop="@dimen/common_5dp">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="@dimen/common_18dp"
+            android:background="?attr/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_5dp"
+            android:text="作者简介"
+            android:textColor="@color/alpha_70_black"
+            android:textSize="@dimen/common_sp_18"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_book_author_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="8dp"
+        android:padding="12dp"
+        android:textColor="@color/alpha_85_black"
+        android:textSize="@dimen/common_sp_16"/>
+
+    <!--本书简介-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_5dp"
+        android:paddingTop="@dimen/common_10dp">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="18dp"
+            android:background="?attr/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_5dp"
+            android:text="摘要"
+            android:textColor="@color/alpha_70_black"
+            android:textSize="@dimen/common_sp_18"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_book_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="8dp"
+        android:padding="12dp"
+        android:textColor="@color/alpha_85_black"
+        android:textSize="@dimen/common_sp_16"/>
+
+    <!--目录-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_5dp"
+        android:paddingTop="@dimen/common_10dp">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="@dimen/common_18dp"
+            android:background="?attr/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_5dp"
+            android:text="目录"
+            android:textColor="@color/alpha_70_black"
+            android:textSize="@dimen/common_sp_18"/>
+    </LinearLayout>
+</LinearLayout>

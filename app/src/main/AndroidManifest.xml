@@ -69,7 +69,12 @@
 
         <!-- 点击电影也没的详情页，带有共享动画 -->
         <activity
-            android:name=".mvp.activity.MovieDetailActivity"
+            android:name=".mvp.activity.DoubanMovieDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 豆瓣的书籍信息点击详情页 -->
+        <activity
+            android:name=".mvp.activity.DoubanBookDetailActivity"
             android:screenOrientation="portrait" />
 
         <!-- 公共的 WebView 界面 -->

@@ -40,16 +40,16 @@
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="top"
-                android:background="#600f"
-                app:layout_collapseMode="pin">
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="top"
+                    android:background="#600f"
+                    app:layout_collapseMode="pin">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="我是toolbar" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我是toolbar"/>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 

@@ -10,6 +10,7 @@ import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanBookItemDetail
+import com.example.root.graduation_app.mvp.activity.DoubanBookDetailActivity
 import com.example.root.graduation_app.mvp.adapter.DoubanBookAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanBookPresenter
@@ -75,6 +76,9 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
             }
          }
       })
+      adapter.setOnItemClickListener { position, view ->
+         DoubanBookDetailActivity.runActivity(activity!!, beanList.get(position))
+      }
    }
 
    override fun initPresenter(): DoubanBookPresenter = DoubanBookPresenter(this@DoubanLiteratureFragment)
