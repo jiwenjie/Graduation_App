@@ -8,6 +8,7 @@ import android.graphics.drawable.TransitionDrawable
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
@@ -100,6 +101,14 @@ object CommonUtils {
    }
 
    /**
+    * 检查 String 是否为 null
+    */
+   fun isEmpty(value: String?): Boolean {
+      return !(value != null && !"".equals(value.trim { it <= ' ' }, ignoreCase = true)
+              && !"null".equals(value.trim { it <= ' ' }, ignoreCase = true))
+   }
+
+   /**
     * 展示虚化图片
     */
    fun displayBlurImg(context: Context, url: String, imageView: ImageView) {
@@ -116,6 +125,26 @@ object CommonUtils {
     */
    fun displayImg(context: Context, url: String, imageView: ImageView) {
       Glide.with(context)
+              .load(url)
+              .apply(RequestOptions.getRequestOptions())
+              .transition(DrawableTransitionOptions().crossFade(300))
+              .thumbnail(0.5f)   // 缩略图
+              .into(imageView)
+   }
+
+   fun displayImgAsBitmap(context: Context, url: String, imageView: ImageView) {
+      Glide.with(context)
+              .asBitmap()
+              .load(url)
+              .apply(RequestOptions.getRequestOptions())
+              .transition(BitmapTransitionOptions().crossFade(300))
+              .thumbnail(0.5f)   // 缩略图
+              .into(imageView)
+   }
+
+   fun displayImgAsGif(context: Context, url: String, imageView: ImageView) {
+      Glide.with(context)
+              .asGif()
               .load(url)
               .apply(RequestOptions.getRequestOptions())
               .transition(DrawableTransitionOptions().crossFade(300))

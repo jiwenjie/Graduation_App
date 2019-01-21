@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.support.multidex.MultiDexApplication
 import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.utils.UnCaught
 import com.pgyersdk.crash.PgyCrashManager
@@ -16,7 +17,7 @@ import com.pgyersdk.crash.PgyCrashManager
  *  desc:
  *  version:1.0
  */
-class App : Application() {
+class App : MultiDexApplication() {
 
    override fun onCreate() {
       super.onCreate()

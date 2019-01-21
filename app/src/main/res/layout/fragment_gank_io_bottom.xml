@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/common_20dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_type_item_title"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:padding="@dimen/line_1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            app:srcCompat="@drawable/ic_vector_title_android"/>
+
+        <TextView
+            android:id="@+id/tv_item_who"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/common_20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/common_5dp"
+            android:layout_weight="1"
+            android:gravity="start|center"
+            android:text="佚名"
+            android:textColor="@color/md_grey_500"
+            android:textSize="@dimen/common_sp_14"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/common_20dp"
+            android:layout_marginStart="@dimen/common_5dp"
+            android:layout_marginEnd="@dimen/common_5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="·"
+            android:textColor="@color/md_grey_500"
+            android:textSize="@dimen/common_sp_14"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_item_type"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/common_20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="start|center_vertical"
+            android:text="type"
+            android:textColor="@color/md_grey_500"
+            android:textSize="@dimen/common_sp_14"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/common_20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/common_10dp"
+        android:gravity="end|center"
+        android:paddingEnd="@dimen/common_10dp"
+        android:paddingStart="@dimen/common_10dp"
+        android:text="time"
+        android:textColor="@color/md_grey_500"
+        android:textSize="@dimen/common_sp_14"/>
+</RelativeLayout>

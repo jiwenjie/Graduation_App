@@ -3,6 +3,7 @@ package com.example.root.graduation_app.mvp.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.Gravity
+import android.view.View
 import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_views.BaseFragment
@@ -46,9 +47,7 @@ class EntertainmentFragment : BaseFragment() {
 
    private fun initView() {
       common_toolbar_title.text = "休闲文娱"
-      common_toolbar_icon.setOnClickListener {
-         activity!!.drawerLyt.openDrawer(Gravity.START)
-      }
+      common_toolbar_icon.visibility = View.GONE
 
       if (mTitles.size != 4 && fragmentList.size != 4) {
          mTitles.add("文学")

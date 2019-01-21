@@ -1,9 +1,12 @@
 package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
+import kotlinx.android.synthetic.main.common_tablayout_viewpager.*
+import kotlinx.android.synthetic.main.common_toolbar_layout.*
 
 /**
  *  author:Jiwenjie
@@ -15,13 +18,8 @@ import com.example.root.graduation_app.R
 class DiscoverFragment : BaseFragment() {
 
    /* BaseFragmentPagerAdapter Demo */
-   private lateinit var mFragmentAdapter: BaseFragmentPagerAdapter
-   private val mFragments = ArrayList<BaseFragment>()
-   private val mTitles = arrayOf("头条", "社会")
-   private val mKeys = arrayOf("top", "shehui")
-
-   private var types: Array<String>? = null         //顶部 tab 英文内容数组
-   private var typesCN: Array<String>? = null       //顶部 tab 中文内容数组
+   private val fragmentList by lazy {  ArrayList<Fragment>() }
+   private val titles by lazy {  ArrayList<String>() }
 
    companion object {
       @JvmStatic
@@ -41,7 +39,21 @@ class DiscoverFragment : BaseFragment() {
    override fun getLayoutId(): Int = R.layout.common_tablayout_viewpager
 
    override fun initFragment(savedInstanceState: Bundle?) {
-      types = resources.getStringArray(R.array.news_type_en)
-      typesCN = resources.getStringArray(R.array.news_type_cn)
+      initView()
+   }
+
+   private fun initView() {
+
+      common_toolbar_title.text = "技术世界"
+
+      if (titles.size != 2 && fragmentList.size != 2) {
+         titles.add("移动")
+         titles.add("扩展资源")
+
+         fragmentList.add(MobileFragment.newInstance())
+         fragmentList.add(ExtendResourceFragment.newInstance())
+      }
+      container_vp.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, titles)
+      container_tab.setupWithViewPager(container_vp)
    }
 }

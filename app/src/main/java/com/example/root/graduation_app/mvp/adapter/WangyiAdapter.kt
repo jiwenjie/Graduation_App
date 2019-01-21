@@ -6,6 +6,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
+import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WangyiNewsItemBean
 import com.example.root.graduation_app.utils.CommonUtils
@@ -26,6 +27,8 @@ class WangyiAdapter(context: Context, beanList: ArrayList<WangyiNewsItemBean>)
 
    override fun convertView(itemView: View, data: WangyiNewsItemBean, position: Int) {
       itemView.tv_item_title.setTextColor(Color.BLACK)
+
+      LogUtils.e("AAAA" + data.source)
 
       itemView.tv_item_title.text = data.title
       itemView.tv_item_who.text = data.source

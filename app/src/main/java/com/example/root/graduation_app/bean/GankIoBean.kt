@@ -7,9 +7,12 @@ package com.example.root.graduation_app.bean
  *  desc:
  *  version:1.0
  */
-data class GankIdDayBean(val error: Boolean,
-                         val results: ArrayList<GankItemBean>)
+data class GankIoListBean(val error: Boolean,
+                          val results: ArrayList<GankItemBean>)
 
+/**
+ * include android and ios
+ */
 data class GankItemBean(val _id: String,
                         val createdAt: String,
                         val desc: String,

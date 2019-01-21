@@ -60,13 +60,13 @@ class IndexFragment : BaseFragment() {
       /**
        * 生命周期判断每次都会调用该方法，所以为了避免 bug，也为了减少内存开销，此处做一个判断
        */
-      if (titles.size != 3 && fragmentList.size != 3) {
+      if (titles.size != 2 && fragmentList.size != 2) {
          titles.add("知乎日报")
-         titles.add("网易新闻")
+//         titles.add("网易新闻")
          titles.add("微信精选")
 
          fragmentList.add(ZhihuFragment.getInstance())
-         fragmentList.add(WangyiFragment.getInstance())
+//         fragmentList.add(WangyiFragment.getInstance())
          fragmentList.add(WeixinFragment.getInstance())
       }
       indexViewpager.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, titles)

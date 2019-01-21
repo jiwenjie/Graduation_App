@@ -1,10 +1,12 @@
 package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
+import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WangyiNewsItemBean
@@ -72,6 +74,7 @@ class WangyiFragment : BaseMvpFragment<WangyiContract.WangyiView, WangyiPresente
 
     override fun updateContentList(list: ArrayList<WangyiNewsItemBean>) {
         loadingMore = false
+        LogUtils.e("FFFF" + list.size)
         wangyiAdapter.addAllData(list)
     }
 
