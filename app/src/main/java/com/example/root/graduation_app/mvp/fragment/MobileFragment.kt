@@ -1,14 +1,18 @@
 package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
+import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.GankItemBean
 import com.example.root.graduation_app.mvp.adapter.GankIoMobileAdapter
 import com.example.root.graduation_app.mvp.constract.GankIoContract
 import com.example.root.graduation_app.mvp.presenter.GankIoPresenter
+import com.example.root.graduation_app.utils.Constants
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
 
 /**
@@ -23,6 +27,9 @@ class MobileFragment : BaseMvpFragment<GankIoContract.GankIoView, GankIoPresente
    private val beanList by lazy { ArrayList<GankItemBean>() }
    private val adapter by lazy { GankIoMobileAdapter(activity!!, beanList) }
 
+   private var page = 1
+   private var loadingMore = false
+
    companion object {
       @JvmStatic
       fun newInstance(): MobileFragment {
@@ -31,7 +38,8 @@ class MobileFragment : BaseMvpFragment<GankIoContract.GankIoView, GankIoPresente
    }
 
    override fun loadData() {
-      mPresenter.getGankIoDayMobile("Android", 10, 1)
+      page = 1
+      mPresenter.getGankIoDayMobile("Android", Constants.CONFIG_LIMIE, page)
    }
 
    override fun getLayoutId(): Int = R.layout.common_multiple_recyclerview
@@ -39,11 +47,28 @@ class MobileFragment : BaseMvpFragment<GankIoContract.GankIoView, GankIoPresente
    override fun initFragment(savedInstanceState: Bundle?) {
       mLayoutStatusView = common_multipleStatusView
       mLayoutStatusView?.showContent()
+
+      commonRv.adapter = adapter
+      commonRv.layoutManager = LinearLayoutManager(activity)
+      commonRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            val itemCount = commonRv.layoutManager?.itemCount
+            val lastVisibleItem =
+               (commonRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+            if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
+               loadingMore = true
+               page ++
+               mPresenter.getGankIoDayMobile("Android", Constants.CONFIG_LIMIE, page)
+            }
+         }
+      })
    }
 
    override fun initPresenter(): GankIoPresenter = GankIoPresenter(this)
 
    override fun updateViewList(beanListL: ArrayList<GankItemBean>) {
+      LogUtils.e("nnnnn" + beanListL.size)
       adapter.addAllData(beanList)
    }
 

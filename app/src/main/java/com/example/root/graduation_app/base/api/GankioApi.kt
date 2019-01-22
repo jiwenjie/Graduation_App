@@ -18,7 +18,7 @@ interface GankioApi {
     * 每日数据： http://gank.io/api/day/年/月/日
     * eg:http://gank.io/api/day/2015/08/06
     */
-   @GET("/api/day/{year}/{month}/{day}")
+   @GET("day/{year}/{month}/{day}")
    fun getGankIoDay(@Path("year") year: String,
                     @Path("month") month: String,
                     @Path("day") day: String): Observable<GankIoListBean>
@@ -31,7 +31,7 @@ interface GankioApi {
      * 第几页：数字，大于0
      * http://gank.io/api/data/Android/10/1
      */
-    @GET("/api/data/{type}/{pre_page}/{page}")
+    @GET("data/{type}/{pre_page}/{page}")
     fun getGankIoCustomList(
         @Path("type") type: String, @Path("pre_page")
         pre_page: Int, @Path("page") page: Int

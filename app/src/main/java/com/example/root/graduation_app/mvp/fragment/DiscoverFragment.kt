@@ -2,10 +2,8 @@ package com.example.root.graduation_app.mvp.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
-import kotlinx.android.synthetic.main.common_tablayout_viewpager.*
 import kotlinx.android.synthetic.main.common_toolbar_layout.*
 
 /**
@@ -46,14 +44,14 @@ class DiscoverFragment : BaseFragment() {
 
       common_toolbar_title.text = "技术世界"
 
-      if (titles.size != 2 && fragmentList.size != 2) {
-         titles.add("移动")
-         titles.add("扩展资源")
-
-         fragmentList.add(MobileFragment.newInstance())
-         fragmentList.add(ExtendResourceFragment.newInstance())
-      }
-      container_vp.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, titles)
-      container_tab.setupWithViewPager(container_vp)
+//      if (titles.size != 2 && fragmentList.size != 2) {
+//         titles.add("移动")
+//         titles.add("扩展资源")
+//
+//         fragmentList.add(MobileFragment.newInstance())
+//         fragmentList.add(ExtendResourceFragment.newInstance())
+//      }
+//      container_vp.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, titles)
+//      container_tab.setupWithViewPager(container_vp)
    }
 }

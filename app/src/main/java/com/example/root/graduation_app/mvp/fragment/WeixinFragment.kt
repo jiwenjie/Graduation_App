@@ -44,6 +44,7 @@ class WeixinFragment : BaseMvpFragment<WeixinContract.WeixinView, WeixinPresente
    override fun getLayoutId(): Int = R.layout.fragment_weixin
 
    override fun loadData() {
+      page = 1
       mPresenter.loadLatestList(page, Constants.CONFIG_LIMIE, Constants.JU_HE_APP_KEY)
    }
 

@@ -24,17 +24,9 @@ class GankIoPresenter(view: GankIoContract.GankIoView): BaseMvpPresenter<GankIoC
         }
         addSubscription(
             mModel.getGankIoDayMobile(type, prePage, page)
-//                    .map { listBean ->
-//                       listBean.results.forEach {  itemBean ->
-//                          if (itemBean.images.isEmpty()) {
-//                             listBean.results.remove(itemBean)
-//                          }
-//                       }
-//                          listBean
-//                    }
                 .subscribe({
                     mView?.dismissLoading()
-                    LogUtils.e(it.results)
+                    LogUtils.e("GGGG" + it.results)
                     mView?.updateViewList(it.results)
                 }, {
                     mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)

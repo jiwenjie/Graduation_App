@@ -55,49 +55,4 @@ abstract class BaseFragment : Fragment() {
     protected open fun handleRxBus() {}
 
     fun startActivity(clazz: Class<*>) = activity!!.startActivity(Intent(activity, clazz))
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        LogUtils.e("onCreate()")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        LogUtils.e("onStart()")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        LogUtils.e("onResume()")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        LogUtils.e("onPause()")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        LogUtils.e("onStop()")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        LogUtils.e("onDestroy()")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        LogUtils.e("onDestroyView()")
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        LogUtils.e("onAttach()")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        LogUtils.e("onDetach()")
-    }
 }

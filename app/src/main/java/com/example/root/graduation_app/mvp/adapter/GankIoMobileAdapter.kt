@@ -17,12 +17,24 @@ import kotlinx.android.synthetic.main.fragment_gank_io_normal_item.view.*
  *  desc:
  *  version:1.0
  */
-class GankIoMobileAdapter(context: Context, beanList: ArrayList<GankItemBean>) : BaseRecyclerAdapter<GankItemBean>(context, beanList) {
+class GankIoMobileAdapter(context: Context, beanList: ArrayList<GankItemBean>, normalLayout: Boolean = true) : BaseRecyclerAdapter<GankItemBean>(context, beanList) {
+
+   private val showNormal = normalLayout  // true 显示 normal 布局，否则显示无图片布局
 
    private val mImageSize = "?imageView2/0/w/200"
 
    override fun getAdapterLayoutId(viewType: Int): Int {
-      return R.layout.fragment_gank_io_normal_item
+      return when (viewType) {
+         1 -> {
+            R.layout.fragment_gank_io_normal_item
+         }
+         2 -> {
+            R.layout.fragment_gank_io_no_image_item
+         }
+         else -> {
+            R.layout.fragment_gank_io_normal_item
+         }
+      }
    }
 
    override fun convertView(itemView: View, data: GankItemBean, position: Int) {
@@ -36,16 +48,26 @@ class GankIoMobileAdapter(context: Context, beanList: ArrayList<GankItemBean>) :
       itemView.tv_item_type.text = data.type
       itemView.tv_item_time.text = data.createdAt.substring(0, 10)
 
-      itemView.tv_item_title.text = data.desc
-      if (!data.images.isEmpty()) {
-         if (data.images.size > 0 && !TextUtils.isEmpty(data.images.get(0))) {
-            CommonUtils.displayImgAsBitmap(mContext, data.images.get(0) + mImageSize, itemView.iv_item_image)
+      when (getItemViewType(position)) {
+         1 -> {
+            itemView.tv_item_title.text = data.desc
+            if (!data.images.isEmpty()) {
+               if (data.images.size > 0 && !TextUtils.isEmpty(data.images[0])) {
+                  CommonUtils.displayImgAsBitmap(mContext, data.images[0] + mImageSize, itemView.iv_item_image)
+               }
+            }
+         }
+         2 -> {
+            itemView.tv_item_title.text = data.desc
          }
       }
    }
 
-   override fun getConvertType(position: Int): Int {
-      return super.getConvertType(position)
+   override fun getItemViewType(position: Int): Int {
+      if (showNormal) {
+         return 1
+      }
+      return 2
    }
 
    private fun initTypeImage(itemView: View, data: GankItemBean) {

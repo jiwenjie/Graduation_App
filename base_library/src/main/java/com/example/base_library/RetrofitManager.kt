@@ -4,7 +4,6 @@ package com.example.base_library
 
 import android.text.TextUtils
 import android.util.Log
-import com.example.base_library.base_utils.LogUtils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
