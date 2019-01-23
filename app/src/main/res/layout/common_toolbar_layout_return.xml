@@ -14,6 +14,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:foreground="@drawable/ripple_bg_radius"
         android:scaleType="fitXY"
         android:src="@drawable/ic_return"
         android:tint="@color/alpha_85_white" />
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/color_white"
+        android:foreground="@drawable/ripple_bg"
         android:textSize="@dimen/common_sp_18"
         android:visibility="gone"
         tools:text="标题标题" />
@@ -33,6 +35,7 @@
         android:layout_width="@dimen/common_35dp"
         android:layout_height="@dimen/common_35dp"
         android:layout_gravity="end"
+        android:foreground="@drawable/ripple_bg_radius"
         android:src="@drawable/ic_action_search_white"
         android:tint="@color/color_white"
         android:visibility="gone" />

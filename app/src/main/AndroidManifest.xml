@@ -46,6 +46,11 @@
         <!--android:screenOrientation="portrait"-->
         <!--android:theme="@style/AppTheme" />-->
 
+        <!-- 搜索公众号文章的界面 -->
+        <activity
+            android:name=".mvp.activity.SearchPublicHistoryActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 程序的登陆界面 -->
         <activity
             android:name=".mvp.activity.LoginActivity"

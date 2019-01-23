@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@android:color/white"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@android:color/white" />

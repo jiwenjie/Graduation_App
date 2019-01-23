@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/rel_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:id="@+id/rel_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_10dp"
+                android:paddingStart="@dimen/common_15dp"
+                android:paddingEnd="@dimen/common_15dp">
+
+                <com.example.root.graduation_app.widget.ClearEditText
+                    android:id="@+id/et_search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_30dp"
+                    android:layout_toStartOf="@+id/tv_cancel"
+                    android:background="@drawable/et_round_bg"
+                    android:drawableLeft="@drawable/ic_action_search"
+                    android:drawablePadding="@dimen/common_5dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/search_hint_text"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/common_10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_gray"
+                    android:textColorHint="@color/color_darker_gray"
+                    android:textCursorDrawable="@drawable/et_cursor"
+                    android:textSize="@dimen/common_sp_12"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/tv_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/common_10dp"
+                    android:text="@string/cancel" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/layout_hot_words"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/common_30dp"
+                android:layout_marginBottom="@dimen/common_40dp"
+                android:text="@string/search_title_tip"
+                android:textColor="@color/color_gray"
+                android:textSize="@dimen/common_sp_12" />
+
+            <TextView
+                android:id="@+id/tv_hot_search_words"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/common_15dp"
+                android:text="@string/search_hot_keywords_tip"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/common_sp_14" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mRecyclerView_hot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/common_15dp"
+                android:layout_marginEnd="@dimen/common_15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_content_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_search_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/common_30dp"
+                android:layout_marginBottom="@dimen/common_20dp"
+                android:text="@string/search_result_count"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/common_sp_12"
+                android:textStyle="bold" />
+
+            <com.example.base_library.base_views.MultipleStatusView
+                android:id="@+id/multipleStatusView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyView="@layout/layout_empty_view"
+                app:errorView="@layout/layout_error_view"
+                app:loadingView="@layout/layout_loading_view"
+                app:noNetworkView="@layout/layout_network_view">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/mRecyclerView_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.example.base_library.base_views.MultipleStatusView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

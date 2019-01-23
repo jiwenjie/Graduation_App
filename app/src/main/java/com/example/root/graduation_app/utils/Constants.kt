@@ -18,6 +18,7 @@ object Constants {
    const val WEIXIN_BASE_URL = "http://v.juhe.cn/weixin/"         // 微信精选的 host 地址
    const val WANGYI_BASE_URL = "http://c.m.163.com/nc/article/"       // 网易新闻的 host 地址
    const val GANKIO_BASE_URL = "http://gank.io/api/"  // 干货集中营的 host 地址
+   const val WANWANDROID_URL = "http://wanandroid.com/"
 
    const val SHARE_LOGIN_USER_NAME = "share_loginUser"
 

@@ -151,10 +151,16 @@ import java.io.Serializable
 }
  **/
 
-data class WanAndroidListBean<T> (
+data class WanAndroidBaseBean<T> (
     val errorCode: Int,
     val errorMsg: String,
-    val data: ArrayList<T>
+    val data: T
+) : Serializable
+
+data class WanAndroidListBean<T> (
+        val errorCode: Int,
+        val errorMsg: String,
+        val data: ArrayList<T>
 ) : Serializable
 
 data class WanAndroidPublicItemBean(

@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><!-- 首页的侧滑栏部分的布局 -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页的侧滑栏部分的布局,
+    这里增加 clickable 是为了解决侧滑栏打开后监听穿透的问题 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
+    android:clickable="true"
     android:background="@color/color_white">
 
     <!-- 高斯模糊图片 -->

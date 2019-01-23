@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:layout_marginTop="2dp"
+    android:background="@color/color_white"
+    android:foreground="@drawable/ripple_bg"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/common_10dp">
+
+        <TextView
+            android:id="@+id/fragment_wanandroid_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textSize="@dimen/common_sp_18"
+            tools:text="Gradle 妙用" />
+
+        <TextView
+            android:id="@+id/fragment_wanandroid_item_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="6dp"
+            tools:text="郭霖" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragment_wanandroid_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="17小时前" />
+
+            <TextView
+                android:id="@+id/fragment_wanandroid_item_source"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                tools:text="公众号" />
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

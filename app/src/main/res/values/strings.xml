@@ -6,6 +6,13 @@
     <string name="data_error">数据获取失败(ㄒoㄒ)~~</string>
     <string name="empty_view_hint">暂时木有内容呀~~</string>
 
+    <string name="search_transition_name">transition_reveal</string>
+    <string name="search_hint_text">帮你找到感兴趣的视频</string>
+    <string name="search_title_tip">输入标题或描述中的关键词找到更多视频</string>
+    <string name="search_hot_keywords_tip">- 热门搜索词 -</string>
+    <string name="search_result_count">-「%1$s」搜索结果共%2$d个-</string>
+    <string name="cancel">取消</string>
+
     <string-array name="news_type_cn">
         <item>头条</item>
         <item>社会</item>

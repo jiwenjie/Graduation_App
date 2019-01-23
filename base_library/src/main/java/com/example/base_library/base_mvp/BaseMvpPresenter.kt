@@ -24,27 +24,27 @@ abstract class BaseMvpPresenter<V : BaseMvpViewImpl>(view: V) : LifecycleObserve
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     protected open fun onCreate() {
-        Log.d(tag, "onCreate")
+        Log.e(tag, "onCreate")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     protected open fun onStart() {
-        Log.d(tag, "onStart")
+        Log.e(tag, "onStart")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     protected open fun onResume() {
-        Log.d(tag, "onResume")
+        Log.e(tag, "onResume")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     protected open fun onPause() {
-        Log.d(tag, "onPause")
+        Log.e(tag, "onPause")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     protected open fun onStop() {
-        Log.d(tag, "onStop")
+        Log.e(tag, "onStop")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -54,12 +54,12 @@ abstract class BaseMvpPresenter<V : BaseMvpViewImpl>(view: V) : LifecycleObserve
         if (!compositeDisposable.isDisposed) {
             compositeDisposable.clear()
         }
-        Log.d(tag, "onDestroy")
+        Log.e(tag, "onDestroy")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
     protected open fun onLifeChange(owner: LifecycleOwner, event: Lifecycle.Event) {
-        Log.d(tag, "onLifeChange: ($owner, $event)")
+        Log.e(tag, "onLifeChange: ($owner, $event)")
     }
 
     /**

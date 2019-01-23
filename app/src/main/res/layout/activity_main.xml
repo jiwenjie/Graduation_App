@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Roots"
     android:id="@+id/drawerLyt"
+    style="@style/Roots"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    android:orientation="vertical"
     tools:openDrawer="start">
 
     <LinearLayout
@@ -15,10 +14,10 @@
         android:orientation="vertical">
 
         <!--<android.support.design.widget.AppBarLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-            <!---->
+        <!---->
 
         <!--</android.support.design.widget.AppBarLayout>-->
 
@@ -39,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:foreground="@drawable/ripple_bg_radius"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="4dp">
@@ -62,6 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:foreground="@drawable/ripple_bg_radius"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="4dp">
@@ -85,6 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:foreground="@drawable/ripple_bg_radius"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="4dp">
@@ -108,6 +110,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:foreground="@drawable/ripple_bg_radius"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="4dp">
