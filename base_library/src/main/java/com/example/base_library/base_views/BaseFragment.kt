@@ -36,9 +36,8 @@ abstract class BaseFragment : Fragment() {
         LogUtils.e("onViewCreated()")
         initFragment(savedInstanceState)
         StatusBarUtil.setColor(activity, ContextCompat.getColor(activity!!, R.color.colorPrimary), 0)
-        mLayoutStatusView?.setOnRetryClickListener {
-            loadData()
-        }
+        //多种状态切换的view 重试点击事件
+        mLayoutStatusView?.setOnClickListener(mRetryClickListener)
         loadData()
         setListener()
         handleRxBus()
@@ -53,6 +52,10 @@ abstract class BaseFragment : Fragment() {
     protected open fun setListener() {}
 
     protected open fun handleRxBus() {}
+
+    open val mRetryClickListener: View.OnClickListener = View.OnClickListener {
+        loadData()
+    }
 
     fun startActivity(clazz: Class<*>) = activity!!.startActivity(Intent(activity, clazz))
 }

@@ -7,7 +7,6 @@
     android:layout_margin="6dp"
     android:layout_marginTop="2dp"
     android:background="@color/color_white"
-    android:foreground="@drawable/ripple_bg"
     android:orientation="vertical"
     app:cardCornerRadius="4dp"
     app:cardElevation="2dp">

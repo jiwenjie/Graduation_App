@@ -32,7 +32,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <!--<activity android:name=".SplashActivity">-->
-        <activity android:name=".mvp.activity.MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,54 +48,56 @@
 
         <!-- 搜索公众号文章的界面 -->
         <activity
-            android:name=".mvp.activity.SearchPublicHistoryActivity"
+            android:name=".ui.activity.SearchPublicHistoryActivity"
             android:screenOrientation="portrait" />
 
         <!-- 程序的登陆界面 -->
         <activity
-            android:name=".mvp.activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 用户的注册页面 -->
         <activity
-            android:name=".mvp.activity.RegisterActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:screenOrientation="portrait" />
 
         <!-- 输入验证码的页面 -->
         <activity
-            android:name=".mvp.activity.InputVerificationCodeActivity"
+            android:name=".ui.activity.InputVerificationCodeActivity"
             android:screenOrientation="portrait" />
 
         <!-- 显示豆瓣 top 250电影 -->
         <activity
-            android:name=".mvp.activity.DoubanMovieTopActivity"
+            android:name=".ui.activity.DoubanMovieTopActivity"
             android:screenOrientation="portrait" />
 
         <!-- 点击电影也没的详情页，带有共享动画 -->
         <activity
-            android:name=".mvp.activity.DoubanMovieDetailActivity"
+            android:name=".ui.activity.DoubanMovieDetailActivity"
             android:screenOrientation="portrait" />
 
         <!-- 豆瓣的书籍信息点击详情页 -->
         <activity
-            android:name=".mvp.activity.DoubanBookDetailActivity"
+            android:name=".ui.activity.DoubanBookDetailActivity"
             android:screenOrientation="portrait" />
 
         <!-- 公共的 WebView 界面 -->
         <activity
-            android:name=".mvp.activity.CommonWebViewActivity"
+            android:name=".ui.activity.CommonWebViewActivity"
             android:screenOrientation="portrait" />
 
         <!-- 个人主页 -->
         <activity
-            android:name=".mvp.activity.ProfileActivity"
+            android:name=".ui.activity.ProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 优秀的项目列表活动 -->
+        <activity
+            android:name=".ui.activity.ExcellentProjectListActivity"
             android:screenOrientation="portrait" />
 
         <!-- 滑动头部和折叠的有关页面 -->
-        <activity
-            android:name=".test.TestAppBarLayout"
-            android:screenOrientation="portrait" />
 
         <!-- 蒲公英的 sdk 引入 start -->
         <provider

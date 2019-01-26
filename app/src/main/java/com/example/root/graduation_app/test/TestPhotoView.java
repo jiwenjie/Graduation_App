@@ -34,7 +34,7 @@ import java.util.List;
 public class TestPhotoView extends AppCompatActivity {
 
    private ViewPager viewPager;
-   private PhotoSlideAdapter adapter;
+//   private PhotoSlideAdapter adapter;
    WebView webView;
 
    private TextView count;

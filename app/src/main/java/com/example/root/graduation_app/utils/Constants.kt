@@ -25,4 +25,9 @@ object Constants {
    const val LOCAL_URL = "http://" + "ip" + "8080/"
 
    const val GITHUB_URL = "https://github.com/jiwenjie/Graduation_App"
+
+   /**
+    * id key
+    */
+   const val CONTENT_CID_KEY = "cid"
 }

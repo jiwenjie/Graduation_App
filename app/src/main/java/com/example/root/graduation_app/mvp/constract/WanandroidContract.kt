@@ -26,25 +26,36 @@ interface WanandroidContract {
         /**
          * 获取某个公众号的历史数据
          */
-        fun getOnePublicAddressHistory(publicId: Int, pageNum: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+        fun getOnePublicAddressHistory(
+            publicId: Int,
+            pageNum: Int
+        ): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
         /**
          * search article in public history
          */
-        fun searchArticleInPublicAddress(publicId: Int, pageNum: Int, searchKey: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+        fun searchArticleInPublicAddress(
+            publicId: Int,
+            pageNum: Int,
+            searchKey: String
+        ): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
         /**
          * get the latest project
          */
         fun getProjectList(page: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
-    }
 
+        /**
+         * get hot word
+         */
+        fun getHotWord(): Observable<WanAndroidListBean<WanandroidHotkeyword>>
+    }
 
 
     /**
      * get public num view
      */
-    interface WanandroidPublicView: BaseMvpViewImpl {
+    interface WanandroidPublicView : BaseMvpViewImpl {
         /**
          * first get the public num data
          */
@@ -59,23 +70,29 @@ interface WanandroidContract {
          * display history data
          */
         fun displayPublicHistory(historyList: ArrayList<WanAndroidItem>)
-
-        /**
-         * search article from history
-         */
-        fun displaySearchResult(searchResultList: ArrayList<WanAndroidItem>)
     }
 
     /**
      * display the latest project view
      */
-    interface WanandroidProjectView: IBaseView {
+    interface WanandroidProjectView : IBaseView {
         /**
          * display the latest project
          */
         fun displayLatestProject(projectList: ArrayList<WanAndroidItem>)
     }
 
+    /**
+     * display hot word in searchActivity
+     */
+    interface WanandroidHotwordView : IBaseView {
+        fun displayHotword(hotwordList: ArrayList<WanandroidHotkeyword>)
+
+        /**
+         * search article from history
+         */
+        fun displaySearchResult(searchResultList: ArrayList<WanAndroidItem>)
+    }
 
     /**
      * presenter
@@ -95,20 +112,30 @@ interface WanandroidContract {
          * get public history data
          */
         fun getOnePublicAddressHistory(publicId: Int, pageNum: Int)
-
-        /**
-         * search article in public history
-         */
-        fun searchArticleInPublicAddress(publicId: Int, pageNum: Int, searchKey: String)
     }
 
     /**
-     * presenter
+     * display project activity presenter
      */
     interface WanandroidProjectPresenter {
         /**
          * get the latest project
          */
         fun getProjectList(page: Int)
+    }
+
+    /**
+     * search activity presenter
+     */
+    interface WanandroidHotwordPresenter {
+        /**
+         * get hot word
+         */
+        fun getHotword()
+
+        /**
+         * search article in public history
+         */
+        fun searchArticleInPublicAddress(publicId: Int, pageNum: Int, searchKey: String)
     }
 }

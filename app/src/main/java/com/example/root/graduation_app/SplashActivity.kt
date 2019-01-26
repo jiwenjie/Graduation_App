@@ -8,8 +8,8 @@ import android.os.Bundle
 import com.example.base_library.base_utils.SharePreferencesUtil
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.bean.LoginUser
-import com.example.root.graduation_app.mvp.activity.LoginActivity
-import com.example.root.graduation_app.mvp.activity.MainActivity
+import com.example.root.graduation_app.ui.activity.LoginActivity
+import com.example.root.graduation_app.ui.activity.MainActivity
 import com.example.root.graduation_app.utils.Constants
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

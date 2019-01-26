@@ -29,17 +29,4 @@ class WanandroidDataPresenter(view: WanandroidContract.WanandroidDataView) : Bas
                       })
       )
    }
-
-   override fun searchArticleInPublicAddress(publicId: Int, pageNum: Int, searchKey: String) {
-      if (pageNum == 1) mView?.showLoading()
-      addSubscription(
-              mModel.searchArticleInPublicAddress(publicId, pageNum, searchKey)
-                      .subscribe({
-                         mView?.dismissLoading()
-                         mView?.displaySearchResult(it.data.datas)
-                      }, {
-                         mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
-                      })
-      )
-   }
 }

@@ -15,6 +15,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
 
@@ -23,7 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_10dp"
-                android:paddingStart="@dimen/common_15dp"
                 android:paddingEnd="@dimen/common_15dp">
 
                 <com.example.root.graduation_app.widget.ClearEditText
@@ -32,18 +32,19 @@
                     android:layout_height="@dimen/common_30dp"
                     android:layout_toStartOf="@+id/tv_cancel"
                     android:background="@drawable/et_round_bg"
-                    android:drawableLeft="@drawable/ic_action_search"
+                    android:drawableLeft="@drawable/ic_action_search_white"
                     android:drawablePadding="@dimen/common_5dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:gravity="center_vertical"
                     android:hint="@string/search_hint_text"
                     android:imeOptions="actionSearch"
+                    android:layout_marginEnd="4dp"
                     android:maxLines="1"
                     android:paddingStart="@dimen/common_10dp"
                     android:singleLine="true"
-                    android:textColor="@color/color_gray"
-                    android:textColorHint="@color/color_darker_gray"
+                    android:textColor="@color/color_white"
+                    android:textColorHint="@color/alpha_90_white"
                     android:textCursorDrawable="@drawable/et_cursor"
                     android:textSize="@dimen/common_sp_12"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -51,6 +52,7 @@
                 <TextView
                     android:id="@+id/tv_cancel"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/color_white"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -131,5 +133,4 @@
             </com.example.base_library.base_views.MultipleStatusView>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

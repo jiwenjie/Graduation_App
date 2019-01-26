@@ -27,7 +27,7 @@
             android:textColor="@color/color_white"
             android:textSize="@dimen/common_sp_18"
             android:visibility="gone"
-            tools:text="标题标题" />
+            tools:text="标题标scasc题" />
 
     </android.support.v7.widget.Toolbar>
 

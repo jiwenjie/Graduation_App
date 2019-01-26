@@ -215,3 +215,12 @@ data class WanandroidTag(
     val name: String,
     val url: String
 ): Serializable
+
+
+data class WanandroidHotkeyword(
+    val id: Int,
+    val link: String,
+    val name: String,
+    val order: Int,
+    val visible: Int
+): Serializable

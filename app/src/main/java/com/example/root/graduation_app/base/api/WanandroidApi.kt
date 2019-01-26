@@ -1,6 +1,7 @@
 package com.example.root.graduation_app.base.api
 
 import com.example.root.graduation_app.bean.*
+import com.example.root.graduation_app.mvp.constract.WanandroidContract
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -25,10 +26,10 @@ interface WanandroidApi {
     /**
      * 获取某个公众号的历史数据
      * http://wanandroid.com/wxarticle/list/405/1/json
-        方法：GET
-        参数：
-        公众号 ID：拼接在 url 中，eg:405
-        公众号页码：拼接在url 中，eg:1
+    方法：GET
+    参数：
+    公众号 ID：拼接在 url 中，eg:405
+    公众号页码：拼接在url 中，eg:1
      */
     @GET("wxarticle/list/{publicId}/{pageNum}/json")
     fun getOnePublicAddressHistory(@Path("publicId") publicId: Int, @Path("pageNum") pageNum: Int)
@@ -37,29 +38,48 @@ interface WanandroidApi {
     /**
      * 在某个公众号中搜索文章
      *  http://wanandroid.com/wxarticle/list/405/1/json?k=Java
-        方法：GET
-        参数 ：
-        k : 字符串，eg:Java
-        公众号 ID：拼接在 url 中，eg:405
-        公众号页码：拼接在url 中，eg:1
+    方法：GET
+    参数 ：
+    k : 字符串，eg:Java
+    公众号 ID：拼接在 url 中，eg:405
+    公众号页码：拼接在url 中，eg:1
      */
     @GET("wxarticle/list/{publicId}/{pageNum}/json")
-    fun searchArticleInPublicAddress(@Path("publicId") publicId: Int, @Path("pageNum") pageNum: Int,
-                                     @Query("k") searchKey: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+    fun searchArticleInPublicAddress(
+        @Path("publicId") publicId: Int, @Path("pageNum") pageNum: Int,
+        @Query("k") searchKey: String
+    ): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
     /**
      * 获取最新项目
      * http://wanandroid.com/article/listproject/0/json
-        方法：GET
-        参数：页码，拼接在连接中，从0开始。
+    方法：GET
+    参数：页码，拼接在连接中，从0开始。
      */
     @GET("article/listproject/{page}/json")
-    fun getProjectList(@Path("page") page: Int) : Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+    fun getProjectList(@Path("page") page: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+
+    /**
+     * 项目数据
+     * http://www.wanandroid.com/project/tree/json
+     */
+    @GET("project/tree/json")
+    fun getProjectTree(): Observable<WanAndroidListBean<WanAndroidPublicItemBean>>
+
+    /**
+     * 项目列表数据
+     * http://www.wanandroid.com/project/list/1/json?cid=294
+     * @param page
+     * @param cid
+     */
+    @GET("project/list/{page}/json")
+    fun getProjectList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+
 
     /**
      * hot key for search
      * http://www.wanandroid.com//hotkey/json
      */
     @GET("/hotkey/json")
-    fun getHotkeyWord()
+    fun getHotkeyWord(): Observable<WanAndroidListBean<WanandroidHotkeyword>>
 }

@@ -44,4 +44,11 @@ class WanandroidModel : WanandroidContract.WanandroidModel {
               .getProjectList(page)
               .compose(RxJavaUtils.applyObservableAsync())
    }
+
+    override fun getHotWord(): Observable<WanAndroidListBean<WanandroidHotkeyword>> {
+        return RetrofitManager.provideClient(Constants.WANWANDROID_URL)
+            .create(WanandroidApi::class.java)
+            .getHotkeyWord()
+            .compose(RxJavaUtils.applyObservableAsync())
+    }
 }
