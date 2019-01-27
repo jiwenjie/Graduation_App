@@ -4,6 +4,7 @@
     android:id="@+id/multiple_status_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     app:emptyView="@layout/layout_empty_view"
     app:errorView="@layout/layout_error_view"
     app:loadingView="@layout/layout_loading_view"

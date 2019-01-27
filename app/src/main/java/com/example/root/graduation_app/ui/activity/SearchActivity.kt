@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_search_public_history.*
  *  desc:
  *  version:1.0
  */
-class SearchPublicHistoryActivity :
+class SearchActivity :
     BaseMvpActivity<WanandroidContract.WanandroidHotwordView, WanandroidHotwordPresenter>(),
     WanandroidContract.WanandroidHotwordView {
 
@@ -45,7 +45,7 @@ class SearchPublicHistoryActivity :
 
         @JvmStatic
         fun runActivity(activity: Activity, publicId : Int) {
-            val intent = Intent(activity, SearchPublicHistoryActivity::class.java)
+            val intent = Intent(activity, SearchActivity::class.java)
             intent.putExtra(KEY_TAB_NAME, publicId)
             activity.startActivity(intent)
         }
@@ -121,7 +121,7 @@ class SearchPublicHistoryActivity :
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        ToastUtils.showToast(this@SearchPublicHistoryActivity, errorMsg)
+        ToastUtils.showToast(this@SearchActivity, errorMsg)
         if (errorCode == ErrorStatus.NETWORK_ERROR) {
             mLayoutStatusView?.showNoNetwork()
         } else {

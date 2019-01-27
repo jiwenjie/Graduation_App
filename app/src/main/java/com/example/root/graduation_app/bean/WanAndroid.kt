@@ -163,8 +163,19 @@ data class WanAndroidListBean<T> (
         val data: ArrayList<T>
 ) : Serializable
 
+//知识体系
+data class KnowledgeTreeBody(
+        val children: ArrayList<WanAndroidPublicItemBean>,
+        val courseId: Int,
+        val id: Int,
+        val name: String,
+        val order: Int,
+        val parentChapterId: Int,
+        val visible: Int
+) : Serializable
+
 data class WanAndroidPublicItemBean(
-    val children: Any,
+    val children: ArrayList<Any>,
     val courseId: Int,
     val id: Int,
     val name: String,
@@ -173,7 +184,6 @@ data class WanAndroidPublicItemBean(
     val userControlSetTop: Boolean,
     val visible: Int
 ) : Serializable
-
 
 data class WanAndroidJson<T>(
     val curPage: Int,

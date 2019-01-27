@@ -27,6 +27,22 @@ object Constants {
    const val GITHUB_URL = "https://github.com/jiwenjie/Graduation_App"
 
    /**
+    * url key
+    */
+   const val CONTENT_URL_KEY = "url"
+   /**
+    * title key
+    */
+   const val CONTENT_TITLE_KEY = "title"
+   /**
+    * id key
+    */
+   const val CONTENT_ID_KEY = "id"
+   /**
+    * content data key
+    */
+   const val CONTENT_DATA_KEY = "content_data"
+   /**
     * id key
     */
    const val CONTENT_CID_KEY = "cid"

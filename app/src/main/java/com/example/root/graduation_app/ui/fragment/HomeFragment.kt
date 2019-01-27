@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_project_index.*
  *  desc:
  *  version:1.0
  */
-class ProjectIndexFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(), ProjectContract.View {
+class HomeFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(), ProjectContract.View {
 
     /**
      * ProjectTreeBean
@@ -35,8 +35,8 @@ class ProjectIndexFragment : BaseMvpFragment<ProjectContract.View, ProjectPresen
 
     companion object {
         @JvmStatic
-        fun newInstance(): ProjectIndexFragment {
-            val fragment = ProjectIndexFragment()
+        fun newInstance(): HomeFragment {
+            val fragment = HomeFragment()
             val bundle = Bundle()
             fragment.arguments = bundle
             return fragment

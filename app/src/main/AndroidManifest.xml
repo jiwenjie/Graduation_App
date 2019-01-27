@@ -32,7 +32,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <!--<activity android:name=".SplashActivity">-->
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.IndexMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +48,7 @@
 
         <!-- 搜索公众号文章的界面 -->
         <activity
-            android:name=".ui.activity.SearchPublicHistoryActivity"
+            android:name=".ui.activity.SearchActivity"
             android:screenOrientation="portrait" />
 
         <!-- 程序的登陆界面 -->
@@ -95,6 +95,11 @@
         <!-- 优秀的项目列表活动 -->
         <activity
             android:name=".ui.activity.ExcellentProjectListActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 从知识体系 tree 列表点击后跳转的 tab 页面 -->
+        <activity
+            android:name=".ui.activity.KnowledgeActivity"
             android:screenOrientation="portrait" />
 
         <!-- 滑动头部和折叠的有关页面 -->

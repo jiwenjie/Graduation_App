@@ -75,6 +75,22 @@ interface WanandroidApi {
     @GET("project/list/{page}/json")
     fun getProjectList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
+    /**
+     * 获取知识体系
+     * http://www.wanandroid.com/tree/json
+     */
+    @GET("tree/json")
+    fun getKnowledgeTree(): Observable<WanAndroidListBean<KnowledgeTreeBody>>
+
+    /**
+     * 知识体系下的文章
+     * http://www.wanandroid.com/article/list/0/json?cid=168
+     * @param page
+     * @param cid
+     */
+    @GET("article/list/{page}/json")
+    fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+
 
     /**
      * hot key for search

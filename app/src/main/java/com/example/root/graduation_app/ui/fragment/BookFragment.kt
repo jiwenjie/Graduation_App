@@ -2,13 +2,11 @@ package com.example.root.graduation_app.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.Gravity
 import android.view.View
 import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.common_tablayout_viewpager.*
 import kotlinx.android.synthetic.main.common_toolbar_layout.*
 
@@ -19,15 +17,15 @@ import kotlinx.android.synthetic.main.common_toolbar_layout.*
  *  desc:
  *  version:1.0
  */
-class EntertainmentFragment : BaseFragment() {
+class BookFragment : BaseFragment() {
 
    private val fragmentList by lazy {  ArrayList<Fragment>() }
    private val mTitles by lazy {  ArrayList<String>() }
 
    companion object {
       @JvmStatic
-       fun newInstance() : EntertainmentFragment {
-          val fragment = EntertainmentFragment()
+       fun newInstance() : BookFragment {
+          val fragment = BookFragment()
           val bundle = Bundle()
           fragment.arguments = bundle
           return fragment
@@ -41,13 +39,13 @@ class EntertainmentFragment : BaseFragment() {
    override fun getLayoutId(): Int = R.layout.common_tablayout_viewpager
 
    override fun initFragment(savedInstanceState: Bundle?) {
-      LogUtils.e("EntertainmentFragment initFragment()")
+      LogUtils.e("BookFragment initFragment()")
       initView()
    }
 
    private fun initView() {
-      common_toolbar_title.text = "休闲文娱"
-      common_toolbar_icon.visibility = View.GONE
+//      common_toolbar_title.text = "休闲文娱"
+//      common_toolbar_icon.visibility = View.GONE
 
       if (mTitles.size != 4 && fragmentList.size != 4) {
          mTitles.add("文学")

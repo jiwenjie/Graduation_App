@@ -7,12 +7,13 @@ import android.support.v7.widget.LinearLayoutManager
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
+import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.bean.WanAndroidJson
-import com.example.root.graduation_app.mvp.constract.ProjectListContract
-import com.example.root.graduation_app.mvp.presenter.ProjectListPresenter
-import com.example.root.graduation_app.ui.adapter.ProjectAdapter
+import com.example.root.graduation_app.mvp.constract.KnowledgeContract
+import com.example.root.graduation_app.mvp.presenter.KnowledgePresenter
+import com.example.root.graduation_app.ui.adapter.KnowledgeAdapter
 import com.example.root.graduation_app.utils.Constants
 import com.example.root.graduation_app.utils.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
@@ -20,30 +21,38 @@ import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 /**
  *  author:Jiwenjie
  *  email:278630464@qq.com
- *  time:2019/01/25
+ *  time:2019/01/26
  *  desc:
  *  version:1.0
  */
-class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectListPresenter>(), ProjectListContract.View {
+class KnowledgeFragment
+   : BaseMvpFragment<KnowledgeContract.View, KnowledgePresenter>(), KnowledgeContract.View {
+
+   /**
+    * cid
+    */
+   private var cid: Int = 0
+
+   /**
+    * datas
+    */
+   private val datas = ArrayList<WanAndroidItem>()
+
+   /**
+    * Knowledge Adapter
+    */
+   private val knowledgeAdapter: KnowledgeAdapter by lazy {
+      KnowledgeAdapter(activity!!, datas)
+   }
 
    /**
     * is Refresh
     */
    private var isRefresh = true
 
-   /**
-    * cid
-    */
-   private var cid: Int = -1
-
-   /**
-    * Article datas
-    */
-   private val datas = ArrayList<WanAndroidItem>()
-
    companion object {
-      fun getInstance(cid: Int): ProjectListFragment {
-         val fragment = ProjectListFragment()
+      fun getInstance(cid: Int): KnowledgeFragment {
+         val fragment = KnowledgeFragment()
          val args = Bundle()
          args.putInt(Constants.CONTENT_CID_KEY, cid)
          fragment.arguments = args
@@ -51,43 +60,27 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
       }
    }
 
-   override fun loadData() {
-      mPresenter.requestProjectList(1, cid)
-//      swipeRefreshLayout.run {
-//         setOnRefreshListener(onRefreshListener)
-//      }
-   }
-
-   override fun getLayoutId(): Int = R.layout.fragment_refresh_layout
-
    override fun initFragment(savedInstanceState: Bundle?) {
       mLayoutStatusView = multiple_status_view
       mLayoutStatusView?.showContent()
-      cid = arguments!!.getInt(Constants.CONTENT_CID_KEY)
 
+      cid = arguments?.getInt(Constants.CONTENT_CID_KEY) ?: 0
+      swipeRefreshLayout.run {
+         setOnRefreshListener(onRefreshListener)
+      }
       recyclerView.run {
          layoutManager = linearLayoutManager
-         adapter = projectAdapter
+         adapter = knowledgeAdapter
          itemAnimator = DefaultItemAnimator()
          recyclerViewItemDecoration?.let { addItemDecoration(it) }
       }
-
-      swipeRefreshLayout.setOnRefreshListener {
-         isRefresh = true
-         mPresenter.requestProjectList(1, cid)
-      }
    }
 
-   /**
-    * RefreshListener
-    */
-   private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
-      isRefresh = true
-//      projectAdapter.setEnableLoadMore(false)
-      mPresenter.requestProjectList(1, cid)
+   override fun loadData() {
+      mPresenter.requestKnowledgeList(0, cid)
    }
 
-   override fun initPresenter(): ProjectListPresenter = ProjectListPresenter(this)
+   override fun initPresenter(): KnowledgePresenter = KnowledgePresenter(this)
 
    override fun scrollToTop() {
       recyclerView.run {
@@ -99,10 +92,8 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
       }
    }
 
-   override fun setProjectList(articles: WanAndroidJson<WanAndroidItem>) {
-      isRefresh = false
-      swipeRefreshLayout.isRefreshing = false
-      projectAdapter.addAllData(articles.datas)
+   override fun setKnowledgeList(articles: WanAndroidJson<WanAndroidItem>) {
+      knowledgeAdapter.addAllData(articles.datas)
    }
 
    override fun showLoading() {
@@ -111,6 +102,12 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
 
    override fun dismissLoading() {
       mLayoutStatusView?.showContent()
+////      swipeRefreshLayout?.isRefreshing = false
+//      if (isRefresh) {
+//         knowledgeAdapter.run {
+////            setEnableLoadMore(true)
+//         }
+//      }
    }
 
    override fun showError(errorMsg: String, errorCode: Int) {
@@ -122,8 +119,13 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
       }
    }
 
-   private val projectAdapter: ProjectAdapter by lazy {
-      ProjectAdapter(activity!!, datas)
+   /**
+    * RecyclerView Divider
+    */
+   private val recyclerViewItemDecoration by lazy {
+      activity?.let {
+         SpaceItemDecoration(it)
+      }
    }
 
    /**
@@ -134,9 +136,12 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
    }
 
    /**
-    * RecyclerView Divider
+    * RefreshListener
     */
-   private val recyclerViewItemDecoration by lazy {
-      activity?.let { SpaceItemDecoration(it) }
+   private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+      isRefresh = true
+      mPresenter.requestKnowledgeList(0, cid)
    }
+
+   override fun getLayoutId(): Int = R.layout.fragment_refresh_layout
 }

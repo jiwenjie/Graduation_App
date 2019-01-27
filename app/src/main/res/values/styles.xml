@@ -36,9 +36,33 @@
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
     <!--</style>-->
 
-    <style name="AppTheme" parent="AppBaseTheme">
+    <!--<style name="AppTheme" parent="AppBaseTheme">-->
 
+    <!--</style>-->
+
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="@style/Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@color/base_bg</item>
+        <item name="android:listDivider">@color/base_bg</item>
+        <!--<item name="textColorPrimary">@color/textColorPrimary</item>-->
+        <!--<item name="viewBackground">@color/White</item>-->
+        <!--关闭启动窗口-->
+        <item name="android:windowDisablePreview">true</item>
+        <!--<item name="android:listDivider">@drawable/bg_divider</item>-->
     </style>
+
+
+    <style name="BaseAppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme" parent="BaseAppTheme.NoActionBar" />
 
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>

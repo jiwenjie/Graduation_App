@@ -13,35 +13,34 @@
     <string name="search_result_count">-「%1$s」搜索结果共%2$d个-</string>
     <string name="cancel">取消</string>
 
-    <string-array name="news_type_cn">
-        <item>头条</item>
-        <item>社会</item>
-        <item>国内</item>
-        <item>国际</item>
-        <item>娱乐</item>
-        <item>体育</item>
-        <item>军事</item>
-        <item>科技</item>
-        <item>财经</item>
-        <item>时尚</item>
-    </string-array>
-    <string-array name="news_type_en">
-        <item>toutiao</item>
-        <item>shehui</item>
-        <item>guonei</item>
-        <item>guoji</item>
-        <item>yule</item>
-        <item>tiyu</item>
-        <item>junshi</item>
-        <item>keji</item>
-        <item>caijing</item>
-        <item>shishang</item>
-    </string-array>
 
     <!-- Home -->
     <string name="collect_success">收藏成功</string>
     <string name="cancel_collect_success">已取消收藏</string>
     <string name="new_fresh">新</string>
     <string name="top_tip">置顶</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="exit_tip">再按一次退出程序</string>
+
+    <!-- Menu Action -->
+    <string name="action_search">搜索</string>
+    <string name="action_share">分享</string>
+    <string name="action_like">收藏</string>
+    <string name="action_browser">用浏览器打开</string>
+
+    <!-- Nav Action -->
+    <string name="nav_my_collect">收藏</string>
+    <string name="nav_setting">设置</string>
+    <string name="nav_about_us">关于我们</string>
+    <string name="nav_logout">退出登录</string>
+    <string name="nav_night_mode">夜间模式</string>
+    <string name="nav_todo">TODO</string>
+
+    <string name="home">首页项目</string>
+    <string name="knowledge_system">知识书籍</string>
+    <string name="project">知识体系</string>
+    <string name="wechat">公众号</string>
 
 </resources>

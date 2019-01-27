@@ -58,9 +58,9 @@ class MainActivity : BaseActivity(), View.OnClickListener {
       // set header style and data
       setHeader()
 //      mFragments.add(IndexFragment.newInstance())
-      mFragments.add(ProjectIndexFragment.newInstance())
-      mFragments.add(DiscoverFragment.newInstance())
-      mFragments.add(EntertainmentFragment.newInstance())
+      mFragments.add(HomeFragment.newInstance())
+      mFragments.add(WeChatFragment.newInstance())
+      mFragments.add(BookFragment.newInstance())
       mFragments.add(KnowledgeTreeFragment.newInstance())
       home_container.adapter = MainNoScrollViewPagerAdapter(supportFragmentManager, mFragments)
       home_container.currentItem = currentIndex
