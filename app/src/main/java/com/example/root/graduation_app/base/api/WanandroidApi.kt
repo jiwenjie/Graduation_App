@@ -3,9 +3,7 @@ package com.example.root.graduation_app.base.api
 import com.example.root.graduation_app.bean.*
 import com.example.root.graduation_app.mvp.constract.WanandroidContract
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  *  author:Jiwenjie
@@ -91,6 +89,23 @@ interface WanandroidApi {
     @GET("article/list/{page}/json")
     fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
+    /**
+     * 搜索热词
+     * http://www.wanandroid.com/hotkey/json
+     */
+    @GET("hotkey/json")
+    fun getHotSearchData(): Observable<WanAndroidListBean<WanandroidHotkeyword>>
+
+   /**
+    * 搜索
+    * http://www.wanandroid.com/article/query/0/json
+    * @param page, 从 0 开始
+    * @param key
+    */
+   @POST("article/query/{page}/json")
+   @FormUrlEncoded
+   fun queryBySearchKey(@Path("page") page: Int,
+                        @Field("k") key: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
     /**
      * hot key for search

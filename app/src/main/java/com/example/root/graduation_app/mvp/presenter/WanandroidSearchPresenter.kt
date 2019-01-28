@@ -13,14 +13,14 @@ import com.example.root.graduation_app.mvp.model.WanandroidModel
  *  desc:get hot word presenter
  *  version:1.0
  */
-class WanandroidHotwordPresenter(view: WanandroidContract.WanandroidHotwordView):
-    BaseMvpPresenter<WanandroidContract.WanandroidHotwordView>(view), WanandroidContract.WanandroidHotwordPresenter {
+class WanandroidSearchPresenter(view: WanandroidContract.WanandroidSearchView):
+    BaseMvpPresenter<WanandroidContract.WanandroidSearchView>(view), WanandroidContract.WanandroidSearchPresenter {
 
     private val mModel by lazy { WanandroidModel() }
 
     override fun getHotword() {
         addSubscription(
-            mModel.getHotWord()
+            mModel.getHotSearchData()
                 .subscribe({
                     mView?.displayHotword(it.data)
                 }, {
@@ -29,10 +29,29 @@ class WanandroidHotwordPresenter(view: WanandroidContract.WanandroidHotwordView)
         )
     }
 
+    /**
+     * 在某个公号下搜索结果
+     */
     override fun searchArticleInPublicAddress(publicId: Int, pageNum: Int, searchKey: String) {
         if (pageNum == 1) mView?.showLoading()
         addSubscription(
             mModel.searchArticleInPublicAddress(publicId, pageNum, searchKey)
+                .subscribe({
+                    mView?.dismissLoading()
+                    mView?.displaySearchResult(it.data.datas)
+                }, {
+                    mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
+                })
+        )
+    }
+
+    /**
+     * 在全部公号下获取搜索结果
+     */
+    override fun searchArticleAll(page: Int, key: String) {
+        if (page == 0) mView?.showLoading()
+        addSubscription(
+            mModel.getSearchResult(page, key)
                 .subscribe({
                     mView?.dismissLoading()
                     mView?.displaySearchResult(it.data.datas)

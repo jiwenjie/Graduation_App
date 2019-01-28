@@ -1,65 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_view_header"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_180"
     android:background="?attr/colorPrimary"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/dp_16"
-    android:paddingTop="@dimen/dp_16"
-    android:paddingRight="@dimen/dp_16"
-    android:paddingBottom="@dimen/dp_16"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/avatar_width"
-        android:layout_height="@dimen/avatar_height"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/img_avatar"
-         />
+    <ImageView
+        android:id="@+id/nav_header_main_bgImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/placeholder_banner" />
 
-    <!--app:borderColor="@color/white"-->
-    <!--app:borderWidth="2dp"-->
-    <!--app:srcCompat="@drawable/img_avatar"-->
-    <!--app:type="circle"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16">
 
-    <TextView
-        android:id="@+id/tv_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp_8"
-        android:text="登陆"
-        android:textSize="@dimen/sp_16"
-        android:textStyle="bold" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/avatar_width"
+            android:layout_height="@dimen/avatar_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@drawable/img_avatar" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="登陆"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:id="@+id/side_image"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="180dp"-->
-    <!--android:background="@drawable/placeholder_banner"-->
-    <!--android:gravity="bottom"-->
-    <!--android:orientation="vertical"-->
-    <!--android:paddingBottom="@dimen/common_16dp"-->
-    <!--android:paddingLeft="@dimen/common_16dp"-->
-    <!--android:paddingRight="@dimen/common_16dp"-->
-    <!--android:paddingTop="@dimen/common_16dp"-->
-    <!--android:fitsSystemWindows="true"-->
-    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark">-->
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/image_description"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textSize="16sp"-->
-        <!--android:text="sascasc"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1" />-->
-
-<!--</LinearLayout>-->
+    </LinearLayout>
+</FrameLayout>

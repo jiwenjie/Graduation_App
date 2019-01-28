@@ -1,6 +1,7 @@
 package com.example.root.graduation_app.ui.activity
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.*
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
@@ -17,6 +19,7 @@ import com.example.root.graduation_app.ui.fragment.BookFragment
 import com.example.root.graduation_app.ui.fragment.KnowledgeTreeFragment
 import com.example.root.graduation_app.ui.fragment.HomeFragment
 import com.jaeger.library.StatusBarUtil
+import com.zhouwei.blurlibrary.EasyBlur
 import kotlinx.android.synthetic.main.activity_index_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -48,7 +51,7 @@ class IndexMainActivity : BaseActivity() {
    /**
     * local username
     */
-//   private val username: String by Preference(Constants.USERNAME_KEY, "")
+//   private val username: String by Preference(ConstantConfig.USERNAME_KEY, "")
 
    /**
     * username TextView
@@ -63,7 +66,6 @@ class IndexMainActivity : BaseActivity() {
    }
 
    override fun initActivity(savedInstanceState: Bundle?) {
-
       StatusBarUtil.setColorForDrawerLayout(this, drawer_layout,
               ContextCompat.getColor(this, R.color.colorPrimary))
 
@@ -86,6 +88,15 @@ class IndexMainActivity : BaseActivity() {
          setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
          nav_username = getHeaderView(0).findViewById(R.id.tv_username)
          menu.findItem(R.id.nav_logout).isVisible = isLogin
+
+         val bgImg = getHeaderView(0).findViewById<ImageView>(R.id.nav_header_main_bgImg)
+
+         val source = BitmapFactory.decodeResource(resources, R.drawable.img_avatar)
+         val bitmap = EasyBlur.with(applicationContext)
+                 .bitmap(source)
+                 .radius(20)
+                 .blur()
+         bgImg.setImageBitmap(bitmap)
       }
       nav_username?.run {
          //         text = if (!isLogin) {
@@ -103,9 +114,7 @@ class IndexMainActivity : BaseActivity() {
             }
          }
       }
-
       showFragment(mIndex)
-
       floating_action_btn.run {
          setOnClickListener(onFABClickListener)
       }
@@ -115,12 +124,6 @@ class IndexMainActivity : BaseActivity() {
     * init DrawerLayout
     */
    private fun initDrawerLayout() {
-//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//         val params = window.attributes
-//         params.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-//         drawer_layout.fitsSystemWindows = true
-//         drawer_layout.clipToPadding = false
-//      }
       drawer_layout.run {
          val toggle = ActionBarDrawerToggle(
                  this@IndexMainActivity,
@@ -131,6 +134,10 @@ class IndexMainActivity : BaseActivity() {
          addDrawerListener(toggle)
          toggle.syncState()
       }
+      // 初始话抽屉打开后背景的高斯模糊
+//      userNameText.text = user?.username ?: user?.userphone
+
+//      nav_header_main_bgImg.setImageBitmap(bitmap)
    }
 
    override fun onSaveInstanceState(outState: Bundle?) {

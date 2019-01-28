@@ -14,7 +14,7 @@ import com.example.root.graduation_app.ui.activity.DoubanBookDetailActivity
 import com.example.root.graduation_app.ui.adapter.DoubanBookAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanBookPresenter
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
 
 /**
@@ -51,7 +51,7 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
 
    override fun loadData() {
       if (!tags.isNullOrEmpty()) {
-         mPresenter.loadBookList(tags!!, start, Constants.CONFIG_LIMIE)
+         mPresenter.loadBookList(tags!!, start, ConstantConfig.CONFIG_LIMIE)
       }
    }
 
@@ -71,8 +71,8 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
                     (commonRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
-               start += Constants.CONFIG_LIMIE
-               mPresenter.loadBookList(tags!!, start, Constants.CONFIG_LIMIE)
+               start += ConstantConfig.CONFIG_LIMIE
+               mPresenter.loadBookList(tags!!, start, ConstantConfig.CONFIG_LIMIE)
             }
          }
       })

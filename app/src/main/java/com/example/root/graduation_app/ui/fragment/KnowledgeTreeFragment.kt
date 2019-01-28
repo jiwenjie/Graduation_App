@@ -11,12 +11,11 @@ import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.KnowledgeTreeBody
-import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 import com.example.root.graduation_app.mvp.constract.KnowledgeTreeContract
 import com.example.root.graduation_app.mvp.presenter.KnowledgeTreePresenter
 import com.example.root.graduation_app.ui.activity.KnowledgeActivity
 import com.example.root.graduation_app.ui.adapter.KnowledgeTreeAdapter
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
 /**
@@ -86,8 +85,8 @@ class KnowledgeTreeFragment
          if (beanList.size != 0) {
             val data = beanList[position]
             Intent(activity, KnowledgeActivity::class.java).run {
-               putExtra(Constants.CONTENT_TITLE_KEY, data.name)
-               putExtra(Constants.CONTENT_DATA_KEY, data)
+               putExtra(ConstantConfig.CONTENT_TITLE_KEY, data.name)
+               putExtra(ConstantConfig.CONTENT_DATA_KEY, data)
                startActivity(this)
             }
          }

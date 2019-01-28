@@ -1,11 +1,10 @@
 package com.example.root.graduation_app.mvp.model
 
 import com.example.base_library.RetrofitManager
-import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.base.api.WangyiApi
 import com.example.root.graduation_app.bean.WangyiNewsListBean
 import com.example.root.graduation_app.mvp.constract.WangyiContract
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.RxJavaUtils
 import io.reactivex.Observable
 
@@ -19,7 +18,7 @@ import io.reactivex.Observable
 class WangyiModel : WangyiContract.WangyiModel {
 
    override fun getNewsList(id: Int): Observable<WangyiNewsListBean> {
-      return RetrofitManager.provideClient(Constants.WANGYI_BASE_URL)
+      return RetrofitManager.provideClient(ConstantConfig.WANGYI_BASE_URL)
               .create(WangyiApi::class.java)
               .getNewsList(id)
               .compose(RxJavaUtils.applyObservableAsync())

@@ -13,7 +13,7 @@ import com.example.root.graduation_app.bean.WanAndroidJson
 import com.example.root.graduation_app.mvp.constract.ProjectListContract
 import com.example.root.graduation_app.mvp.presenter.ProjectListPresenter
 import com.example.root.graduation_app.ui.adapter.ProjectAdapter
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
@@ -45,7 +45,7 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
       fun getInstance(cid: Int): ProjectListFragment {
          val fragment = ProjectListFragment()
          val args = Bundle()
-         args.putInt(Constants.CONTENT_CID_KEY, cid)
+         args.putInt(ConstantConfig.CONTENT_CID_KEY, cid)
          fragment.arguments = args
          return fragment
       }
@@ -63,7 +63,7 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
    override fun initFragment(savedInstanceState: Bundle?) {
       mLayoutStatusView = multiple_status_view
       mLayoutStatusView?.showContent()
-      cid = arguments!!.getInt(Constants.CONTENT_CID_KEY)
+      cid = arguments!!.getInt(ConstantConfig.CONTENT_CID_KEY)
 
       recyclerView.run {
          layoutManager = linearLayoutManager

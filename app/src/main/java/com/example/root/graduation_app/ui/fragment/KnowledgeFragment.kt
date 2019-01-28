@@ -7,14 +7,13 @@ import android.support.v7.widget.LinearLayoutManager
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
-import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.bean.WanAndroidJson
 import com.example.root.graduation_app.mvp.constract.KnowledgeContract
 import com.example.root.graduation_app.mvp.presenter.KnowledgePresenter
 import com.example.root.graduation_app.ui.adapter.KnowledgeAdapter
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
@@ -54,7 +53,7 @@ class KnowledgeFragment
       fun getInstance(cid: Int): KnowledgeFragment {
          val fragment = KnowledgeFragment()
          val args = Bundle()
-         args.putInt(Constants.CONTENT_CID_KEY, cid)
+         args.putInt(ConstantConfig.CONTENT_CID_KEY, cid)
          fragment.arguments = args
          return fragment
       }
@@ -64,7 +63,7 @@ class KnowledgeFragment
       mLayoutStatusView = multiple_status_view
       mLayoutStatusView?.showContent()
 
-      cid = arguments?.getInt(Constants.CONTENT_CID_KEY) ?: 0
+      cid = arguments?.getInt(ConstantConfig.CONTENT_CID_KEY) ?: 0
       swipeRefreshLayout.run {
          setOnRefreshListener(onRefreshListener)
       }

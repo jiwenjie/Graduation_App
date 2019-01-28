@@ -87,6 +87,11 @@
             android:name=".ui.activity.CommonWebViewActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 收藏的 Activity -->
+        <activity
+            android:name=".ui.activity.CollectActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 个人主页 -->
         <activity
             android:name=".ui.activity.ProfileActivity"

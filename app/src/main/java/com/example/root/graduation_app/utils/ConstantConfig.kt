@@ -7,7 +7,7 @@ package com.example.root.graduation_app.utils
  *  desc:常量存储
  *  version:1.0
  */
-object Constants {
+object ConstantConfig {
 
    const val JU_HE_APP_KEY = "e293423adc192ebb71523aa3b854b472"   // 聚合数据 key, 获取微信数据时需要传参数
 
@@ -46,4 +46,11 @@ object Constants {
     * id key
     */
    const val CONTENT_CID_KEY = "cid"
+
+   /**
+    *  PgyData
+    */
+   const val PgyAPIKey = "e9c78c8de1cd495a0065d6bfcedd371e"
+   const val PgyUserKey = "458b9f2f6649d7b656503656715061a3"
+   const val PgyAppKey = "eef566fce6ff5df19a67b8b3a965b403"
 }

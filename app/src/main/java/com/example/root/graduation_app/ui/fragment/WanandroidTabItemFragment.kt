@@ -6,13 +6,11 @@ import android.support.v7.widget.RecyclerView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
-import com.example.base_library.base_views.BaseFragment
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.R.id.common_multipleStatusView
 import com.example.root.graduation_app.bean.WanAndroidItem
-import com.example.root.graduation_app.ui.adapter.WanandroidTabItemAdapter
 import com.example.root.graduation_app.mvp.constract.WanandroidContract
 import com.example.root.graduation_app.mvp.presenter.WanandroidDataPresenter
+import com.example.root.graduation_app.ui.adapter.KnowledgeAdapter
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
 
 /**
@@ -26,7 +24,7 @@ class WanandroidTabItemFragment : BaseMvpFragment<WanandroidContract.WanandroidD
       WanandroidContract.WanandroidDataView {
 
    private val beanList by lazy { ArrayList<WanAndroidItem>() }
-   private val adapter by lazy { WanandroidTabItemAdapter(activity!!, beanList) }
+   private val adapter by lazy { KnowledgeAdapter(activity!!, beanList) }
 
    private var publicId = -1  // 公众号的 id
 

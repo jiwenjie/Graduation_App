@@ -2,10 +2,8 @@ package com.example.root.graduation_app.mvp.presenter
 
 import com.example.base_library.base_mvp.BaseMvpPresenter
 import com.example.base_library.base_utils.ExceptionHandle
-import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.mvp.constract.WeixinContract
 import com.example.root.graduation_app.mvp.model.WeixinModel
-import com.example.root.graduation_app.utils.Constants
 
 /**
  *  author:Jiwenjie

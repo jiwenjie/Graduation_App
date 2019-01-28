@@ -12,7 +12,7 @@ import com.example.root.graduation_app.bean.GankItemBean
 import com.example.root.graduation_app.ui.adapter.GankIoMobileAdapter
 import com.example.root.graduation_app.mvp.constract.GankIoContract
 import com.example.root.graduation_app.mvp.presenter.GankIoPresenter
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
 
 /**
@@ -39,7 +39,7 @@ class ExtendResourceFragment : BaseMvpFragment<GankIoContract.GankIoView, GankIo
 
    override fun loadData() {
       page = 1
-      mPresenter.getGankIoDayMobile("拓展资源", Constants.CONFIG_LIMIE, page)
+      mPresenter.getGankIoDayMobile("拓展资源", ConstantConfig.CONFIG_LIMIE, page)
    }
 
    override fun getLayoutId(): Int = R.layout.common_multiple_recyclerview
@@ -59,7 +59,7 @@ class ExtendResourceFragment : BaseMvpFragment<GankIoContract.GankIoView, GankIo
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
                page ++
-               mPresenter.getGankIoDayMobile("Android", Constants.CONFIG_LIMIE, page)
+               mPresenter.getGankIoDayMobile("Android", ConstantConfig.CONFIG_LIMIE, page)
             }
          }
       })

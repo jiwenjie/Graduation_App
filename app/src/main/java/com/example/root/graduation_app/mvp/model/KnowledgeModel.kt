@@ -6,7 +6,7 @@ import com.example.root.graduation_app.bean.WanAndroidBaseBean
 import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.bean.WanAndroidJson
 import com.example.root.graduation_app.mvp.constract.KnowledgeContract
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.RxJavaUtils
 import io.reactivex.Observable
 
@@ -20,7 +20,7 @@ import io.reactivex.Observable
 class KnowledgeModel: KnowledgeContract.Model {
 
    override fun requestKnowledgeList(page: Int, cid: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>> {
-      return RetrofitManager.provideClient(Constants.WANWANDROID_URL)
+      return RetrofitManager.provideClient(ConstantConfig.WANWANDROID_URL)
               .create(WanandroidApi::class.java)
               .getKnowledgeList(page, cid)
               .compose(RxJavaUtils.applyObservableAsync())

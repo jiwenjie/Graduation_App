@@ -14,7 +14,7 @@ import com.example.root.graduation_app.bean.DoubanSubjectBean
 import com.example.root.graduation_app.ui.adapter.DoubanTopMovieAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanMoviePresenter
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import kotlinx.android.synthetic.main.common_toolbar_multiple_recyclerview.*
 
 /**
@@ -42,7 +42,7 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
    }
 
    override fun loadData() {
-      mPresenter.getDoubanMovieTop250(start, Constants.CONFIG_LIMIE)
+      mPresenter.getDoubanMovieTop250(start, ConstantConfig.CONFIG_LIMIE)
    }
 
    override fun getLayoutId(): Int = R.layout.common_toolbar_multiple_recyclerview
@@ -65,8 +65,8 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
             val mLastVisibleItemPosition = (common_toolbarRv.layoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(stagLayoutSpanCount)
             if (!loadingMore && mLastVisibleItemPosition.max() == (itemCount!! - 1)) {
                loadingMore = true
-               start += Constants.CONFIG_LIMIE
-               mPresenter.getDoubanMovieTop250(start, Constants.CONFIG_LIMIE)
+               start += ConstantConfig.CONFIG_LIMIE
+               mPresenter.getDoubanMovieTop250(start, ConstantConfig.CONFIG_LIMIE)
             }
          }
       })

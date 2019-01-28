@@ -4,7 +4,7 @@ import com.example.base_library.RetrofitManager
 import com.example.root.graduation_app.base.api.GankioApi
 import com.example.root.graduation_app.bean.GankIoListBean
 import com.example.root.graduation_app.mvp.constract.GankIoContract
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.RxJavaUtils
 import io.reactivex.Observable
 
@@ -22,7 +22,7 @@ class GankIoModel : GankIoContract.GankIoModel {
     }
 
     override fun getGankIoDayMobile(type: String, prePage: Int, page: Int): Observable<GankIoListBean> {
-        return RetrofitManager.provideClient(Constants.GANKIO_BASE_URL)
+        return RetrofitManager.provideClient(ConstantConfig.GANKIO_BASE_URL)
             .create(GankioApi::class.java)
             .getGankIoCustomList(type, prePage, page)
             .compose(RxJavaUtils.applyObservableAsync())

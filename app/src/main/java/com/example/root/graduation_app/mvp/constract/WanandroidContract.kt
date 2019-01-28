@@ -49,6 +49,13 @@ interface WanandroidContract {
          * get hot word
          */
         fun getHotWord(): Observable<WanAndroidListBean<WanandroidHotkeyword>>
+
+        fun getHotSearchData(): Observable<WanAndroidListBean<WanandroidHotkeyword>>
+
+        /**
+         * get search result
+         */
+        fun getSearchResult(page: Int, key: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
     }
 
 
@@ -85,7 +92,7 @@ interface WanandroidContract {
     /**
      * display hot word in searchActivity
      */
-    interface WanandroidHotwordView : IBaseView {
+    interface WanandroidSearchView : IBaseView {
         fun displayHotword(hotwordList: ArrayList<WanandroidHotkeyword>)
 
         /**
@@ -127,15 +134,20 @@ interface WanandroidContract {
     /**
      * search activity presenter
      */
-    interface WanandroidHotwordPresenter {
+    interface WanandroidSearchPresenter {
         /**
          * get hot word
          */
         fun getHotword()
 
         /**
-         * search article in public history
+         * search article in public history, search in one publicNo
          */
         fun searchArticleInPublicAddress(publicId: Int, pageNum: Int, searchKey: String)
+
+        /**
+         * search article all
+         */
+        fun searchArticleAll(page: Int, key: String)
     }
 }

@@ -4,9 +4,8 @@ import com.example.base_library.RetrofitManager
 import com.example.root.graduation_app.base.api.WanandroidApi
 import com.example.root.graduation_app.bean.KnowledgeTreeBody
 import com.example.root.graduation_app.bean.WanAndroidListBean
-import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 import com.example.root.graduation_app.mvp.constract.KnowledgeTreeContract
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.RxJavaUtils
 import io.reactivex.Observable
 
@@ -20,7 +19,7 @@ import io.reactivex.Observable
 class KnowledgeTreeModel : KnowledgeTreeContract.Model {
 
     override fun requestKnowledgeTree(): Observable<WanAndroidListBean<KnowledgeTreeBody>> {
-        return RetrofitManager.provideClient(Constants.WANWANDROID_URL)
+        return RetrofitManager.provideClient(ConstantConfig.WANWANDROID_URL)
             .create(WanandroidApi::class.java)
             .getKnowledgeTree()
             .compose(RxJavaUtils.applyObservableAsync())

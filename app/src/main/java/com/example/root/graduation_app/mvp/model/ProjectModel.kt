@@ -5,7 +5,7 @@ import com.example.root.graduation_app.base.api.WanandroidApi
 import com.example.root.graduation_app.bean.WanAndroidListBean
 import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 import com.example.root.graduation_app.mvp.constract.ProjectContract
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.RxJavaUtils
 import io.reactivex.Observable
 
@@ -19,7 +19,7 @@ import io.reactivex.Observable
 class ProjectModel : ProjectContract.Model {
 
    override fun requestProjectTree(): Observable<WanAndroidListBean<WanAndroidPublicItemBean>> {
-      return RetrofitManager.provideClient(Constants.WANWANDROID_URL)
+      return RetrofitManager.provideClient(ConstantConfig.WANWANDROID_URL)
               .create(WanandroidApi::class.java)
               .getProjectTree()
               .compose(RxJavaUtils.applyObservableAsync())

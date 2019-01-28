@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Roots"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,9 +16,9 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary">
 
             <RelativeLayout
                 android:id="@+id/rel_search_view"
@@ -30,6 +31,7 @@
                     android:id="@+id/et_search_view"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_30dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_toStartOf="@+id/tv_cancel"
                     android:background="@drawable/et_round_bg"
                     android:drawableLeft="@drawable/ic_action_search_white"
@@ -39,7 +41,6 @@
                     android:gravity="center_vertical"
                     android:hint="@string/search_hint_text"
                     android:imeOptions="actionSearch"
-                    android:layout_marginEnd="4dp"
                     android:maxLines="1"
                     android:paddingStart="@dimen/common_10dp"
                     android:singleLine="true"
@@ -52,12 +53,12 @@
                 <TextView
                     android:id="@+id/tv_cancel"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/color_white"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/common_10dp"
-                    android:text="@string/cancel" />
+                    android:text="@string/cancel"
+                    android:textColor="@color/color_white" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
 

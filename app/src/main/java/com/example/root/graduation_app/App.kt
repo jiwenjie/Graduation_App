@@ -21,8 +21,8 @@ class App : MultiDexApplication() {
 
    override fun onCreate() {
       super.onCreate()
-      UnCaught.getInstance().init(this)
-      PgyCrashManager.register() //推荐使用，注册 蒲公英
+      UnCaught.getInstance().init(this)   // 本地 crash 捕捉
+      PgyCrashManager.register()    // 新版推荐使用，注册 蒲公英
       contextInstance = this.applicationContext
 
       registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {

@@ -3,14 +3,12 @@ package com.example.root.graduation_app
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import com.example.base_library.base_utils.SharePreferencesUtil
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.bean.LoginUser
-import com.example.root.graduation_app.ui.activity.LoginActivity
 import com.example.root.graduation_app.ui.activity.MainActivity
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -71,6 +69,6 @@ class SplashActivity : BaseActivity() {
      * after word "as" need add "?", otherwise it is not null
      */
     private fun getLoginUser(): LoginUser? {
-        return SharePreferencesUtil.getAny(applicationContext, Constants.SHARE_LOGIN_USER_NAME, LoginUser::class.java) as LoginUser?
+        return SharePreferencesUtil.getAny(applicationContext, ConstantConfig.SHARE_LOGIN_USER_NAME, LoginUser::class.java) as LoginUser?
     }
 }

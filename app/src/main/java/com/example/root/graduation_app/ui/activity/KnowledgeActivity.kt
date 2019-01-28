@@ -10,7 +10,7 @@ import com.example.root.graduation_app.bean.KnowledgeTreeBody
 import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 import com.example.root.graduation_app.ui.adapter.KnowledgePagerAdapter
 import com.example.root.graduation_app.ui.fragment.KnowledgeFragment
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import kotlinx.android.synthetic.main.activity_knowledge.*
 
 /**
@@ -66,8 +66,8 @@ class KnowledgeActivity : BaseActivity() {
 
    private fun initView() {
       intent.extras?.let {
-         toolbarTitle = it.getString(Constants.CONTENT_TITLE_KEY) ?: ""
-         it.getSerializable(Constants.CONTENT_DATA_KEY)?.let {
+         toolbarTitle = it.getString(ConstantConfig.CONTENT_TITLE_KEY) ?: ""
+         it.getSerializable(ConstantConfig.CONTENT_DATA_KEY)?.let {
 
 
             val data = it as KnowledgeTreeBody

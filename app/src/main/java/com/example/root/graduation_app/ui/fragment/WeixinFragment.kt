@@ -11,7 +11,7 @@ import com.example.root.graduation_app.bean.WeixinChoiceItemBean
 import com.example.root.graduation_app.ui.adapter.WeixinAdapter
 import com.example.root.graduation_app.mvp.constract.WeixinContract
 import com.example.root.graduation_app.mvp.presenter.WeixinPresenter
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import kotlinx.android.synthetic.main.fragment_weixin.*
 
 /**
@@ -45,7 +45,7 @@ class WeixinFragment : BaseMvpFragment<WeixinContract.WeixinView, WeixinPresente
 
    override fun loadData() {
       page = 1
-      mPresenter.loadLatestList(page, Constants.CONFIG_LIMIE, Constants.JU_HE_APP_KEY)
+      mPresenter.loadLatestList(page, ConstantConfig.CONFIG_LIMIE, ConstantConfig.JU_HE_APP_KEY)
    }
 
    override fun initFragment(savedInstanceState: Bundle?) {
@@ -63,7 +63,7 @@ class WeixinFragment : BaseMvpFragment<WeixinContract.WeixinView, WeixinPresente
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
                page ++
-               mPresenter.loadLatestList(page, Constants.CONFIG_LIMIE, Constants.JU_HE_APP_KEY)
+               mPresenter.loadLatestList(page, ConstantConfig.CONFIG_LIMIE, ConstantConfig.JU_HE_APP_KEY)
             }
          }
       })

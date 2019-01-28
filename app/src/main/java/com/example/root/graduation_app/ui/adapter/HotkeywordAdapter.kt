@@ -23,11 +23,11 @@ class HotkeywordAdapter(mContext: Context, mList: ArrayList<WanandroidHotkeyword
      * Kotlin 的函数可以作为参数，这样写 callback 的时候就可以不用 interface 了
      * 而且这样的写法可以更好的使用 lambda 方式
      */
-    private var mOnTagItemClickListener: ((tag: String) -> Unit)? = null
-
-    fun setOnTagItemClickListener(onTagItemClickListener: (tag: String) -> Unit) {
-        this.mOnTagItemClickListener = onTagItemClickListener
-    }
+//    private var mOnTagItemClickListener: ((tag: String) -> Unit)? = null
+//
+//    fun setOnTagItemClickListener(onTagItemClickListener: (tag: String) -> Unit) {
+//        this.mOnTagItemClickListener = onTagItemClickListener
+//    }
 
 
     override fun getAdapterLayoutId(viewType: Int): Int = R.layout.activity_flow_text_item
@@ -38,8 +38,8 @@ class HotkeywordAdapter(mContext: Context, mList: ArrayList<WanandroidHotkeyword
         val params = itemView.tv_title.layoutParams
         if (params is FlexboxLayoutManager.LayoutParams) params.flexGrow = 1.0f
 
-        itemView.setOnClickListener {
-            mOnTagItemClickListener?.invoke(data.name)
-        }
+//        itemView.setOnClickListener {
+//            mOnTagItemClickListener?.invoke(data.name)
+//        }
     }
 }

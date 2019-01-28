@@ -7,7 +7,7 @@ import com.example.root.graduation_app.bean.DoubanBookItemDetail
 import com.example.root.graduation_app.bean.DoubanMovieBean
 import com.example.root.graduation_app.bean.DoubanMovieDetail
 import com.example.root.graduation_app.mvp.constract.DoubanContract
-import com.example.root.graduation_app.utils.Constants
+import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.RxJavaUtils
 import io.reactivex.Observable
 
@@ -23,7 +23,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
    /** 豆瓣电影部分 **/
    override fun getDoubanHotMovie(): Observable<DoubanMovieBean> {
       return RetrofitManager
-              .provideClient(Constants.DOUBAN_BASE_URL)
+              .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
               .getDoubanHotMovie()
               .compose(RxJavaUtils.applyObservableAsync())
@@ -31,7 +31,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
 
    override fun getDoubanMovieDetail(id: String): Observable<DoubanMovieDetail> {
       return RetrofitManager
-              .provideClient(Constants.DOUBAN_BASE_URL)
+              .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
               .getDoubanMovieDetail(id)
               .compose(RxJavaUtils.applyObservableAsync())
@@ -39,7 +39,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
 
    override fun getDoubanMovieTop250(start: Int, count: Int): Observable<DoubanMovieBean> {
       return RetrofitManager
-              .provideClient(Constants.DOUBAN_BASE_URL)
+              .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
               .getDoubanMovieTop250(start, count)
               .compose(RxJavaUtils.applyObservableAsync())
@@ -48,7 +48,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
    /** 豆瓣书籍部分 **/
    override fun getBookListWithTag(tag: String, start: Int, count: Int): Observable<DoubanBookBean> {
       return RetrofitManager
-              .provideClient(Constants.DOUBAN_BASE_URL)
+              .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
               .getBookListWithTag(tag, start, count)
               .compose(RxJavaUtils.applyObservableAsync())
@@ -56,7 +56,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
 
    override fun getBookDetail(id: String): Observable<DoubanBookItemDetail> {
       return RetrofitManager
-              .provideClient(Constants.DOUBAN_BASE_URL)
+              .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
               .getBookDetail(id)
               .compose(RxJavaUtils.applyObservableAsync())

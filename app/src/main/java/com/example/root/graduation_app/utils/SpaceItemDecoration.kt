@@ -27,7 +27,7 @@ class SpaceItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
    private var attrs: IntArray = intArrayOf(android.R.attr.listDivider)
 
    init {
-      var a = context.obtainStyledAttributes(attrs)
+      val a = context.obtainStyledAttributes(attrs)
       mDivider = a.getDrawable(0)
       a.recycle()
    }
