@@ -44,9 +44,6 @@ class BookFragment : BaseFragment() {
    }
 
    private fun initView() {
-//      common_toolbar_title.text = "休闲文娱"
-//      common_toolbar_icon.visibility = View.GONE
-
       if (mTitles.size != 4 && fragmentList.size != 4) {
          mTitles.add("文学")
          mTitles.add("文化")

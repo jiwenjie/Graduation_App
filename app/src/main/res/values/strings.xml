@@ -13,6 +13,15 @@
     <string name="search_result_count">-「%1$s」搜索结果共%2$d个-</string>
     <string name="cancel">取消</string>
 
+    <string name="nickname">昵称</string>
+    <string name="nickname_length_invalid">昵称长度太短</string>
+    <string name="description_length_init">0/60</string>
+    <string name="description_length_limit">%1$d/60</string>
+    <string name="nickname_length_init">0/12</string>
+    <string name="description_content">简介：%1$s</string>
+    <string name="edit_description">编辑个人简介</string>
+    <string name="description">个人简介</string>
+    <string name="save">保存</string>
 
     <!-- Home -->
     <string name="collect_success">收藏成功</string>
@@ -42,5 +51,26 @@
     <string name="knowledge_system">知识书籍</string>
     <string name="project">知识体系</string>
     <string name="wechat">公众号</string>
+
+    <string name="login_tint">请先登录</string>
+
+    <string name="about_content"><![CDATA[
+        <h2>毕设项目</h2>
+        <p>\t\t这是对自己大学阶段的总结，也是未来一个阶段的开启标志</p>
+        <p>\t\t能力有限，难免会有一些问题，如果有所发现可以在 github 上给我留言：</p>
+            <br/>\t\t\t\t我的 QQ： 278630464
+            <br/>\t\t\t\t我的微信：jiwenjiejiayou
+            <br/>\t\t\t\t谢谢大家支持
+        <p>\t\t几句话与各位共勉</p>
+        <br/>\t\t 迷茫本就是青春该有的样子，只要以后的我们不会厌恶现在的自己就好了
+        <br/>\t\t 愿我们出走半生，归来仍是少年
+        <br/>\t\t 希望我们多年后回首时不会后悔我们做过的每一个选择
+        <p>\t\t可以在 <a href="https://github.com/jiwenjie/Graduation_App" target="_blank">https://github.com/jiwenjie/Graduation_App</a> 项目中以issue的形式提出，我将及时跟进。</p>
+        <h2>源码位置</h2>
+        <p>\t\t本软件开源，如果你发现任何错误，不要犹豫，马上点击<a href="https://github.com/jiwenjie/Graduation_App" target="_blank">GitHub</a>，在上面发起<b>issue</b>或者提交<b>pull request</b>。</p>
+    ]]></string>
+
+
+    <string name="copyright_content">本APP所使用的所有API均由 玩Android 网站提供，仅供学习交流，不可用于任何商业用途。</string>
 
 </resources>

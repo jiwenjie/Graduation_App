@@ -7,13 +7,16 @@ import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.*
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
+import com.example.root.graduation_app.R.id.*
 import com.example.root.graduation_app.ui.fragment.WeChatFragment
 import com.example.root.graduation_app.ui.fragment.BookFragment
 import com.example.root.graduation_app.ui.fragment.KnowledgeTreeFragment
@@ -21,6 +24,7 @@ import com.example.root.graduation_app.ui.fragment.HomeFragment
 import com.jaeger.library.StatusBarUtil
 import com.zhouwei.blurlibrary.EasyBlur
 import kotlinx.android.synthetic.main.activity_index_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 /**
@@ -84,36 +88,6 @@ class IndexMainActivity : BaseActivity() {
 
       initDrawerLayout()
 
-      nav_view.run {
-         setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
-         nav_username = getHeaderView(0).findViewById(R.id.tv_username)
-         menu.findItem(R.id.nav_logout).isVisible = isLogin
-
-         val bgImg = getHeaderView(0).findViewById<ImageView>(R.id.nav_header_main_bgImg)
-
-         val source = BitmapFactory.decodeResource(resources, R.drawable.img_avatar)
-         val bitmap = EasyBlur.with(applicationContext)
-                 .bitmap(source)
-                 .radius(20)
-                 .blur()
-         bgImg.setImageBitmap(bitmap)
-      }
-      nav_username?.run {
-         //         text = if (!isLogin) {
-//            getString(R.string.login)
-//         } else {
-//            username
-//         }
-         setOnClickListener {
-            if (!isLogin) {
-               Intent(this@IndexMainActivity, LoginActivity::class.java).run {
-                  startActivity(this)
-               }
-            } else {
-
-            }
-         }
-      }
       showFragment(mIndex)
       floating_action_btn.run {
          setOnClickListener(onFABClickListener)
@@ -124,6 +98,43 @@ class IndexMainActivity : BaseActivity() {
     * init DrawerLayout
     */
    private fun initDrawerLayout() {
+      val headerView = nav_view.getHeaderView(0)
+      val signUp = headerView.findViewById<TextView>(R.id.headerSignUpText)
+      val userLyt = headerView.findViewById<LinearLayout>(R.id.userLayout)
+      val description = headerView.findViewById<LinearLayout>(R.id.descriptionLayout)
+      val introduction = headerView.findViewById<TextView>(R.id.descriptionMe)
+      introduction.text = "简介："
+
+      nav_view.run {
+         setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+//         nav_username = getHeaderView(0).findViewById(R.id.tv_username)
+         menu.findItem(R.id.nav_logout).isVisible = isLogin
+
+         val bgImg = getHeaderView(0).findViewById<ImageView>(R.id.navHeaderBgImage)
+
+         val source = BitmapFactory.decodeResource(resources, R.drawable.avatar_default)
+         val bitmap = EasyBlur.with(applicationContext)
+                 .bitmap(source)
+                 .radius(20)
+                 .blur()
+         bgImg.setImageBitmap(bitmap)
+      }
+//      nav_username?.run {
+//         //         text = if (!isLogin) {
+////            getString(R.string.login)
+////         } else {
+////            username
+////         }
+//         setOnClickListener {
+//            if (!isLogin) {
+//               Intent(this@IndexMainActivity, LoginActivity::class.java).run {
+//                  startActivity(this)
+//               }
+//            } else {
+//
+//            }
+//         }
+//      }
       drawer_layout.run {
          val toggle = ActionBarDrawerToggle(
                  this@IndexMainActivity,
@@ -134,10 +145,19 @@ class IndexMainActivity : BaseActivity() {
          addDrawerListener(toggle)
          toggle.syncState()
       }
-      // 初始话抽屉打开后背景的高斯模糊
-//      userNameText.text = user?.username ?: user?.userphone
 
-//      nav_header_main_bgImg.setImageBitmap(bitmap)
+      signUp.setOnClickListener {
+         // 签到的点击事件
+      }
+
+      description.setOnClickListener {
+         // 点击跳转用户编辑页
+         ModifyUserInfoActivity.runActivity(this@IndexMainActivity)
+      }
+
+      userLyt.setOnClickListener {
+         // 点击跳转 我的主页(包含 todo and untodo in left and right tab)
+      }
    }
 
    override fun onSaveInstanceState(outState: Bundle?) {
@@ -247,36 +267,28 @@ class IndexMainActivity : BaseActivity() {
            NavigationView.OnNavigationItemSelectedListener { item ->
               when (item.itemId) {
                  R.id.nav_collect -> {
-//                    if (isLogin) {
-//                       Intent(this@MainActivity, CommonActivity::class.java).run {
-//                          putExtra(Constant.TYPE_KEY, Constant.Type.COLLECT_TYPE_KEY)
-//                          startActivity(this)
-//                       }
-//                    } else {
-//                       showToast(resources.getString(R.string.login_tint))
-//                       Intent(this@MainActivity, LoginActivity::class.java).run {
-//                          startActivity(this)
-//                       }
-//                    }
-                    // drawer_layout.closeDrawer(GravityCompat.START)
+                    if (isLogin) {
+                       CollectActivity.runActivity(this@IndexMainActivity)
+                    } else {
+                       ToastUtils.showToast(this, resources.getString(R.string.login_tint))
+                       LoginActivity.runActivity(this, null)
+                    }
+                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
                  R.id.nav_setting -> {
 //                    Intent(this@MainActivity, SettingActivity::class.java).run {
 //                       // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
 //                       startActivity(this)
 //                    }
-                    // drawer_layout.closeDrawer(GravityCompat.START)
+                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
                  R.id.nav_about_us -> {
-//                    Intent(this@MainActivity, CommonActivity::class.java).run {
-//                       putExtra(Constant.TYPE_KEY, Constant.Type.ABOUT_US_TYPE_KEY)
-//                       startActivity(this)
-//                    }
-                    // drawer_layout.closeDrawer(GravityCompat.START)
+                    AboutMeActivity.runActivity(this@IndexMainActivity)
+                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
                  R.id.nav_logout -> {
-//                    logout()
-                    // drawer_layout.closeDrawer(GravityCompat.START)
+                     logout()
+                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
                  R.id.nav_night_mode -> {
 //                    if (SettingUtil.getIsNightMode()) {
@@ -300,11 +312,18 @@ class IndexMainActivity : BaseActivity() {
 //                          startActivity(this)
 //                       }
 //                    }
-                    // drawer_layout.closeDrawer(GravityCompat.START)
+                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
               }
               true
            }
+
+   /**
+    * 退出登陆方法
+    */
+   private fun logout() {
+
+   }
 
    override fun recreate() {
       try {

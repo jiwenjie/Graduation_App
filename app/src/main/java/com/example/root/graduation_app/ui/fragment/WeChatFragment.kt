@@ -45,22 +45,12 @@ class WeChatFragment : BaseMvpFragment<WanandroidContract.WanandroidPublicView, 
     override fun getLayoutId(): Int = R.layout.fragment_discovery
 
     override fun initFragment(savedInstanceState: Bundle?) {
-        initView()
-    }
 
-    private fun initView() {
-//        common_toolbar_title.text = "技术世界"
-//        common_toolbar_icon.visibility = View.GONE   // 隐藏头像
-//        common_toolbar_search.visibility = View.VISIBLE    // 显示搜索框
-//        common_toolbar_search.setOnClickListener {
-//            SearchActivity.runActivity(activity!!, idList[container_tab.selectedTabPosition])
-//        }
     }
 
     override fun initPresenter(): WanandroidPublicPresenter = WanandroidPublicPresenter(this)
 
     override fun displayPublicNumList(publicBeanList: ArrayList<WanAndroidPublicItemBean>) {
-        LogUtils.e("DDDD" + publicBeanList)
         if (titles.size == 0 && (titles.size == fragmentList.size)) {
             publicBeanList.forEach {
                 titles.add(it.name)

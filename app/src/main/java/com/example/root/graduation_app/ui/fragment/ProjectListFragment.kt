@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
@@ -41,6 +42,9 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
     */
    private val datas = ArrayList<WanAndroidItem>()
 
+   private var page = 1
+   private var loadingMore = false
+
    companion object {
       fun getInstance(cid: Int): ProjectListFragment {
          val fragment = ProjectListFragment()
@@ -72,9 +76,31 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
          recyclerViewItemDecoration?.let { addItemDecoration(it) }
       }
 
+      recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            val itemCount = recyclerView.layoutManager?.itemCount
+            val lastVisibleItem =
+                    (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+            if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
+               loadingMore = true
+               page ++
+               mPresenter.requestProjectList(page, cid)
+            }
+         }
+      })
+      initEvent()
+   }
+
+   private fun initEvent() {
       swipeRefreshLayout.setOnRefreshListener {
          isRefresh = true
-         mPresenter.requestProjectList(1, cid)
+         page = 1
+         mPresenter.requestProjectList(page, cid)
+      }
+
+      projectAdapter.setOnItemClickListener { position, view ->
+         // 点击项目跳转活动
       }
    }
 
@@ -101,6 +127,7 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
 
    override fun setProjectList(articles: WanAndroidJson<WanAndroidItem>) {
       isRefresh = false
+      loadingMore = false
       swipeRefreshLayout.isRefreshing = false
       projectAdapter.addAllData(articles.datas)
    }

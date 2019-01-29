@@ -12,6 +12,7 @@
     app:popupTheme="@style/AppTheme.ToolbarPopupOverlay">
 
     <ImageView
+        android:id="@+id/common_toolbar_return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"

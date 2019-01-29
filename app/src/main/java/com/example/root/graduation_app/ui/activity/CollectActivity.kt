@@ -1,7 +1,12 @@
 package com.example.root.graduation_app.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import com.example.base_library.base_views.BaseActivity
+import com.example.root.graduation_app.R
+import com.example.root.graduation_app.bean.WanAndroidItem
+import com.example.root.graduation_app.ui.adapter.KnowledgeAdapter
 
 /**
  *  author:Jiwenjie
@@ -12,15 +17,27 @@ import com.example.base_library.base_views.BaseActivity
  */
 class CollectActivity : BaseActivity() {
 
+   private val beanList by lazy { ArrayList<WanAndroidItem>() }
+   private val collectAdapter by lazy { KnowledgeAdapter(this, beanList) }
+
+   private var page = 0
+   private var loadingMore = false
+
+   companion object {
+      @JvmStatic
+      fun runActivity(activity: Activity) {
+         val intent = Intent(activity, CollectActivity::class.java)
+         activity.startActivity(intent)
+      }
+   }
+
    override fun initActivity(savedInstanceState: Bundle?) {
 
    }
 
    override fun loadData() {
-      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
    }
 
-   override fun getLayoutId(): Int {
-      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-   }
+   override fun getLayoutId(): Int = R.layout.activity_collect
 }

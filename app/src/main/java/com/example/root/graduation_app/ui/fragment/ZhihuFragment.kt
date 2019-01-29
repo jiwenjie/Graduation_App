@@ -71,7 +71,6 @@ class ZhihuFragment : BaseMvpFragment<ZhihuContract.ZhihuView, ZhihuPresenter>()
    }
 
    override fun updateContentList(ItemList: ArrayList<ZhihuDailyItemBean>) {
-      //        Logger.e(list.toString());
       loadingMore = false
       zhihuAdapter.addAllData(ItemList)
    }
@@ -93,23 +92,3 @@ class ZhihuFragment : BaseMvpFragment<ZhihuContract.ZhihuView, ZhihuPresenter>()
       mLayoutStatusView?.showContent()
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

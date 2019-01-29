@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
@@ -48,6 +49,8 @@ class KnowledgeFragment
     * is Refresh
     */
    private var isRefresh = true
+   private var page = 0
+   private var loadingMore = false
 
    companion object {
       fun getInstance(cid: Int): KnowledgeFragment {
@@ -73,10 +76,25 @@ class KnowledgeFragment
          itemAnimator = DefaultItemAnimator()
          recyclerViewItemDecoration?.let { addItemDecoration(it) }
       }
+
+      recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            val itemCount = recyclerView.layoutManager?.itemCount
+            val lastVisibleItem =
+                    (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+            if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
+               loadingMore = true
+               page ++
+               mPresenter.requestKnowledgeList(page, cid)
+            }
+         }
+      })
    }
 
    override fun loadData() {
-      mPresenter.requestKnowledgeList(0, cid)
+      page = 0
+      mPresenter.requestKnowledgeList(page, cid)
    }
 
    override fun initPresenter(): KnowledgePresenter = KnowledgePresenter(this)
@@ -92,6 +110,7 @@ class KnowledgeFragment
    }
 
    override fun setKnowledgeList(articles: WanAndroidJson<WanAndroidItem>) {
+      loadingMore = false
       knowledgeAdapter.addAllData(articles.datas)
    }
 
