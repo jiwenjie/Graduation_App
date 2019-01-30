@@ -32,12 +32,10 @@ class KnowledgeFragment
     * cid
     */
    private var cid: Int = 0
-
    /**
     * datas
     */
    private val datas = ArrayList<WanAndroidItem>()
-
    /**
     * Knowledge Adapter
     */
@@ -85,7 +83,7 @@ class KnowledgeFragment
                     (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
-               page ++
+               page++
                mPresenter.requestKnowledgeList(page, cid)
             }
          }
@@ -111,6 +109,7 @@ class KnowledgeFragment
 
    override fun setKnowledgeList(articles: WanAndroidJson<WanAndroidItem>) {
       loadingMore = false
+      swipeRefreshLayout?.isRefreshing = false
       knowledgeAdapter.addAllData(articles.datas)
    }
 
@@ -120,12 +119,6 @@ class KnowledgeFragment
 
    override fun dismissLoading() {
       mLayoutStatusView?.showContent()
-////      swipeRefreshLayout?.isRefreshing = false
-//      if (isRefresh) {
-//         knowledgeAdapter.run {
-////            setEnableLoadMore(true)
-//         }
-//      }
    }
 
    override fun showError(errorMsg: String, errorCode: Int) {

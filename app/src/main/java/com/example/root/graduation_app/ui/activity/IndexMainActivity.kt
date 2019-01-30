@@ -1,5 +1,6 @@
 package com.example.root.graduation_app.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -95,6 +96,7 @@ class IndexMainActivity : BaseActivity() {
    /**
     * init DrawerLayout
     */
+   @SuppressLint("SetTextI18n")
    private fun initDrawerLayout() {
       val headerView = nav_view.getHeaderView(0)
       val signUp = headerView.findViewById<TextView>(R.id.headerSignUpText)
@@ -159,6 +161,7 @@ class IndexMainActivity : BaseActivity() {
       }
 
       userLyt.setOnClickListener {
+         // 点击跳转用户主页（显示已做未做的两个 tab 页）
          drawer_layout.closeDrawers()
          ProfileActivity.runActivity(this@IndexMainActivity)
       }

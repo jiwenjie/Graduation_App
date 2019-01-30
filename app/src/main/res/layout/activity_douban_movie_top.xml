@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="5dp"
+    android:layout_margin="0.5dp"
     android:foreground="@drawable/item_touch_bg"
-    app:cardElevation="4dp">
+    app:cardElevation="@dimen/dp_2">
 
     <LinearLayout
         android:id="@+id/ll_item_top_moive"

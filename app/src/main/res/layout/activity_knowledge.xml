@@ -14,19 +14,24 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            app:navigationIcon="@drawable/arrow_left"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:colorControlNormal="@color/color_white"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleTextColor="@color/color_white" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
+            android:theme="@style/AppTheme.AppBarOverlay"
             app:tabGravity="center"
             app:tabIndicatorColor="@color/color_white"
             app:tabIndicatorHeight="@dimen/dp_2"
-            app:tabMode="scrollable"/>
+            app:tabMode="scrollable"
+            app:tabTextColor="@color/color_white" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -35,8 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
         app:layout_behavior="com.example.root.graduation_app.widget.ScaleDownShowBehavior"
         app:srcCompat="@drawable/ic_arrow_upward_white_24dp" />
 

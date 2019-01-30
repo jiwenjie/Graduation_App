@@ -54,4 +54,9 @@ object ConstantConfig {
    const val PgyAPIKey = "e9c78c8de1cd495a0065d6bfcedd371e"
    const val PgyUserKey = "458b9f2f6649d7b656503656715061a3"
    const val PgyAppKey = "eef566fce6ff5df19a67b8b3a965b403"
+
+   /**
+    * FileProvider authority
+    */
+   const val FILE_AUTHORITY = "com.jackson.fileprovider"
 }

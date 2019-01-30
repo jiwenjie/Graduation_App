@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <root-path
+            name="root"
+            path="" />      <!-- 设备根目录 -->
+
+        <external-path
+            name="project_root"
+            path="" />      <!-- Environment.getExternalStorageDirectory() -->
+
+        <external-cache-path
+            name="e_cache_dir"
+            path="" />      <!-- getExternalCacheDir() -->
+
+        <cache-path
+            name="cache_dir"
+            path="" />      <!-- getCacheDir() -->
+    </paths>
+</resources>

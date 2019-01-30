@@ -3,15 +3,9 @@
     <color name="colorPrimary">#FE6D4B</color>
 
     <color name="mn_colorDialogWindowBg">#00000000</color>
-    <color name="mn_colorDialogTrans">#00000000</color>
     <color name="mn_colorDialogViewBg">#b2000000</color>
     <color name="mn_colorDialogTextColor">#ffffff</color>
     <color name="mn_colorDialogProgressBarColor">#ffffff</color>
-    <color name="mn_colorDialogImageTintColor">#ffffff</color>
-    <color name="alpha_45_black">#73000000</color>
     <color name="alpha_60_black">#99000000</color>
     <!--进度条相关的颜色-->
-    <color name="mn_colorDialogProgressBarBgColor">#b4b4b4</color>
-    <color name="mn_colorDialogProgressBarProgressColor">#FFFFFF</color>
-    <color name="mn_colorDialogProgressBarSecondProgressColor">#ff9c9c</color>
 </resources>

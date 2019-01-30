@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.common_toolbar_layout.*
 class ProfileActivity : BaseActivity() {
 
    companion object {
+      @JvmStatic
       fun runActivity(activity: Activity) {
          val intent = Intent(activity, ProfileActivity::class.java)
          activity.startActivity(intent)
@@ -40,9 +41,5 @@ class ProfileActivity : BaseActivity() {
               ContextCompat.getColor(this@ProfileActivity, R.color.colorPrimary), 0)
       progressBarLayout.visibility = View.GONE
       loadErrorView.visibility = View.VISIBLE
-   }
-
-   private fun initEvent() {
-
    }
 }

@@ -1,8 +1,10 @@
 package com.example.root.graduation_app.ui.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.content.ContextCompat
 import android.view.View
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
@@ -11,6 +13,7 @@ import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 import com.example.root.graduation_app.ui.adapter.KnowledgePagerAdapter
 import com.example.root.graduation_app.ui.fragment.KnowledgeFragment
 import com.example.root.graduation_app.utils.ConstantConfig
+import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_knowledge.*
 
 /**
@@ -22,11 +25,13 @@ import kotlinx.android.synthetic.main.activity_knowledge.*
  */
 class KnowledgeActivity : BaseActivity() {
 
-
    companion object {
       @JvmStatic
-      fun runActivity(activity: Activity) {
-
+      fun runActivity(activity: Activity, name: String, data: KnowledgeTreeBody) {
+         val intent = Intent(activity, KnowledgeActivity::class.java)
+         intent.putExtra(ConstantConfig.CONTENT_TITLE_KEY, name)
+         intent.putExtra(ConstantConfig.CONTENT_DATA_KEY, data)
+         activity.startActivity(intent)
       }
    }
 
@@ -41,6 +46,8 @@ class KnowledgeActivity : BaseActivity() {
    private lateinit var toolbarTitle: String
 
    override fun initActivity(savedInstanceState: Bundle?) {
+      StatusBarUtil.setColor(this@KnowledgeActivity,
+              ContextCompat.getColor(this@KnowledgeActivity, R.color.colorPrimary), 0)
       initView()
       toolbar.run {
          title = toolbarTitle
@@ -69,13 +76,8 @@ class KnowledgeActivity : BaseActivity() {
          toolbarTitle = it.getString(ConstantConfig.CONTENT_TITLE_KEY) ?: ""
          it.getSerializable(ConstantConfig.CONTENT_DATA_KEY)?.let {
 
-
             val data = it as KnowledgeTreeBody
             knowledges.addAll(data.children)
-//            knowledges.addAll(data.children)
-//            data.children.let {
-//               knowledges.addAll()
-//            }
          }
       }
    }
@@ -90,7 +92,6 @@ class KnowledgeActivity : BaseActivity() {
    private val viewPagerAdapter: KnowledgePagerAdapter by lazy {
       KnowledgePagerAdapter(knowledges, supportFragmentManager)
    }
-
 
    /**
     * onTabSelectedListener

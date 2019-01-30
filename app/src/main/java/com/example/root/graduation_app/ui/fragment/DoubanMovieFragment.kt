@@ -53,7 +53,7 @@ class DoubanMovieFragment : BaseMvpFragment<DoubanContract.DoubanMovieView, Doub
       commonRv.adapter = adapter
       commonRv.layoutManager = LinearLayoutManager(activity)
       adapter.setOnItemClickListener { position, view ->
-         DoubanMovieDetailActivity.runActivity(activity!!, beanList.get(position))
+         DoubanMovieDetailActivity.runActivity(activity!!, beanList[position])
       }
    }
 

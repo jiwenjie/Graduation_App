@@ -3,6 +3,7 @@ package com.example.root.graduation_app.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import com.example.base_library.base_mvp.BaseMvpActivity
@@ -15,6 +16,7 @@ import com.example.root.graduation_app.ui.adapter.DoubanTopMovieAdapter
 import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanMoviePresenter
 import com.example.root.graduation_app.utils.ConstantConfig
+import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.common_toolbar_multiple_recyclerview.*
 
 /**
@@ -50,11 +52,12 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
    override fun initPresenter(): DoubanMoviePresenter = DoubanMoviePresenter(this)
 
    override fun initActivity(savedInstanceState: Bundle?) {
+      StatusBarUtil.setColor(this@DoubanMovieTopActivity,
+              ContextCompat.getColor(this@DoubanMovieTopActivity, R.color.colorPrimary), 0)
       mLayoutStatusView = common_toolbar_multipleStatusView
-
       mLayoutStatusView?.showContent()
-      common_toolbarRv.adapter = adapter
 
+      common_toolbarRv.adapter = adapter
       common_toolbarRv.layoutManager = StaggeredGridLayoutManager(3,
               StaggeredGridLayoutManager.VERTICAL)
       common_toolbarRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -62,7 +65,8 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
             super.onScrollStateChanged(recyclerView, newState)
             val itemCount = recyclerView.layoutManager?.itemCount
 
-            val mLastVisibleItemPosition = (common_toolbarRv.layoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(stagLayoutSpanCount)
+            val mLastVisibleItemPosition = (common_toolbarRv.layoutManager as StaggeredGridLayoutManager)
+                    .findLastVisibleItemPositions(stagLayoutSpanCount)
             if (!loadingMore && mLastVisibleItemPosition.max() == (itemCount!! - 1)) {
                loadingMore = true
                start += ConstantConfig.CONFIG_LIMIE
@@ -70,7 +74,6 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
             }
          }
       })
-
    }
 
    override fun updateDoubanContentList(subjectList: ArrayList<DoubanSubjectBean>) {

@@ -131,18 +131,16 @@
             android:value="eef566fce6ff5df19a67b8b3a965b403" />
         <!-- 蒲公英的 sdk 引入 end -->
 
-        <!-- 专用于测试的 Activity start -->
-        <!--<activity-->
-        <!--android:name=".test.TestActivity"-->
-        <!--android:screenOrientation="portrait" />-->
-
-        <!--<activity-->
-        <!--android:name=".test.TestOneActivity"-->
-        <!--android:screenOrientation="portrait" />-->
-
-        <!--<activity-->
-        <!--android:name=".test.TestTabItem"-->
-        <!--android:screenOrientation="portrait" />-->
-        <!-- 专用于测试的 Activity end -->
+        <!-- FileProvider start -->
+        <provider
+            android:authorities="com.graduation.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+        <!-- FileProvider end-->
     </application>
 </manifest>

@@ -12,16 +12,6 @@
         <item name="android:backgroundDimAmount">0.3</item>     <!--对话框的背景灰度-->
     </style>
 
-    <style name="AnimBottomIn" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
-    </style>
-
-    <style name="AnimTopIn" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/push_top_in</item>
-        <item name="android:windowExitAnimation">@anim/push_top_out</item>
-    </style>
-
     <!-- 通用错误页面的样式 -->
     <style name="MultipleStatusView" />
 

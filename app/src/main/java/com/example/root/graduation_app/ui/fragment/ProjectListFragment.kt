@@ -1,6 +1,7 @@
 package com.example.root.graduation_app.ui.fragment
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -26,12 +27,7 @@ import kotlinx.android.synthetic.main.fragment_refresh_layout.*
  *  desc:
  *  version:1.0
  */
-class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectListPresenter>(), ProjectListContract.View {
-
-   /**
-    * is Refresh
-    */
-   private var isRefresh = true
+class ProjectListFragment : BaseMvpFragment<ProjectListContract.View, ProjectListPresenter>(), ProjectListContract.View {
 
    /**
     * cid
@@ -58,9 +54,6 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
 
    override fun loadData() {
       mPresenter.requestProjectList(1, cid)
-//      swipeRefreshLayout.run {
-//         setOnRefreshListener(onRefreshListener)
-//      }
    }
 
    override fun getLayoutId(): Int = R.layout.fragment_refresh_layout
@@ -85,7 +78,7 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
                     (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
-               page ++
+               page++
                mPresenter.requestProjectList(page, cid)
             }
          }
@@ -94,10 +87,8 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
    }
 
    private fun initEvent() {
-      swipeRefreshLayout.setOnRefreshListener {
-         isRefresh = true
-         page = 1
-         mPresenter.requestProjectList(page, cid)
+      swipeRefreshLayout.run {
+         setOnRefreshListener(onRefreshListener)
       }
 
       projectAdapter.setOnItemClickListener { position, view ->
@@ -112,9 +103,9 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
     * RefreshListener
     */
    private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
-      isRefresh = true
-//      projectAdapter.setEnableLoadMore(false)
-      mPresenter.requestProjectList(1, cid)
+      swipeRefreshLayout.isRefreshing = true
+      swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(activity!!, R.color.colorPrimary))
+      loadData()
    }
 
    override fun initPresenter(): ProjectListPresenter = ProjectListPresenter(this)
@@ -130,7 +121,6 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
    }
 
    override fun setProjectList(articles: WanAndroidJson<WanAndroidItem>) {
-      isRefresh = false
       loadingMore = false
       swipeRefreshLayout.isRefreshing = false
       projectAdapter.addAllData(articles.datas)

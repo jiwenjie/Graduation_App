@@ -23,6 +23,26 @@
     <string name="description">个人简介</string>
     <string name="save">保存</string>
     <string name="user_separator">|</string>
+    <string name="take_photo">拍照</string>
+    <string name="your_album">我的相册</string>
+    <string name="select_avatar">选择头像照片</string>
+    <string name="select_bg_image">选择个人封面照片</string>
+    <string name="hold_on_for_saving">保存中，请稍后</string>
+    <string name="save_success">保存成功</string>
+    <string name="album_is_empty">您的相册空空如也</string>
+    <string name="confirm_to_abort_userinfo_modification">您已修改了个人信息，确定放弃保存吗？</string>
+    <string name="abort">放弃</string>
+    <string name="stay">留下</string>
+    <string name="crop">裁剪</string>
+    <string name="crop_failed">裁剪失败</string>
+
+    <!-- 搜索 -->
+    <string name="search_keyword_can_not_be_blank">搜索内容不能为空</string>
+    <string name="search_keyword_to_long">搜索内容不能超过30个字符</string>
+    <string name="search_failed">搜索失败，出现未知问题</string>
+    <string name="search_failed_bad_network">搜索失败，请检查您的网络</string>
+    <string name="search_no_result">没有搜索到任何内容</string>
+    <string name="search_hint">搜索用户昵称或内容</string>
 
     <!-- Home -->
     <string name="collect_success">收藏成功</string>

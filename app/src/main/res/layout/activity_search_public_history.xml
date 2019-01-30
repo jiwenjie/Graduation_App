@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Roots"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,53 +13,40 @@
         android:background="@color/backgroundColor"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
+            android:id="@+id/searchToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary">
+            android:layout_height="?android:actionBarSize"
+            android:focusable="true"
+            android:clickable="true">
 
-            <RelativeLayout
-                android:id="@+id/rel_search_view"
+            <View
+                android:id="@+id/searchBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_10dp"
-                android:paddingEnd="@dimen/common_15dp">
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"/>
 
-                <com.example.root.graduation_app.widget.ClearEditText
-                    android:id="@+id/et_search_view"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/searchBack"
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_arrow_back"/>
+
+                <SearchView
+                    android:id="@+id/searchView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_30dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_toStartOf="@+id/tv_cancel"
-                    android:background="@drawable/et_round_bg"
-                    android:drawableLeft="@drawable/ic_action_search_white"
-                    android:drawablePadding="@dimen/common_5dp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:gravity="center_vertical"
-                    android:hint="@string/search_hint_text"
-                    android:imeOptions="actionSearch"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/common_10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/color_white"
-                    android:textColorHint="@color/alpha_90_white"
-                    android:textCursorDrawable="@drawable/et_cursor"
-                    android:textSize="@dimen/common_sp_12"
-                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:iconifiedByDefault="false"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-                <TextView
-                    android:id="@+id/tv_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/common_10dp"
-                    android:text="@string/cancel"
-                    android:textColor="@color/color_white" />
-            </RelativeLayout>
-        </android.support.v7.widget.Toolbar>
+            </LinearLayout>
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/layout_hot_words"
@@ -95,7 +81,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/common_15dp"
                 android:layout_marginEnd="@dimen/common_15dp" />
-
         </LinearLayout>
 
         <LinearLayout
