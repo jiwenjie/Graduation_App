@@ -10,16 +10,16 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.FullScreen">
-        <item name="android:windowFullscreen">true</item>
-    </style>
+    <!--<style name="AppTheme.NoActionBar.FullScreen">-->
+        <!--<item name="android:windowFullscreen">true</item>-->
+    <!--</style>-->
 
-    <style name="CompatAppTheme" parent="AppTheme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">false</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="windowActionModeOverlay">true</item>
-    </style>
+    <!--<style name="CompatAppTheme" parent="AppTheme">-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowFullscreen">false</item>-->
+        <!--<item name="android:windowActionBar">false</item>-->
+        <!--<item name="windowActionModeOverlay">true</item>-->
+    <!--</style>-->
 
     <!-- Base application theme. -->
     <!--<style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
@@ -64,12 +64,12 @@
 
     <style name="AppTheme" parent="BaseAppTheme.NoActionBar" />
 
-    <style name="AnimationActivity" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
-    </style>
+    <!--<style name="AnimationActivity" parent="@android:style/Animation.Activity">-->
+        <!--<item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>-->
+        <!--<item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>-->
+        <!--<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
+    <!--</style>-->
 
     <!-- 约束布局的样式，左右部分 -->
     <style name="ConstraintStartAndEndStyle">
@@ -121,42 +121,42 @@
         <item name="android:clipToPadding">false</item>
     </style>
 
-    <style name="AppTheme.Label">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/common_sp_14</item>
-        <item name="android:textColor">@color/color_gray</item>
-    </style>
+    <!--<style name="AppTheme.Label">-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+        <!--<item name="android:gravity">center_vertical</item>-->
+        <!--<item name="android:singleLine">true</item>-->
+        <!--<item name="android:textSize">@dimen/common_sp_14</item>-->
+        <!--<item name="android:textColor">@color/color_gray</item>-->
+    <!--</style>-->
 
-    <style name="AppTheme.Label.Title">
-        <item name="android:textColor">@color/color_black</item>
-        <item name="android:textSize">@dimen/common_sp_16</item>
-    </style>
+    <!--<style name="AppTheme.Label.Title">-->
+        <!--<item name="android:textColor">@color/color_black</item>-->
+        <!--<item name="android:textSize">@dimen/common_sp_16</item>-->
+    <!--</style>-->
 
-    <style name="AppTheme.Label.Description">
-        <item name="android:gravity">top</item>
-        <item name="android:lineSpacingExtra">@dimen/common_5dp</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textSize">@dimen/common_sp_14</item>
-        <item name="android:singleLine">false</item>
-    </style>
+    <!--<style name="AppTheme.Label.Description">-->
+        <!--<item name="android:gravity">top</item>-->
+        <!--<item name="android:lineSpacingExtra">@dimen/common_5dp</item>-->
+        <!--<item name="android:ellipsize">end</item>-->
+        <!--<item name="android:textSize">@dimen/common_sp_14</item>-->
+        <!--<item name="android:singleLine">false</item>-->
+    <!--</style>-->
 
-    <style name="AppTheme.Label.Layout">
-        <item name="android:paddingTop">@dimen/padding_common_v</item>
-        <item name="android:paddingBottom">@dimen/padding_common_v</item>
-        <item name="android:paddingStart">@dimen/padding_common_h</item>
-        <item name="android:paddingEnd">@dimen/padding_common_h</item>
-    </style>
+    <!--<style name="AppTheme.Label.Layout">-->
+        <!--<item name="android:paddingTop">@dimen/padding_common_v</item>-->
+        <!--<item name="android:paddingBottom">@dimen/padding_common_v</item>-->
+        <!--<item name="android:paddingStart">@dimen/padding_common_h</item>-->
+        <!--<item name="android:paddingEnd">@dimen/padding_common_h</item>-->
+    <!--</style>-->
 
-    <style name="AppTheme.DiverLine">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:dividerHeight">0.5dp</item>
-        <item name="android:divider">@color/color_division_line</item>
-        <item name="android:background">@color/color_division_line</item>
-    </style>
+    <!--<style name="AppTheme.DiverLine">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">0.5dp</item>-->
+        <!--<item name="android:dividerHeight">0.5dp</item>-->
+        <!--<item name="android:divider">@color/color_division_line</item>-->
+        <!--<item name="android:background">@color/color_division_line</item>-->
+    <!--</style>-->
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -169,24 +169,24 @@
         <item name="overlapAnchor">false</item>
     </style>
 
-    <style name="AppBaseTheme" parent="BaseAppThemeLight">
-        <!--<item name="themeColor">@color/md_light_blue_500</item>-->
-    </style>
+    <!--<style name="AppBaseTheme" parent="BaseAppThemeLight">-->
+        <!--&lt;!&ndash;<item name="themeColor">@color/md_light_blue_500</item>&ndash;&gt;-->
+    <!--</style>-->
 
     <!-- App Theme Light -->
-    <style name="BaseAppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">false</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorPrimary</item>
-        <item name="windowActionModeOverlay">true</item>
-        <item name="android:windowBackground">@color/base_bg</item>
-        <item name="android:listDivider">@color/base_bg</item>
-        <!--<item name="widgetBackground">@android:color/white</item>-->
-        <!--<item name="widgetBackgroundDark">@color/base_bg</item>-->
-        <!--<item name="widgetBackgroundTitle">@android:color/white</item>-->
-    </style>
+    <!--<style name="BaseAppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowFullscreen">false</item>-->
+        <!--<item name="android:windowActionBar">false</item>-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorPrimary</item>-->
+        <!--<item name="windowActionModeOverlay">true</item>-->
+        <!--<item name="android:windowBackground">@color/base_bg</item>-->
+        <!--<item name="android:listDivider">@color/base_bg</item>-->
+        <!--&lt;!&ndash;<item name="widgetBackground">@android:color/white</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="widgetBackgroundDark">@color/base_bg</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="widgetBackgroundTitle">@android:color/white</item>&ndash;&gt;-->
+    <!--</style>-->
 
 </resources>

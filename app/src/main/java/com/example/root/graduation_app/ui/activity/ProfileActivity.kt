@@ -3,10 +3,13 @@ package com.example.root.graduation_app.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.view.View
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.StatusBarUtils
+import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.common_toolbar_layout.*
 
@@ -33,19 +36,13 @@ class ProfileActivity : BaseActivity() {
    override fun getLayoutId(): Int = R.layout.activity_profile
 
    override fun initActivity(savedInstanceState: Bundle?) {
-      StatusBarUtils.darkMode(this)
-      StatusBarUtils.setPaddingSmart(this, common_toolbar)
-      mLayoutStatusView = activity_profile_multipleStatusView
-
-      mLayoutStatusView?.showEmpty()
-      initEvent()
+      StatusBarUtil.setColor(this@ProfileActivity,
+              ContextCompat.getColor(this@ProfileActivity, R.color.colorPrimary), 0)
+      progressBarLayout.visibility = View.GONE
+      loadErrorView.visibility = View.VISIBLE
    }
 
    private fun initEvent() {
-      activity_profile_btn.setOnClickListener {
-         // click it go to github
-         CommonWebViewActivity.runActivity(this@ProfileActivity, "github", ConstantConfig.GITHUB_URL)
-//         GithubActivity.runActivity(this@ProfileActivity)
-      }
+
    }
 }

@@ -13,6 +13,7 @@ import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.bean.WanAndroidJson
 import com.example.root.graduation_app.mvp.constract.ProjectListContract
 import com.example.root.graduation_app.mvp.presenter.ProjectListPresenter
+import com.example.root.graduation_app.ui.activity.CommonWebViewActivity
 import com.example.root.graduation_app.ui.adapter.ProjectAdapter
 import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.SpaceItemDecoration
@@ -101,6 +102,9 @@ class ProjectListFragment: BaseMvpFragment<ProjectListContract.View, ProjectList
 
       projectAdapter.setOnItemClickListener { position, view ->
          // 点击项目跳转活动
+         if (datas.size > 0) {
+            CommonWebViewActivity.runActivity(activity!!, datas[position].title, datas[position].link)
+         }
       }
    }
 

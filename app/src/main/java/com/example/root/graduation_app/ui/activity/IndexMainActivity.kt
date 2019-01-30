@@ -16,7 +16,6 @@ import android.widget.TextView
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.R.id.*
 import com.example.root.graduation_app.ui.fragment.WeChatFragment
 import com.example.root.graduation_app.ui.fragment.BookFragment
 import com.example.root.graduation_app.ui.fragment.KnowledgeTreeFragment
@@ -24,7 +23,6 @@ import com.example.root.graduation_app.ui.fragment.HomeFragment
 import com.jaeger.library.StatusBarUtil
 import com.zhouwei.blurlibrary.EasyBlur
 import kotlinx.android.synthetic.main.activity_index_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 /**
@@ -101,9 +99,12 @@ class IndexMainActivity : BaseActivity() {
       val headerView = nav_view.getHeaderView(0)
       val signUp = headerView.findViewById<TextView>(R.id.headerSignUpText)
       val userLyt = headerView.findViewById<LinearLayout>(R.id.userLayout)
+      val userName = headerView.findViewById<TextView>(R.id.nicknameMe)
       val description = headerView.findViewById<LinearLayout>(R.id.descriptionLayout)
       val introduction = headerView.findViewById<TextView>(R.id.descriptionMe)
+
       introduction.text = "简介："
+      userName.text = "Jackson"  // 默认名字，实际应该取值判断
 
       nav_view.run {
          setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
@@ -148,15 +149,18 @@ class IndexMainActivity : BaseActivity() {
 
       signUp.setOnClickListener {
          // 签到的点击事件
+         drawer_layout.closeDrawers()
       }
 
       description.setOnClickListener {
          // 点击跳转用户编辑页
+         drawer_layout.closeDrawers()
          ModifyUserInfoActivity.runActivity(this@IndexMainActivity)
       }
 
       userLyt.setOnClickListener {
-         // 点击跳转 我的主页(包含 todo and untodo in left and right tab)
+         drawer_layout.closeDrawers()
+         ProfileActivity.runActivity(this@IndexMainActivity)
       }
    }
 
@@ -392,7 +396,7 @@ class IndexMainActivity : BaseActivity() {
             finish()
          } else {
             mExitTime = System.currentTimeMillis()
-            ToastUtils.showToast(applicationContext, "再按一次退出程序")
+            ToastUtils.showToast(applicationContext, resources.getString(R.string.exit_tip))
          }
          return true
       }
