@@ -18,8 +18,10 @@
     <string name="description_length_init">0/60</string>
     <string name="description_length_limit">%1$d/60</string>
     <string name="nickname_length_init">0/12</string>
+    <string name="nickname_length_limit">%1$d/12</string>
     <string name="description_content">简介：%1$s</string>
     <string name="edit_description">编辑个人简介</string>
+    <string name="nickname_invalid">昵称只能包含中英文、数字、下划线、横线</string>
     <string name="description">个人简介</string>
     <string name="save">保存</string>
     <string name="user_separator">|</string>
@@ -35,6 +37,8 @@
     <string name="stay">留下</string>
     <string name="crop">裁剪</string>
     <string name="crop_failed">裁剪失败</string>
+    <string name="share_article_url">%1$s分享【%2$s】：%3$s</string>
+    <string name="title_about_top250">电影排行榜</string>
 
     <!-- 搜索 -->
     <string name="search_keyword_can_not_be_blank">搜索内容不能为空</string>

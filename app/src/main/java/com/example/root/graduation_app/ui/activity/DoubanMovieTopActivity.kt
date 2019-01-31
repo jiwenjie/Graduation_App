@@ -57,6 +57,7 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
       mLayoutStatusView = common_toolbar_multipleStatusView
       mLayoutStatusView?.showContent()
 
+      common_toolbarLyt.title = resources.getString(R.string.title_about_top250)
       common_toolbarRv.adapter = adapter
       common_toolbarRv.layoutManager = StaggeredGridLayoutManager(3,
               StaggeredGridLayoutManager.VERTICAL)

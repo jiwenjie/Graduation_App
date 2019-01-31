@@ -10,6 +10,7 @@ import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.mvp.constract.WanandroidContract
 import com.example.root.graduation_app.mvp.presenter.WanandroidDataPresenter
+import com.example.root.graduation_app.ui.activity.CommonWebViewActivity
 import com.example.root.graduation_app.ui.adapter.KnowledgeAdapter
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
 
@@ -71,6 +72,10 @@ class WanandroidTabItemFragment : BaseMvpFragment<WanandroidContract.WanandroidD
             }
          }
       })
+
+      adapter.setOnItemClickListener { position, view ->
+         CommonWebViewActivity.runActivity(activity!!, beanList[position].title, beanList[position].link)
+      }
    }
 
    override fun initPresenter(): WanandroidDataPresenter = WanandroidDataPresenter(this)

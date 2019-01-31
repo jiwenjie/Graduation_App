@@ -14,10 +14,16 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.text.Editable
+import android.text.TextUtils
 import android.util.Log
+import android.view.View
+import com.example.base_library.RxBus
 import com.example.base_library.base_utils.LogUtils
+import com.example.base_library.base_utils.ToastUtils
+import com.example.base_library.base_utils.ToastUtils.showToast
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
+import com.example.root.graduation_app.utils.CommonUtils
 import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.FileUtil
 import com.example.root.graduation_app.utils.SimpleTextWatcher
@@ -45,8 +51,12 @@ class ModifyUserInfoActivity : BaseActivity() {
         const val REQUEST_CODE_CAPTURE_CROP = 4
         const val REQUEST_CODE_ALBUM = 5
 
-//        val ROOT_DIR = Environment.getExternalStorageDirectory().toString() + File.separator + "project"
-//        val PIC_TEMP = "$ROOT_DIR/temp.jpg"
+        private var srcNickname: String = ""
+        private var srcAvatar: String = ""
+        private var srcBgImage: String = ""
+        private var srcDescription: String = ""
+        private var userAvatarPath: String = ""
+        private var userBgImagePath: String = ""
 
         var imgUri: Uri? = null
         var imageFile: File? = null
@@ -68,13 +78,26 @@ class ModifyUserInfoActivity : BaseActivity() {
         // 输入昵称的监听
         nicknameEdit.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
-                super.afterTextChanged(s)
+                val length = nicknameEdit.text.toString().trim { it <= ' ' }.length
+                nicknameLimitText.text = String.format(resources.getString(R.string.nickname_length_limit), length)
+                userNickname.text = s.toString().trim { it <= ' ' }
             }
         })
         // 输入简介的监听
         descriptionEdit.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
-                super.afterTextChanged(s)
+                val length = descriptionEdit.text.toString().trim { it <= ' ' }.length
+                descriptionLimitText.text =
+                        String.format(resources.getString(R.string.description_length_limit), length)
+                if (TextUtils.isEmpty(s.toString().trim { it <= ' ' })) {
+                    userDescription.text = ""
+                    userDescription.visibility = View.GONE
+                } else {
+                    userDescription.text = String.format(
+                        resources.getString(R.string.description_content),
+                        s.toString().trim { it <= ' ' })
+                    userDescription.visibility = View.VISIBLE
+                }
             }
         })
     }
@@ -86,6 +109,7 @@ class ModifyUserInfoActivity : BaseActivity() {
 
         save.setOnClickListener {
             // 保存按钮
+            saveUserInfo()
         }
 
         userAvatar.setOnClickListener {
@@ -97,6 +121,54 @@ class ModifyUserInfoActivity : BaseActivity() {
             // 选择封面图片，拍照，你的相册
             dialogSelect(TAKE_BG_IMAGE_PICTURE)
         }
+    }
+
+    private fun saveUserInfo() {
+        if (!validateNickname()) {
+            return
+        }
+        if (isUserInfoChanged) {
+            showProgress("信息保存中...")
+            val nickname =
+                if (nicknameEdit.text.toString().trim() == srcNickname) "" else nicknameEdit.text.toString().trim()
+            val description =
+                if (descriptionEdit.text.toString().trim() == srcDescription) "" else descriptionEdit.text.toString().trim()
+            val avatarFilePath = if (TextUtils.isEmpty(userAvatarPath)) "" else userAvatarPath
+            val bgImageFilePath = if (TextUtils.isEmpty(userBgImagePath)) "" else userBgImagePath
+
+            // todo 开始把信息上传服务器，成功后使用 RxBus 通知首页更改信息
+//            RxBus.mBus.post()
+        } else {
+            finish()
+        }
+    }
+
+    /**
+     * 判断用户是否修改了个人信息。
+     * @return 修改了个人信息返回 true，否则返回 false。
+     */
+    private val isUserInfoChanged: Boolean
+        get() = !(nicknameEdit.text.toString() == srcNickname
+                && descriptionEdit.text.toString() == srcDescription
+                && TextUtils.isEmpty(userAvatarPath)
+                && TextUtils.isEmpty(userBgImagePath))
+
+
+    /**
+     * 判断用户昵称是否合法。用户昵称长度必须在2-30个字符之间，并且只能包含中英文、数字、下划线和横线。
+     *
+     * @return 昵称合法返回true，不合法返回false。
+     */
+    private fun validateNickname(): Boolean {
+        val nickname = nicknameEdit.text.toString().trim { it <= ' ' }
+        if (nickname.length < 2) {
+            ToastUtils.showToast(this@ModifyUserInfoActivity, resources.getString(R.string.nickname_length_invalid))
+            return false
+        } else if (!nickname.matches(CommonUtils.NICK_NAME_REG_EXP.toRegex())) {
+            ToastUtils.showToast(this@ModifyUserInfoActivity, resources.getString(R.string.nickname_invalid))
+            return false
+        }
+        return true
     }
 
     private fun dialogSelect(action: Int) {
@@ -188,7 +260,11 @@ class ModifyUserInfoActivity : BaseActivity() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_CODE_CAPTURE -> { //拍照成功后，裁剪
-                    val sourceUri = FileProvider.getUriForFile(this, ConstantConfig.FILE_AUTHORITY, imageFile!!) //通过FileProvider创建一个content类型的Uri
+                    val sourceUri = FileProvider.getUriForFile(
+                        this,
+                        ConstantConfig.FILE_AUTHORITY,
+                        imageFile!!
+                    ) //通过FileProvider创建一个content类型的Uri
                     gotoCrop(sourceUri)
                 }
                 REQUEST_CODE_ALBUM -> { //从相册选择照片后，裁剪

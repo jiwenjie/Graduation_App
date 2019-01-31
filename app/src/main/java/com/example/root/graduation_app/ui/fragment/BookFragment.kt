@@ -19,17 +19,17 @@ import kotlinx.android.synthetic.main.common_toolbar_layout.*
  */
 class BookFragment : BaseFragment() {
 
-   private val fragmentList by lazy {  ArrayList<Fragment>() }
-   private val mTitles by lazy {  ArrayList<String>() }
+   private val fragmentList by lazy { ArrayList<Fragment>() }
+   private val mTitles by lazy { ArrayList<String>() }
 
    companion object {
       @JvmStatic
-       fun newInstance() : BookFragment {
-          val fragment = BookFragment()
-          val bundle = Bundle()
-          fragment.arguments = bundle
-          return fragment
-       }
+      fun newInstance(): BookFragment {
+         val fragment = BookFragment()
+         val bundle = Bundle()
+         fragment.arguments = bundle
+         return fragment
+      }
    }
 
    override fun loadData() {
@@ -44,18 +44,17 @@ class BookFragment : BaseFragment() {
    }
 
    private fun initView() {
-      if (mTitles.size != 4 && fragmentList.size != 4) {
-         mTitles.add("文学")
-         mTitles.add("文化")
-         mTitles.add("生活")
-         mTitles.add("影视")    // 单独调用接口
+      mTitles.add("文学")
+      mTitles.add("文化")
+      mTitles.add("生活")
+      mTitles.add("影视")    // 单独调用接口
 
-         fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[0]))
-         fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[1]))
-         fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[2]))
-         fragmentList.add(DoubanMovieFragment.newInstance())
-      }
+      fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[0]))
+      fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[1]))
+      fragmentList.add(DoubanLiteratureFragment.getInstance(mTitles[2]))
+      fragmentList.add(DoubanMovieFragment.newInstance())
       container_tab.setupWithViewPager(container_vp)
       container_vp.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, mTitles)
+      container_vp.offscreenPageLimit = fragmentList.size
    }
 }

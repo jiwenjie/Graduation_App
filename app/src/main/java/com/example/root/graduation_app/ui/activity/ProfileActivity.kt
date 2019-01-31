@@ -7,11 +7,8 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.utils.ConstantConfig
-import com.example.root.graduation_app.utils.StatusBarUtils
 import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.common_toolbar_layout.*
 
 /**
  *  author:Jiwenjie

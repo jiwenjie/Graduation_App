@@ -59,6 +59,11 @@ object CommonUtils {
    }
 
    /**
+    * 检查用户昵称是否合法的正式表达式。
+    */
+   const val NICK_NAME_REG_EXP = "^[\u4E00-\u9FA5A-Za-z0-9_\\-]+$"
+
+   /**
     * 拼接 movie 中 bean 的名字
     */
    fun splicingString(authers: ArrayList<String>): String {

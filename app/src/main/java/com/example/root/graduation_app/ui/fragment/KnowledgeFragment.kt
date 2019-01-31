@@ -13,6 +13,7 @@ import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.bean.WanAndroidJson
 import com.example.root.graduation_app.mvp.constract.KnowledgeContract
 import com.example.root.graduation_app.mvp.presenter.KnowledgePresenter
+import com.example.root.graduation_app.ui.activity.CommonWebViewActivity
 import com.example.root.graduation_app.ui.adapter.KnowledgeAdapter
 import com.example.root.graduation_app.utils.ConstantConfig
 import com.example.root.graduation_app.utils.SpaceItemDecoration
@@ -35,7 +36,7 @@ class KnowledgeFragment
    /**
     * datas
     */
-   private val datas = ArrayList<WanAndroidItem>()
+   private val datas by lazy { ArrayList<WanAndroidItem>() }
    /**
     * Knowledge Adapter
     */
@@ -88,6 +89,10 @@ class KnowledgeFragment
             }
          }
       })
+
+      knowledgeAdapter.setOnItemClickListener { position, view ->
+         CommonWebViewActivity.runActivity(activity!!, datas[position].title, datas[position].link)
+      }
    }
 
    override fun loadData() {

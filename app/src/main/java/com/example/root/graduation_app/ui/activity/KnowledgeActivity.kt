@@ -38,7 +38,7 @@ class KnowledgeActivity : BaseActivity() {
    /**
     * datas
     */
-   private var knowledges = ArrayList<WanAndroidPublicItemBean>()
+   private val knowledges by lazy { ArrayList<WanAndroidPublicItemBean>() }
 
    /**
     * toolbar title
