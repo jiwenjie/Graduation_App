@@ -144,5 +144,4 @@
         android:layout_marginTop="@dimen/common_5dp"
         android:layout_marginEnd="@dimen/common_20dp"
         android:background="@color/md_grey_500" />
-
 </LinearLayout>

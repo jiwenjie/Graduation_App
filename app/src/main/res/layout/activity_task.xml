@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_task_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/arrow_left"
+        app:title="新建任务"
+        app:titleTextColor="@color/color_white">
+
+        <!-- 只有在任务详情的时候显示 -->
+        <TextView
+            android:id="@+id/activity_task_operation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:text="变更状态"
+            android:textColor="@color/color_white" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/activity_task_titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:ellipsize="end"
+                android:hint="请输入标题"
+                android:lines="1" />
+
+            <EditText
+                android:id="@+id/activity_task_contentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="请输入内容"
+                android:minLines="3"
+                android:paddingEnd="@dimen/dp_4"
+                android:paddingStart="@dimen/dp_4"
+                android:textSize="@dimen/common_sp_14" />
+        </LinearLayout>
+
+
+        <ViewStub
+            android:id="@+id/activity_task_netError"
+            android:layout="@layout/layout_network_view"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <ViewStub
+            android:id="@+id/activity_task_emptyView"
+            android:layout="@layout/layout_empty_view"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </FrameLayout>
+</LinearLayout>

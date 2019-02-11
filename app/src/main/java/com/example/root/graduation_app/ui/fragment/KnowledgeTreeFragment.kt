@@ -13,6 +13,7 @@ import com.example.root.graduation_app.mvp.constract.KnowledgeTreeContract
 import com.example.root.graduation_app.mvp.presenter.KnowledgeTreePresenter
 import com.example.root.graduation_app.ui.activity.KnowledgeActivity
 import com.example.root.graduation_app.ui.adapter.KnowledgeTreeAdapter
+import com.example.root.graduation_app.utils.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
 /**
@@ -64,6 +65,7 @@ class KnowledgeTreeFragment
          layoutManager = linearLayoutManager
          adapter = knowLedgeAdapter
          itemAnimator = DefaultItemAnimator()
+         addItemDecoration(SpaceItemDecoration(activity!!))
       }
    }
 

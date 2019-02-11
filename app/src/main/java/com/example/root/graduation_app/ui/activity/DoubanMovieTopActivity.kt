@@ -44,7 +44,7 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
    }
 
    override fun loadData() {
-      mPresenter.getDoubanMovieTop250(start, ConstantConfig.CONFIG_LIMIE)
+      mPresenter.getDoubanMovieTop250(start, ConstantConfig.PAGE_LIMIT)
    }
 
    override fun getLayoutId(): Int = R.layout.common_toolbar_multiple_recyclerview
@@ -70,8 +70,8 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
                     .findLastVisibleItemPositions(stagLayoutSpanCount)
             if (!loadingMore && mLastVisibleItemPosition.max() == (itemCount!! - 1)) {
                loadingMore = true
-               start += ConstantConfig.CONFIG_LIMIE
-               mPresenter.getDoubanMovieTop250(start, ConstantConfig.CONFIG_LIMIE)
+               start += ConstantConfig.PAGE_LIMIT
+               mPresenter.getDoubanMovieTop250(start, ConstantConfig.PAGE_LIMIT)
             }
          }
       })

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.TransitionDrawable
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -16,7 +15,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanCastsBean
 import com.zhouwei.blurlibrary.EasyBlur
-import kotlinx.android.synthetic.main.activity_movie_detail_person_item.view.*
 import java.util.regex.Pattern
 
 /**

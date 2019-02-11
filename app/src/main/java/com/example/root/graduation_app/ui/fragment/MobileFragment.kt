@@ -39,7 +39,7 @@ class MobileFragment : BaseMvpFragment<GankIoContract.GankIoView, GankIoPresente
 
    override fun loadData() {
       page = 1
-      mPresenter.getGankIoDayMobile("Android", ConstantConfig.CONFIG_LIMIE, page)
+      mPresenter.getGankIoDayMobile("Android", ConstantConfig.PAGE_LIMIT, page)
    }
 
    override fun getLayoutId(): Int = R.layout.common_multiple_recyclerview
@@ -59,7 +59,7 @@ class MobileFragment : BaseMvpFragment<GankIoContract.GankIoView, GankIoPresente
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
                page ++
-               mPresenter.getGankIoDayMobile("Android", ConstantConfig.CONFIG_LIMIE, page)
+               mPresenter.getGankIoDayMobile("Android", ConstantConfig.PAGE_LIMIT, page)
             }
          }
       })

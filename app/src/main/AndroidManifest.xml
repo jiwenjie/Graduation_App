@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.root.graduation_app">
 
+    <!-- 拍照权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
     <!-- 允许访问Wi-Fi网络状态信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 允许获取Wi-Fi网络状态改变信息 -->
@@ -118,6 +120,16 @@
             android:name=".ui.activity.KnowledgeActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 点击新建笔记或者任务记录 -->
+        <activity
+            android:name=".ui.activity.TaskActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 点击查看 todo 列表 -->
+        <activity
+            android:name=".ui.activity.TodoActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 滑动头部和折叠的有关页面 -->
 
         <!-- 蒲公英的 sdk 引入 start -->
@@ -133,8 +145,8 @@
 
         <!-- FileProvider start -->
         <provider
-            android:authorities="com.graduation.fileprovider"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.graduation.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

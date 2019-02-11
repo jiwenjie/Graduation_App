@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="end"
+        android:padding="8dp"
+        android:tint="@android:color/black" />
+
+    <!-- 当退出账号再次登陆的时候，给出提示欢迎再次登陆，否则只是提示在线多久 -->
+    <TextView
+        android:id="@+id/dialog_contextText"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/dp_50"
+        android:layout_marginEnd="@dimen/dp_50"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        tools:text="同学你好：欢饮您再次登陆\n这是您第三次登陆。谢谢您的使用；\n您一共学习 256 分钟，继续加油。"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/dialog_textBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_radius_theme_bg"
+        android:gravity="center"
+        android:text="我知道了"
+        android:textColor="@color/color_white"
+        android:textSize="16sp" />
+
+</LinearLayout>

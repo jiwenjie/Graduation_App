@@ -1,5 +1,6 @@
 package com.example.root.graduation_app.test
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -31,6 +32,8 @@ class TestActivity : BaseActivity() {
     override fun initActivity(savedInstanceState: Bundle?) {
 
 //        RetrofitManager.setBaseUrl(ConstantConfig.WEIXIN_BASE_URL)
+
+        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
 
         RetrofitManager.provideClient(ConstantConfig.WANGYI_BASE_URL).create(WangyiApi::class.java)
             .getNewsList(0)

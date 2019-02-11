@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.base_library.ActivityStackManager
+import com.example.base_library.PermissionListener
 import com.example.base_library.R
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.widget.MProgressDialog
@@ -29,6 +30,8 @@ import java.util.ArrayList
  *  version:1.0
  */
 abstract class BaseActivity : AppCompatActivity() {
+
+   private var mPermissionListener: PermissionListener? = null
 
    /**
     * 多种状态的 View 切换
@@ -138,70 +141,37 @@ abstract class BaseActivity : AppCompatActivity() {
               .build()
    }
 
-   /** dynamic apply permissions related methods -- start **/
+   /* for permissions request */
+   open fun onRuntimePermissionsAsk(permissions: kotlin.Array<String>, listener: PermissionListener) {
+      this.mPermissionListener = listener
+      val activity = ActivityStackManager.getTopActivity()
+      val deniedPermissions: MutableList<String> = mutableListOf()
 
-   private val REQUEST_PERMISSION = 1520
+      permissions
+              .filterNot { ContextCompat.checkSelfPermission(activity!!, it) == PackageManager.PERMISSION_GRANTED }
+              .forEach { deniedPermissions.add(it) }
 
-   fun reqPermissionResult(isAllGranted: Boolean, permission: Array<String>, reqCode: Int) {
-
+      if (deniedPermissions.isEmpty())
+         mPermissionListener!!.onGranted()
+      else
+         ActivityCompat.requestPermissions(activity!!, deniedPermissions.toTypedArray(), 1)
    }
 
-   /**
-    * @param permissions
-    * @param reqCode
-    * @return true is indicate all permissions have been authorization(授权)
-    * and false indicate some permissions have not been authorization
-    */
-   @JvmOverloads
-   fun reqPermissions(permissions: Array<String>, reqCode: Int = REQUEST_PERMISSION): Boolean {
-      val needReqPermissionList = ArrayList<String>()
-      var hasNoAskPermission = false
-      for (permission in needReqPermissionList) {
-         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-            needReqPermissionList.add(permission)
-            /** if user check (don't ask again next time)  */
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-               hasNoAskPermission = true
-            }
-         }
-      }
-      if (needReqPermissionList.size == 0) {
-         return true
-      }
-
-      if (hasNoAskPermission) {
-         if (permissions.size == 1) {
-            /** if only one permission, indication need execute an action  */
-            AlertDialog.Builder(this)
-                    .setTitle("提示")
-                    .setMessage("当前操作所需权限已被禁止。\n\n请点击\"设置\"-\"权限\"-打开所需权限。")
-                    .setNegativeButton("取消", null)
-                    .setPositiveButton("设置") { dialog, which ->
-                       val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                       intent.data = Uri.parse("package:$packageName")
-                       startActivity(intent)
-                    }
-                    .show()
-            return false
-         }
-      }
-
-      ActivityCompat.requestPermissions(this,
-              needReqPermissionList.toTypedArray(),
-              reqCode)
-      return false
-   }
-
-   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
       super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-      var isAllGranted = true
-      for (grantResult in grantResults) {
-         if (grantResult != PackageManager.PERMISSION_GRANTED) {
-            isAllGranted = false
+      if (requestCode == 1) {
+         val deniedPermissions: MutableList<String> = mutableListOf()
+         if (grantResults.isNotEmpty()) {
+            for (i in grantResults.indices) {
+               if (grantResults[i] != PackageManager.PERMISSION_GRANTED)
+                  deniedPermissions.add(permissions[i])
+            }
+
+            if (deniedPermissions.isEmpty())
+               mPermissionListener!!.onGranted()
+            else
+               mPermissionListener!!.onDenied(deniedPermissions)
          }
       }
-      reqPermissionResult(isAllGranted, permissions, requestCode)
    }
-
-   /** dynamic apply permissions related methods -- end **/
 }

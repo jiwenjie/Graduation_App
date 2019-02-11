@@ -1,5 +1,6 @@
 package com.example.root.graduation_app.test;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -51,8 +52,6 @@ public class TestPhotoView extends AppCompatActivity {
         count = findViewById(R.id.tvCount);
 
 //        radioGroup.check(2);
-
-
         list = new ArrayList<>();
         list.add(null);
         list.add(null);

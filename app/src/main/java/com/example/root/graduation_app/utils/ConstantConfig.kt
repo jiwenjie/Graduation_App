@@ -17,7 +17,8 @@ object ConstantConfig {
    const val WANGYI_BASE_URL = "http://c.m.163.com/nc/article/"       // 网易新闻的 host 地址
    const val GANKIO_BASE_URL = "http://gank.io/api/"  // 干货集中营的 host 地址
    const val WANWANDROID_URL = "http://wanandroid.com/"
-   const val JACKSON_BASE_URL = "http://192.168.43.166:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
+
+   const val JACKSON_BASE_URL = "http://192.168.1.103:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
 
    const val SHARE_LOGIN_USER_NAME = "share_loginUser"
 
@@ -25,7 +26,7 @@ object ConstantConfig {
 
    const val GITHUB_URL = "https://github.com/jiwenjie/Graduation_App"
 
-   const val CONFIG_LIMIE: Int = 20
+   const val PAGE_LIMIT: Int = 20   // 分页查询的时候一次查询 20 个
 
    /**
     * url key
@@ -58,5 +59,5 @@ object ConstantConfig {
    /**
     * FileProvider authority
     */
-   const val FILE_AUTHORITY = "com.jackson.fileprovider"
+   const val FILE_AUTHORITY = "com.graduation.fileprovider"
 }

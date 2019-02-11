@@ -1,35 +1,37 @@
+@file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.example.root.graduation_app.ui.activity
 
+import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
-import com.example.base_library.RxBus
+import androidx.core.net.toUri
+import com.example.base_library.PermissionListener
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
-import com.example.base_library.base_utils.ToastUtils.showToast
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.utils.CommonUtils
-import com.example.root.graduation_app.utils.ConstantConfig
-import com.example.root.graduation_app.utils.FileUtil
-import com.example.root.graduation_app.utils.SimpleTextWatcher
+import com.example.root.graduation_app.utils.*
 import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_modify_user_info.*
 import java.io.File
+import android.R.attr.data
+import android.database.Cursor
+import com.example.root.graduation_app.R.id.userAvatar
+
 
 /**
  *  author:Jiwenjie
@@ -42,6 +44,9 @@ import java.io.File
 class ModifyUserInfoActivity : BaseActivity() {
 
     companion object {
+        private const val REQUEST_TAKE_PHOTO = 0x110    // 拍照 requestCode
+        private const val REQUEST_CHOOSE_ALBUM = 0x112  // 选择图片 requestCode
+
         private var AVATAR_OR_BGIMAGE = -1     // 0 表示选择头像，1 表示选择背景图片
 
         private const val TAKE_AVATAR_PICTURE = 0
@@ -74,8 +79,34 @@ class ModifyUserInfoActivity : BaseActivity() {
             this@ModifyUserInfoActivity,
             ContextCompat.getColor(this@ModifyUserInfoActivity, R.color.colorPrimary), 0
         )
+
+        initView()
         initEvent()
-        // 输入昵称的监听
+    }
+
+    private fun initView() {
+        //        srcNickname = UserUtil.nickname   // 从本地读取 nickName
+//        srcAvatar = UserUtil.avatar       // 本地读取头像
+//        srcBgImage = UserUtil.bgImage
+//        srcDescription = UserUtil.description
+        // todo 暂时注释，这里需要注意逻辑部分
+//        Glide.with(this)
+//                .asBitmap()
+//                .load(CustomUrl(srcAvatar))
+//                .apply(RequestOptions.getAvatar())
+//                .into(userAvatar)
+//        userNickname.text = srcNickname
+//        nicknameEdit.setText(srcNickname)
+
+        if (TextUtils.isEmpty(srcDescription)) {
+            userDescription.visibility = View.GONE
+        } else {
+            descriptionEdit.setText(srcDescription)
+            userDescription.visibility = View.VISIBLE
+            userDescription.text = String.format(resources.getString(R.string.description_content), srcDescription)
+        }
+
+        // 输入昵称的 text change 监听
         nicknameEdit.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 val length = nicknameEdit.text.toString().trim { it <= ' ' }.length
@@ -83,7 +114,7 @@ class ModifyUserInfoActivity : BaseActivity() {
                 userNickname.text = s.toString().trim { it <= ' ' }
             }
         })
-        // 输入简介的监听
+        // 输入简介的 text change 监听
         descriptionEdit.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 val length = descriptionEdit.text.toString().trim { it <= ' ' }.length
@@ -100,6 +131,11 @@ class ModifyUserInfoActivity : BaseActivity() {
                 }
             }
         })
+        loadBg()
+    }
+
+    private fun loadBg() {
+
     }
 
     private fun initEvent() {
@@ -187,8 +223,27 @@ class ModifyUserInfoActivity : BaseActivity() {
         }
         builder.setItems(items) { _, which ->
             when (which) {
-                0 -> takePhoto()
-                1 -> chooseFromAlbum()
+                0 -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {   // 判断大于 6.0 进行权限请求
+                        onRuntimePermissionsAsk(arrayOf(
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        ), object : PermissionListener {
+                            override fun onGranted() {
+                                takePhoto()
+                            }
+
+                            override fun onDenied(deniedPermissions: List<String>) {
+                                showDialog()
+                            }
+                        })
+                    } else {    // 低于 6.0 的时候直接访问就可以
+                        takePhoto()
+                    }
+                }
+                1 -> {
+                    chooseFromAlbum()
+                }
                 else -> {
                 }
             }
@@ -222,6 +277,9 @@ class ModifyUserInfoActivity : BaseActivity() {
         imageCropFile = FileUtil.createImageFile(true)
         imageCropFile?.let {
             val intent = Intent("com.android.camera.action.CROP")
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)  //添加这一句表示对目标应用临时授权该 Uri 所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            intent.setDataAndType(sourceUri, "image/*")  //设置数据源
             intent.putExtra("crop", "true")
             intent.putExtra("aspectX", 1)    //X方向上的比例
             intent.putExtra("aspectY", 1)    //Y方向上的比例
@@ -230,19 +288,7 @@ class ModifyUserInfoActivity : BaseActivity() {
             intent.putExtra("scale ", true)  //是否保留比例
             intent.putExtra("return-data", false)
             intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) //添加这一句表示对目标应用临时授权该Uri所代表的文件
-                intent.setDataAndType(sourceUri, "image/*")  //设置数据源
-
-                val imgCropUri = Uri.fromFile(it)
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imgCropUri) //设置输出  不需要ContentUri,否则失败
-                LogUtils.d("tag 输入 $sourceUri")
-                LogUtils.d("tag 输出 ${Uri.fromFile(it)}")
-            } else {
-                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(it))
-            }
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(it))
             startActivityForResult(intent, REQUEST_CODE_CAPTURE_CROP)
         }
     }
@@ -251,7 +297,8 @@ class ModifyUserInfoActivity : BaseActivity() {
      *  从相册中选择图片 + 裁剪
      */
     private fun chooseFromAlbum() {
-        val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_PICK, null)
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
         startActivityForResult(intent, REQUEST_CODE_ALBUM)
     }
 
@@ -273,18 +320,80 @@ class ModifyUserInfoActivity : BaseActivity() {
                     }
                 }
                 REQUEST_CODE_CAPTURE_CROP -> {   //裁剪成功后，显示结果
-                    imageCropFile?.let {
-                        if (AVATAR_OR_BGIMAGE == 0) {   // 选择头像图片
-                            userAvatar.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
-                        } else if (AVATAR_OR_BGIMAGE == 1) {    // 选择背景图片
-                            userBgImage.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
-                        }
+                    if (AVATAR_OR_BGIMAGE == 0) {   // 选择头像图片
+
+                        val uri = data?.data
+//                        val bitmap = data!!.getParcelableExtra<Bitmap>("data")
+////                        val bitmap = data?.getParcelableExtra<Bitmap>("data")
+//
+//                        //将bitmap转换为Uri
+//                        var uri = Uri.parse(MediaStore.Images.Media.insertImage(contentResolver, bitmap, null, null))
+//                        //对非正确的Uri处理，这类Uri存在手机的external.db中，可以查询_data字段查出对应文件的uri
+//                        if (uri.path.contains("external")) {
+//                            uri = getExternal(uri.path)
+//                        }
+////                        val filePathColumn  = arrayOf(MediaStore.Images.Media.DATA)
+//                        val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
+//                        cursor.moveToFirst()
+//                        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+//                        //picturePath就是图片在储存卡所在的位置
+//                        val picturePath = cursor.getString(columnIndex)
+//                        cursor.close()
+                        updateAvatar(imageCropFile?.absolutePath!!)
+//                        updateAvatar(picturePath!!.toUri())
+                    } else if (AVATAR_OR_BGIMAGE == 1) {    // 选择背景图片
+                        userBgImage.setImageBitmap(BitmapFactory.decodeFile(imageCropFile?.absolutePath))
                     }
                 }
             }
         } else {
             LogUtils.d("tag 错误码 $resultCode")
         }
+    }
+
+//    private fun updateAvatar(uri: Uri) {
+    private fun updateAvatar(uri: String) {
+        UploadUtils.uploadAvatar(uri, object : UploadUtils.UploadImageListener {
+            override fun uploadSuccess(type: Int) {
+                ToastUtils.showToast(this@ModifyUserInfoActivity, "上传成功")
+                userAvatar.setImageBitmap(BitmapFactory.decodeFile(imageCropFile?.absolutePath))
+                LogUtils.e("上传成功")
+            }
+
+            override fun uploadFailed(type: Int) {
+                ToastUtils.showToast(this@ModifyUserInfoActivity, "上传失败")
+                LogUtils.e("上传失败")
+            }
+        })
+    }
+
+    private fun getExternal(external: String): Uri {
+        var myImageUrl = "content://media$external"
+        var uri = Uri.parse(myImageUrl)
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+
+//        val actualimagecursor = contentResolver.query(uri, proj, null, null, null)
+        val actualimagecursor = this.managedQuery(uri, proj, null, null, null)
+        var actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        actualimagecursor.moveToFirst()
+        var img_path = actualimagecursor.getString(actual_image_column_index)
+        var file = File(img_path)
+        var fileUri = Uri.fromFile(file)
+        actualimagecursor.close()
+        return fileUri
+    }
+
+    private fun showDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("提示")
+            .setMessage("当前操作所需权限已被禁止。\n\n请点击\"设置\"-\"权限\"-打开所需权限。")
+            .setNegativeButton("取消", null)
+            .setPositiveButton("设置") { dialog, which ->
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+            }
+            .show()
     }
 
     override fun loadData() {

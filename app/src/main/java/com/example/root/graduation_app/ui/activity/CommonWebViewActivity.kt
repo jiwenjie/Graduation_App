@@ -74,6 +74,9 @@ class CommonWebViewActivity : BaseActivity() {
          setSupportActionBar(this)
          supportActionBar?.setDisplayHomeAsUpEnabled(true)
       }
+      commonWebViewToolbar.setNavigationOnClickListener {
+         finish()
+      }
 
       refreshLayout = findViewById(R.id.commonRefreshLyt)
       webView = findViewById(R.id.commonWebView)
@@ -82,9 +85,6 @@ class CommonWebViewActivity : BaseActivity() {
       refreshLayout!!.setProgressBackgroundColorSchemeColor(resources.getColor(R.color.alpha_90_white))
       refreshLayout!!.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary))
       refreshLayout!!.setDistanceToTriggerSync(200)
-
-      /** 这里可以根据参数决定是否显示分享  */
-
    }
 
    /**

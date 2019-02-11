@@ -45,7 +45,7 @@ class WeixinFragment : BaseMvpFragment<WeixinContract.WeixinView, WeixinPresente
 
    override fun loadData() {
       page = 1
-      mPresenter.loadLatestList(page, ConstantConfig.CONFIG_LIMIE, ConstantConfig.JU_HE_APP_KEY)
+      mPresenter.loadLatestList(page, ConstantConfig.PAGE_LIMIT, ConstantConfig.JU_HE_APP_KEY)
    }
 
    override fun initFragment(savedInstanceState: Bundle?) {
@@ -63,7 +63,7 @@ class WeixinFragment : BaseMvpFragment<WeixinContract.WeixinView, WeixinPresente
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
                page ++
-               mPresenter.loadLatestList(page, ConstantConfig.CONFIG_LIMIE, ConstantConfig.JU_HE_APP_KEY)
+               mPresenter.loadLatestList(page, ConstantConfig.PAGE_LIMIT, ConstantConfig.JU_HE_APP_KEY)
             }
          }
       })

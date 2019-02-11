@@ -1,6 +1,4 @@
 package com.example.root.graduation_app.bean
-
-import android.support.v4.app.INotificationSideChannel
 import java.io.Serializable
 
 /**
@@ -151,86 +149,86 @@ import java.io.Serializable
 }
  **/
 
-data class WanAndroidBaseBean<T> (
-    val errorCode: Int,
-    val errorMsg: String,
-    val data: T
+data class WanAndroidBaseBean<T>(
+        var errorCode: Int,
+        var errorMsg: String,
+        var data: T
 ) : Serializable
 
-data class WanAndroidListBean<T> (
-        val errorCode: Int,
-        val errorMsg: String,
-        val data: ArrayList<T>
+data class WanAndroidListBean<T>(
+        var errorCode: Int,
+        var errorMsg: String,
+        var data: ArrayList<T>
 ) : Serializable
 
 //知识体系
 data class KnowledgeTreeBody(
-        val children: ArrayList<WanAndroidPublicItemBean>,
-        val courseId: Int,
-        val id: Int,
-        val name: String,
-        val order: Int,
-        val parentChapterId: Int,
-        val visible: Int
+        var children: ArrayList<WanAndroidPublicItemBean>,
+        var courseId: Int,
+        var id: Int,
+        var name: String,
+        var order: Int,
+        var parentChapterId: Int,
+        var visible: Int
 ) : Serializable
 
 data class WanAndroidPublicItemBean(
-    val children: ArrayList<Any>,
-    val courseId: Int,
-    val id: Int,
-    val name: String,
-    val order: Long,
-    val parentChapterId: Int,
-    val userControlSetTop: Boolean,
-    val visible: Int
+        var children: ArrayList<Any>,
+        var courseId: Int,
+        var id: Int,
+        var name: String,
+        var order: Long,
+        var parentChapterId: Int,
+        var userControlSetTop: Boolean,
+        var visible: Int
 ) : Serializable
 
 data class WanAndroidJson<T>(
-    val curPage: Int,
-    val datas: ArrayList<T>,
-    val offset: Int,
-    val over: Boolean,
-    val pageCount: Int,
-    val size: Int,
-    val total: Int
+        var curPage: Int,
+        var datas: ArrayList<T>,
+        var offset: Int,
+        var over: Boolean,
+        var pageCount: Int,
+        var size: Int,
+        var total: Int
 ) : Serializable
 
 data class WanAndroidItem(
-    val apkLink: String,
-    val author: String,
-    val chapterId: Int,
-    val chapterName: String,
-    val collect: Boolean,
-    val courseId: Int,
-    val desc: String,
-    val envelopePic: String,
-    val fresh: Boolean,
-    val id: Int,
-    val link: String,
-    val niceDate: String,
-    val origin: String,
-    val projectLink: String,
-    val publishTime: Long,
-    val superChapterId: Int,
-    val superChapterName: String,
-    val tags: ArrayList<WanandroidTag>,
-    val title: String,
-    val type: Int,
-    val userId: Int,
-    val visible: Int,
-    val zan: Int
+        var apkLink: String,
+        var author: String,
+        var chapterId: Int,
+        var chapterName: String,
+        var collect: Boolean,
+        var courseId: Int,
+        var desc: String,
+        var envelopePic: String,
+        var fresh: Boolean,
+        var id: Int,
+        var link: String,
+        var niceDate: String,
+        var origin: String,
+        var projectLink: String,
+        var publishTime: Long,
+        var superChapterId: Int,
+        var superChapterName: String,
+        var tags: ArrayList<WanandroidTag>,
+        var title: String,
+        var type: Int,
+        var userId: Int,
+        var visible: Int,
+        var zan: Int
 ) : Serializable
 
 data class WanandroidTag(
-    val name: String,
-    val url: String
-): Serializable
+        var name: String,
+        var url: String
+) : Serializable
 
 
 data class WanandroidHotkeyword(
-    val id: Int,
-    val link: String,
-    val name: String,
-    val order: Int,
-    val visible: Int
-): Serializable
+        var id: Int,
+        var link: String,
+        var name: String,
+        var order: Int,
+        var visible: Int
+) : Serializable

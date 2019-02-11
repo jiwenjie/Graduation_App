@@ -12,7 +12,9 @@ import com.example.root.graduation_app.mvp.constract.WanandroidContract
 import com.example.root.graduation_app.mvp.presenter.WanandroidDataPresenter
 import com.example.root.graduation_app.ui.activity.CommonWebViewActivity
 import com.example.root.graduation_app.ui.adapter.KnowledgeAdapter
+import com.example.root.graduation_app.utils.SpaceItemDecoration
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
+import kotlinx.android.synthetic.main.common_multiple_recyclerview.view.*
 
 /**
  *  author:Jiwenjie
@@ -58,6 +60,7 @@ class WanandroidTabItemFragment : BaseMvpFragment<WanandroidContract.WanandroidD
       mLayoutStatusView = common_multipleStatusView
       mLayoutStatusView?.showContent()
 
+      commonRv.addItemDecoration(SpaceItemDecoration(activity!!))
       commonRv.adapter = adapter
       commonRv.layoutManager = LinearLayoutManager(activity)
       commonRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {

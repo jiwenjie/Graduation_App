@@ -60,7 +60,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:textColor="@color/color_white"
-                        android:textSize="22sp"
+                        android:textSize="18sp"
                         tools:text="吉文杰" />
 
                     <TextView
@@ -69,9 +69,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
+                        android:ellipsize="middle"
                         android:maxLines="3"
                         android:textColor="@color/color_white"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         tools:text="第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码第一行代码" />
 
                 </LinearLayout>
@@ -189,10 +190,10 @@
 
         <ImageView
             android:id="@+id/activity_modify_user_info_return"
-            android:src="@drawable/ic_return"
-            android:tint="@color/color_white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_return"
+            android:tint="@color/color_white" />
 
         <TextView
             android:id="@+id/save"

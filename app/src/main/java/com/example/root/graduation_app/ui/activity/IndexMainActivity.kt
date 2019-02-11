@@ -23,8 +23,10 @@ import com.example.root.graduation_app.ui.fragment.KnowledgeTreeFragment
 import com.example.root.graduation_app.ui.fragment.HomeFragment
 import com.jaeger.library.StatusBarUtil
 import com.zhouwei.blurlibrary.EasyBlur
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_index_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.util.concurrent.TimeUnit
 
 /**
  *  author:Jiwenjie
@@ -77,6 +79,8 @@ class IndexMainActivity : BaseActivity() {
          setSupportActionBar(this)
       }
 
+      initDrawerLayout()
+
       bottom_navigation.run {
          // 以前使用 BottomNavigationViewHelper.disableShiftMode(this) 方法来设置底部图标和字体都显示并去掉点击动画
          // 升级到 28.0.0 之后，官方重构了 BottomNavigationView ，目前可以使用 labelVisibilityMode = 1 来替代
@@ -84,8 +88,6 @@ class IndexMainActivity : BaseActivity() {
          labelVisibilityMode = 1
          setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
       }
-
-      initDrawerLayout()
 
       showFragment(mIndex)
       floating_action_btn.run {
@@ -157,13 +159,19 @@ class IndexMainActivity : BaseActivity() {
       description.setOnClickListener {
          // 点击跳转用户编辑页
          drawer_layout.closeDrawers()
-         ModifyUserInfoActivity.runActivity(this@IndexMainActivity)
+         Observable.timer(400, TimeUnit.MILLISECONDS)
+                 .subscribe {
+                    ModifyUserInfoActivity.runActivity(this@IndexMainActivity)
+                 }
       }
 
       userLyt.setOnClickListener {
          // 点击跳转用户主页（显示已做未做的两个 tab 页）
          drawer_layout.closeDrawers()
-         ProfileActivity.runActivity(this@IndexMainActivity)
+         Observable.timer(400, TimeUnit.MILLISECONDS)
+                 .subscribe {
+                    ProfileActivity.runActivity(this@IndexMainActivity)
+                 }
       }
    }
 
@@ -274,30 +282,40 @@ class IndexMainActivity : BaseActivity() {
            NavigationView.OnNavigationItemSelectedListener { item ->
               when (item.itemId) {
                  R.id.nav_collect -> {
+                    drawer_layout.closeDrawer(GravityCompat.START)
                     if (isLogin) {
-                       CollectActivity.runActivity(this@IndexMainActivity)
+                       Observable.timer(400, TimeUnit.MILLISECONDS)
+                               .subscribe {
+                                  CollectActivity.runActivity(this@IndexMainActivity)
+                               }
                     } else {
                        ToastUtils.showToast(this, resources.getString(R.string.login_tint))
                        LoginActivity.runActivity(this, null)
                     }
-                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
                  R.id.nav_setting -> {
 //                    Intent(this@MainActivity, SettingActivity::class.java).run {
 //                       // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
 //                       startActivity(this)
 //                    }
-                     drawer_layout.closeDrawer(GravityCompat.START)
+                    drawer_layout.closeDrawer(GravityCompat.START)
                  }
                  R.id.nav_about_us -> {
-                    AboutMeActivity.runActivity(this@IndexMainActivity)
-                     drawer_layout.closeDrawer(GravityCompat.START)
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    Observable.timer(400, TimeUnit.MILLISECONDS)
+                            .subscribe {
+                               AboutMeActivity.runActivity(this@IndexMainActivity)
+                            }
                  }
                  R.id.nav_logout -> {
-                     logout()
-                     drawer_layout.closeDrawer(GravityCompat.START)
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    Observable.timer(400, TimeUnit.MILLISECONDS)
+                            .subscribe {
+                               logout()
+                            }
                  }
                  R.id.nav_night_mode -> {
+                    drawer_layout.closeDrawer(GravityCompat.START)
 //                    if (SettingUtil.getIsNightMode()) {
 //                       SettingUtil.setIsNightMode(false)
 //                       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -319,7 +337,7 @@ class IndexMainActivity : BaseActivity() {
 //                          startActivity(this)
 //                       }
 //                    }
-                     drawer_layout.closeDrawer(GravityCompat.START)
+                    drawer_layout.closeDrawer(GravityCompat.START)
                  }
               }
               true

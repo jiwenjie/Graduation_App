@@ -51,7 +51,7 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
 
    override fun loadData() {
       if (!tags.isNullOrEmpty()) {
-         mPresenter.loadBookList(tags!!, start, ConstantConfig.CONFIG_LIMIE)
+         mPresenter.loadBookList(tags!!, start, ConstantConfig.PAGE_LIMIT)
       }
    }
 
@@ -71,8 +71,8 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
                     (commonRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
-               start += ConstantConfig.CONFIG_LIMIE
-               mPresenter.loadBookList(tags!!, start, ConstantConfig.CONFIG_LIMIE)
+               start += ConstantConfig.PAGE_LIMIT
+               mPresenter.loadBookList(tags!!, start, ConstantConfig.PAGE_LIMIT)
             }
          }
       })
