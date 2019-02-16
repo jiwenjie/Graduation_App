@@ -16,7 +16,7 @@ import io.reactivex.Observable
 interface CollectContract {
 
    interface Model {
-      fun requestCollectData(page: Int, limit: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+      fun requestCollectData(userid: String, page: Int, limit: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
    }
 
    interface View: IBaseView {
@@ -24,6 +24,6 @@ interface CollectContract {
    }
 
    interface Presenter {
-      fun requestCollectData(page: Int, limit: Int)
+      fun requestCollectData(userid: String, page: Int, limit: Int)
    }
 }

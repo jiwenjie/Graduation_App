@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
@@ -15,6 +17,8 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.DoubanCastsBean
 import com.zhouwei.blurlibrary.EasyBlur
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 /**
@@ -104,6 +108,14 @@ object CommonUtils {
    }
 
    /**
+    * 添加公共的格式化日期时间的方法
+    */
+   fun getFormatDateTime(date: Date): String {
+       val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+       return dateFormat.format(date)
+   }
+
+   /**
     * 检查 String 是否为 null
     */
    fun isEmpty(value: String?): Boolean {
@@ -181,5 +193,13 @@ object CommonUtils {
             imageView.setImageBitmap(errorBitmap)
          }
       }
+   }
+
+   /**
+    * 隐藏软键盘
+    */
+   fun hideKeyboard(context: Context, view: View) {
+      val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+      imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
    }
 }

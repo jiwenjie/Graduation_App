@@ -7,6 +7,9 @@ import android.content.Context
 import android.os.Bundle
 import android.support.multidex.MultiDexApplication
 import com.example.base_library.base_utils.LogUtils
+import com.example.root.graduation_app.bean.LoginUser
+import com.example.root.graduation_app.utils.ConstantConfig
+import com.example.root.graduation_app.utils.SharePreferencesUtil
 import com.example.root.graduation_app.utils.UnCaught
 import com.pgyersdk.crash.PgyCrashManager
 
@@ -57,7 +60,24 @@ class App : MultiDexApplication() {
    }
 
    companion object {
+
+      private var user: LoginUser? = null
+
       @SuppressLint("StaticFieldLeak")
       lateinit var contextInstance: Context
+
+      fun getLoginUser(): LoginUser? {
+         return if (user != null) {
+            user
+         } else {
+            user = SharePreferencesUtil.getAny(this.contextInstance, ConstantConfig.SHARE_LOGIN_USER_NAME)
+            user
+         }
+      }
+
+      fun setLoginUser(user: LoginUser?) {
+         this.user = user
+         SharePreferencesUtil.saveAny(this.contextInstance, ConstantConfig.SHARE_LOGIN_USER_NAME, user)  // 保存 user 的时候把 user 也存到本地
+      }
    }
 }

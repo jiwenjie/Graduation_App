@@ -6,11 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import com.example.base_library.base_utils.LogUtils
+import com.example.root.graduation_app.utils.SharePreferencesUtil
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
+import com.example.root.graduation_app.App
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.LoginUser
 import com.example.root.graduation_app.utils.CommonUtils
+import com.example.root.graduation_app.utils.ConstantConfig
+import com.example.root.graduation_app.utils.PhoneUserUtils
 import com.example.root.graduation_app.utils.SimpleTextWatcher
 import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_login.*
@@ -28,6 +33,8 @@ class LoginActivity : BaseActivity() {
    private var inputPass: String? = null
 
    private var user: LoginUser? = null
+
+   private var userIsNull: Boolean? = null
 
    companion object {
       private const val LOGIN_USER = "login_user"
@@ -54,8 +61,14 @@ class LoginActivity : BaseActivity() {
       user = intent.getSerializableExtra(LOGIN_USER) as LoginUser?
 
       if (user == null) {  // if user is null show it is first open app
-         activity_login_phone.text = null
+         user = SharePreferencesUtil.getAny(this@LoginActivity, ConstantConfig.SHARE_LOGIN_USER_NAME)
+         if (user != null) {
+            activity_login_phone.setText(user!!.userphone.toString())
+         } else {
+            userIsNull = true //说明此时 user 是 null
+         }
       } else {    // else show local have user data but now it sign out
+         userIsNull = false
          activity_login_phone.setText(user?.userphone.toString())
          inputPhone = CommonUtils.formatPhoneNum(activity_login_phone.text.toString())
          isLocalUserPhone()
@@ -106,7 +119,7 @@ class LoginActivity : BaseActivity() {
             val part2 = s?.subSequence(3, length).toString()
             activity_login_phone.setText("$part1 $part2")
          }
-         if (length == 9){
+         if (length == 9) {
             val part1 = s?.subSequence(0, 8).toString()
             val part2 = s?.subSequence(8, length).toString()
             activity_login_phone.setText("$part1 $part2")
@@ -130,12 +143,18 @@ class LoginActivity : BaseActivity() {
          activity_login_btn_active.setBackgroundResource(R.drawable.login_btn_no_press)
       }
 
-      if (TextUtils.equals(inputPhone, user?.userphone)) {
-         // 如果当前值和用户输入的相同
-         activity_login_icon.setBackgroundResource(R.drawable.shape_circle_blue)
-         displayName = user?.username!!.substring(1, user?.username!!.length - 1)  // 去掉名称的第一个
-         activity_login_icon.text = displayName
-         activity_login_welcome.text = "Hello!$displayName\n欢迎回来"
+      if (!userIsNull!!) {
+         if (TextUtils.equals(inputPhone, user?.userphone)) {
+            // 如果当前值和用户输入的相同
+            activity_login_icon.setBackgroundResource(R.drawable.shape_circle_blue)
+            displayName = user?.username!!.substring(1, user?.username!!.length - 1)  // 去掉名称的第一个
+            activity_login_icon.text = displayName
+            activity_login_welcome.text = "Hello!$displayName\n欢迎回来"
+         } else {
+            activity_login_icon.setBackgroundResource(R.drawable.login_icon_left)
+            activity_login_icon.text = null
+            activity_login_welcome.text = "欢迎使用"
+         }
       } else {
          activity_login_icon.setBackgroundResource(R.drawable.login_icon_left)
          activity_login_icon.text = null
@@ -171,18 +190,33 @@ class LoginActivity : BaseActivity() {
 
       activity_login_more.setOnClickListener {
          // 更多的点击事件
-         ToastUtils.showToast(applicationContext, "点击更多")
+         ToastUtils.showToast(applicationContext, "未开发该功能，在继续完善中")
       }
 
       activity_login_btn_active.setOnClickListener {
-         // 登陆的点击事件
+         // 登陆的点击事件, 调用登陆接口
 
          /**
           * 此处调用接口访问后台，验证成功在跳转，否则给出错误提示
           */
-         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-         finish()
-         overridePendingTransition(R.anim.abc_popup_enter, R.anim.abc_popup_exit)
+
+         showProgress("正在登录中...")
+         PhoneUserUtils.loginByPhone(inputPhone!!, inputPass!!, object : PhoneUserUtils.operationListener {
+            override fun success(user: LoginUser) {
+               // 登录后把信息保存到本地
+               dismissProgress()
+               App.setLoginUser(user)
+               IndexMainActivity.runActivity(this@LoginActivity)
+               finish()
+               overridePendingTransition(R.anim.abc_popup_enter, R.anim.abc_popup_exit)
+            }
+
+            override fun failed(error: String) {
+               LogUtils.e(error)
+               dismissProgress()
+               ToastUtils.showToast(this@LoginActivity, error)
+            }
+         })
       }
    }
 }

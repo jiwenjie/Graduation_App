@@ -6,6 +6,7 @@ import com.example.base_library.RetrofitManager
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.base.api.JacksonApi
+import com.example.root.graduation_app.bean.LoginUser
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -40,21 +41,21 @@ object UploadUtils {
         LogUtils.e("UploadUtils" + file.name)
         LogUtils.e("UploadUtils" + file.absolutePath)
 
-        RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
-            .create(JacksonApi::class.java)
-            .uploadAvatar(body)
-            .compose(RxJavaUtils.applyObservableAsync())
-            .subscribe({
-                LogUtils.e("UploadUtils" + it.string())
-                listener.uploadSuccess(TYPE_AVATAR)
-            }, {
-                LogUtils.e("UploadUtils$it")
-                listener.uploadFailed(TYPE_AVATAR)
-            })
+//        RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
+//            .create(JacksonApi::class.java)
+//            .uploadAvatar(body)
+//            .compose(RxJavaUtils.applyObservableAsync())
+//            .subscribe({
+//                LogUtils.e("UploadUtils" + it.string())
+//                listener.uploadSuccess(TYPE_AVATAR)
+//            }, {
+//                LogUtils.e("UploadUtils$it")
+//                listener.uploadFailed(TYPE_AVATAR)
+//            })
     }
 
     @SuppressLint("CheckResult")
-    fun uploadAvatar(imgPath: String, listener: UploadImageListener) {   // true 为上传成功，false 为上传失败
+    fun uploadAvatar(userid: String, imgPath: String, listener: UploadImageListener) {   // true 为上传成功，false 为上传失败
         var file: File? = null
         try {
             file = File(imgPath)
@@ -63,28 +64,30 @@ object UploadUtils {
         }
 
         val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file!!)
-//        val requestBody = RequestBody.create(MediaType.parse("image/png"), file!!)
-        val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
+        val body = MultipartBody.Part.createFormData("image", file.name, requestBody)   // 这里的 key 要和后台接收的 body 名字相同才行
         LogUtils.e("UploadUtils" + file.name)
         LogUtils.e("UploadUtils" + file.absolutePath)
 
         RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
             .create(JacksonApi::class.java)
-            .uploadAvatar(body)
+            .uploadAvatar(userid, body)
             .compose(RxJavaUtils.applyObservableAsync())
             .subscribe({
-                LogUtils.e("UploadUtils" + it.string())
-                listener.uploadSuccess(TYPE_AVATAR)
+                if (it.result == "succeed") {
+                    listener.uploadSuccess(it.data)
+                } else {
+                    listener.uploadFailed(it.msg)
+                }
+
             }, {
-                LogUtils.e("UploadUtils$it")
-                listener.uploadFailed(TYPE_AVATAR)
+                listener.uploadFailed(it.message.toString())
             })
     }
 
     interface UploadImageListener {
 
-        fun uploadSuccess(type: Int)
+        fun uploadSuccess(user: LoginUser)
 
-        fun uploadFailed(type: Int)
+        fun uploadFailed(msg: String)
     }
 }

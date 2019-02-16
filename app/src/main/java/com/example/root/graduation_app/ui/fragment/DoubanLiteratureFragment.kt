@@ -77,7 +77,7 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
          }
       })
       adapter.setOnItemClickListener { position, view ->
-         DoubanBookDetailActivity.runActivity(activity!!, beanList.get(position))
+         DoubanBookDetailActivity.runActivity(activity!!, beanList[position])
       }
    }
 

@@ -4,10 +4,11 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
-import com.example.base_library.base_utils.SharePreferencesUtil
+import com.example.root.graduation_app.utils.SharePreferencesUtil
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.bean.LoginUser
-import com.example.root.graduation_app.ui.activity.MainActivity
+import com.example.root.graduation_app.ui.activity.IndexMainActivity
+import com.example.root.graduation_app.ui.activity.LoginActivity
 import com.example.root.graduation_app.utils.ConstantConfig
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,16 +38,17 @@ class SplashActivity : BaseActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     // 此时测试直接进入首页
-                    MainActivity.runActivity(this@SplashActivity, null)
-//                    if (user != null) {     // 说明已经注册过，则直接跳转登陆页面之后在登陆
-//                        if (user.isSignOut!!) {     // 说明有本地账号但是已经点击过退出登陆，即此时未登录
-//                            LoginActivity.runActivity(this@SplashActivity, user)
-//                        } else {       // 说明有本地账号 即此时已登录
-//                            MainActivity.runActivity(this@SplashActivity, user)
-//                        }
-//                    } else {        // 说明是第一次打开，还未注册，所以去登陆页面注册
-//                        LoginActivity.runActivity(this@SplashActivity, null)
-//                    }
+                    if (user != null) {
+                        // 如果 user 不为空则不管其他，直接进入 Main 中。只有第一次安装的时候需要跳转登陆页面
+                       IndexMainActivity.runActivity(this@SplashActivity)
+//                       if (user.signout!!) { // 如果退出账号
+//                          LoginActivity.runActivity(this@SplashActivity, user)
+//                       } else {  // 没有退出账号
+//
+//                       }
+                    } else {
+                        LoginActivity.runActivity(this@SplashActivity, null)
+                    }
                     finish()
                     overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
                 }
@@ -69,6 +71,6 @@ class SplashActivity : BaseActivity() {
      * after word "as" need add "?", otherwise it is not null
      */
     private fun getLoginUser(): LoginUser? {
-        return SharePreferencesUtil.getAny(applicationContext, ConstantConfig.SHARE_LOGIN_USER_NAME, LoginUser::class.java) as LoginUser?
+        return App.getLoginUser()
     }
 }

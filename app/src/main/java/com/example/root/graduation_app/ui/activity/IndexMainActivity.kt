@@ -1,6 +1,7 @@
 package com.example.root.graduation_app.ui.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -14,18 +15,29 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.base_library.RetrofitManager
+import com.example.base_library.RxBus
+import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
+import com.example.root.graduation_app.App
 import com.example.root.graduation_app.R
+import com.example.root.graduation_app.base.api.JacksonApi
+import com.example.root.graduation_app.bean.LoginUser
+import com.example.root.graduation_app.rxbusevent.UserInfoChangeEvent
 import com.example.root.graduation_app.ui.fragment.WeChatFragment
 import com.example.root.graduation_app.ui.fragment.BookFragment
 import com.example.root.graduation_app.ui.fragment.KnowledgeTreeFragment
 import com.example.root.graduation_app.ui.fragment.HomeFragment
+import com.example.root.graduation_app.utils.*
+import com.example.root.graduation_app.widget.SignDialog
 import com.jaeger.library.StatusBarUtil
 import com.zhouwei.blurlibrary.EasyBlur
 import io.reactivex.Observable
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_index_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -63,6 +75,17 @@ class IndexMainActivity : BaseActivity() {
     */
    private var nav_username: TextView? = null
 
+   private var user = App.getLoginUser()
+   private var signUp: TextView? = null
+
+   companion object {
+      @JvmStatic
+      fun runActivity(activity: Activity) {
+         val intent = Intent(activity, IndexMainActivity::class.java)
+         activity.startActivity(intent)
+      }
+   }
+
    override fun onCreate(savedInstanceState: Bundle?) {
       if (savedInstanceState != null) {
          mIndex = savedInstanceState.getInt(BOTTOM_INDEX)
@@ -73,6 +96,7 @@ class IndexMainActivity : BaseActivity() {
    override fun initActivity(savedInstanceState: Bundle?) {
       StatusBarUtil.setColorForDrawerLayout(this, drawer_layout,
               ContextCompat.getColor(this, R.color.colorPrimary))
+      isLogin = user != null && user?.signout == false   // 判断用户是否登录，登录则是 true，否则是 false
 
       toolbar.run {
          title = getString(R.string.app_name)
@@ -101,14 +125,28 @@ class IndexMainActivity : BaseActivity() {
    @SuppressLint("SetTextI18n")
    private fun initDrawerLayout() {
       val headerView = nav_view.getHeaderView(0)
-      val signUp = headerView.findViewById<TextView>(R.id.headerSignUpText)
+      signUp = headerView.findViewById(R.id.headerSignUpText)
       val userLyt = headerView.findViewById<LinearLayout>(R.id.userLayout)
       val userName = headerView.findViewById<TextView>(R.id.nicknameMe)
       val description = headerView.findViewById<LinearLayout>(R.id.descriptionLayout)
       val introduction = headerView.findViewById<TextView>(R.id.descriptionMe)
+      val imgAvatar = headerView.findViewById<ImageView>(R.id.avatarMe)
 
-      introduction.text = "简介："
-      userName.text = "Jackson"  // 默认名字，实际应该取值判断
+      if (isLogin) {
+         // 说明此时用户登陆了账号
+         userName.text = user?.username
+         introduction.text = "简介：" + if (user?.profile.isNullOrEmpty()) "" else user?.profile
+         signUp!!.visibility = View.VISIBLE
+         if (user?.signintoday!!) { // 如果今天已经签到
+            signUp!!.text = "已签到"
+            signUp?.isEnabled = false
+            signUp?.setBackgroundColor(ContextCompat.getColor(this@IndexMainActivity, R.color.item_date))
+         }
+      } else {
+         userName.text = "您还未登陆"
+         introduction.text = "简介："
+         signUp!!.visibility = View.GONE
+      }
 
       nav_view.run {
          setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
@@ -117,6 +155,11 @@ class IndexMainActivity : BaseActivity() {
 
          val bgImg = getHeaderView(0).findViewById<ImageView>(R.id.navHeaderBgImage)
 
+         // 这里应该从网络取图片
+         if (user?.avatar != null) {
+            // 说明有头像存储
+            PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar)
+         }
          val source = BitmapFactory.decodeResource(resources, R.drawable.avatar_default)
          val bitmap = EasyBlur.with(applicationContext)
                  .bitmap(source)
@@ -124,22 +167,6 @@ class IndexMainActivity : BaseActivity() {
                  .blur()
          bgImg.setImageBitmap(bitmap)
       }
-//      nav_username?.run {
-//         //         text = if (!isLogin) {
-////            getString(R.string.login)
-////         } else {
-////            username
-////         }
-//         setOnClickListener {
-//            if (!isLogin) {
-//               Intent(this@IndexMainActivity, LoginActivity::class.java).run {
-//                  startActivity(this)
-//               }
-//            } else {
-//
-//            }
-//         }
-//      }
       drawer_layout.run {
          val toggle = ActionBarDrawerToggle(
                  this@IndexMainActivity,
@@ -151,33 +178,96 @@ class IndexMainActivity : BaseActivity() {
          toggle.syncState()
       }
 
-      signUp.setOnClickListener {
+      signUp!!.setOnClickListener {
          // 签到的点击事件
+         signUpNow()
          drawer_layout.closeDrawers()
       }
 
       description.setOnClickListener {
          // 点击跳转用户编辑页
          drawer_layout.closeDrawers()
-         Observable.timer(400, TimeUnit.MILLISECONDS)
+         Observable.timer(300, TimeUnit.MILLISECONDS)
                  .subscribe {
-                    ModifyUserInfoActivity.runActivity(this@IndexMainActivity)
+                    if (isLogin) {
+                       ModifyUserInfoActivity.runActivity(this@IndexMainActivity)
+                    } else {
+                       LoginActivity.runActivity(this@IndexMainActivity, user)
+                       ToastUtils.showToast(this@IndexMainActivity, resources.getString(R.string.login_tint))
+                       LoginActivity.runActivity(this@IndexMainActivity, null)
+                    }
                  }
       }
 
       userLyt.setOnClickListener {
          // 点击跳转用户主页（显示已做未做的两个 tab 页）
          drawer_layout.closeDrawers()
-         Observable.timer(400, TimeUnit.MILLISECONDS)
+         Observable.timer(300, TimeUnit.MILLISECONDS)
                  .subscribe {
-                    ProfileActivity.runActivity(this@IndexMainActivity)
+                    if (isLogin) {
+                       ProfileActivity.runActivity(this@IndexMainActivity)
+                    } else {
+                       LoginActivity.runActivity(this@IndexMainActivity, user)
+                       ToastUtils.showToast(this@IndexMainActivity, resources.getString(R.string.login_tint))
+                       LoginActivity.runActivity(this@IndexMainActivity, null)
+                    }
                  }
       }
+   }
+
+   /**
+    * 签到的点击事件，网络请求
+    */
+   @SuppressLint("CheckResult")
+   private fun signUpNow() {
+      showProgress("正在签到...")
+      RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
+              .create(JacksonApi::class.java)
+              .userSignUp(user?.userid!!, CommonUtils.getFormatDateTime(Date()))
+              .compose(RxJavaUtils.applyObservableAsync())
+              .subscribe({
+                 if (it.result == "succeed") {
+                    user = it.data
+                    signUp!!.text = "已签到"
+                    signUp?.isEnabled = false
+                    signUp?.setBackgroundColor(ContextCompat.getColor(this@IndexMainActivity, R.color.item_date))
+                    SharePreferencesUtil.saveAny(this@IndexMainActivity, ConstantConfig.SHARE_LOGIN_USER_NAME, user!!)
+                    ToastUtils.showToast(this@IndexMainActivity, "签到成功")
+                    val dialog = SignDialog(this@IndexMainActivity)
+                    dialog.show()
+                 } else {
+                    ToastUtils.showToast(this@IndexMainActivity, it.msg)
+                 }
+              }, {
+                 ToastUtils.showToast(this@IndexMainActivity, it.message.toString())
+                 LogUtils.e(it.message)
+              })
    }
 
    override fun onSaveInstanceState(outState: Bundle?) {
       super.onSaveInstanceState(outState)
       outState?.putInt(BOTTOM_INDEX, mIndex)
+   }
+
+   override fun handleRxBus() {
+      RxBus.mBus.register(this@IndexMainActivity, UserInfoChangeEvent::class.java,
+              Consumer {
+                 LogUtils.e("更新数据后调用该方法")
+                 PhoneUserUtils.getUptoDateUser(user?.userid!!, object : PhoneUserUtils.operationListener {
+                    override fun success(nowUser: LoginUser) {
+                       user = nowUser
+                       App.setLoginUser(nowUser)
+                       // 更新 user 对象之后刷新侧滑栏部分
+                       LogUtils.e("用户信息：" + user?.profile)
+//                       initDrawerLayout()
+                    }
+
+                    override fun failed(error: String) {
+                       LogUtils.e(error)
+                       ToastUtils.showToast(this@IndexMainActivity, error)
+                    }
+                 })
+              })
    }
 
    override fun loadData() {
@@ -284,7 +374,7 @@ class IndexMainActivity : BaseActivity() {
                  R.id.nav_collect -> {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     if (isLogin) {
-                       Observable.timer(400, TimeUnit.MILLISECONDS)
+                       Observable.timer(300, TimeUnit.MILLISECONDS)
                                .subscribe {
                                   CollectActivity.runActivity(this@IndexMainActivity)
                                }
@@ -298,18 +388,19 @@ class IndexMainActivity : BaseActivity() {
 //                       // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
 //                       startActivity(this)
 //                    }
+                    ToastUtils.showToast(this@IndexMainActivity, "正在开发中...")
                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
                  R.id.nav_about_us -> {
                     drawer_layout.closeDrawer(GravityCompat.START)
-                    Observable.timer(400, TimeUnit.MILLISECONDS)
+                    Observable.timer(300, TimeUnit.MILLISECONDS)
                             .subscribe {
                                AboutMeActivity.runActivity(this@IndexMainActivity)
                             }
                  }
                  R.id.nav_logout -> {
                     drawer_layout.closeDrawer(GravityCompat.START)
-                    Observable.timer(400, TimeUnit.MILLISECONDS)
+                    Observable.timer(300, TimeUnit.MILLISECONDS)
                             .subscribe {
                                logout()
                             }
@@ -338,6 +429,15 @@ class IndexMainActivity : BaseActivity() {
 //                       }
 //                    }
                     drawer_layout.closeDrawer(GravityCompat.START)
+                    Observable.timer(300, TimeUnit.MILLISECONDS)
+                            .subscribe {
+                               if (isLogin) {
+                                  TodoActivity.runActivity(this@IndexMainActivity)
+                               } else {
+                                  ToastUtils.showToast(this@IndexMainActivity, resources.getString(R.string.login_tint))
+                                  LoginActivity.runActivity(this@IndexMainActivity, null)
+                               }
+                            }
                  }
               }
               true
@@ -347,7 +447,9 @@ class IndexMainActivity : BaseActivity() {
     * 退出登陆方法
     */
    private fun logout() {
-
+      App.setLoginUser(null)
+      LoginActivity.runActivity(this, null)
+      finish()
    }
 
    override fun recreate() {
@@ -426,6 +528,7 @@ class IndexMainActivity : BaseActivity() {
 
    override fun onDestroy() {
       super.onDestroy()
+      RxBus.mBus.unregister(this@IndexMainActivity)
       mHomeFragment = null
       mBookFragment = null
       mKnowledgeTreeFragment = null

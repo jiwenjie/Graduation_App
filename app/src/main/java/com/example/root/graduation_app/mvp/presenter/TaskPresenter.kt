@@ -1,6 +1,7 @@
 package com.example.root.graduation_app.mvp.presenter
 
 import com.example.base_library.base_mvp.BaseMvpPresenter
+import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.mvp.constract.TaskContract
 import com.example.root.graduation_app.mvp.model.TaskModel
 
@@ -16,36 +17,52 @@ class TaskPresenter(view: TaskContract.View)
 
    private val mModel by lazy { TaskModel() }
 
-   override fun createNewTask(title: String, content: String, time: String) {
+   override fun createNewTask(userid: String, title: String, content: String) {
       addSubscription(
-              mModel.createNewTask(title, content, time)
+              mModel.createNewTask(userid, title, content)
                       .subscribe({
-                         mView?.createNewSuccess(it.data)
+                         if (it.result == "succeed") {
+                            mView?.createNewSuccess(it.result) // 后台这里新建成功之后没有添加 data
+                         } else {
+                            LogUtils.e(it.msg + it.code)
+                            mView?.error()
+                         }
                       }, {
+                         LogUtils.e(it.message.toString())
                          mView?.error()
-                      })
-      )
+                      }))
    }
 
-   override fun getTaskDetail(id: Int) {
+   override fun getTaskDetail(userid: String, id: String) {
       addSubscription(
-              mModel.getTaskDetail(id)
+              mModel.getTaskDetail(userid, id)
                       .subscribe({
-                         mView?.getDetailSuccess(it.data)
+                         if (it.result == "succeed") {
+                            mView?.getDetailSuccess(it.data)
+                         } else {
+                            mView?.error()
+                            LogUtils.e(it.msg + it.code)
+                         }
                       }, {
+                         LogUtils.e(it.message.toString())
                          mView?.error()
-                      })
-      )
+                      }))
    }
 
-   override fun changeStatus(id: Int, complete: Boolean) {
+   override fun changeStatus(userid: String, id: String) {
       addSubscription(
-              mModel.changeStatus(id, complete)
+              mModel.changeStatus(userid, id)
                       .subscribe({
-                        mView?.changeStatusSuccess(it.data)
+                         if (it.result == "succeed") {
+                            // 返回的没有 data 这个字段 （当返回的格式是 String 的时候）
+                            mView?.changeStatusSuccess(it.result)
+                         } else {
+                            mView?.error()
+                            LogUtils.e(it.msg)
+                         }
                       }, {
+                         LogUtils.e(it.message.toString())
                          mView?.error()
-                      })
-      )
+                      }))
    }
 }

@@ -15,7 +15,7 @@ import io.reactivex.Observable
 interface TodoContract {
 
    interface Model {
-      fun getTodoList(page: Int, limit: Int, complete: Boolean)
+      fun getTodoList(userid: String, page: Int, limit: Int, complete: Boolean)
               : Observable<BaseJacksonList<TodoBean>>
    }
 
@@ -24,6 +24,6 @@ interface TodoContract {
    }
 
    interface Presenter {
-      fun getTodoList(page: Int, limit: Int, complete: Boolean)
+      fun getTodoList(userid: String, page: Int, limit: Int, complete: Boolean)
    }
 }

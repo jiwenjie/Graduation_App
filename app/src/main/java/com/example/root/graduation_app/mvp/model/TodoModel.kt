@@ -18,10 +18,10 @@ import io.reactivex.Observable
  */
 class TodoModel: TodoContract.Model {
 
-   override fun getTodoList(page: Int, limit: Int, complete: Boolean): Observable<BaseJacksonList<TodoBean>> {
+   override fun getTodoList(userid: String, page: Int, limit: Int, complete: Boolean): Observable<BaseJacksonList<TodoBean>> {
       return RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
               .create(JacksonApi::class.java)
-              .getTodoListData(page, limit, complete)
+              .getTodoListData(userid, page, limit, complete)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 }

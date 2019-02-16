@@ -43,7 +43,7 @@ abstract class BaseFragment : Fragment() {
         handleRxBus()
     }
 
-    protected abstract fun loadData()
+    abstract fun loadData()
 
     protected abstract fun getLayoutId(): Int
 

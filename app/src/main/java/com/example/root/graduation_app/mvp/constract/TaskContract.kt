@@ -15,11 +15,11 @@ import io.reactivex.Observable
 interface TaskContract {
 
    interface Model {
-      fun createNewTask(title: String, content: String, time: String): Observable<BaseJackson<String>>
+      fun createNewTask(userid: String, title: String, content: String): Observable<BaseJackson<String>>
 
-      fun getTaskDetail(id: Int): Observable<BaseJackson<TodoBean>>
+      fun getTaskDetail(userid: String, id: String): Observable<BaseJackson<TodoBean>>
 
-      fun changeStatus(id: Int, complete: Boolean): Observable<BaseJackson<String>>
+      fun changeStatus(userid: String, id: String): Observable<BaseJackson<String>>
    }
 
    interface View : BaseMvpViewImpl {
@@ -33,10 +33,10 @@ interface TaskContract {
    }
 
    interface Presenter {
-      fun createNewTask(title: String, content: String, time: String)
+      fun createNewTask(userid: String, title: String, content: String)
 
-      fun getTaskDetail(id: Int)
+      fun getTaskDetail(userid: String, id: String)
 
-      fun changeStatus(id: Int, complete: Boolean)
+      fun changeStatus(userid: String, id: String)
    }
 }

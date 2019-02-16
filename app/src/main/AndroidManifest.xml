@@ -35,7 +35,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <!--<activity android:name=".SplashActivity">-->
-        <activity android:name=".ui.activity.IndexMainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,6 +44,15 @@
         </activity>
 
         <!-- 程序首页 -->
+        <activity
+            android:name=".ui.activity.IndexMainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 注册页面输入用户手机号后跳转到输入昵称页面 -->
+        <activity
+            android:name=".ui.activity.InputNickNameAndPassActivity"
+            android:screenOrientation="portrait" />
+
         <!--<activity-->
         <!--android:name=".mvp.activity.MainActivity"-->
         <!--android:screenOrientation="portrait"-->

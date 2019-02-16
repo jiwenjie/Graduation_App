@@ -17,10 +17,10 @@ class CollectPresenter(view: CollectContract.View)
 
    private val mModel by lazy { CollectModel() }
 
-   override fun requestCollectData(page: Int, limit: Int) {
+   override fun requestCollectData(userid: String, page: Int, limit: Int) {
       mView?.showLoading()
       addSubscription(
-              mModel.requestCollectData(page, limit)
+              mModel.requestCollectData(userid, page, limit)
                       .subscribe({
                          mView?.dismissLoading()
                          mView?.displayCollectData(it.data.datas)

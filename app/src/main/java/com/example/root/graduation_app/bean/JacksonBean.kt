@@ -24,7 +24,8 @@ data class BaseJackson<T>(
 ) : Serializable
 
 data class TodoBean(
-        var id: Int,
+        var todoid: String,
+        var userid: String,
         var title: String,
         var content: String,
         var createtime: String,

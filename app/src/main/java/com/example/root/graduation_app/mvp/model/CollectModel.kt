@@ -19,10 +19,10 @@ import io.reactivex.Observable
  */
 class CollectModel : CollectContract.Model {
 
-   override fun requestCollectData(page: Int, limit: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>> {
+   override fun requestCollectData(userid: String, page: Int, limit: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>> {
       return RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
               .create(JacksonApi::class.java)
-              .getCollectData(page, limit)
+              .getCollectData(userid, page, limit)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 }

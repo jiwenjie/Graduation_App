@@ -124,7 +124,7 @@ abstract class BaseActivity : AppCompatActivity() {
    }
 
    fun showProgress(msg: String?, config: MDialogConfig?) {
-      MProgressDialog.showProgress(this@BaseActivity, msg, config)
+      MProgressDialog.showProgress(this, msg, config)
    }
 
    fun dismissProgress() {

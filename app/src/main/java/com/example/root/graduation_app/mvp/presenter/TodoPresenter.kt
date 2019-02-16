@@ -2,6 +2,7 @@ package com.example.root.graduation_app.mvp.presenter
 
 import com.example.base_library.base_mvp.BaseMvpPresenter
 import com.example.base_library.base_utils.ExceptionHandle
+import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.mvp.constract.TodoContract
 import com.example.root.graduation_app.mvp.model.TodoModel
 
@@ -17,13 +18,18 @@ class TodoPresenter(view: TodoContract.View) : BaseMvpPresenter<TodoContract.Vie
 
    private val mModel by lazy { TodoModel() }
 
-   override fun getTodoList(page: Int, limit: Int, complete: Boolean) {
+   override fun getTodoList(userid: String, page: Int, limit: Int, complete: Boolean) {
       if (page == 1) mView?.showLoading()
       addSubscription(
-              mModel.getTodoList(page, limit, complete)
+              mModel.getTodoList(userid, page, limit, complete)
                       .subscribe({
                          mView?.dismissLoading()
-                         mView?.showResult(it.data)
+                         LogUtils.e(it.msg)
+                         if (it.result == "succeed") {
+                            mView?.showResult(it.data)
+                         } else {
+                            mView?.showError(it.msg, it.code)
+                         }
                       }, {
                          mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
                       })

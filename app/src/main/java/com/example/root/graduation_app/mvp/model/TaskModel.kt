@@ -18,24 +18,24 @@ import io.reactivex.Observable
  */
 class TaskModel : TaskContract.Model {
 
-   override fun createNewTask(title: String, content: String, time: String): Observable<BaseJackson<String>> {
+   override fun createNewTask(userid: String, title: String, content: String): Observable<BaseJackson<String>> {
       return RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
               .create(JacksonApi::class.java)
-              .createNewTask(title, content, time)
+              .createNewTask(userid, title, content)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 
-   override fun getTaskDetail(id: Int): Observable<BaseJackson<TodoBean>> {
+   override fun getTaskDetail(userid: String, id: String): Observable<BaseJackson<TodoBean>> {
       return RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
               .create(JacksonApi::class.java)
-              .getTaskDetail(id)
+              .getTaskDetail(userid, id)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 
-   override fun changeStatus(id: Int, complete: Boolean): Observable<BaseJackson<String>> {
+   override fun changeStatus(userid: String, id: String): Observable<BaseJackson<String>> {
       return RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
               .create(JacksonApi::class.java)
-              .changeStatus(id, complete)
+              .changeStatus(userid, id)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 }
