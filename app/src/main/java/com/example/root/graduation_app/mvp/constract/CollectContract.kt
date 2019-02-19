@@ -1,6 +1,7 @@
 package com.example.root.graduation_app.mvp.constract
 
 import com.example.root.graduation_app.base.IBaseView
+import com.example.root.graduation_app.bean.BaseJacksonList
 import com.example.root.graduation_app.bean.WanAndroidBaseBean
 import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.bean.WanAndroidJson
@@ -16,7 +17,7 @@ import io.reactivex.Observable
 interface CollectContract {
 
    interface Model {
-      fun requestCollectData(userid: String, page: Int, limit: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+      fun requestCollectData(userid: String, page: Int, limit: Int): Observable<BaseJacksonList<WanAndroidItem>>
    }
 
    interface View: IBaseView {

@@ -3,6 +3,7 @@ package com.example.root.graduation_app.base.api
 import com.example.root.graduation_app.bean.*
 import io.reactivex.Observable
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
@@ -52,7 +53,7 @@ interface JacksonApi {
     */
    @Multipart
    @POST("phoneUser/modifyAvatar")
-   fun uploadAvatar(@Part("userid") userid: String, @Part imgs: MultipartBody.Part): Observable<BaseJackson<LoginUser>>
+   fun uploadAvatar(@Part("userid") userid: RequestBody, @Part imgs: MultipartBody.Part): Observable<BaseJackson<LoginUser>>
 
    /**
     * 更改用户的基本信息（昵称和简介）
@@ -61,13 +62,13 @@ interface JacksonApi {
    @POST("phoneUser/changeUserInfo")
    fun changeNickNameAndDescription(@Field("userid") userid: String,
                                     @Field("nickname") nickname: String,
-                                    @Field("description") description: String): Observable<BaseJackson<String>>
+                                    @Field("description") description: String): Observable<BaseJackson<LoginUser>>
 
    /**
     * 获取用户的所有信息
     */
    @FormUrlEncoded
-   @POST("phoneUser/getUserInfo")
+   @POST("phoneUser/getUserInfoNow")
    fun getUserInfo(@Field("userid") userId: String): Observable<BaseJackson<LoginUser>>
 
    /**
@@ -123,7 +124,7 @@ interface JacksonApi {
    fun getCollectData(
            @Field("userid") userid: String,
            @Field("page") page: Int,
-           @Field("limit") limit: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+           @Field("limit") limit: Int): Observable<BaseJacksonList<WanAndroidItem>>
 
    /**
     * 收藏文章

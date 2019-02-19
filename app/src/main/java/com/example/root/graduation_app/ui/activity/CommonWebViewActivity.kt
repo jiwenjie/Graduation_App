@@ -19,7 +19,6 @@ import android.webkit.WebViewClient
 import android.widget.TextView
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
-import com.example.base_library.base_utils.ToastUtils.showToast
 
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R

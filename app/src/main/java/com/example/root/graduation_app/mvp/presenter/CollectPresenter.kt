@@ -18,12 +18,16 @@ class CollectPresenter(view: CollectContract.View)
    private val mModel by lazy { CollectModel() }
 
    override fun requestCollectData(userid: String, page: Int, limit: Int) {
-      mView?.showLoading()
+      if (page == 0 || page == 1) mView?.showLoading()
       addSubscription(
               mModel.requestCollectData(userid, page, limit)
                       .subscribe({
                          mView?.dismissLoading()
-                         mView?.displayCollectData(it.data.datas)
+                         if (it.result == "succeed") {
+                            mView?.displayCollectData(it.data)
+                         } else {
+                            mView?.showError(it.msg, it.code)
+                         }
                       }, {
                          mView?.showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
                       })

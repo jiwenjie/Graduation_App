@@ -192,9 +192,14 @@ class ModifyUserInfoActivity : BaseActivity() {
                     if (it.result == "succeed") {
                        // 返回值表示成功后，使用 RxBus 更新数据，之后直接把当前活动 finish 掉即可。
                        ToastUtils.showToast(this@ModifyUserInfoActivity, "信息更改成功")
-                       RxBus.mBus.post(UserInfoChangeEvent())
+                       val user = it.data
+                       LogUtils.e(user.profile + user.userphone)
+                       App.setLoginUser(user)
+//                       App.setLoginUser(it.data)
+//                       RxBus.mBus.post(UserInfoChangeEvent())
                        Observable.timer(300, TimeUnit.MILLISECONDS)
                           .subscribe {
+                             IndexMainActivity.runActivity(this)
                              finish()
                              overridePendingTransition(0, 0)
                           }
@@ -207,7 +212,10 @@ class ModifyUserInfoActivity : BaseActivity() {
                  })
 //            RxBus.mBus.post()
       } else {
+         // 这里不做什么特殊处理，直接过去
+         IndexMainActivity.runActivity(this)
          finish()
+         overridePendingTransition(0, 0)
       }
    }
 
@@ -365,7 +373,7 @@ class ModifyUserInfoActivity : BaseActivity() {
    }
 
    private fun updateAvatar(path: String) {
-      UploadUtils.uploadAvatar(user?.userid!!, path, object : UploadUtils.UploadImageListener {
+      UploadUtils.uploadAvatar(App.getLoginUser()?.userid!!, path, object : UploadUtils.UploadImageListener {
          override fun uploadSuccess(user: LoginUser) {
             ToastUtils.showToast(this@ModifyUserInfoActivity, "上传成功")
             App.setLoginUser(user)  // 保存 loginUser

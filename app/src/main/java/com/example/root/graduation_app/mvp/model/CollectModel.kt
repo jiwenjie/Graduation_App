@@ -2,6 +2,7 @@ package com.example.root.graduation_app.mvp.model
 
 import com.example.base_library.RetrofitManager
 import com.example.root.graduation_app.base.api.JacksonApi
+import com.example.root.graduation_app.bean.BaseJacksonList
 import com.example.root.graduation_app.bean.WanAndroidBaseBean
 import com.example.root.graduation_app.bean.WanAndroidItem
 import com.example.root.graduation_app.bean.WanAndroidJson
@@ -19,7 +20,7 @@ import io.reactivex.Observable
  */
 class CollectModel : CollectContract.Model {
 
-   override fun requestCollectData(userid: String, page: Int, limit: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>> {
+   override fun requestCollectData(userid: String, page: Int, limit: Int): Observable<BaseJacksonList<WanAndroidItem>> {
       return RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
               .create(JacksonApi::class.java)
               .getCollectData(userid, page, limit)

@@ -15,7 +15,7 @@ import com.example.root.graduation_app.bean.LoginUser
 object SharePreferencesUtil {
 
    /** SharePreference 的存储关键字 **/
-   private const val SHARED_PREFERENCES_NAME = "graduation_app_file"
+   private const val SHARED_PREFERENCES_NAME = "graduation_app_files"
 
    @JvmStatic
    fun saveString(context: Context, key: String, value: String) {

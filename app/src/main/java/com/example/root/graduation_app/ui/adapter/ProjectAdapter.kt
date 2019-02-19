@@ -50,7 +50,6 @@ class ProjectAdapter(context: Context, beanList: ArrayList<WanAndroidItem>)
          } else {
             if (data.collect) {  // 文章已被收藏（这里注意因为只在前台改了数据没有更改后台数据，所以刷新之后就会重置）
                // 说明此时文章已被收藏，所以点击的时候应该是取消收藏
-               LogUtils.e("此时文章已经被收藏")
                PhoneUserUtils.cancelCollect(user.userid!!, data.id, object : PhoneUserUtils.collectArticleInterface {
                   override fun success(msg: String) {
                     ToastUtils.showToast(mContext, "取消收藏成功")
@@ -65,7 +64,6 @@ class ProjectAdapter(context: Context, beanList: ArrayList<WanAndroidItem>)
                })
             } else {
                // 说明此时文章还没被收藏或者已经取消了收藏
-               LogUtils.e("此时文章还未被收藏")
                PhoneUserUtils.collectArticle(user.userid!!, data, object : PhoneUserUtils.collectArticleInterface {
                   override fun success(msg: String) {
                      ToastUtils.showToast(mContext, "收藏成功")

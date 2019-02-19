@@ -51,10 +51,11 @@ object PhoneUserUtils {
     */
    @SuppressLint("CheckResult")
    @JvmStatic
-   fun getUptoDateUser(userId: String, listener: operationListener) {
+   fun getUpdateUser(userId: String, listener: operationListener) {
       RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
               .create(JacksonApi::class.java)
               .getUserInfo(userId)
+              .compose(RxJavaUtils.applyObservableAsync())
               .subscribe({
                  if (it.result == "succeed") {
                     listener.success(it.data)

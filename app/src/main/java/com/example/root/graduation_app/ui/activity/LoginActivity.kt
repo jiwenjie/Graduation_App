@@ -201,10 +201,11 @@ class LoginActivity : BaseActivity() {
           */
 
          showProgress("正在登录中...")
-         PhoneUserUtils.loginByPhone(inputPhone!!, inputPass!!, object : PhoneUserUtils.operationListener {
+         PhoneUserUtils.loginByPhone(activity_login_phone.text.toString().trim(), activity_login_password.text.toString().trim(), object : PhoneUserUtils.operationListener {
             override fun success(user: LoginUser) {
                // 登录后把信息保存到本地
                dismissProgress()
+               LogUtils.e("Login" + user.username + user.profile)
                App.setLoginUser(user)
                IndexMainActivity.runActivity(this@LoginActivity)
                finish()

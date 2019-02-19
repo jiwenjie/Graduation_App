@@ -65,12 +65,17 @@ object UploadUtils {
 
         val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file!!)
         val body = MultipartBody.Part.createFormData("image", file.name, requestBody)   // 这里的 key 要和后台接收的 body 名字相同才行
+
+        /**
+         * 参数和图片一起上传的时候两种方式，这是第一种，第二种是使用 query 关键字
+          */
+        val idBody = RequestBody.create(MediaType.parse("multipart/form-data"), userid)
         LogUtils.e("UploadUtils" + file.name)
         LogUtils.e("UploadUtils" + file.absolutePath)
 
         RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
             .create(JacksonApi::class.java)
-            .uploadAvatar(userid, body)
+            .uploadAvatar(idBody, body)
             .compose(RxJavaUtils.applyObservableAsync())
             .subscribe({
                 if (it.result == "succeed") {
@@ -78,7 +83,6 @@ object UploadUtils {
                 } else {
                     listener.uploadFailed(it.msg)
                 }
-
             }, {
                 listener.uploadFailed(it.message.toString())
             })

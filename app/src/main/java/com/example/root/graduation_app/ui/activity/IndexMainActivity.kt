@@ -75,7 +75,7 @@ class IndexMainActivity : BaseActivity() {
     */
    private var nav_username: TextView? = null
 
-   private var user = App.getLoginUser()
+   private var user: LoginUser? = null
    private var signUp: TextView? = null
 
    companion object {
@@ -96,6 +96,7 @@ class IndexMainActivity : BaseActivity() {
    override fun initActivity(savedInstanceState: Bundle?) {
       StatusBarUtil.setColorForDrawerLayout(this, drawer_layout,
               ContextCompat.getColor(this, R.color.colorPrimary))
+      user = App.getLoginUser()
       isLogin = user != null && user?.signout == false   // 判断用户是否登录，登录则是 true，否则是 false
 
       toolbar.run {
@@ -158,6 +159,7 @@ class IndexMainActivity : BaseActivity() {
          // 这里应该从网络取图片
          if (user?.avatar != null) {
             // 说明有头像存储
+            LogUtils.e("有头像")
             PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar)
          }
          val source = BitmapFactory.decodeResource(resources, R.drawable.avatar_default)
@@ -226,8 +228,10 @@ class IndexMainActivity : BaseActivity() {
               .userSignUp(user?.userid!!, CommonUtils.getFormatDateTime(Date()))
               .compose(RxJavaUtils.applyObservableAsync())
               .subscribe({
+                 dismissProgress()
                  if (it.result == "succeed") {
                     user = it.data
+                    App.setLoginUser(it.data)
                     signUp!!.text = "已签到"
                     signUp?.isEnabled = false
                     signUp?.setBackgroundColor(ContextCompat.getColor(this@IndexMainActivity, R.color.item_date))
@@ -239,6 +243,7 @@ class IndexMainActivity : BaseActivity() {
                     ToastUtils.showToast(this@IndexMainActivity, it.msg)
                  }
               }, {
+                 dismissProgress()
                  ToastUtils.showToast(this@IndexMainActivity, it.message.toString())
                  LogUtils.e(it.message)
               })
@@ -249,26 +254,13 @@ class IndexMainActivity : BaseActivity() {
       outState?.putInt(BOTTOM_INDEX, mIndex)
    }
 
-   override fun handleRxBus() {
-      RxBus.mBus.register(this@IndexMainActivity, UserInfoChangeEvent::class.java,
-              Consumer {
-                 LogUtils.e("更新数据后调用该方法")
-                 PhoneUserUtils.getUptoDateUser(user?.userid!!, object : PhoneUserUtils.operationListener {
-                    override fun success(nowUser: LoginUser) {
-                       user = nowUser
-                       App.setLoginUser(nowUser)
-                       // 更新 user 对象之后刷新侧滑栏部分
-                       LogUtils.e("用户信息：" + user?.profile)
-//                       initDrawerLayout()
-                    }
-
-                    override fun failed(error: String) {
-                       LogUtils.e(error)
-                       ToastUtils.showToast(this@IndexMainActivity, error)
-                    }
-                 })
-              })
-   }
+//   override fun handleRxBus() {
+//      RxBus.mBus.register(this@IndexMainActivity, UserInfoChangeEvent::class.java,
+//              Consumer {
+//                 LogUtils.e("更新数据后调用该方法")
+//
+//              })
+//   }
 
    override fun loadData() {
 
@@ -528,7 +520,7 @@ class IndexMainActivity : BaseActivity() {
 
    override fun onDestroy() {
       super.onDestroy()
-      RxBus.mBus.unregister(this@IndexMainActivity)
+//      RxBus.mBus.unregister(this@IndexMainActivity)
       mHomeFragment = null
       mBookFragment = null
       mKnowledgeTreeFragment = null
