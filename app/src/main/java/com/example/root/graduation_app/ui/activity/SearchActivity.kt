@@ -114,14 +114,13 @@ class SearchActivity :
             page = 0
             mPresenter.searchArticleAll(page, tagKey)
         }
-
-        hotkeywordAdapter.setOnItemClickListener { position, view ->
-            val bean = beanList[position]
-            CommonWebViewActivity.runActivity(this@SearchActivity, bean.name, bean.link)
-        }
         // 取消
         searchBack.setOnClickListener {
             onBackPressed()
+        }
+
+        searchAdapter.setOnItemClickListener { position, view ->
+            CommonWebViewActivity.runActivity(this@SearchActivity, searchList[position].title, searchList[position].link)
         }
     }
 
