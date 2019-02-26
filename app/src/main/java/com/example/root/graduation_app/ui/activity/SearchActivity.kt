@@ -2,6 +2,7 @@ package com.example.root.graduation_app.ui.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -63,7 +64,9 @@ class SearchActivity :
         mLayoutStatusView = multipleStatusView
         mLayoutStatusView?.showContent()
         publicId = intent.getIntExtra(KEY_TAB_NAME, -1)
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            searchView.transitionName = getString(R.string.transition_search_back)
+        }
         initView()
         initEvent()
     }
@@ -111,27 +114,15 @@ class SearchActivity :
             page = 0
             mPresenter.searchArticleAll(page, tagKey)
         }
+
+        hotkeywordAdapter.setOnItemClickListener { position, view ->
+            val bean = beanList[position]
+            CommonWebViewActivity.runActivity(this@SearchActivity, bean.name, bean.link)
+        }
         // 取消
         searchBack.setOnClickListener {
             onBackPressed()
         }
-//        tv_cancel.setOnClickListener {
-//            onBackPressed()
-//        }
-        // 键盘的搜索按钮 (EditText 的 几种 imeAction 设置使用，此处判断是否是搜索)
-//        et_search_view.setOnEditorActionListener { v, actionId, event ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-////                closeSoftKeyboard()
-//                tagKey = et_search_view.text.toString()
-//                page = 0
-//                if (tagKey.isEmpty()) {
-//                    ToastUtils.showToast(applicationContext!!, "请输入您感兴趣的关键词")
-//                } else {
-//                    mPresenter.searchArticleAll(page, tagKey)
-//                }
-//            }
-//            false
-//        }
     }
 
     private fun setupSearchView() {
@@ -156,90 +147,20 @@ class SearchActivity :
         searchBack.setOnClickListener {
             dismiss()
         }
-//        scrim.setOnClickListener {
-//            dismiss()
-//        }
     }
 
     private fun searchFor(query: String) {
-//        keyword = query
-//        if (keyword.isBlank()) {
-//            showToast(GlobalUtil.getString(R.string.search_keyword_can_not_be_blank))
-//        } else {
-//            clearResults()
-//            loading?.visibility = View.VISIBLE
-//            hideKeyboard()
-//
-//            isLoading = true
-//            isNoMoreData = false
-//            GifFun.getHandler().postDelayed(600) {
-//                SearchMixed.getResponse(keyword, object : Callback {
-//                    override fun onResponse(response: Response) {
-//                        if (activity == null) {
-//                            return
-//                        }
-//                        isLoading = false
-//                        if (!ResponseHandler.handleResponse(response)) {
-//                            val searchMixed = response as SearchMixed
-//                            val status = searchMixed.status
-//                            when (status) {
-//                                0 -> {
-//                                    searchItemList.addAll(searchMixed.users)
-//                                    searchItemList.addAll(searchMixed.feeds)
-//                                    if (searchMixed.feeds.size < 10) {
-//                                        isNoMoreData = true
-//                                    }
-//                                    adapter.notifyDataSetChanged()
-//                                    loadFinished()
-//                                }
-//                                10004 -> {
-//                                    loadFinished()
-//                                }
-//                                10501 -> {
-//                                    loadFailed(GlobalUtil.getString(R.string.search_keyword_can_not_be_blank))
-//                                }
-//                                10502 -> {
-//                                    loadFailed(GlobalUtil.getString(R.string.search_keyword_to_long))
-//                                }
-//                                else -> {
-//                                    logWarn(TAG, "Search failed. " + GlobalUtil.getResponseClue(status, searchMixed.msg))
-//                                    loadFailed(GlobalUtil.getString(R.string.search_failed) + " " + status)
-//                                }
-//                            }
-//                        } else {
-//                            loadFailed(GlobalUtil.getString(R.string.unknown_error) + ": " + response.status)
-//                        }
-//                    }
-//
-//                    override fun onFailure(e: Exception) {
-//                        logWarn(TAG, e.message, e)
-//                        isLoading = false
-//                        loadFailed(GlobalUtil.getString(R.string.search_failed_bad_network))
-//                    }
-//                })
-//            }
-//        }
+
     }
 
     private fun dismiss() {
         // clear the background else the touch ripple moves with the translation which looks bad
         searchBack.background = null
-//        if (AndroidVersion.hasLollipop()) {
-//            finishAfterTransition()
-//        } else {
-//            finish()
-//        }
     }
 
     private fun clearResults() {
-//        runAutoTransition()
-//        adapter.clear()
-//        searchResults.visibility = View.INVISIBLE
-//        loading?.visibility = View.GONE
-//        hideNoContentView()
-//        hideLoadErrorView()
-    }
 
+    }
 
     override fun loadData() {
         mPresenter.getHotword()
@@ -279,6 +200,10 @@ class SearchActivity :
             layout_hot_words.visibility = View.VISIBLE
             layout_content_result.visibility = View.GONE
             return
+        }
+        // 属性动画部分
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition()
         }
         super.onBackPressed()
     }

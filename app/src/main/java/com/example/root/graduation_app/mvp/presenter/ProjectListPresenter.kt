@@ -18,7 +18,7 @@ class ProjectListPresenter(view: ProjectListContract.View)
    private val mModel by lazy { ProjectListModel() }
 
    override fun requestProjectList(page: Int, cid: Int) {
-      mView?.showLoading()
+      if (page == 1) mView?.showLoading()
       addSubscription(
               mModel.requestProjectList(page, cid)
                       .subscribe({

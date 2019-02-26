@@ -99,4 +99,9 @@
 
     <string name="copyright_content">本APP所使用的所有API均由 玩Android 网站提供，仅供学习交流，不可用于任何商业用途。</string>
 
+    <string name="saveImageLocal">保存图片到本地</string>
+
+    <!-- 共享动画的 key -->
+    <string name="transition_search_back">shareSearchBack</string>
+    <string name="transition_view_logo">sharelogo</string>
 </resources>

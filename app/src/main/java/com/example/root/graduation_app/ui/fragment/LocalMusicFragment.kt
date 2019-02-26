@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
  *  author:Jiwenjie
  *  email:278630464@qq.com
  *  time:2019/02/21
- *  desc:
+ *  desc: 已弃用
  *  version:1.0
  */
 class LocalMusicFragment : BaseFragment() {
@@ -62,7 +62,7 @@ class LocalMusicFragment : BaseFragment() {
       commonRv.addItemDecoration(SpaceItemDecoration(activity!!))
       commonRv.adapter = localAdapter  // 因为是一次性获取，所以不需要滚动监听了
       localAdapter.setOnItemClickListener { position, view ->
-         MusicPlayActivity.runActivity(activity!!, beanList[position])  // 跳转过去的同时开始播放音乐
+         MusicPlayActivity.runActivity(activity!!, position, beanList)  // 跳转过去的同时开始播放音乐
          binder?.playMusic(beanList[position])
       }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.content.edit
 import com.alibaba.fastjson.JSON
 import com.example.root.graduation_app.bean.LoginUser
+import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 
 /**
  *  author:Jiwenjie
@@ -126,5 +127,28 @@ object SharePreferencesUtil {
       val stringAny = sp.getString(key, "")
       if (stringAny.isNullOrEmpty()) return null
       return JSON.parseObject(stringAny, LoginUser::class.java)
+   }
+
+   /**
+    * 存储取出列表数据
+    */
+   @JvmStatic
+   fun saveHomeTreeList(context: Context, key: String, beanList: List<WanAndroidPublicItemBean>) {
+      val sp = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+      sp.edit {
+         putString(key, JSON.toJSONString(beanList))
+         apply()
+      }
+   }
+
+   @JvmStatic
+   fun getHomeTreeList(context: Context, key: String): MutableList<WanAndroidPublicItemBean>? {
+      val sp = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+      val data = sp.getString(key, "")
+      return if (data.isNullOrEmpty()) {
+         null
+      } else {
+         JSON.parseArray(data, WanAndroidPublicItemBean::class.java)
+      }
    }
 }

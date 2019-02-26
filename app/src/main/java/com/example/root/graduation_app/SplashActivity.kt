@@ -91,31 +91,6 @@ class SplashActivity : BaseActivity() {
       animatorSet.start()
    }
 
-   @SuppressLint("CheckResult", "PrivateResource")
-   private fun getNewUserInfo() {
-
-//      RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
-//              .create(JacksonApi::class.java)
-//              .getUserInfo("1550113004014")
-//              .compose(RxJavaUtils.applyObservableAsync())
-//              .subscribe({
-//                  if (it.result == "succeed") {
-//                     val user = it.data
-//                     AlertDialog.Builder(this)
-//                             .setTitle("测试")
-//                             .setMessage(user.avatar + user.profile)
-//                             .show()
-//                     LogUtils.e("SplashActivityTest" + user.avatar + user.profile)
-//                  } else {
-//                     ToastUtils.showToast(this@SplashActivity, it.msg)
-//                  }
-//              }, {
-//                 LogUtils.e(it.message.toString())
-//              })
-
-
-   }
-
    @SuppressLint("PrivateResource")
    private fun goIndexMainActivity() {
       IndexMainActivity.runActivity(this@SplashActivity)

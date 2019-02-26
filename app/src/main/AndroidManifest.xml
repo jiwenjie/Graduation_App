@@ -163,6 +163,10 @@
             android:name=".ui.activity.LocalMusicActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 查看 logo 的界面 -->
+        <activity
+            android:name=".ui.activity.ViewLogoActivity"
+            android:screenOrientation="portrait" />
         <!-- 滑动头部和折叠的有关页面 -->
 
         <!-- 蒲公英的 sdk 引入 start -->

@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.text.Editable
 import android.text.TextUtils
+import android.widget.TextView
 import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.utils.SharePreferencesUtil
 import com.example.base_library.base_utils.ToastUtils
@@ -49,8 +51,6 @@ class LoginActivity : BaseActivity() {
    override fun loadData() {
 
    }
-
-   override fun getLayoutId(): Int = R.layout.activity_login
 
    /**
     * 判断本地存储的登陆对象值是否与输入的相同，相同则显示 Hello!xxx欢迎回来
@@ -184,7 +184,6 @@ class LoginActivity : BaseActivity() {
    private fun initEvent() {
       activity_login_register.setOnClickListener {
          // 点击注册
-         ToastUtils.showToast(applicationContext, "点击注册")
          startActivity(Intent(this, RegisterActivity::class.java))
       }
 
@@ -219,5 +218,14 @@ class LoginActivity : BaseActivity() {
             }
          })
       }
+
+      activity_login_icon.setOnClickListener {
+         val view = findViewById<TextView>(R.id.activity_login_icon)
+         val intent = Intent(baseContext, ViewLogoActivity::class.java)
+         val compat = ActivityOptionsCompat.makeSceneTransitionAnimation(this@LoginActivity, view, getString(R.string.transition_view_logo))
+         startActivity(intent, compat.toBundle())
+      }
    }
+
+   override fun getLayoutId(): Int = R.layout.activity_login
 }

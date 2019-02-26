@@ -23,6 +23,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_drawer_layout.*
 import java.util.*
 
+/**
+ * 弃用改 main 活动
+ */
 @SuppressLint("Registered")
 class MainActivity : BaseActivity(), View.OnClickListener {
 

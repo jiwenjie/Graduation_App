@@ -22,49 +22,52 @@ import kotlinx.android.synthetic.main.activity_feed_back.*
  */
 class FeedBackActivity : BaseActivity() {
 
-    companion object {
-       @JvmStatic
-       fun runActivity(activity: Activity) {
-           val intent = Intent(activity, FeedBackActivity::class.java)
-           activity.startActivity(intent)
-       }
-    }
+   companion object {
+      @JvmStatic
+      fun runActivity(activity: Activity) {
+         val intent = Intent(activity, FeedBackActivity::class.java)
+         activity.startActivity(intent)
+      }
+   }
 
-    override fun initActivity(savedInstanceState: Bundle?) {
+   override fun initActivity(savedInstanceState: Bundle?) {
 
-        activity_feed_back_contentText.addTextChangedListener(object : SimpleTextWatcher() {
-            override fun afterTextChanged(s: Editable?) {
-                confirmChange(s)
+      activity_feed_back_contentText.addTextChangedListener(object : SimpleTextWatcher() {
+         override fun afterTextChanged(s: Editable?) {
+            confirmChange(s)
+         }
+      })
+
+      activity_feed_back_confirmText.setOnClickListener {
+         showProgress(null)
+         PhoneUserUtils.feedBack(App.getLoginUser()?.userid!!, activity_feed_back_contentText.text.toString().trim(), object : PhoneUserUtils.feedOnClickListener {
+            override fun onSuccess(msg: String) {
+               ToastUtils.showToast(this@FeedBackActivity, msg)
+               dismissProgress()
+               activity_feed_back_contentText.text = null
             }
-        })
 
-        activity_feed_back_confirmText.setOnClickListener {
-            PhoneUserUtils.feedBack(App.getLoginUser()?.userid!!, activity_feed_back_contentText.text.toString().trim(), object : PhoneUserUtils.feedOnClickListener {
-                override fun onSuccess(msg: String) {
-                    ToastUtils.showToast(this@FeedBackActivity, msg)
-                    activity_feed_back_contentText.text = null
-                }
+            override fun onFailed(error: String) {
+               dismissProgress()
+               ToastUtils.showToast(this@FeedBackActivity, error)
+            }
+         })
+      }
+   }
 
-                override fun onFailed(error: String) {
-                    ToastUtils.showToast(this@FeedBackActivity, error)
-                }
-            })
-        }
-    }
+   private fun confirmChange(s: Editable?) {
+      if (s.isNullOrEmpty()) {
+         activity_feed_back_confirmText.isEnabled = false
+         activity_feed_back_confirmText.background = ContextCompat.getDrawable(this@FeedBackActivity, R.drawable.login_btn_no_press)
+      } else {
+         activity_feed_back_confirmText.isEnabled = true
+         activity_feed_back_confirmText.background = ContextCompat.getDrawable(this@FeedBackActivity, R.drawable.login_btn_is_press)
+      }
+   }
 
-    private fun confirmChange(s: Editable?) {
-        if (s.isNullOrEmpty()) {
-            activity_feed_back_confirmText.isEnabled = false
-            activity_feed_back_confirmText.background = ContextCompat.getDrawable(this@FeedBackActivity, R.drawable.login_btn_no_press)
-        } else {
-            activity_feed_back_confirmText.isEnabled = true
-            activity_feed_back_confirmText.background = ContextCompat.getDrawable(this@FeedBackActivity, R.drawable.login_btn_is_press)
-        }
-    }
+   override fun loadData() {
 
-    override fun loadData() {
+   }
 
-    }
-
-    override fun getLayoutId(): Int = R.layout.activity_feed_back
+   override fun getLayoutId(): Int = R.layout.activity_feed_back
 }

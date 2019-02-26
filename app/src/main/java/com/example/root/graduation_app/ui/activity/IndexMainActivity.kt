@@ -2,11 +2,14 @@ package com.example.root.graduation_app.ui.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
@@ -488,8 +491,18 @@ class IndexMainActivity : BaseActivity() {
    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
       when (item?.itemId) {
          R.id.action_search -> {
-            Intent(this, SearchActivity::class.java).run {
-               startActivity(this)
+            /** 增加共享动画元素 **/
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {   // 系统版本在 5.0 以上开启共享动画
+               val searchMenuView: View? = toolbar?.findViewById(R.id.action_search)
+               searchMenuView?.visibility = View.GONE    // 5.0 以上为了解决跳转有重叠的问题所以设置 GONE
+               val intent = Intent(this, SearchActivity::class.java)
+               val options = ActivityOptions.makeSceneTransitionAnimation(this, searchMenuView,
+                       getString(R.string.transition_search_back)).toBundle()
+               startActivity(intent, options)
+            } else {
+               Intent(this, SearchActivity::class.java).run {
+                  startActivity(this)
+               }
             }
             return true
          }

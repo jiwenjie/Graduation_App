@@ -2,6 +2,7 @@ package com.example.root.graduation_app.ui.fragment
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import com.alibaba.fastjson.JSON
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
@@ -10,6 +11,8 @@ import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 import com.example.root.graduation_app.mvp.constract.ProjectContract
 import com.example.root.graduation_app.mvp.presenter.ProjectPresenter
 import com.example.root.graduation_app.ui.adapter.ProjectPagerAdapter
+import com.example.root.graduation_app.utils.ConstantConfig
+import com.example.root.graduation_app.utils.SharePreferencesUtil
 import kotlinx.android.synthetic.main.fragment_project_index.*
 
 /**
@@ -44,6 +47,7 @@ class HomeFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(), 
     }
 
     override fun loadData() {
+        // 首先判断本地时候保存了数据，如果有直接取出，没有就进行网络请求
         mPresenter.requestProjectTree()
     }
 
@@ -59,8 +63,6 @@ class HomeFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(), 
             addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
             addOnTabSelectedListener(onTabSelectedListener)
         }
-
-//        refreshColor(ColorEvent(true))
     }
 
     override fun initPresenter(): ProjectPresenter = ProjectPresenter(this)

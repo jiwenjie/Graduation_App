@@ -31,8 +31,6 @@ class RegisterActivity : BaseActivity() {
 
    }
 
-   override fun getLayoutId(): Int = R.layout.activity_register
-
    override fun initActivity(savedInstanceState: Bundle?) {
       StatusBarUtil.setColorNoTranslucent(this@RegisterActivity, ContextCompat.getColor(applicationContext, R.color.color_white))
 
@@ -123,4 +121,6 @@ class RegisterActivity : BaseActivity() {
          }
       }
    }
+
+   override fun getLayoutId(): Int = R.layout.activity_register
 }

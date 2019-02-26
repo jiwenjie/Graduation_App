@@ -60,4 +60,10 @@ object ConstantConfig {
     * FileProvider authority
     */
    const val FILE_AUTHORITY = "com.graduation.fileprovider"
+
+   /**
+    * 保存数据的 key 值
+    */
+   const val KEY_HOMEFRAGMENT_TREE = "key_homefragment_tree"
+
 }

@@ -19,7 +19,8 @@
             android:id="@+id/activity_register_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_return" />
+            android:src="@drawable/ic_return"
+            android:tint="@color/colorPrimary" />
 
     </android.support.v7.widget.Toolbar>
 
