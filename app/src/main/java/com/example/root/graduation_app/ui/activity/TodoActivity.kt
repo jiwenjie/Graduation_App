@@ -28,7 +28,7 @@ class TodoActivity: BaseActivity() {
    private val complete by lazy { TodoFragment.newInstance(true) }
 
    companion object {
-      private const val REQ_CODE = 1203
+      private const val REQ_CODE = 12035
 
       @JvmStatic
       fun runActivity(activity: Activity) {
@@ -55,7 +55,6 @@ class TodoActivity: BaseActivity() {
    }
 
    override fun loadData() {
-
       mTitles.add("未完成")
       mTitles.add("已完成")
       fragmentList.add(noComplete)
@@ -71,7 +70,9 @@ class TodoActivity: BaseActivity() {
       if (resultCode != Activity.RESULT_OK) return
       // 新建成功之后需要刷新数据
       if (requestCode == REQ_CODE) {
+         noComplete.adapter.mDataList?.clear()
          noComplete.loadData()
+         complete.adapter.mDataList?.clear()
          complete.loadData()
       }
    }

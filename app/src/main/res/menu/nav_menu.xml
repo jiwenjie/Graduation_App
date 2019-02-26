@@ -14,7 +14,7 @@
             android:title="@string/nav_todo" />
 
         <item
-            android:id="@+id/nav_night_mode"
+            android:id="@+id/nav_relax"
             android:icon="@drawable/ic_night_24dp"
             android:title="@string/nav_night_mode" />
 
@@ -27,6 +27,10 @@
             android:id="@+id/nav_about_us"
             android:icon="@drawable/ic_about_us_white_24dp"
             android:title="@string/nav_about_us" />
+        <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_vector_title_front"
+                android:title="@string/nav_feedback" />
 
         <item
             android:id="@+id/nav_logout"

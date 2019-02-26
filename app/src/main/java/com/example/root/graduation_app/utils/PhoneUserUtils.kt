@@ -6,6 +6,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideContext
 import com.example.base_library.RetrofitManager
+import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.base.api.JacksonApi
 import com.example.root.graduation_app.bean.LoginUser
 import com.example.root.graduation_app.bean.WanAndroidItem
@@ -137,4 +138,32 @@ object PhoneUserUtils {
             .apply(RequestOptions.getAvatar())
             .into(avatar)
     }
+
+   /**
+    * 用户反馈调用的信息
+    */
+   @SuppressLint("CheckResult")
+   @JvmStatic
+   fun feedBack(userId: String, content: String, listener: feedOnClickListener) {
+      RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
+              .create(JacksonApi::class.java)
+              .feedBack(userId, content)
+              .compose(RxJavaUtils.applyObservableAsync())
+              .subscribe({
+                 if (it.result == "succeed") {
+                    listener.onSuccess(it.msg)
+                 } else {
+                    listener.onFailed(it.msg)
+                 }
+              }, {
+                 LogUtils.e(it.message.toString())
+                 listener.onFailed(it.message.toString())
+              })
+   }
+
+   interface feedOnClickListener {
+      fun onSuccess(msg: String)
+
+      fun onFailed(error: String)
+   }
 }

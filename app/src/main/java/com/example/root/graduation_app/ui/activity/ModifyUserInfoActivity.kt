@@ -195,14 +195,8 @@ class ModifyUserInfoActivity : BaseActivity() {
                        val user = it.data
                        LogUtils.e(user.profile + user.userphone)
                        App.setLoginUser(user)
-//                       App.setLoginUser(it.data)
-//                       RxBus.mBus.post(UserInfoChangeEvent())
-                       Observable.timer(300, TimeUnit.MILLISECONDS)
-                          .subscribe {
-                             IndexMainActivity.runActivity(this)
-                             finish()
-                             overridePendingTransition(0, 0)
-                          }
+                       RxBus.mBus.post(UserInfoChangeEvent())
+                       finish()
                     } else {
                        ToastUtils.showToast(this@ModifyUserInfoActivity, it.msg)
                     }
@@ -210,7 +204,6 @@ class ModifyUserInfoActivity : BaseActivity() {
                     dismissProgress()
                     ToastUtils.showToast(this@ModifyUserInfoActivity, it.message.toString())
                  })
-//            RxBus.mBus.post()
       } else {
          // 这里不做什么特殊处理，直接过去
          IndexMainActivity.runActivity(this)

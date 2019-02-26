@@ -1,9 +1,13 @@
 package com.example.root.graduation_app.ui.fragment
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.ImageView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.LogUtils
@@ -24,7 +28,7 @@ import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
  *  desc:
  *  version:1.0
  */
-class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, DoubanBookPresenter>(),
+class DoubanLiteratureFragment : BaseMvpFragment<DoubanContract.DoubanBookView, DoubanBookPresenter>(),
         DoubanContract.DoubanBookView {
 
    private var tags: String? = null
@@ -76,9 +80,16 @@ class DoubanLiteratureFragment: BaseMvpFragment<DoubanContract.DoubanBookView, D
             }
          }
       })
-      adapter.setOnItemClickListener { position, view ->
-         DoubanBookDetailActivity.runActivity(activity!!, beanList[position])
-      }
+
+      adapter.setOnShareElementClickListener(object : DoubanBookAdapter.OnShareElementInterface {
+         override fun onItemClick(data: DoubanBookItemDetail, imageView: ImageView) {
+            /** 实现共享动画 **/
+            val intent = Intent(activity!!, DoubanBookDetailActivity::class.java)
+            val compat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, imageView, "ShareElement")
+            intent.putExtra(DoubanBookDetailActivity.KEY_BEAN, data)
+            activity!!.startActivity(intent, compat.toBundle())
+         }
+      })
    }
 
    override fun initPresenter(): DoubanBookPresenter = DoubanBookPresenter(this@DoubanLiteratureFragment)

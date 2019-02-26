@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/arrow_left"
+        app:title="反馈界面"
+        app:titleTextColor="@color/color_white" />
+
+    <EditText
+        android:id="@+id/activity_feed_back_contentText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:hint="请输入"
+        android:minLines="3"
+        android:padding="@dimen/dp_8"
+        android:textSize="@dimen/common_sp_14"
+        tools:text="aslncksacnkscn" />
+
+    <TextView
+        android:id="@+id/activity_feed_back_confirmText"
+        android:text="提 交"
+        android:gravity="center"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/color_white"
+        android:background="@drawable/login_btn_no_press"
+        android:layout_margin="@dimen/dp_16"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_40dp" />
+
+</LinearLayout>

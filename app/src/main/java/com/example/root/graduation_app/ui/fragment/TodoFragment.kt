@@ -32,7 +32,7 @@ class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoCo
    private var loadingMore = false
    private var complete: Boolean? = null  // 传递的参数，查看是否查询已完成或者未完成的
    private val beanList by lazy { ArrayList<TodoBean>() }
-   private val adapter by lazy { TodoAdapter(activity!!, beanList) }
+   val adapter by lazy { TodoAdapter(activity!!, beanList) }
 
    companion object {
       private const val KEY_COMPLETE = "key_complete"
@@ -40,7 +40,7 @@ class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoCo
       private const val REQ_REFLESH = 1526
 
       @JvmStatic
-      fun newInstance(complete: Boolean) : TodoFragment {
+      fun newInstance(complete: Boolean): TodoFragment {
          return TodoFragment().apply {
             arguments = Bundle().apply {
                putBoolean(KEY_COMPLETE, complete)
@@ -66,7 +66,7 @@ class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoCo
                     (commonRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             if (!loadingMore && lastVisibleItem == (itemCount - 1)) {
                loadingMore = true
-               page ++
+               page++
                mPresenter.getTodoList(App.getLoginUser()?.userid!!, page, ConstantConfig.PAGE_LIMIT, complete!!)
             }
          }
@@ -81,6 +81,7 @@ class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoCo
    }
 
    override fun loadData() {
+      page = 1
       mPresenter.getTodoList(App.getLoginUser()?.userid!!, page, ConstantConfig.PAGE_LIMIT, complete!!)
    }
 
@@ -92,6 +93,9 @@ class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoCo
          mLayoutStatusView?.showEmpty()
          return
       } else {
+         if (page == 1) {
+            adapter.mDataList?.clear()
+         }
          adapter.addAllData(dataList)
       }
    }

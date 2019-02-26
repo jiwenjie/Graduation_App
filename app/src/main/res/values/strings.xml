@@ -68,8 +68,9 @@
     <string name="nav_my_collect">收藏</string>
     <string name="nav_setting">设置</string>
     <string name="nav_about_us">关于我们</string>
+    <string name="nav_feedback">反馈</string>
     <string name="nav_logout">退出登录</string>
-    <string name="nav_night_mode">夜间模式</string>
+    <string name="nav_night_mode">轻松一下</string>
     <string name="nav_todo">TODO</string>
 
     <string name="home">首页项目</string>

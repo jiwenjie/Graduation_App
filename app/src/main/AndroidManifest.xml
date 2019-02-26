@@ -139,6 +139,30 @@
             android:name=".ui.activity.TodoActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 反馈界面 -->
+        <activity
+            android:name=".ui.activity.FeedBackActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 轻松一下，音乐播放界面 -->
+        <activity
+            android:name=".ui.activity.MusicIndexActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.MusicPlayActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 单纯的网络歌曲界面，只有在用户拒绝了权限的时候才会跳转该界面 -->
+        <activity
+            android:name=".ui.activity.OnLineMusicActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 本地音乐的 Activity -->
+        <activity
+            android:name=".ui.activity.LocalMusicActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 滑动头部和折叠的有关页面 -->
 
         <!-- 蒲公英的 sdk 引入 start -->
@@ -151,6 +175,8 @@
             android:name="PGYER_APPID"
             android:value="eef566fce6ff5df19a67b8b3a965b403" />
         <!-- 蒲公英的 sdk 引入 end -->
+
+        <service android:name=".MusicPlayService" />
 
         <!-- FileProvider start -->
         <provider

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.widget.NestedScrollView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.example.base_library.base_mvp.BaseMvpActivity
@@ -19,6 +20,7 @@ import com.example.root.graduation_app.mvp.constract.DoubanContract
 import com.example.root.graduation_app.mvp.presenter.DoubanBookDetailPresenter
 import com.example.root.graduation_app.utils.CommonUtils
 import com.example.root.graduation_app.utils.RequestOptions
+import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_douban_book_detail.*
 import kotlinx.android.synthetic.main.activity_douban_book_detail_header.*
 import kotlinx.android.synthetic.main.activity_douban_book_detail_mid.*
@@ -31,12 +33,12 @@ import kotlinx.android.synthetic.main.activity_douban_book_detail_mid.*
  *  version:1.0
  */
 class DoubanBookDetailActivity : BaseMvpActivity<DoubanContract.DoubanBookDetailView, DoubanBookDetailPresenter>(),
-      DoubanContract.DoubanBookDetailView {
+        DoubanContract.DoubanBookDetailView {
 
    private var bean: DoubanBookItemDetail? = null
 
    companion object {
-      private const val KEY_BEAN = "key_bean"
+      const val KEY_BEAN = "key_bean"
 
       fun runActivity(activity: Activity, bean: DoubanBookItemDetail) {
          val intent = Intent(activity, DoubanBookDetailActivity::class.java)
@@ -52,6 +54,11 @@ class DoubanBookDetailActivity : BaseMvpActivity<DoubanContract.DoubanBookDetail
    }
 
    private fun initHeaderView() {
+      // 共享动画接收部分
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+         iv_book_photo.transitionName = "ShareElement"
+      }
+
       tv_book_rating_number.text = bean!!.rating.average
       tv_collect_count.text = "${bean!!.rating.numRaters}"
       tv_book_author.text = CommonUtils.splicingString(bean!!.author)
@@ -75,8 +82,7 @@ class DoubanBookDetailActivity : BaseMvpActivity<DoubanContract.DoubanBookDetail
       CommonUtils.displayBlurImg(this@DoubanBookDetailActivity, bean!!.images.large, iv_header_bg)
       CommonUtils.displayBlurImg(this@DoubanBookDetailActivity, bean!!.images.large, iv_toolbar_bg)
 
-      val headerBgHeight
-              = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      val headerBgHeight = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
          toolbar.layoutParams.height + ScreenUtils.getStatusBarHeight(this@DoubanBookDetailActivity)
       } else {
          toolbar.layoutParams.height
@@ -134,6 +140,13 @@ class DoubanBookDetailActivity : BaseMvpActivity<DoubanContract.DoubanBookDetail
       ToastUtils.showToast(this@DoubanBookDetailActivity, "$errorCode" + errorMsg)
       LogUtils.e("$errorCode" + errorMsg)
       nsv_scrollview.visibility = View.GONE
+   }
+
+   override fun onBackPressed() {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+         finishAfterTransition()
+      }
+      super.onBackPressed()
    }
 
    override fun getLayoutId(): Int = R.layout.activity_douban_book_detail

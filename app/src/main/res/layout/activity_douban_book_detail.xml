@@ -4,16 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants">
-    <!--android:descendantFocusability="blocksDescendants"-->
     <!--viewgroup会覆盖子类控件而直接获得焦点，避免RecycleView开始的时候获取焦点滚动到底部-->
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!--<include-->
-            <!--android:id="@+id/fl_net_view"-->
-            <!--layout="@layout/sub_net_status"/>-->
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nsv_scrollview"
@@ -63,6 +58,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/arrow_left"
                 app:popupTheme="@style/AppTheme.ToolbarPopupOverlay"
                 app:titleTextColor="@color/color_white"/>
         </FrameLayout>

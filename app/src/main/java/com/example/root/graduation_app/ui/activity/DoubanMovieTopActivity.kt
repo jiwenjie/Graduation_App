@@ -58,6 +58,9 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
       mLayoutStatusView?.showContent()
 
       common_toolbarLyt.title = resources.getString(R.string.title_about_top250)
+      common_toolbarLyt.setNavigationOnClickListener {
+         finish()
+      }
       common_toolbarRv.adapter = adapter
       common_toolbarRv.layoutManager = StaggeredGridLayoutManager(3,
               StaggeredGridLayoutManager.VERTICAL)
@@ -75,6 +78,9 @@ class DoubanMovieTopActivity : BaseMvpActivity<DoubanContract.DoubanMovieView, D
             }
          }
       })
+      adapter.setOnItemClickListener { position, view ->
+         DoubanMovieDetailActivity.runActivity(this@DoubanMovieTopActivity, beanList[position])
+      }
    }
 
    override fun updateDoubanContentList(subjectList: ArrayList<DoubanSubjectBean>) {

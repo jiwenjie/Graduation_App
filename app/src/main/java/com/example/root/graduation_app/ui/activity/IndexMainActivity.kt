@@ -94,10 +94,12 @@ class IndexMainActivity : BaseActivity() {
    }
 
    override fun initActivity(savedInstanceState: Bundle?) {
-      StatusBarUtil.setColorForDrawerLayout(this, drawer_layout,
-              ContextCompat.getColor(this, R.color.colorPrimary))
+      StatusBarUtil.setColorForDrawerLayout(
+              this, drawer_layout,
+              ContextCompat.getColor(this, R.color.colorPrimary)
+      )
       user = App.getLoginUser()
-      isLogin = user != null && user?.signout == false   // 判断用户是否登录，登录则是 true，否则是 false
+      isLogin = user != null && user?.isSignout == false   // 判断用户是否登录，登录则是 true，否则是 false
 
       toolbar.run {
          title = getString(R.string.app_name)
@@ -138,7 +140,7 @@ class IndexMainActivity : BaseActivity() {
          userName.text = user?.username
          introduction.text = "简介：" + if (user?.profile.isNullOrEmpty()) "" else user?.profile
          signUp!!.visibility = View.VISIBLE
-         if (user?.signintoday!!) { // 如果今天已经签到
+         if (user?.isSignintoday!!) { // 如果今天已经签到
             signUp!!.text = "已签到"
             signUp?.isEnabled = false
             signUp?.setBackgroundColor(ContextCompat.getColor(this@IndexMainActivity, R.color.item_date))
@@ -175,7 +177,8 @@ class IndexMainActivity : BaseActivity() {
                  this,
                  toolbar,
                  R.string.navigation_drawer_open,
-                 R.string.navigation_drawer_close)
+                 R.string.navigation_drawer_close
+         )
          addDrawerListener(toggle)
          toggle.syncState()
       }
@@ -254,13 +257,13 @@ class IndexMainActivity : BaseActivity() {
       outState?.putInt(BOTTOM_INDEX, mIndex)
    }
 
-//   override fun handleRxBus() {
-//      RxBus.mBus.register(this@IndexMainActivity, UserInfoChangeEvent::class.java,
-//              Consumer {
-//                 LogUtils.e("更新数据后调用该方法")
-//
-//              })
-//   }
+   override fun handleRxBus() {
+      RxBus.mBus.register(this@IndexMainActivity, UserInfoChangeEvent::class.java,
+              Consumer {
+                 this.user = App.getLoginUser()
+                 initDrawerLayout()
+              })
+   }
 
    override fun loadData() {
 
@@ -376,10 +379,6 @@ class IndexMainActivity : BaseActivity() {
                     }
                  }
                  R.id.nav_setting -> {
-//                    Intent(this@MainActivity, SettingActivity::class.java).run {
-//                       // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
-//                       startActivity(this)
-//                    }
                     ToastUtils.showToast(this@IndexMainActivity, "正在开发中...")
                     drawer_layout.closeDrawer(GravityCompat.START)
                  }
@@ -397,29 +396,24 @@ class IndexMainActivity : BaseActivity() {
                                logout()
                             }
                  }
-                 R.id.nav_night_mode -> {
+                 R.id.nav_relax -> {      // 跳转进入音乐播放界面
                     drawer_layout.closeDrawer(GravityCompat.START)
-//                    if (SettingUtil.getIsNightMode()) {
-//                       SettingUtil.setIsNightMode(false)
-//                       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                    } else {
-//                       SettingUtil.setIsNightMode(true)
-//                       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                    }
-//                    window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
-//                    recreate()
+                    Observable.timer(300, TimeUnit.MILLISECONDS)
+                            .subscribe {
+                               LocalMusicActivity.runActivity(this@IndexMainActivity)
+//                               MusicIndexActivity.runActivity(this@IndexMainActivity)
+                            }
+                 }
+                 R.id.nav_feedback -> {   // 向我反馈
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    if (isLogin) {
+                       FeedBackActivity.runActivity(this@IndexMainActivity)
+                    } else {
+                       ToastUtils.showToast(this, resources.getString(R.string.login_tint))
+                       LoginActivity.runActivity(this, null)
+                    }
                  }
                  R.id.nav_todo -> {
-//                    if (isLogin) {
-//                       Intent(this@MainActivity, TodoActivity::class.java).run {
-//                          startActivity(this)
-//                       }
-//                    } else {
-//                       showToast(resources.getString(R.string.login_tint))
-//                       Intent(this@MainActivity, LoginActivity::class.java).run {
-//                          startActivity(this)
-//                       }
-//                    }
                     drawer_layout.closeDrawer(GravityCompat.START)
                     Observable.timer(300, TimeUnit.MILLISECONDS)
                             .subscribe {
@@ -520,7 +514,7 @@ class IndexMainActivity : BaseActivity() {
 
    override fun onDestroy() {
       super.onDestroy()
-//      RxBus.mBus.unregister(this@IndexMainActivity)
+      RxBus.mBus.unregister(this@IndexMainActivity)
       mHomeFragment = null
       mBookFragment = null
       mKnowledgeTreeFragment = null

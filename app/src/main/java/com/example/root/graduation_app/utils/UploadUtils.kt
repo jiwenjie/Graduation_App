@@ -23,37 +23,6 @@ import java.net.URISyntaxException
  */
 object UploadUtils {
 
-    const val TYPE_AVATAR = 12036   // 头像标志
-    const val TYPE_BGIMAGE = 12031  // 背景图片标志
-
-    @SuppressLint("CheckResult")
-    fun uploadAvatar(uri: Uri, listener: UploadImageListener) {   // true 为上传成功，false 为上传失败
-        var file: File? = null
-        try {
-            file = File(URI(uri.toString()))
-        } catch (e: URISyntaxException) {
-            e.printStackTrace()
-        }
-
-        val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file!!)
-//        val requestBody = RequestBody.create(MediaType.parse("image/png"), file!!)
-        val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
-        LogUtils.e("UploadUtils" + file.name)
-        LogUtils.e("UploadUtils" + file.absolutePath)
-
-//        RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
-//            .create(JacksonApi::class.java)
-//            .uploadAvatar(body)
-//            .compose(RxJavaUtils.applyObservableAsync())
-//            .subscribe({
-//                LogUtils.e("UploadUtils" + it.string())
-//                listener.uploadSuccess(TYPE_AVATAR)
-//            }, {
-//                LogUtils.e("UploadUtils$it")
-//                listener.uploadFailed(TYPE_AVATAR)
-//            })
-    }
-
     @SuppressLint("CheckResult")
     fun uploadAvatar(userid: String, imgPath: String, listener: UploadImageListener) {   // true 为上传成功，false 为上传失败
         var file: File? = null
@@ -88,10 +57,18 @@ object UploadUtils {
             })
     }
 
+    @SuppressLint("CheckResult")
+    fun uploadMusic(userid: String, imgPath: String, listener: UploadMusicListener) {   // true 为上传成功，false 为上传失败
+
+    }
+
     interface UploadImageListener {
-
         fun uploadSuccess(user: LoginUser)
+        fun uploadFailed(msg: String)
+    }
 
+    interface UploadMusicListener {
+        fun uploadSuccess()
         fun uploadFailed(msg: String)
     }
 }

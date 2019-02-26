@@ -31,7 +31,7 @@ class SplashActivity : BaseActivity() {
    @SuppressLint("CheckResult", "PrivateResource")
    override fun loadData() {
       if (App.getLoginUser() == null) {
-         Observable.timer(4, TimeUnit.SECONDS)
+         Observable.timer(3200, TimeUnit.MILLISECONDS)
                  .compose(RxJavaUtils.applyObservableAsync())
                  .subscribe {
                     LoginActivity.runActivity(this@SplashActivity, null)
@@ -45,7 +45,7 @@ class SplashActivity : BaseActivity() {
                App.setLoginUser(user)
                LogUtils.e("SplashActivity用户信息：" + user.profile)
                LogUtils.e("SplashActivity头像信息：" + user.avatar)
-               Observable.timer(4, TimeUnit.SECONDS)
+               Observable.timer(3200, TimeUnit.MILLISECONDS)
                        .compose(RxJavaUtils.applyObservableAsync())
                        .subscribe {
                           goIndexMainActivity()
@@ -55,12 +55,12 @@ class SplashActivity : BaseActivity() {
             @SuppressLint("PrivateResource")
             override fun failed(error: String) {
                LogUtils.e("SplashActivity===$error")
-               Observable.timer(4, TimeUnit.SECONDS)
+               Observable.timer(3200, TimeUnit.MILLISECONDS)
                        .compose(RxJavaUtils.applyObservableAsync())
                        .subscribe {
                           // 此时测试直接进入首页
                           // 如果 user 不为空则不管其他，直接进入 Main 中。只有第一次安装的时候需要跳转登陆页面
-                          if (App.getLoginUser()?.signout!!) { // 如果退出账号
+                          if (App.getLoginUser()?.isSignout!!) { // 如果退出账号
                              LoginActivity.runActivity(this@SplashActivity, null)
                           } else {  // 没有退出账号
                              IndexMainActivity.runActivity(this@SplashActivity)
@@ -80,9 +80,14 @@ class SplashActivity : BaseActivity() {
       val objAlphaIv = ObjectAnimator.ofFloat(ivSplash, "alpha", 0f, 1f)
       val animatorX = ObjectAnimator.ofFloat(ivSplash, "scaleX", 0f, 1f)
       val animatorY = ObjectAnimator.ofFloat(ivSplash, "scaleY", 0f, 1f)
+
+      // 设置 Text 的动画
+      val textScaleX = ObjectAnimator.ofFloat(activity_splash_slognText, "scaleX", 1f, 1.35f, 0.75f, 1.25f, 0.85f, 1f)
+      val textScaleY = ObjectAnimator.ofFloat(activity_splash_slognText, "scaleY", 1f, 0.8f, 1.25f, 0.85f, 1.15f, 1f)
+
       val animatorSet = AnimatorSet()
-      animatorSet.playTogether(objAlphaIv, animatorX, animatorY)
-      animatorSet.duration = 2000
+      animatorSet.playTogether(objAlphaIv, animatorX, animatorY, textScaleX, textScaleY)
+      animatorSet.duration = 2200
       animatorSet.start()
    }
 

@@ -56,8 +56,6 @@ class ProjectListFragment : BaseMvpFragment<ProjectListContract.View, ProjectLis
       mPresenter.requestProjectList(1, cid)
    }
 
-   override fun getLayoutId(): Int = R.layout.fragment_refresh_layout
-
    override fun initFragment(savedInstanceState: Bundle?) {
       mLayoutStatusView = multiple_status_view
       mLayoutStatusView?.showContent()
@@ -160,4 +158,6 @@ class ProjectListFragment : BaseMvpFragment<ProjectListContract.View, ProjectLis
    private val recyclerViewItemDecoration by lazy {
       activity?.let { SpaceItemDecoration(it) }
    }
+
+   override fun getLayoutId(): Int = R.layout.fragment_refresh_layout
 }

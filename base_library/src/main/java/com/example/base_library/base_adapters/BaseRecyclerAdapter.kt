@@ -22,7 +22,7 @@ abstract class BaseRecyclerAdapter<T: Any>(context: Context, dataList: ArrayList
     private val mHeaderViews: SparseArray<View> = SparseArray()     // SparseArray 用来代替 HashMap
     private val mFooterViews: SparseArray<View> = SparseArray()     // 内部的实现是 两个数组
     protected val mContext = context
-    protected var mDataList = dataList
+    var mDataList = dataList
     protected var mSelectedPosition = -1
     private val mInflater = LayoutInflater.from(mContext)
     private var mOnItemClickListener: ((position: Int, view: View) -> Unit)? = null

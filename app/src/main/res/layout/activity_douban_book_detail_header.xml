@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +9,7 @@
         android:id="@+id/iv_header_bg"
         android:layout_width="match_parent"
         android:layout_height="330dp"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,9 +17,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/common_20dp"
         android:paddingStart="@dimen/common_20dp"
         android:paddingTop="@dimen/image_width_100dp"
+        android:paddingBottom="@dimen/common_20dp"
         tools:ignore="RtlSymmetry">
 
         <LinearLayout
@@ -60,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:text="评分："
-                            android:textColor="@color/colorRateRed"/>
+                            android:textColor="@color/colorRateRed" />
 
                         <TextView
                             android:id="@+id/tv_book_rating_number"
@@ -69,7 +68,7 @@
                             android:layout_marginLeft="3dp"
                             android:ellipsize="end"
                             android:lines="1"
-                            android:textColor="@color/colorRateRed"/>
+                            android:textColor="@color/colorRateRed" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -83,13 +82,13 @@
                             android:id="@+id/tv_collect_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_white"/>
+                            android:textColor="@color/color_white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" 人评分"
-                            android:textColor="@color/color_white"/>
+                            android:textColor="@color/color_white" />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -97,15 +96,15 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="作者："
-                        android:textColor="@color/color_white"/>
+                        android:textColor="@color/color_white" />
 
                     <TextView
                         android:id="@+id/tv_book_author"
@@ -113,22 +112,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:ellipsize="end"
-                        android:textColor="@color/color_white"/>
+                        android:textColor="@color/color_white" />
                 </LinearLayout>
 
                 <!--出版社-->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="出版社："
-                        android:textColor="@color/color_white"/>
+                        android:textColor="@color/color_white" />
 
                     <TextView
                         android:id="@+id/tv_book_publisher"
@@ -136,15 +135,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:ellipsize="end"
-                        android:textColor="@color/color_white"/>
+                        android:textColor="@color/color_white" />
                 </LinearLayout>
 
                 <!--出版日期-->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -152,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:text="出版日期："
-                        android:textColor="@color/color_white"/>
+                        android:textColor="@color/color_white" />
 
                     <TextView
                         android:id="@+id/tv_book_pupdate"
@@ -160,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:ellipsize="end"
-                        android:textColor="@color/color_white"/>
+                        android:textColor="@color/color_white" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

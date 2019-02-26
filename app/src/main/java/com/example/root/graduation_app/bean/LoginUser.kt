@@ -9,23 +9,20 @@ import java.io.Serializable
  *  desc:登陆用户的 bean
  *  version:1.0
  */
-class LoginUser : Serializable {
+//data class LoginUser(var userid: String,
+//                     var userphone: String,
+//                     var username: String,
+//                     var password: String?,
+//                     var continuesigndays: Int,        // indicate(表示, 表明) how many days have singed
+//                     var signintoday: Boolean,  // 表示今天是否签到
+//                     var signintime: String,     // 表示今天签到时间
+//                     var signintotaldays: Int,    // 表示一共签到了几天
+//                     var logintime: String,     // 表示第一次登陆时间 any day's the first login time
+//                     var logouttime: String,     // 表示登出时间
+//                     var totaltime: Long,       // 使用 App 的总时间
+//                     var avatar: String,     // 用户头像在服务器存储的地址
+//                     var signout: Boolean,    // 标记是否退出账号
+//                     var collectioncount: String, // 收藏了几篇文章
+//                     var profile: String) : Serializable
 
-   var userid: String? = null
-   var userphone: String? = null
-   var username: String? = null
-   var password: String? = null
-   var continuesigndays: Int? = null         // indicate(表示, 表明) how many days have singed
-   var signintoday: Boolean? = null  // 表示今天是否签到
-   var signintime: String? = null      // 表示今天签到时间
-   var signintotaldays: Int? = null     // 表示一共签到了几天
-   var logintime: String? = null     // 表示第一次登陆时间 any day's the first login time
-   var logouttime: String? = null     // 表示登出时间
-   var totaltime: Long? = null        // 使用 App 的总时间
-   var avatar: String? = null      // 用户头像在服务器存储的地址
-   var signout: Boolean = false     // 标记是否退出账号
-
-   var collectioncount: String? = null // 收藏了几篇文章
-   var profile: String? = null   // profile
-}
 

@@ -162,4 +162,24 @@ interface JacksonApi {
    @POST("collect/cancelCollectArticle")
    fun cancelCollect(@Field("userid") userId: String, @Field("id") articleId: Int): Observable<BaseJackson<String>>
 
+    /**
+     * 用户反馈调用的接口
+     */
+    @FormUrlEncoded
+    @POST("phoneUser/feedback")
+    fun feedBack(@Field("userid") userId: String, @Field("content") content: String): Observable<BaseJackson<String>>
+
+    /**
+     * 获取在线音乐的接口 (这里获取所有的在线音乐列表，所以不用传 userid)
+     */
+    @FormUrlEncoded
+    @POST("music/getOnlineMusic")
+    fun getOnlineMusicList(@Field("page") page: Int, @Field("limit") limit: Int): Observable<BaseJacksonList<Song>>
+
+   /**
+    * 上传音乐文件
+    */
+   @Multipart
+   @POST("phoneUser/uploadMusic")
+   fun uploadMusic(@Part("userid") userid: RequestBody, @Part imgs: MultipartBody.Part): Observable<BaseJackson<String>>
 }

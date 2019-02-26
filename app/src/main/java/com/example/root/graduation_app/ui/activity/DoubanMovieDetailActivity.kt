@@ -42,7 +42,7 @@ class DoubanMovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView
 
     companion object {
         private const val KEY_BEAN = "key_bean"
-
+        @JvmStatic
         fun runActivity(activity: Activity, subjectBean: DoubanSubjectBean) {
             val intent = Intent(activity, DoubanMovieDetailActivity::class.java)
             intent.putExtra(KEY_BEAN, subjectBean)
@@ -54,6 +54,9 @@ class DoubanMovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView
         bean = intent.getSerializableExtra(KEY_BEAN) as DoubanSubjectBean
         initHeaderView()
         initView()
+        common_toolbar_return.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initHeaderView() {

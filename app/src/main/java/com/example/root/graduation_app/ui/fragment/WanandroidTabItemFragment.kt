@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.common_multiple_recyclerview.view.*
  *  version:1.0
  */
 class WanandroidTabItemFragment : BaseMvpFragment<WanandroidContract.WanandroidDataView, WanandroidDataPresenter>(),
-      WanandroidContract.WanandroidDataView {
+        WanandroidContract.WanandroidDataView {
 
    private val beanList by lazy { ArrayList<WanAndroidItem>() }
    private val adapter by lazy { KnowledgeAdapter(activity!!, beanList) }
@@ -70,7 +70,7 @@ class WanandroidTabItemFragment : BaseMvpFragment<WanandroidContract.WanandroidD
             val lastVisibleItem = (commonRv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             if (!loadingMore && lastVisibleItem == (itemCount!! - 1)) {
                loadingMore = true
-               page ++
+               page++
                mPresenter.getOnePublicAddressHistory(publicId, page)
             }
          }
