@@ -7,4 +7,6 @@
 
 愿我们成为真实的自己。
 如果想要后台部分代码请看 https://github.com/jiwenjie/Graduation_BackStage
-![](image/01.mp4)
+
+运行结果
+![](images/01.mp4)
