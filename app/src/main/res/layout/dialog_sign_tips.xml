@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_5_corner_white"
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatImageView
@@ -16,10 +16,11 @@
         android:id="@+id/dialog_titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="签到成功"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
-        tools:text="签到成功" />
+        android:textStyle="bold" />
 
     <!-- 当退出账号再次登陆的时候，给出提示欢迎再次登陆，否则只是提示在线多久 -->
     <TextView
@@ -31,8 +32,8 @@
         android:layout_marginTop="@dimen/dp_12"
         android:layout_marginEnd="@dimen/dp_50"
         android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:text="XX您好：\n感谢您的使用\n这是您第三次登陆。谢谢您的使用；\n您一共学习 256 分钟，继续加油。" />
+        android:text="XX您好：\n感谢您的使用\n这是您第三次登陆。谢谢您的使用；\n您一共学习 256 分钟，继续加油。"
+        android:textColor="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/dialog_textBtn"

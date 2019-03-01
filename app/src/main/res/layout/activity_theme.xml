@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_theme_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/arrow_left"
+        app:title="选择主题皮肤"
+        app:titleTextColor="@color/color_white" />
+
+    <TextView
+        android:id="@+id/btn_change"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/zhihuBlue"
+        android:gravity="center"
+        android:padding="@dimen/dp_8"
+        android:text="改变主题色"
+        android:textColor="@color/color_white" />
+
+</LinearLayout>

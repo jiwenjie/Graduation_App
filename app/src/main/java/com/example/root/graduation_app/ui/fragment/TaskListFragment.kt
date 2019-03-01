@@ -1,7 +1,5 @@
 package com.example.root.graduation_app.ui.fragment
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,12 +8,11 @@ import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.App
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.bean.LoginUser
 import com.example.root.graduation_app.bean.TodoBean
 import com.example.root.graduation_app.mvp.constract.TodoContract
 import com.example.root.graduation_app.mvp.presenter.TodoPresenter
-import com.example.root.graduation_app.ui.activity.TaskActivity
-import com.example.root.graduation_app.ui.adapter.TodoAdapter
+import com.example.root.graduation_app.ui.activity.CreateTaskActivity
+import com.example.root.graduation_app.ui.adapter.TaskListAdapter
 import com.example.root.graduation_app.utils.ConstantConfig
 import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
 
@@ -26,22 +23,22 @@ import kotlinx.android.synthetic.main.common_multiple_recyclerview.*
  *  desc:
  *  version:1.0
  */
-class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoContract.View {
+class TaskListFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoContract.View {
 
    private var page = 1
    private var loadingMore = false
    private var complete: Boolean? = null  // 传递的参数，查看是否查询已完成或者未完成的
    private val beanList by lazy { ArrayList<TodoBean>() }
-   val adapter by lazy { TodoAdapter(activity!!, beanList) }
+   val adapter by lazy { TaskListAdapter(activity!!, beanList) }
 
    companion object {
       private const val KEY_COMPLETE = "key_complete"
       // 如果跳转详情之后有改变状态的操作，则刷新数据
-      private const val REQ_REFLESH = 1526
+      const val REQ_REFLESH = 1526
 
       @JvmStatic
-      fun newInstance(complete: Boolean): TodoFragment {
-         return TodoFragment().apply {
+      fun newInstance(complete: Boolean): TaskListFragment {
+         return TaskListFragment().apply {
             arguments = Bundle().apply {
                putBoolean(KEY_COMPLETE, complete)
             }
@@ -76,7 +73,7 @@ class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoCo
        * 点击列表的子项跳转详情部分
        */
       adapter.setOnItemClickListener { position, view ->
-         TaskActivity.runActivity(activity!!, beanList[position].todoid, REQ_REFLESH, false)
+         CreateTaskActivity.runActivity(activity!!, beanList[position].todoid, REQ_REFLESH, false)
       }
    }
 
@@ -117,13 +114,13 @@ class TodoFragment : BaseMvpFragment<TodoContract.View, TodoPresenter>(), TodoCo
       }
    }
 
-   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-      super.onActivityResult(requestCode, resultCode, data)
-      if (resultCode != Activity.RESULT_OK) return
-      if (requestCode == REQ_REFLESH) {
-         loadData()
-      }
-   }
+//   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//      super.onActivityResult(requestCode, resultCode, data)
+//      if (resultCode != Activity.RESULT_OK) return
+//      if (requestCode == REQ_REFLESH) {
+//         loadData()
+//      }
+//   }
 
    override fun getLayoutId(): Int = R.layout.common_multiple_recyclerview
 }

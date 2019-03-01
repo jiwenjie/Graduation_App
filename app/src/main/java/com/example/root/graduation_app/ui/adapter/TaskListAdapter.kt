@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_todo_item.view.*
  *  desc:
  *  version:1.0
  */
-class TodoAdapter(context: Context, beanList: ArrayList<TodoBean>)
+class TaskListAdapter(context: Context, beanList: ArrayList<TodoBean>)
    : BaseRecyclerAdapter<TodoBean>(context, beanList) {
 
    override fun getAdapterLayoutId(viewType: Int): Int = R.layout.fragment_todo_item

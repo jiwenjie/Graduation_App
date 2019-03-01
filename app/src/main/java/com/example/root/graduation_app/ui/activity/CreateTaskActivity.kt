@@ -4,17 +4,12 @@ package com.example.root.graduation_app.ui.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import com.example.base_library.base_mvp.BaseMvpActivity
-import com.example.base_library.base_utils.ScreenUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.root.graduation_app.App
 import com.example.root.graduation_app.R
@@ -24,7 +19,6 @@ import com.example.root.graduation_app.mvp.presenter.TaskPresenter
 import com.example.root.graduation_app.utils.CommonUtils
 import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_task.*
-import java.text.SimpleDateFormat
 
 /**
  *  author:Jiwenjie
@@ -33,7 +27,7 @@ import java.text.SimpleDateFormat
  *  desc:点击新建任务或者笔记
  *  version:1.0
  */
-class TaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), TaskContract.View {
+class CreateTaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), TaskContract.View {
 
    private var isEdit: Boolean? = null   // 标志位，判断是新建或是详情
    private var id: String? = null  // id
@@ -44,7 +38,7 @@ class TaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), TaskCo
 
       @JvmStatic
       fun runActivity(activity: Activity, id: String?, isEdit: Boolean) {
-         val intent = Intent(activity, TaskActivity::class.java)
+         val intent = Intent(activity, CreateTaskActivity::class.java)
          intent.putExtra(KEY_ID, id)
          intent.putExtra(KEY_IS_EDIT, isEdit)
          activity.startActivity(intent)
@@ -52,7 +46,7 @@ class TaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), TaskCo
 
       @JvmStatic
       fun runActivity(activity: Activity, id: String?, reqCode: Int, isEdit: Boolean) {
-         val intent = Intent(activity, TaskActivity::class.java)
+         val intent = Intent(activity, CreateTaskActivity::class.java)
          intent.putExtra(KEY_ID, id)
          intent.putExtra(KEY_IS_EDIT, isEdit)
          activity.startActivityForResult(intent, reqCode)
@@ -61,8 +55,8 @@ class TaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), TaskCo
 
    override fun initActivity(savedInstanceState: Bundle?) {
 
-      StatusBarUtil.setColor(this@TaskActivity,
-              ContextCompat.getColor(this@TaskActivity, R.color.colorPrimary), 0)
+      StatusBarUtil.setColor(this@CreateTaskActivity,
+              ContextCompat.getColor(this@CreateTaskActivity, R.color.colorPrimary), 0)
 
       id = intent.getStringExtra(KEY_ID)
       isEdit = intent.getBooleanExtra(KEY_IS_EDIT, false)
@@ -99,7 +93,7 @@ class TaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), TaskCo
     * 二次确认是否改变状态
     */
    private fun confirm() {
-      AlertDialog.Builder(this@TaskActivity)
+      AlertDialog.Builder(this@CreateTaskActivity)
               .setTitle("提示")
               .setMessage("确认变更操作吗？")
               .setNegativeButton("取消", null)
@@ -169,18 +163,18 @@ class TaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), TaskCo
    override fun changeStatusSuccess(msg: String) {
       dismissProgress()
       if (msg == "succeed") {
-         ToastUtils.showToast(this@TaskActivity, "状态修改成功")
+         ToastUtils.showToast(this@CreateTaskActivity, "状态修改成功")
          setResult(Activity.RESULT_OK)
          finish()
       } else {
-         ToastUtils.showToast(this@TaskActivity, "操作失败")
+         ToastUtils.showToast(this@CreateTaskActivity, "操作失败")
       }
    }
 
    override fun error() {
       dismissProgress()
       // 操作失败的时候显示失败界面
-      ToastUtils.showToast(this@TaskActivity, "操作失败")
+      ToastUtils.showToast(this@CreateTaskActivity, "操作失败")
    }
 
    override fun getLayoutId(): Int = R.layout.activity_task

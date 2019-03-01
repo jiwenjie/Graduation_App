@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat
 import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.ui.fragment.TodoFragment
+import com.example.root.graduation_app.ui.fragment.TaskListFragment
 import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_todo.*
 
@@ -19,20 +19,20 @@ import kotlinx.android.synthetic.main.activity_todo.*
  *  desc:查看 todoTask 列表的界面
  *  version:1.0
  */
-class TodoActivity: BaseActivity() {
+class TaskListActivity: BaseActivity() {
 
    private val fragmentList by lazy { ArrayList<Fragment>() }
    private val mTitles by lazy { ArrayList<String>() }
 
-   private val noComplete by lazy { TodoFragment.newInstance(false) }
-   private val complete by lazy { TodoFragment.newInstance(true) }
+   private val noComplete by lazy { TaskListFragment.newInstance(false) }
+   private val complete by lazy { TaskListFragment.newInstance(true) }
 
    companion object {
-      private const val REQ_CODE = 12035
+      private const val REQ_CREATE = 12035
 
       @JvmStatic
       fun runActivity(activity: Activity) {
-         val intent = Intent(activity, TodoActivity::class.java)
+         val intent = Intent(activity, TaskListActivity::class.java)
          intent.putExtra("", "")
          activity.startActivity(intent)
       }
@@ -40,8 +40,8 @@ class TodoActivity: BaseActivity() {
 
    override fun initActivity(savedInstanceState: Bundle?) {
       StatusBarUtil.setColor(
-              this@TodoActivity,
-              ContextCompat.getColor(this@TodoActivity, R.color.colorPrimary),
+              this@TaskListActivity,
+              ContextCompat.getColor(this@TaskListActivity, R.color.colorPrimary),
               0)
 
       activity_todo_toolbar.setNavigationOnClickListener {
@@ -50,7 +50,7 @@ class TodoActivity: BaseActivity() {
 
       activity_todo_newTask.setOnClickListener {
          // 点击新建
-         TaskActivity.runActivity(this@TodoActivity, null, REQ_CODE, true)
+         CreateTaskActivity.runActivity(this@TaskListActivity, null, REQ_CREATE, true)
       }
    }
 
@@ -69,10 +69,13 @@ class TodoActivity: BaseActivity() {
       super.onActivityResult(requestCode, resultCode, data)
       if (resultCode != Activity.RESULT_OK) return
       // 新建成功之后需要刷新数据
-      if (requestCode == REQ_CODE) {
-         noComplete.adapter.mDataList?.clear()
+      if (requestCode == REQ_CREATE) {    // 新建后刷新
+         noComplete.adapter.clearData()
          noComplete.loadData()
-         complete.adapter.mDataList?.clear()
+      } else if (requestCode == TaskListFragment.REQ_REFLESH) {   // 变更状态后刷新
+         noComplete.adapter.clearData()
+         noComplete.loadData()
+         complete.adapter.clearData()
          complete.loadData()
       }
    }

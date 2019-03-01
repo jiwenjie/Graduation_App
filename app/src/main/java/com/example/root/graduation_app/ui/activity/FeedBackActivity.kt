@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.text.Editable
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
@@ -42,9 +43,8 @@ class FeedBackActivity : BaseActivity() {
          showProgress(null)
          PhoneUserUtils.feedBack(App.getLoginUser()?.userid!!, activity_feed_back_contentText.text.toString().trim(), object : PhoneUserUtils.feedOnClickListener {
             override fun onSuccess(msg: String) {
-               ToastUtils.showToast(this@FeedBackActivity, msg)
                dismissProgress()
-               activity_feed_back_contentText.text = null
+               feedSuccess(msg)
             }
 
             override fun onFailed(error: String) {
@@ -53,6 +53,20 @@ class FeedBackActivity : BaseActivity() {
             }
          })
       }
+   }
+
+   /**
+    * 提交反馈成功界面
+    */
+   fun feedSuccess(msg: String) {
+      ToastUtils.showToast(this@FeedBackActivity, msg)
+      AlertDialog.Builder(this)
+              .setMessage(msg)
+              .setNegativeButton("我知道了", null)
+              .show()
+      activity_feed_back_contentText.text = null
+      activity_feed_back_confirmText.isEnabled = false
+      activity_feed_back_confirmText.background = ContextCompat.getDrawable(this@FeedBackActivity, R.drawable.login_btn_no_press)
    }
 
    private fun confirmChange(s: Editable?) {

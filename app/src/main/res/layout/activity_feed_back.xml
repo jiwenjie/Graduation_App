@@ -27,13 +27,14 @@
 
     <TextView
         android:id="@+id/activity_feed_back_confirmText"
-        android:text="提 交"
-        android:gravity="center"
-        android:textSize="@dimen/sp_16"
-        android:textColor="@color/color_white"
-        android:background="@drawable/login_btn_no_press"
-        android:layout_margin="@dimen/dp_16"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_40dp" />
+        android:layout_height="@dimen/common_40dp"
+        android:layout_margin="@dimen/dp_16"
+        android:background="@drawable/login_btn_no_press"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="提 交"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/sp_16" />
 
 </LinearLayout>

@@ -131,12 +131,12 @@
 
         <!-- 点击新建笔记或者任务记录 -->
         <activity
-            android:name=".ui.activity.TaskActivity"
+            android:name=".ui.activity.CreateTaskActivity"
             android:screenOrientation="portrait" />
 
         <!-- 点击查看 todo 列表 -->
         <activity
-            android:name=".ui.activity.TodoActivity"
+            android:name=".ui.activity.TaskListActivity"
             android:screenOrientation="portrait" />
 
         <!-- 反馈界面 -->
@@ -166,6 +166,11 @@
         <!-- 查看 logo 的界面 -->
         <activity
             android:name=".ui.activity.ViewLogoActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 旋转主题色的 Activity -->
+        <activity
+            android:name=".ui.activity.ThemeActivity"
             android:screenOrientation="portrait" />
         <!-- 滑动头部和折叠的有关页面 -->
 

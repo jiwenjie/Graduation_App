@@ -6,39 +6,24 @@
 
     <color name="transparent">#00000000</color>
     <color name="color_gray">#9a9a9a</color>
-
-
     <color name="theme">#3399ff</color>
-
     <color name="base_bg">#ffeeeeee</color>
-
-
     <!--电影评分-->
     <color name="colorRateRed">#FB5B81</color>
 
     <!-- title 半透明背景颜色 -->
     <!-- 默认背景色 -->
     <color name="backgroundColor">#EEEEEE</color>
-
     <!-- white -->
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
-
-
     <!-- item 标题颜色 -->
-
     <color name="color_lighter_gray">#ddd</color>
-
     <color name="color_division_line">@color/color_lighter_gray</color>
-
     <!-- 主体文字,标题/标签 -->
     <color name="txt_black">#212121</color>
-
-
     <color name="md_grey_500">#9e9e9e</color>
-
     <!--transparent-->
-
     <!--87%white-->
     <color name="primary_text">#de000000</color>
     <!--87%black-->
@@ -47,13 +32,11 @@
     <!--54%black-->
     <color name="image_place_holder">#DFDFDF</color>
     <!--87%white-->
-
     <color name="alpha_15_white">#26FFFFFF</color>
     <color name="alpha_60_white">#99FFFFFF</color>
     <color name="alpha_80_white">#CCFFFFFF</color>
     <color name="alpha_85_white">#D9FFFFFF</color>
     <color name="alpha_90_white">#E6FFFFFF</color>
-
     <color name="alpha_10_black">#1A000000</color>
     <color name="alpha_25_black">#40000000</color>
     <color name="alpha_35_black">#59000000</color>
@@ -63,9 +46,6 @@
     <color name="alpha_80_black">#CC000000</color>
     <color name="alpha_85_black">#D9000000</color>
     <color name="alpha_90_black">#E6000000</color>
-
-
-
     <!-- item -->
     <color name="item_title">#19191B</color>
     <color name="item_author">@color/Grey700</color>
@@ -75,12 +55,13 @@
     <color name="item_nav_color_tv">#19191B</color>
     <color name="color_about_tv">@color/Grey600</color>
     <color name="arrow_color">@color/Grey700</color>
-
-
     <color name="White">#FFFFFF</color>
-    <color name="Blue_Grey">#607d8b</color>
-
+    <color name="Blue_Grey">#607d8b</color>d
     <color name="Grey300">#E0E0E0</color>
     <color name="Grey600">#757575</color>
     <color name="Grey700">#616161</color>
+
+    <!--知乎蓝-->
+    <color name="zhihuBlue">#1F96F2</color>
+    <color name="zhihuBlue50">#B01F96F2</color>
 </resources>
