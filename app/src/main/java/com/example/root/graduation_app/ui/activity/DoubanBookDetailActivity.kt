@@ -59,6 +59,10 @@ class DoubanBookDetailActivity : BaseMvpActivity<DoubanContract.DoubanBookDetail
          iv_book_photo.transitionName = "ShareElement"
       }
 
+      toolbar.setNavigationOnClickListener {
+         finish()
+      }
+
       tv_book_rating_number.text = bean!!.rating.average
       tv_collect_count.text = "${bean!!.rating.numRaters}"
       tv_book_author.text = CommonUtils.splicingString(bean!!.author)

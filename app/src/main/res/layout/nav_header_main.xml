@@ -22,7 +22,7 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatarMe"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -36,7 +36,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:textColor="@color/color_white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             tools:text="Jackson" />
     </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:maxLines="1"
             android:padding="5dp"
             android:textColor="@color/color_white"
-            android:textSize="14sp"
+            android:textSize="@dimen/sp_12"
             tools:text="简介：" />
 
         <ImageView

@@ -386,7 +386,6 @@ class IndexMainActivity : BaseActivity() {
                     val dialog = SignUpDialog(this@IndexMainActivity)
                     dialog.show()
 //                    ThemeActivity.runActivity(this)
-
                 }
                 R.id.nav_about_us -> {
                     drawer_layout.closeDrawer(GravityCompat.START)
@@ -473,12 +472,6 @@ class IndexMainActivity : BaseActivity() {
         when (mIndex) {
             FRAGMENT_HOME -> {
                 mHomeFragment?.scrollToTop()
-            }
-            FRAGMENT_BOOK -> {
-//            mBookFragment?.scrollToTop()
-            }
-            FRAGMENT_WECHAT -> {
-//            mWeChatFragment?.scrollToTop()
             }
             FRAGMENT_KNOWLEDGE_TREE -> {
                 mKnowledgeTreeFragment?.scrollToTop()

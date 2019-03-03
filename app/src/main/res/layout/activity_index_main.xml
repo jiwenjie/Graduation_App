@@ -37,6 +37,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/dp_20"
             android:layout_marginBottom="@dimen/dp_60"
+            app:layout_behavior="com.example.root.graduation_app.widget.ScaleDownShowBehavior"
             app:srcCompat="@drawable/ic_arrow_upward_white_24dp" />
 
     </android.support.design.widget.CoordinatorLayout>

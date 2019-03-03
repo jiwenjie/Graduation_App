@@ -10,7 +10,7 @@ import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.ui.fragment.TaskListFragment
 import com.jaeger.library.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_todo.*
+import kotlinx.android.synthetic.main.activity_task_list.*
 
 /**
  *  author:Jiwenjie
@@ -80,5 +80,5 @@ class TaskListActivity: BaseActivity() {
       }
    }
 
-   override fun getLayoutId(): Int = R.layout.activity_todo
+   override fun getLayoutId(): Int = R.layout.activity_task_list
 }

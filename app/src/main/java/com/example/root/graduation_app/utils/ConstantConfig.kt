@@ -18,28 +18,18 @@ object ConstantConfig {
    const val GANKIO_BASE_URL = "http://gank.io/api/"  // 干货集中营的 host 地址
    const val WANWANDROID_URL = "http://wanandroid.com/"
 
-   const val JACKSON_BASE_URL = "http://172.16.134.10:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
+   const val JACKSON_BASE_URL = "http://192.168.1.103:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
 
    const val SHARE_LOGIN_USER_NAME = "share_user"
-
-   const val LOCAL_URL = "http://" + "ip" + "8080/"
 
    const val GITHUB_URL = "https://github.com/jiwenjie/Graduation_App"
 
    const val PAGE_LIMIT: Int = 20   // 分页查询的时候一次查询 20 个
 
    /**
-    * url key
-    */
-   const val CONTENT_URL_KEY = "url"
-   /**
     * title key
     */
    const val CONTENT_TITLE_KEY = "title"
-   /**
-    * id key
-    */
-   const val CONTENT_ID_KEY = "id"
    /**
     * content data key
     */
@@ -65,5 +55,4 @@ object ConstantConfig {
     * 保存数据的 key 值
     */
    const val KEY_HOMEFRAGMENT_TREE = "key_homefragment_tree"
-
 }

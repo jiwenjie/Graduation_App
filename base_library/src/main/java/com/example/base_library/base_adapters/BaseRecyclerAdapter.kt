@@ -8,6 +8,7 @@ import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.base_library.base_utils.LogUtils
 
 /**
  *  author:Jiwenjie
@@ -63,7 +64,7 @@ abstract class BaseRecyclerAdapter<T: Any>(context: Context, dataList: ArrayList
             val pos = position - getHeaderSize()
 
             convertView(holder.itemView, mDataList!![pos], pos) // this position not include header and footer
-
+            LogUtils.e("HashCode0" + holder.itemView.hashCode())
             holder.itemView.setOnClickListener { v ->
                 mOnItemClickListener?.invoke(pos, v)
             }

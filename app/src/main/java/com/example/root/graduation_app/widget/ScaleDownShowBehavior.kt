@@ -1,5 +1,7 @@
 package com.example.root.graduation_app.widget
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.design.widget.CoordinatorLayout
@@ -7,6 +9,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
+
 
 /**
  *  author:Jiwenjie
@@ -16,6 +19,8 @@ import android.view.View
  *  version:1.0
  */
 class ScaleDownShowBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior(context, attrs) {
+
+   private var animComplete = false    // 标志动画是否完成，默认 false
 
    override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout,
                                     child: FloatingActionButton,
@@ -30,10 +35,21 @@ class ScaleDownShowBehavior(context: Context, attrs: AttributeSet) : FloatingAct
    @SuppressLint("RestrictedApi")
    override fun onNestedScroll(coordinatorLayout: CoordinatorLayout, child: FloatingActionButton, target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int) {
       super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type)
-      if (dyConsumed > 0 && child.visibility == View.VISIBLE) {
-         child.visibility = View.INVISIBLE
-      } else if (dyConsumed < 0 && child.visibility != View.VISIBLE) {
-         child.show()
+      if (dyConsumed > 0 && !animComplete) {
+         startAnimation(child, 1f, 0f)
+         animComplete = true
+      } else if (dyConsumed < 0 && animComplete) {
+         startAnimation(child, 0f, 1f)
+         animComplete = false
       }
+   }
+
+   private fun startAnimation(child: FloatingActionButton, startX: Float, endY: Float) {
+      val animObjX = ObjectAnimator.ofFloat(child, "scaleX", startX, endY)
+      val animObjY = ObjectAnimator.ofFloat(child, "scaleY", startX, endY)
+      val animatorSet = AnimatorSet()
+      animatorSet.playTogether(animObjX, animObjY)
+      animatorSet.duration = 200
+      animatorSet.start()
    }
 }

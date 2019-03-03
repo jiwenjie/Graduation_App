@@ -1,23 +1,13 @@
 package com.example.root.graduation_app.ui.adapter
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.view.View
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.base_library.base_adapters.BaseRecyclerAdapter
 import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.R
-import com.example.root.graduation_app.R.id.imageView
 import com.example.root.graduation_app.bean.DoubanBookItemDetail
-import com.example.root.graduation_app.ui.activity.DoubanBookDetailActivity
 import com.example.root.graduation_app.utils.CommonUtils
-import com.example.root.graduation_app.utils.RequestOptions
 import kotlinx.android.synthetic.main.fragment_douban_book_item.view.*
 
 /**
@@ -41,27 +31,9 @@ class DoubanBookAdapter(context: Context, beanList: ArrayList<DoubanBookItemDeta
       itemView.tv_item_pubdate.text = "出版日期：${data.pubdate}"
       itemView.tv_item_rate.text = "评分：${data.rating.average}"
 
+      LogUtils.e("HashCode1" + itemView.hashCode())
+
       CommonUtils.displayImg(mContext, data.image, itemView.iv_item_image)
-
-      itemView.iv_item_image.setOnClickListener {
-         // 共享动画接收部分
-         if (listener != null) {
-            listener?.onItemClick(data, itemView.iv_item_image)
-         }
-//         val intent = Intent(mContext, DoubanBookDetailActivity::class.java)
-//         val compat = ActivityOptionsCompat.makeSceneTransitionAnimation(mContext as Activity, itemView.iv_item_image, "ShareElement")
-//         mContext.startActivity(intent, compat.toBundle())
-      }
-   }
-
-   interface OnShareElementInterface {
-      fun onItemClick(data: DoubanBookItemDetail, imageView: ImageView)
-   }
-
-   private var listener: OnShareElementInterface? = null
-
-   fun setOnShareElementClickListener(listener: OnShareElementInterface) {
-      this.listener = listener
    }
 }
 

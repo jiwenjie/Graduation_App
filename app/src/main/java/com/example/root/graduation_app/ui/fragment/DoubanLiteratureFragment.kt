@@ -1,13 +1,11 @@
 package com.example.root.graduation_app.ui.fragment
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.ImageView
 import com.example.base_library.base_mvp.BaseMvpFragment
 import com.example.base_library.base_utils.ErrorStatus
 import com.example.base_library.base_utils.LogUtils
@@ -51,8 +49,6 @@ class DoubanLiteratureFragment : BaseMvpFragment<DoubanContract.DoubanBookView, 
       }
    }
 
-   override fun getLayoutId(): Int = R.layout.common_multiple_recyclerview
-
    override fun loadData() {
       if (!tags.isNullOrEmpty()) {
          mPresenter.loadBookList(tags!!, start, ConstantConfig.PAGE_LIMIT)
@@ -81,15 +77,13 @@ class DoubanLiteratureFragment : BaseMvpFragment<DoubanContract.DoubanBookView, 
          }
       })
 
-      adapter.setOnShareElementClickListener(object : DoubanBookAdapter.OnShareElementInterface {
-         override fun onItemClick(data: DoubanBookItemDetail, imageView: ImageView) {
-            /** 实现共享动画 **/
-            val intent = Intent(activity!!, DoubanBookDetailActivity::class.java)
-            val compat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, imageView, "ShareElement")
-            intent.putExtra(DoubanBookDetailActivity.KEY_BEAN, data)
-            activity!!.startActivity(intent, compat.toBundle())
-         }
-      })
+      adapter.setOnItemClickListener { position, view ->
+         /** 实现共享动画 **/
+         val intent = Intent(activity!!, DoubanBookDetailActivity::class.java)
+         val compat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, view.findViewById(R.id.iv_item_image), "ShareElement")
+         intent.putExtra(DoubanBookDetailActivity.KEY_BEAN, beanList[position])
+         activity!!.startActivity(intent, compat.toBundle())
+      }
    }
 
    override fun initPresenter(): DoubanBookPresenter = DoubanBookPresenter(this@DoubanLiteratureFragment)
@@ -116,48 +110,5 @@ class DoubanLiteratureFragment : BaseMvpFragment<DoubanContract.DoubanBookView, 
       mLayoutStatusView?.showContent()
    }
 
-   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-      LogUtils.e("onCreate()")
-   }
-
-   override fun onStart() {
-      super.onStart()
-      LogUtils.e("onStart()")
-   }
-
-   override fun onResume() {
-      super.onResume()
-      LogUtils.e("onResume()")
-   }
-
-   override fun onPause() {
-      super.onPause()
-      LogUtils.e("onPause()")
-   }
-
-   override fun onStop() {
-      super.onStop()
-      LogUtils.e("onStop()")
-   }
-
-   override fun onDestroy() {
-      super.onDestroy()
-      LogUtils.e("onDestroy()")
-   }
-
-   override fun onDestroyView() {
-      super.onDestroyView()
-      LogUtils.e("onDestroyView()")
-   }
-
-   override fun onAttach(context: Context?) {
-      super.onAttach(context)
-      LogUtils.e("onAttach()")
-   }
-
-   override fun onDetach() {
-      super.onDetach()
-      LogUtils.e("onDetach()")
-   }
+   override fun getLayoutId(): Int = R.layout.common_multiple_recyclerview
 }
