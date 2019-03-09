@@ -9,4 +9,7 @@
 如果想要后台部分代码请看 https://github.com/jiwenjie/Graduation_BackStage
 
 运行结果
-![](images/01.mp4)
+![](image/007.gif)
+
+运行结果二
+![](image/008.gif)
