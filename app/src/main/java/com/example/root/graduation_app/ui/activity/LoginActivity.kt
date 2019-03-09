@@ -195,6 +195,15 @@ class LoginActivity : BaseActivity() {
       activity_login_btn_active.setOnClickListener {
          // 登陆的点击事件, 调用登陆接口
 
+         if (activity_login_phone.text.toString().trim().isNullOrEmpty()) {
+            ToastUtils.showToast(this@LoginActivity, "号码不能为空")
+            return@setOnClickListener
+         }
+         if (activity_login_password.text.toString().trim().isNullOrEmpty()) {
+            ToastUtils.showToast(this@LoginActivity, "密码不能为空")
+            return@setOnClickListener
+         }
+
          /**
           * 此处调用接口访问后台，验证成功在跳转，否则给出错误提示
           */

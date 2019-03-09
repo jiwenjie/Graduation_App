@@ -104,7 +104,7 @@ class MusicPlayActivity : BaseActivity() {
       if (currentIndex == -1 || beanList == null || beanList?.size == 0) return
       song = beanList!![currentIndex]
       createBindService()   // 创建绑定 Service
-      activity_music_player_albumIng.setImageBitmap(MusicUtils.setArtwork(this@MusicPlayActivity, song?.path!!))
+//      activity_music_player_albumIng.setImageBitmap(MusicUtils.setArtwork(this@MusicPlayActivity, song?.path!!))
       startAlbumAnimation(0f)
       if (!runing) {
          runing = true

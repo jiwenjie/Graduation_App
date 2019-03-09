@@ -33,6 +33,10 @@ class FeedBackActivity : BaseActivity() {
 
    override fun initActivity(savedInstanceState: Bundle?) {
 
+      activity_feed_back_toolbar.setNavigationOnClickListener {
+         finish()
+      }
+
       activity_feed_back_contentText.addTextChangedListener(object : SimpleTextWatcher() {
          override fun afterTextChanged(s: Editable?) {
             confirmChange(s)

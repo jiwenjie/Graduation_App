@@ -161,8 +161,6 @@ object MusicUtils {
       artwork = myRetriever.embeddedPicture
 
       return if (artwork != null) {
-//ivPic.setImageBitmap(bMap);
-
          BitmapFactory.decodeByteArray(artwork, 0, artwork.size)
       } else {
          //ivPic.setImageResource(R.drawable.ic_menu_camera);

@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextUtils
 import android.view.View
+import com.bumptech.glide.Glide
 import com.example.base_library.PermissionListener
 import com.example.base_library.RetrofitManager
 import com.example.base_library.RxBus
@@ -48,8 +49,6 @@ import java.util.concurrent.TimeUnit
  */
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ModifyUserInfoActivity : BaseActivity() {
-
-   private var user: LoginUser? = null
 
    companion object {
       private const val REQUEST_TAKE_PHOTO = 0x110    // 拍照 requestCode
@@ -91,17 +90,13 @@ class ModifyUserInfoActivity : BaseActivity() {
    }
 
    private fun initView() {
-      user = SharePreferencesUtil.getAny(this@ModifyUserInfoActivity, ConstantConfig.SHARE_LOGIN_USER_NAME)
-      srcNickname = user?.username   // 从本地读取 nickName
-      srcAvatar = user?.avatar       // 本地读取头像
-//        srcBgImage = user?.
-      srcDescription = user?.profile
+      srcNickname = App.getLoginUser()?.username   // 从本地读取 nickName
+      srcAvatar = App.getLoginUser()?.avatar       // 本地读取头像
+      srcDescription = App.getLoginUser()?.profile
       // todo 暂时注释，这里需要注意逻辑部分
-//        Glide.with(this)
-//                .asBitmap()
-//                .load(CustomUrl(srcAvatar))
-//                .apply(RequestOptions.getAvatar())
-//                .into(userAvatar)
+      if (srcAvatar != null) {
+         PhoneUserUtils.loadAvatar(this@ModifyUserInfoActivity, srcAvatar!!, userAvatar)
+      }
       userNickname.text = srcNickname
       nicknameEdit.setText(srcNickname)
 
@@ -185,7 +180,7 @@ class ModifyUserInfoActivity : BaseActivity() {
          showProgress("信息修改中...")
          RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
                  .create(JacksonApi::class.java)
-                 .changeNickNameAndDescription(user?.userid!!, nickname, description)
+                 .changeNickNameAndDescription(App.getLoginUser()?.userid!!, nickname, description)
                  .compose(RxJavaUtils.applyObservableAsync())
                  .subscribe({
                     dismissProgress()
