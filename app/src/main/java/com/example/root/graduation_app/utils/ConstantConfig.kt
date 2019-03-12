@@ -18,7 +18,7 @@ object ConstantConfig {
    const val GANKIO_BASE_URL = "http://gank.io/api/"  // 干货集中营的 host 地址
    const val WANWANDROID_URL = "http://wanandroid.com/"
 
-   const val JACKSON_BASE_URL = "http://192.168.0.109:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
+   const val JACKSON_BASE_URL = "http://172.17.16.62:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
 
    const val SHARE_LOGIN_USER_NAME = "share_user"
 

@@ -19,7 +19,6 @@ import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextUtils
 import android.view.View
-import com.bumptech.glide.Glide
 import com.example.base_library.PermissionListener
 import com.example.base_library.RetrofitManager
 import com.example.base_library.RxBus
@@ -32,12 +31,9 @@ import com.example.root.graduation_app.utils.*
 import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_modify_user_info.*
 import java.io.File
-import com.example.root.graduation_app.utils.SharePreferencesUtil
 import com.example.root.graduation_app.base.api.JacksonApi
 import com.example.root.graduation_app.bean.LoginUser
 import com.example.root.graduation_app.rxbusevent.UserInfoChangeEvent
-import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
 
 
 /**
@@ -349,9 +345,9 @@ class ModifyUserInfoActivity : BaseActivity() {
             }
             REQUEST_CODE_CAPTURE_CROP -> {   //裁剪成功后，显示结果
                if (AVATAR_OR_BGIMAGE == 0) {   // 选择头像图片
-                  updateAvatar(imageCropFile?.absolutePath!!)
+                  uploadAvatar(imageCropFile?.absolutePath!!)
                } else if (AVATAR_OR_BGIMAGE == 1) {    // 选择背景图片
-                  userBgImage.setImageBitmap(BitmapFactory.decodeFile(imageCropFile?.absolutePath))
+                  uploadBgImg(imageCropFile?.absolutePath!!)
                }
             }
          }
@@ -360,18 +356,35 @@ class ModifyUserInfoActivity : BaseActivity() {
       }
    }
 
-   private fun updateAvatar(path: String) {
+   // 上传头像图片
+   private fun uploadAvatar(path: String) {
       UploadUtils.uploadAvatar(App.getLoginUser()?.userid!!, path, object : UploadUtils.UploadImageListener {
          override fun uploadSuccess(user: LoginUser) {
             ToastUtils.showToast(this@ModifyUserInfoActivity, "上传成功")
             App.setLoginUser(user)  // 保存 loginUser
-            userAvatar.setImageBitmap(BitmapFactory.decodeFile(imageCropFile?.absolutePath))
+            userAvatar.setImageBitmap(BitmapFactory.decodeFile(path))
             LogUtils.e("上传成功")
          }
 
          override fun uploadFailed(msg: String) {
             ToastUtils.showToast(this@ModifyUserInfoActivity, "上传失败")
             LogUtils.e(msg)
+         }
+      })
+   }
+
+   //上传背景图片
+   private fun uploadBgImg(path: String) {
+      UploadUtils.uploadBgImg(App.getLoginUser()?.userid!!, path, object : UploadUtils.UploadListener {
+         override fun uploadSuccess() {
+            runOnUiThread {
+               userBgImage.setImageBitmap(BitmapFactory.decodeFile(path))
+            }
+            LogUtils.e("ModifyUserInfo 成功")
+         }
+
+         override fun uploadFailed(msg: String) {
+            LogUtils.e("ModifyUserInfo" + msg)
          }
       })
    }

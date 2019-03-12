@@ -1,17 +1,14 @@
 package com.example.root.graduation_app.utils
 
 import android.annotation.SuppressLint
-import android.net.Uri
+import com.alibaba.fastjson.util.JavaBeanInfo.build
 import com.example.base_library.RetrofitManager
 import com.example.base_library.base_utils.LogUtils
-import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.base.api.JacksonApi
 import com.example.root.graduation_app.bean.LoginUser
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.*
 import java.io.File
-import java.net.URI
+import java.io.IOException
 import java.net.URISyntaxException
 
 /**
@@ -37,7 +34,7 @@ object UploadUtils {
 
         /**
          * 参数和图片一起上传的时候两种方式，这是第一种，第二种是使用 query 关键字
-          */
+         */
         val idBody = RequestBody.create(MediaType.parse("multipart/form-data"), userid)
         LogUtils.e("UploadUtils" + file.name)
         LogUtils.e("UploadUtils" + file.absolutePath)
@@ -58,8 +55,49 @@ object UploadUtils {
     }
 
     @SuppressLint("CheckResult")
-    fun uploadMusic(userid: String, imgPath: String, listener: UploadMusicListener) {   // true 为上传成功，false 为上传失败
+    fun uploadMusic(userid: String, imgPath: String, listener: UploadListener) {   // true 为上传成功，false 为上传失败
 
+    }
+
+    // 上传背景图片的方法
+    fun uploadBgImg(userid: String, imgPath: String, listener: UploadListener) {
+        var file: File? = null
+        try {
+            file = File(imgPath)
+        } catch (e: URISyntaxException) {
+            e.printStackTrace()
+        }
+
+        val mOkHttpClent = OkHttpClient()
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("userid", userid)  // 上传参数
+            .addFormDataPart(
+                "bgImg", file?.name,
+                RequestBody.create(MediaType.parse("multipart/form-data"), file!!)
+            )   // 上传文件
+            .build()
+
+        val request = Request.Builder()
+            .url(ConstantConfig.JACKSON_BASE_URL + "phoneUser/uploadBgImg")
+            .post(requestBody)
+            .build()
+        val call = mOkHttpClent.newCall(request)
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                LogUtils.e("yyy" + e.message)
+                listener.uploadFailed(e.message.toString())
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    listener.uploadSuccess()
+                } else {
+                    listener.uploadSuccess()
+                    LogUtils.e("tttttt" + response.code() + response.message())
+                }
+            }
+        })
     }
 
     interface UploadImageListener {
@@ -67,7 +105,7 @@ object UploadUtils {
         fun uploadFailed(msg: String)
     }
 
-    interface UploadMusicListener {
+    interface UploadListener {
         fun uploadSuccess()
         fun uploadFailed(msg: String)
     }
