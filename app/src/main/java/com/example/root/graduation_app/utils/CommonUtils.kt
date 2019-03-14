@@ -1,6 +1,8 @@
 package com.example.root.graduation_app.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -9,8 +11,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
@@ -155,6 +160,37 @@ object CommonUtils {
               .transition(BitmapTransitionOptions().crossFade(300))
               .thumbnail(0.5f)   // 缩略图
               .into(imageView)
+   }
+
+   @SuppressLint("CheckResult")
+   fun displayBgAsBitmap(context: Context, url: String, imageView: ImageView) {
+      Glide.with(context)
+         .asBitmap()
+         .load(url)
+         .apply(RequestOptions.getRequestOptions())
+         .transition(BitmapTransitionOptions().crossFade(300))
+         .thumbnail(0.5f)   // 缩略图
+         .listener(object : RequestListener<Bitmap> {
+            override fun onLoadFailed(
+               e: GlideException?,
+               model: Any?,
+               target: Target<Bitmap>?,
+               isFirstResource: Boolean
+            ): Boolean {
+               TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onResourceReady(
+               resource: Bitmap?,
+               model: Any?,
+               target: Target<Bitmap>?,
+               dataSource: DataSource?,
+               isFirstResource: Boolean
+            ): Boolean {
+               TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+         })
+//         .into(imageView)
    }
 
    fun displayImgAsGif(context: Context, url: String, imageView: ImageView) {

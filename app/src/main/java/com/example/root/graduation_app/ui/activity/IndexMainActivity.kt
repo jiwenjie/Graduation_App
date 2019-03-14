@@ -166,12 +166,16 @@ class IndexMainActivity : BaseActivity() {
                 LogUtils.e("有头像")
                 PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar)
             }
-            val source = BitmapFactory.decodeResource(resources, R.drawable.avatar_default)
-            val bitmap = EasyBlur.with(applicationContext)
-                .bitmap(source)
-                .radius(20)
-                .blur()
-            bgImg.setImageBitmap(bitmap)
+            if (user?.profile != null) {
+                // 说明此时有背景图片
+                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.profile!!, bgImg)
+            }
+//            val source = BitmapFactory.decodeResource(resources, R.drawable.avatar_default)
+//            val bitmap = EasyBlur.with(applicationContext)
+//                .bitmap(source)
+//                .radius(20)
+//                .blur()
+//            bgImg.setImageBitmap(bitmap)
         }
         drawer_layout.run {
             val toggle = ActionBarDrawerToggle(
