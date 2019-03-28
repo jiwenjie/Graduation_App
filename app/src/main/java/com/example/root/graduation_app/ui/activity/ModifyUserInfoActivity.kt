@@ -147,17 +147,14 @@ class ModifyUserInfoActivity : BaseActivity() {
         activity_modify_user_info_return.setOnClickListener {
             finish()
         }
-
         save.setOnClickListener {
             // 保存按钮
             saveUserInfo()
         }
-
         userAvatar.setOnClickListener {
             // 点击拍照或者选择相册（选择头像图片）
             dialogSelect(TAKE_AVATAR_PICTURE)
         }
-
         bgImageCamera.setOnClickListener {
             // 选择封面图片，拍照，你的相册
             dialogSelect(TAKE_BG_IMAGE_PICTURE)

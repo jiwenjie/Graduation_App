@@ -51,8 +51,8 @@ interface WanandroidApi {
     /**
      * 获取最新项目
      * http://wanandroid.com/article/listproject/0/json
-    方法：GET
-    参数：页码，拼接在连接中，从0开始。
+        方法：GET
+        参数：页码，拼接在连接中，从0开始。
      */
     @GET("article/listproject/{page}/json")
     fun getProjectList(@Path("page") page: Int): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
@@ -102,10 +102,9 @@ interface WanandroidApi {
     * @param page, 从 0 开始
     * @param key
     */
-   @POST("article/query/{page}/json")
-   @FormUrlEncoded
-   fun queryBySearchKey(@Path("page") page: Int,
-                        @Field("k") key: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+   @GET("article/query/{page}/json")
+   fun queryBySearchKey(@Query("page") page: Int,
+                        @Query("k") key: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
     /**
      * hot key for search

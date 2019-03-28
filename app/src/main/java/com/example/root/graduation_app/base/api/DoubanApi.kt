@@ -52,9 +52,10 @@ interface DoubanApi {
    @GET("v2/book/search")
    fun getBookListWithTag(@Query("tag") tag: String,
                           @Query("start") start: Int,
-                          @Query("count") count: Int): Observable<DoubanBookBean>
+                          @Query("count") count: Int,
+                          @Query("apikey") apiKey: String): Observable<DoubanBookBean>
 
    @GET("v2/book/{id}")
-   fun getBookDetail(@Path("id") id: String): Observable<DoubanBookItemDetail>
+   fun getBookDetail(@Path("id") id: String, @Query("apikey") apiKey: String): Observable<DoubanBookItemDetail>
 
 }

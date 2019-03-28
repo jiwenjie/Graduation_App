@@ -50,7 +50,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
       return RetrofitManager
               .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
-              .getBookListWithTag(tag, start, count)
+              .getBookListWithTag(tag, start, count, ConstantConfig.DOUBAN_APIKEY)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 
@@ -58,7 +58,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
       return RetrofitManager
               .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
-              .getBookDetail(id)
+              .getBookDetail(id, ConstantConfig.DOUBAN_APIKEY)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 }
