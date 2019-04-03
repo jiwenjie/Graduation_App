@@ -24,6 +24,7 @@ public class LoginUser implements Serializable {
    private String avatar;     // 用户头像在服务器存储的地址
    private boolean signout;    // 标记是否退出账号
    private String collectioncount; // 收藏了几篇文章
+   private String bgimageurl; // 背景图片地址
    private String profile;
 
    public String getUserid() {
@@ -136,6 +137,14 @@ public class LoginUser implements Serializable {
 
    public void setCollectioncount(String collectioncount) {
       this.collectioncount = collectioncount;
+   }
+
+   public String getBgimageurl() {
+      return bgimageurl;
+   }
+
+   public void setBgimageurl(String bgimageurl) {
+      this.bgimageurl = bgimageurl;
    }
 
    public String getProfile() {

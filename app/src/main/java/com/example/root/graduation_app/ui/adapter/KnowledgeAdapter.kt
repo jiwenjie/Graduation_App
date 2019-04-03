@@ -48,7 +48,7 @@ class KnowledgeAdapter(context: Context, beanList: ArrayList<WanAndroidItem>)
                   override fun success(msg: String) {
                      ToastUtils.showToast(mContext, "取消收藏成功")
                      data.collect = !data.collect
-                     itemView.iv_like.setImageResource(R.drawable.ic_like)
+                     itemView.iv_like.setImageResource(R.drawable.ic_like_not)
                   }
 
                   override fun failed(error: String) {

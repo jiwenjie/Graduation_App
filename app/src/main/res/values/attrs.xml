@@ -27,6 +27,18 @@
         <attr name="clear_rightDrawableSize" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="PasswordView">
+        <attr name="mode" format="integer"/>                <!-- 模式 -->
+        <attr name="passwordLength" format="integer"/>      <!-- 密码长度 -->
+        <attr name="cursorFlashTime" format="integer"/>     <!-- 光标刷新时间 -->
+        <attr name="borderWidth" format="dimension"/>       <!-- 边线宽度 -->
+        <attr name="borderColor" format="color"/>           <!-- 边线颜色 -->
+        <attr name="cursorColor" format="color"/>           <!-- 广标颜色 -->
+        <attr name="isCursorEnable" format="boolean"/>      <!-- 是否禁用 -->
+        <attr name="passwordPadding" format="dimension"/>   <!-- 密码间距 -->
+        <attr name="cipherEnable" format="boolean"/>        <!-- 模式 -->
+    </declare-styleable>
+
 </resources>
 
 

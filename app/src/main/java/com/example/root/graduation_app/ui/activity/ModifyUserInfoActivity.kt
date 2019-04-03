@@ -87,12 +87,16 @@ class ModifyUserInfoActivity : BaseActivity() {
     }
 
     private fun initView() {
-        srcNickname = App.getLoginUser()?.username   // 从本地读取 nickName
-        srcAvatar = App.getLoginUser()?.avatar       // 本地读取头像
+        srcNickname = App.getLoginUser()?.username      // 从本地读取 nickName
+        srcAvatar = App.getLoginUser()?.avatar          // 本地读取头像
+        srcBgImage = App.getLoginUser()?.bgimageurl     // 读取背景图片
         srcDescription = App.getLoginUser()?.profile
         // todo 暂时注释，这里需要注意逻辑部分
         if (srcAvatar != null) {
             PhoneUserUtils.loadAvatar(this@ModifyUserInfoActivity, srcAvatar!!, userAvatar)
+        }
+        if (srcBgImage != null) {
+            CommonUtils.displayImgAsBitmap(this@ModifyUserInfoActivity, srcBgImage!!, userBgImage)
         }
         userNickname.text = srcNickname
         nicknameEdit.setText(srcNickname)

@@ -155,7 +155,7 @@ object CommonUtils {
    fun displayImgAsBitmap(context: Context, url: String, imageView: ImageView) {
       Glide.with(context)
               .asBitmap()
-              .load(url)
+              .load(ConstantConfig.JACKSON_BASE_URL + url)
               .apply(RequestOptions.getRequestOptions())
               .transition(BitmapTransitionOptions().crossFade(300))
               .thumbnail(0.5f)   // 缩略图

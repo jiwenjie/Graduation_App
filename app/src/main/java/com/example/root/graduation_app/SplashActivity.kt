@@ -39,37 +39,34 @@ class SplashActivity : BaseActivity() {
                     overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
                  }
       } else {
-         PhoneUserUtils.getUpdateUser(App.getLoginUser()?.userid!!, object : PhoneUserUtils.operationListener {
-            @SuppressLint("CheckResult")
-            override fun success(user: LoginUser) {
-               App.setLoginUser(user)
-               LogUtils.e("SplashActivity用户信息：" + user.profile)
-               LogUtils.e("SplashActivity头像信息：" + user.avatar)
-               Observable.timer(3200, TimeUnit.MILLISECONDS)
-                       .compose(RxJavaUtils.applyObservableAsync())
-                       .subscribe {
-                          goIndexMainActivity()
-                       }
-            }
-
-            @SuppressLint("PrivateResource")
-            override fun failed(error: String) {
-               LogUtils.e("SplashActivity===$error")
-               Observable.timer(3200, TimeUnit.MILLISECONDS)
-                       .compose(RxJavaUtils.applyObservableAsync())
-                       .subscribe {
-                          // 此时测试直接进入首页
-                          // 如果 user 不为空则不管其他，直接进入 Main 中。只有第一次安装的时候需要跳转登陆页面
-                          if (App.getLoginUser()?.isSignout!!) { // 如果退出账号
-                             LoginActivity.runActivity(this@SplashActivity, null)
-                          } else {  // 没有退出账号
-                             IndexMainActivity.runActivity(this@SplashActivity)
+         if (App.getLoginUser()?.isSignout!!) { // 如果退出账号
+            LoginActivity.runActivity(this@SplashActivity, null)
+         } else {  // 没有退出账号
+            PhoneUserUtils.getUpdateUser(App.getLoginUser()?.userid!!, object : PhoneUserUtils.operationListener {
+               @SuppressLint("CheckResult")
+               override fun success(user: LoginUser) {
+                  App.setLoginUser(user)
+                  LogUtils.e("SplashActivity用户信息：" + user.profile)
+                  LogUtils.e("SplashActivity头像信息：" + user.avatar)
+                  Observable.timer(3000, TimeUnit.MILLISECONDS)
+                          .compose(RxJavaUtils.applyObservableAsync())
+                          .subscribe {
+                             goIndexMainActivity()
                           }
-                          finish()
-                          overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
-                       }
-            }
-         })
+               }
+
+               @SuppressLint("PrivateResource")
+               override fun failed(error: String) {
+                  LogUtils.e("SplashActivity===$error")
+                  Observable.timer(3000, TimeUnit.MILLISECONDS)
+                          .compose(RxJavaUtils.applyObservableAsync())
+                          .subscribe {
+                             goIndexMainActivity()
+                          }
+               }
+            })
+         }
+
       }
    }
 

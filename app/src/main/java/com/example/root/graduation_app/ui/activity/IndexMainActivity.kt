@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -34,7 +33,6 @@ import com.example.root.graduation_app.ui.fragment.HomeFragment
 import com.example.root.graduation_app.utils.*
 import com.example.root.graduation_app.widget.SignUpDialog
 import com.jaeger.library.StatusBarUtil
-import com.zhouwei.blurlibrary.EasyBlur
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_index_main.*
@@ -148,7 +146,7 @@ class IndexMainActivity : BaseActivity() {
                 signUp?.setBackgroundColor(ContextCompat.getColor(this@IndexMainActivity, R.color.item_date))
             }
         } else {
-            userName.text = "您还未登陆"
+            userName.text = "点击登陆"
             introduction.text = "简介："
             signUp!!.visibility = View.GONE
         }
@@ -168,7 +166,8 @@ class IndexMainActivity : BaseActivity() {
             }
             if (user?.profile != null) {
                 // 说明此时有背景图片
-                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.profile!!, bgImg)
+//                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.bgimageurl!!, bgImg)
+                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg)
             }
 //            val source = BitmapFactory.decodeResource(resources, R.drawable.avatar_default)
 //            val bitmap = EasyBlur.with(applicationContext)
@@ -211,6 +210,7 @@ class IndexMainActivity : BaseActivity() {
         }
 
         userLyt.setOnClickListener {
+            return@setOnClickListener   // 这里先使用 return 屏蔽，暂不做处理
             // 点击跳转用户主页（显示已做未做的两个 tab 页）
             drawer_layout.closeDrawers()
             Observable.timer(300, TimeUnit.MILLISECONDS)
