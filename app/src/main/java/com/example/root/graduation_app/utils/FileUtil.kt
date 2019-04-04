@@ -63,6 +63,16 @@ object FileUtil {
             null
         }
     }
+
+    // 把头像文件存储到硬盘
+    fun saveAvatarInDisk() {
+
+    }
+
+    // 把背景图片存储到硬盘
+    fun saveBgInDisk() {
+
+    }
 }
 
 

@@ -8,6 +8,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -34,6 +35,8 @@ import java.io.File
 import com.example.root.graduation_app.base.api.JacksonApi
 import com.example.root.graduation_app.bean.LoginUser
 import com.example.root.graduation_app.rxbusevent.UserInfoChangeEvent
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 /**
@@ -349,15 +352,39 @@ class ModifyUserInfoActivity : BaseActivity() {
                 }
                 REQUEST_CODE_CAPTURE_CROP -> {   //裁剪成功后，显示结果
                     if (AVATAR_OR_BGIMAGE == 0) {   // 选择头像图片
-                        uploadAvatar(imageCropFile?.absolutePath!!)
+                        saveAvatar()
                     } else if (AVATAR_OR_BGIMAGE == 1) {    // 选择背景图片
-                        uploadBgImg(imageCropFile?.absolutePath!!)
+                        saveBg()
                     }
                 }
             }
         } else {
             LogUtils.d("tag 错误码 $resultCode")
         }
+    }
+
+    private fun saveAvatar() {
+        // 先把内容保存到本地
+        SharePreferencesUtil.saveUserImgPath(ConstantConfig.KEY_USER_AVATAR, imageCropFile?.absolutePath!!)
+        uploadAvatar(imageCropFile?.absolutePath!!)
+    }
+
+    private fun saveBg() {
+        SharePreferencesUtil.saveUserImgPath(ConstantConfig.KEY_USER_BG, imageCropFile?.absolutePath!!)
+        uploadBgImg(imageCropFile?.absolutePath!!)
+    }
+
+    /**
+     * 某些机型直接获取会为null,在这里处理一下防止国内某些机型返回null
+     */
+    private fun getViewBitmap(view: View?): Bitmap? {
+        if (view == null) {
+            return null
+        }
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
     }
 
     // 上传头像图片

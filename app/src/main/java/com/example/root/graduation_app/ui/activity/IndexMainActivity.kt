@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -37,6 +38,7 @@ import io.reactivex.Observable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_index_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.io.FileInputStream
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -105,9 +107,8 @@ class IndexMainActivity : BaseActivity() {
             title = getString(R.string.app_name)
             setSupportActionBar(this)
         }
-
         initDrawerLayout()
-
+        showFragment(mIndex)
         bottom_navigation.run {
             // 以前使用 BottomNavigationViewHelper.disableShiftMode(this) 方法来设置底部图标和字体都显示并去掉点击动画
             // 升级到 28.0.0 之后，官方重构了 BottomNavigationView ，目前可以使用 labelVisibilityMode = 1 来替代
@@ -115,8 +116,6 @@ class IndexMainActivity : BaseActivity() {
             labelVisibilityMode = 1
             setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         }
-
-        showFragment(mIndex)
         floating_action_btn.run {
             setOnClickListener(onFABClickListener)
         }
@@ -155,17 +154,26 @@ class IndexMainActivity : BaseActivity() {
             setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
 //         nav_username = getHeaderView(0).findViewById(R.id.tv_username)
             menu.findItem(R.id.nav_logout).isVisible = isLogin
-
             val bgImg = getHeaderView(0).findViewById<ImageView>(R.id.navHeaderBgImage)
-
             // 这里应该从网络取图片
             if (user?.avatar != null) {
                 // 说明有头像存储
-                LogUtils.e("有头像")
+                val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_AVATAR)
+                if (!path.isNullOrEmpty()) {
+                    val fis = FileInputStream(path)
+                    val bitmap  = BitmapFactory.decodeStream(fis)
+                    imgAvatar.setImageBitmap(bitmap)
+                }
                 PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar)
             }
             if (user?.profile != null) {
                 // 说明此时有背景图片
+                val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
+                if (!path.isNullOrEmpty()) {
+                    val fis = FileInputStream(path)
+                    val bitmap  = BitmapFactory.decodeStream(fis)
+                    imgAvatar.setImageBitmap(bitmap)
+                }
 //                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.bgimageurl!!, bgImg)
                 CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg)
             }
@@ -187,13 +195,11 @@ class IndexMainActivity : BaseActivity() {
             addDrawerListener(toggle)
             toggle.syncState()
         }
-
         signUp!!.setOnClickListener {
             // 签到的点击事件
             signUpNow()
             drawer_layout.closeDrawers()
         }
-
         description.setOnClickListener {
             // 点击跳转用户编辑页
             drawer_layout.closeDrawers()
@@ -208,7 +214,6 @@ class IndexMainActivity : BaseActivity() {
                     }
                 }
         }
-
         userLyt.setOnClickListener {
             return@setOnClickListener   // 这里先使用 return 屏蔽，暂不做处理
             // 点击跳转用户主页（显示已做未做的两个 tab 页）

@@ -22,24 +22,18 @@ object RequestOptions {
               .error(R.mipmap.ic_error)
    }
 
-//    fun getRequestOptions(): RequestOptions {
-//        return RequestOptions()
-//            .centerCrop()
-//            .placeholder(R.drawable.placeholder_banner)
-//            .error(R.mipmap.ic_error)
-//    }
-
    fun getRequestDefaultAvatar(): RequestOptions {
       return RequestOptions()
               .placeholder(R.drawable.img_avatar)
               .circleCrop()
    }
 
+   // 因为从之前从本地读取数据，所以不需要占位符了
    fun getAvatar(): RequestOptions {
       return RequestOptions()
               .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-              .placeholder(R.drawable.loading_bg_circle)
-              .error(R.drawable.avatar_default)
+//              .placeholder(R.drawable.loading_bg_circle)
+//              .error(R.drawable.avatar_default)
    }
 }
 

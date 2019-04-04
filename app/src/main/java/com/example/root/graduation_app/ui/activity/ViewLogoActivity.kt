@@ -85,7 +85,7 @@ class ViewLogoActivity : AppCompatActivity() {
       if (view == null) {
          return null
       }
-      val bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888)
+      val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
       val canvas = Canvas(bitmap)
       view.draw(canvas)
       return bitmap

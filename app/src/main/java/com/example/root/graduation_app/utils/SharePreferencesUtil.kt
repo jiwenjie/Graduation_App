@@ -3,6 +3,7 @@ package com.example.root.graduation_app.utils
 import android.content.Context
 import androidx.core.content.edit
 import com.alibaba.fastjson.JSON
+import com.example.root.graduation_app.App
 import com.example.root.graduation_app.bean.LoginUser
 import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 
@@ -17,6 +18,10 @@ object SharePreferencesUtil {
 
    /** SharePreference 的存储关键字 **/
    private const val SHARED_PREFERENCES_NAME = "graduation_app_files"
+
+   private fun getUserKey(): String? {
+      return App.getLoginUser()?.userid + "-" + App.getLoginUser()?.userphone
+   }
 
    @JvmStatic
    fun saveString(context: Context, key: String, value: String) {
@@ -150,5 +155,28 @@ object SharePreferencesUtil {
       } else {
          JSON.parseArray(data, WanAndroidPublicItemBean::class.java)
       }
+   }
+
+   /**
+    * 保存用户头像或背景的路径, type 传递参数是头像或者背景
+    */
+   @JvmStatic
+   fun saveUserImgPath(type: String, path: String) {
+      val sp = App.contextInstance.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+      sp.edit {
+         putString(getUserKey() + type, path)
+         apply()
+      }
+   }
+
+   /**
+    * 读取用户头像或背景的路径, type 传递参数是头像或者背景
+    */
+   @JvmStatic
+   fun getUserImgPath(type: String): String? {
+      val sp = App.contextInstance.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+      val path = sp.getString(getUserKey() + type, "")
+      if (path.isNullOrEmpty()) return null
+      return path
    }
 }
