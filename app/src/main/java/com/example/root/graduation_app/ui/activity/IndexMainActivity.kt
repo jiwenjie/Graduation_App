@@ -80,7 +80,14 @@ class IndexMainActivity : BaseActivity() {
     private var user: LoginUser? = null
     private var signUp: TextView? = null
 
+    private var bgImg: ImageView? = null
+    private var imgAvatar: ImageView? = null
+    private var userName: TextView? = null
+    private var introduction: TextView? = null
+
     companion object {
+        private const val REQ_REFRESH = 116
+
         @JvmStatic
         fun runActivity(activity: Activity) {
             val intent = Intent(activity, IndexMainActivity::class.java)
@@ -128,16 +135,15 @@ class IndexMainActivity : BaseActivity() {
     private fun initDrawerLayout() {
         val headerView = nav_view.getHeaderView(0)
         signUp = headerView.findViewById(R.id.headerSignUpText)
-        val userLyt = headerView.findViewById<LinearLayout>(R.id.userLayout)
-        val userName = headerView.findViewById<TextView>(R.id.nicknameMe)
+        userName = headerView.findViewById(R.id.nicknameMe)
         val description = headerView.findViewById<LinearLayout>(R.id.descriptionLayout)
-        val introduction = headerView.findViewById<TextView>(R.id.descriptionMe)
-        val imgAvatar = headerView.findViewById<ImageView>(R.id.avatarMe)
+        introduction = headerView.findViewById(R.id.descriptionMe)
+        imgAvatar = headerView.findViewById(R.id.avatarMe)
 
         if (isLogin) {
             // 说明此时用户登陆了账号
-            userName.text = user?.username
-            introduction.text = "简介：" + if (user?.profile.isNullOrEmpty()) "" else user?.profile
+            userName?.text = user?.username
+            introduction?.text = "简介：" + if (user?.profile.isNullOrEmpty()) "" else user?.profile
             signUp!!.visibility = View.VISIBLE
             if (user?.isSignintoday!!) { // 如果今天已经签到
                 signUp!!.text = "已签到"
@@ -145,44 +151,32 @@ class IndexMainActivity : BaseActivity() {
                 signUp?.setBackgroundColor(ContextCompat.getColor(this@IndexMainActivity, R.color.item_date))
             }
         } else {
-            userName.text = "点击登陆"
-            introduction.text = "简介："
+            userName?.text = "点击登陆"
+            introduction?.text = "简介："
             signUp!!.visibility = View.GONE
         }
 
         nav_view.run {
             setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
-//         nav_username = getHeaderView(0).findViewById(R.id.tv_username)
             menu.findItem(R.id.nav_logout).isVisible = isLogin
-            val bgImg = getHeaderView(0).findViewById<ImageView>(R.id.navHeaderBgImage)
+            bgImg = getHeaderView(0).findViewById(R.id.navHeaderBgImage)
             // 这里应该从网络取图片
             if (user?.avatar != null) {
                 // 说明有头像存储
                 val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_AVATAR)
                 if (!path.isNullOrEmpty()) {
-                    val fis = FileInputStream(path)
-                    val bitmap  = BitmapFactory.decodeStream(fis)
-                    imgAvatar.setImageBitmap(bitmap)
+                    imgAvatar?.setImageBitmap(BitmapFactory.decodeFile(path))
                 }
-                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar)
+                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
             }
             if (user?.profile != null) {
                 // 说明此时有背景图片
                 val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
                 if (!path.isNullOrEmpty()) {
-                    val fis = FileInputStream(path)
-                    val bitmap  = BitmapFactory.decodeStream(fis)
-                    imgAvatar.setImageBitmap(bitmap)
+                    bgImg?.setImageBitmap(BitmapFactory.decodeFile(path))
                 }
-//                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.bgimageurl!!, bgImg)
-                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg)
+                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg!!)
             }
-//            val source = BitmapFactory.decodeResource(resources, R.drawable.avatar_default)
-//            val bitmap = EasyBlur.with(applicationContext)
-//                .bitmap(source)
-//                .radius(20)
-//                .blur()
-//            bgImg.setImageBitmap(bitmap)
         }
         drawer_layout.run {
             val toggle = ActionBarDrawerToggle(
@@ -206,22 +200,7 @@ class IndexMainActivity : BaseActivity() {
             Observable.timer(300, TimeUnit.MILLISECONDS)
                 .subscribe {
                     if (isLogin) {
-                        ModifyUserInfoActivity.runActivity(this@IndexMainActivity)
-                    } else {
-                        LoginActivity.runActivity(this@IndexMainActivity, user)
-                        ToastUtils.showToast(this@IndexMainActivity, resources.getString(R.string.login_tint))
-                        LoginActivity.runActivity(this@IndexMainActivity, null)
-                    }
-                }
-        }
-        userLyt.setOnClickListener {
-            return@setOnClickListener   // 这里先使用 return 屏蔽，暂不做处理
-            // 点击跳转用户主页（显示已做未做的两个 tab 页）
-            drawer_layout.closeDrawers()
-            Observable.timer(300, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    if (isLogin) {
-                        ProfileActivity.runActivity(this@IndexMainActivity)
+                        ModifyUserInfoActivity.runActivity(this@IndexMainActivity, REQ_REFRESH)
                     } else {
                         LoginActivity.runActivity(this@IndexMainActivity, user)
                         ToastUtils.showToast(this@IndexMainActivity, resources.getString(R.string.login_tint))
@@ -266,14 +245,6 @@ class IndexMainActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putInt(BOTTOM_INDEX, mIndex)
-    }
-
-    override fun handleRxBus() {
-        RxBus.mBus.register(this@IndexMainActivity, UserInfoChangeEvent::class.java,
-            Consumer {
-                this.user = App.getLoginUser()
-                initDrawerLayout()
-            })
     }
 
     override fun loadData() {
@@ -530,6 +501,35 @@ class IndexMainActivity : BaseActivity() {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) return
+        if (requestCode == REQ_REFRESH) {
+            this.user = App.getLoginUser()
+
+            userName?.text = user?.username
+            introduction?.text = "简介：" + if (user?.profile.isNullOrEmpty()) "" else user?.profile
+
+            if (user?.avatar != null) {
+                // 说明有头像存储
+                val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_AVATAR)
+                if (!path.isNullOrEmpty()) {
+                    imgAvatar?.setImageBitmap(BitmapFactory.decodeFile(path))
+                }
+                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
+            }
+            if (user?.profile != null) {
+                // 说明此时有背景图片
+                val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
+                if (!path.isNullOrEmpty()) {
+                    bgImg?.setImageBitmap(BitmapFactory.decodeFile(path))
+                }
+                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg!!)
+            }
+        }
     }
 
     override fun onDestroy() {

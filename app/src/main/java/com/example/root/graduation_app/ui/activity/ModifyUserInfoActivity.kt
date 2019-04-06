@@ -50,9 +50,6 @@ import java.io.IOException
 class ModifyUserInfoActivity : BaseActivity() {
 
     companion object {
-        private const val REQUEST_TAKE_PHOTO = 0x110    // 拍照 requestCode
-        private const val REQUEST_CHOOSE_ALBUM = 0x112  // 选择图片 requestCode
-
         private var AVATAR_OR_BGIMAGE = -1     // 0 表示选择头像，1 表示选择背景图片
 
         private const val TAKE_AVATAR_PICTURE = 0
@@ -74,9 +71,9 @@ class ModifyUserInfoActivity : BaseActivity() {
         var imageCropFile: File? = null
 
         @JvmStatic
-        fun runActivity(activity: Activity) {
+        fun runActivity(activity: Activity, req: Int) {
             val intent = Intent(activity, ModifyUserInfoActivity::class.java)
-            activity.startActivity(intent)
+            activity.startActivityForResult(intent, req)
         }
     }
 
@@ -176,10 +173,7 @@ class ModifyUserInfoActivity : BaseActivity() {
         if (isUserInfoChanged) {
             val nickname = nicknameEdit.text.toString().trim()
             val description = descriptionEdit.text.toString().trim()
-            val avatarFilePath = if (TextUtils.isEmpty(userAvatarPath)) "" else userAvatarPath
-            val bgImageFilePath = if (TextUtils.isEmpty(userBgImagePath)) "" else userBgImagePath
 
-            // todo 开始把信息上传服务器，成功后使用 RxBus 通知首页更改信息
             showProgress("信息修改中...")
             RetrofitManager.provideClient(ConstantConfig.JACKSON_BASE_URL)
                 .create(JacksonApi::class.java)
@@ -191,9 +185,9 @@ class ModifyUserInfoActivity : BaseActivity() {
                         // 返回值表示成功后，使用 RxBus 更新数据，之后直接把当前活动 finish 掉即可。
                         ToastUtils.showToast(this@ModifyUserInfoActivity, "信息更改成功")
                         val user = it.data
-                        LogUtils.e(user.profile + user.userphone)
+                        LogUtils.e(user.bgimageurl + user.avatar)
                         App.setLoginUser(user)
-                        RxBus.mBus.post(UserInfoChangeEvent())
+                        setResult(Activity.RESULT_OK)
                         finish()
                     } else {
                         ToastUtils.showToast(this@ModifyUserInfoActivity, it.msg)
@@ -223,7 +217,6 @@ class ModifyUserInfoActivity : BaseActivity() {
 
     /**
      * 判断用户昵称是否合法。用户昵称长度必须在2-30个字符之间，并且只能包含中英文、数字、下划线和横线。
-     *
      * @return 昵称合法返回true，不合法返回false。
      */
     private fun validateNickname(): Boolean {
@@ -263,7 +256,6 @@ class ModifyUserInfoActivity : BaseActivity() {
                             override fun onGranted() {
                                 takePhoto()
                             }
-
                             override fun onDenied(deniedPermissions: List<String>) {
                                 showDialog()
                             }

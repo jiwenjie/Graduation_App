@@ -102,9 +102,10 @@ interface WanandroidApi {
     * @param page, 从 0 开始
     * @param key
     */
-   @GET("article/query/{page}/json")
-   fun queryBySearchKey(@Query("page") page: Int,
-                        @Query("k") key: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
+   @POST("article/query/{page}/json")
+   @FormUrlEncoded
+   fun queryBySearchKey(@Path("page") page: Int,
+                        @Field("k") key: String): Observable<WanAndroidBaseBean<WanAndroidJson<WanAndroidItem>>>
 
     /**
      * hot key for search
