@@ -75,7 +75,6 @@ class DoubanMovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView
             .into(iv_movie_photo)
 
         CommonUtils.displayBlurImg(this@DoubanMovieDetailActivity, bean!!.images.large, iv_header_bg)     // 显示虚化图片
-        CommonUtils.displayBlurImg(this@DoubanMovieDetailActivity, bean!!.images.large, iv_toolbar_bg)    // 显示虚化图片
     }
 
     private fun initView() {

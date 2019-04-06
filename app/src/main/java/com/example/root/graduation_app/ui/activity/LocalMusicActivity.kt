@@ -9,10 +9,8 @@ import android.os.Bundle
 import android.os.IBinder
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.base_library.RxBus
-import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_views.BaseActivity
 import com.example.root.graduation_app.MusicPlayService
 import com.example.root.graduation_app.R
@@ -54,7 +52,6 @@ class LocalMusicActivity: BaseActivity() {
 
       }
    }
-
 
    companion object {
       @JvmStatic
@@ -110,7 +107,6 @@ class LocalMusicActivity: BaseActivity() {
 
    private fun createBindService() {
       val intent = Intent(this, MusicPlayService::class.java)
-//      intent.putExtra(MusicPlayService.KEY_MUSIC, beanList)
       bindService(intent, connection, Context.BIND_AUTO_CREATE)    // 创建并绑定了 Service
    }
 

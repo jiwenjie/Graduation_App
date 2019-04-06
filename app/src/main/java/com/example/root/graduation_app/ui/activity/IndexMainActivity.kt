@@ -68,11 +68,6 @@ class IndexMainActivity : BaseActivity() {
     protected var isLogin = false
 
     /**
-     * local username
-     */
-//   private val username: String by Preference(ConstantConfig.USERNAME_KEY, "")
-
-    /**
      * username TextView
      */
     private var nav_username: TextView? = null
@@ -169,7 +164,7 @@ class IndexMainActivity : BaseActivity() {
                 }
                 PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
             }
-            if (user?.profile != null) {
+            if (user?.bgimageurl != null) {
                 // 说明此时有背景图片
                 val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
                 if (!path.isNullOrEmpty()) {
@@ -511,7 +506,11 @@ class IndexMainActivity : BaseActivity() {
             this.user = App.getLoginUser()
 
             userName?.text = user?.username
-            introduction?.text = "简介：" + if (user?.profile.isNullOrEmpty()) "" else user?.profile
+            if (user?.profile.isNullOrEmpty()) {
+                introduction?.text = "简介："
+            } else {
+                introduction?.text = user?.profile
+            }
 
             if (user?.avatar != null) {
                 // 说明有头像存储
@@ -534,7 +533,6 @@ class IndexMainActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        RxBus.mBus.unregister(this@IndexMainActivity)
         mHomeFragment = null
         mBookFragment = null
         mKnowledgeTreeFragment = null

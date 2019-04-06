@@ -8,6 +8,7 @@
     <ImageView
         android:id="@+id/iv_header_bg"
         android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
         android:layout_height="330dp"
         android:scaleType="fitXY" />
 
@@ -32,6 +33,7 @@
                 android:id="@+id/iv_book_photo"
                 android:layout_width="125dp"
                 android:layout_height="165dp"
+                android:background="@color/color_white"
                 android:layout_marginEnd="@dimen/common_15dp"
                 android:scaleType="fitXY"/>
 

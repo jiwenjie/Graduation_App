@@ -35,13 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_toolbar_bg"
-            android:layout_width="match_parent"
-            android:layout_height="330dp"
-            android:alpha="0"
-            android:scaleType="fitXY" />
-
         <FrameLayout
             android:id="@+id/toolbg"
             android:layout_width="match_parent"
@@ -49,7 +42,6 @@
             android:fitsSystemWindows="true">
 
             <include layout="@layout/common_toolbar_layout_return" />
-
         </FrameLayout>
     </FrameLayout>
 </FrameLayout>

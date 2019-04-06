@@ -47,7 +47,6 @@ class HomeFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(), 
     }
 
     override fun loadData() {
-        // 首先判断本地时候保存了数据，如果有直接取出，没有就进行网络请求
         mPresenter.requestProjectTree()
     }
 

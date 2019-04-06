@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/alpha_80_black"
                 android:textSize="@dimen/common_sp_18"
-                tools:text="啊擦拭擦拭" />
+                tools:text="导演或演员名v" />
 
             <TextView
                 android:id="@+id/tv_person_type"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="@dimen/common_15dp"
                 android:textColor="@color/alpha_60_black"
                 android:textSize="@dimen/common_sp_16"
-                tools:text="acasc" />
+                tools:text="身份（导演或主演）" />
         </LinearLayout>
     </LinearLayout>
 
