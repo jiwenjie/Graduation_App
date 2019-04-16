@@ -518,7 +518,7 @@ class IndexMainActivity : BaseActivity() {
                 if (!path.isNullOrEmpty()) {
                     imgAvatar?.setImageBitmap(BitmapFactory.decodeFile(path))
                 }
-                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
+//                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
             }
             if (user?.profile != null) {
                 // 说明此时有背景图片
@@ -526,7 +526,7 @@ class IndexMainActivity : BaseActivity() {
                 if (!path.isNullOrEmpty()) {
                     bgImg?.setImageBitmap(BitmapFactory.decodeFile(path))
                 }
-                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg!!)
+//                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg!!)
             }
         }
     }

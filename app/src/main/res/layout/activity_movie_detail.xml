@@ -31,10 +31,6 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <FrameLayout
             android:id="@+id/toolbg"
             android:layout_width="match_parent"
@@ -43,5 +39,4 @@
 
             <include layout="@layout/common_toolbar_layout_return" />
         </FrameLayout>
-    </FrameLayout>
 </FrameLayout>

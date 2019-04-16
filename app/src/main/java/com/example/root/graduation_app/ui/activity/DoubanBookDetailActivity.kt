@@ -45,7 +45,6 @@ class DoubanBookDetailActivity : BaseMvpActivity<DoubanContract.DoubanBookDetail
    override fun initActivity(savedInstanceState: Bundle?) {
       bean = intent.getSerializableExtra(KEY_BEAN) as DoubanBookItemDetail
       initHeaderView()
-//      initView()
    }
 
    private fun initHeaderView() {

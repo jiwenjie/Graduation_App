@@ -83,7 +83,8 @@ class DoubanMovieDetailActivity : BaseMvpActivity<DoubanContract.DoubanMovieView
         rv_movie_detail.isNestedScrollingEnabled = false
         nsv_scrollview.setOnScrollChangeListener { nestedScrollView: NestedScrollView?, l: Int, t: Int, oldl: Int, oldt: Int ->
             var alpha = 1f
-            var slideValue = t - ScreenUtils.dip2px(this@DoubanMovieDetailActivity, 56f) + ScreenUtils.getStatusBarHeight(this@DoubanMovieDetailActivity)
+            var slideValue = t - ScreenUtils.dip2px(this@DoubanMovieDetailActivity, 56f)
+                                + ScreenUtils.getStatusBarHeight(this@DoubanMovieDetailActivity)
             if (slideValue < 0) {
                 slideValue = 0
             }

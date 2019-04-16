@@ -1,6 +1,5 @@
 package com.example.root.graduation_app.utils
 
-import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.root.graduation_app.R
@@ -19,7 +18,7 @@ object RequestOptions {
       return RequestOptions()
               .centerCrop()
               .placeholder(R.drawable.placeholder_banner)
-              .error(R.mipmap.ic_error)
+              .error(R.drawable.shape_error_color_100)
    }
 
    fun getRequestDefaultAvatar(): RequestOptions {
@@ -32,8 +31,8 @@ object RequestOptions {
    fun getAvatar(): RequestOptions {
       return RequestOptions()
               .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-//              .placeholder(R.drawable.loading_bg_circle)
-//              .error(R.drawable.avatar_default)
+              .placeholder(R.drawable.loading_bg_circle)
+              .error(R.drawable.avatar_default)
    }
 }
 

@@ -38,10 +38,6 @@
         </android.support.v4.widget.NestedScrollView>
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,5 +51,4 @@
                 app:popupTheme="@style/AppTheme.ToolbarPopupOverlay"
                 app:titleTextColor="@color/color_white"/>
         </FrameLayout>
-    </FrameLayout>
 </FrameLayout>
