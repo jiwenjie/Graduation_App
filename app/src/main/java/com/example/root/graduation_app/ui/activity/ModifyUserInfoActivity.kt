@@ -185,7 +185,7 @@ class ModifyUserInfoActivity : BaseActivity() {
                         // 返回值表示成功后，使用 RxBus 更新数据，之后直接把当前活动 finish 掉即可。
                         ToastUtils.showToast(this@ModifyUserInfoActivity, "信息更改成功")
                         val user = it.data
-                        LogUtils.e(user.bgimageurl + user.avatar)
+                        LogUtils.e("ModifyUserInfo" + user.bgimageurl + user.avatar)
                         App.setLoginUser(user)
                         setResult(Activity.RESULT_OK)
                         finish()

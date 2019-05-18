@@ -25,7 +25,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
       return RetrofitManager
               .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
-              .getDoubanHotMovie()
+              .getDoubanHotMovie(ConstantConfig.DOUBAN_APIKEY)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 
@@ -33,7 +33,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
       return RetrofitManager
               .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
-              .getDoubanMovieDetail(id)
+              .getDoubanMovieDetail(id, ConstantConfig.DOUBAN_APIKEY)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 
@@ -41,7 +41,7 @@ class DoubanModel : DoubanContract.DoubanBookModel, DoubanContract.DoubanMovieMo
       return RetrofitManager
               .provideClient(ConstantConfig.DOUBAN_BASE_URL)
               .create(DoubanApi::class.java)
-              .getDoubanMovieTop250(start, count)
+              .getDoubanMovieTop250(start, count, ConstantConfig.DOUBAN_APIKEY)
               .compose(RxJavaUtils.applyObservableAsync())
    }
 

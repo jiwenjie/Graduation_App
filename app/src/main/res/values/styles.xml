@@ -26,10 +26,16 @@
         <!--<item name="android:listDivider">@drawable/bg_divider</item>-->
     </style>
 
+    <!-- 侧滑栏与 toolbar 关联时返回键样式 -->
+    <style name="AppTheme.DrawerArrowToggle" parent="Base.Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
 
     <style name="BaseAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- 侧滑栏与 toolbar 关联时返回键样式 -->
+        <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme.NoActionBar" />

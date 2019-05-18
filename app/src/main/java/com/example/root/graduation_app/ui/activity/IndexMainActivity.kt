@@ -162,7 +162,7 @@ class IndexMainActivity : BaseActivity() {
                 if (!path.isNullOrEmpty()) {
                     imgAvatar?.setImageBitmap(BitmapFactory.decodeFile(path))
                 }
-                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
+//                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
             }
             if (user?.bgimageurl != null) {
                 // 说明此时有背景图片
@@ -170,7 +170,7 @@ class IndexMainActivity : BaseActivity() {
                 if (!path.isNullOrEmpty()) {
                     bgImg?.setImageBitmap(BitmapFactory.decodeFile(path))
                 }
-                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg!!)
+//                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg!!)
             }
         }
         drawer_layout.run {
@@ -520,7 +520,7 @@ class IndexMainActivity : BaseActivity() {
                 }
 //                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
             }
-            if (user?.profile != null) {
+            if (user?.bgimageurl != null) {
                 // 说明此时有背景图片
                 val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
                 if (!path.isNullOrEmpty()) {

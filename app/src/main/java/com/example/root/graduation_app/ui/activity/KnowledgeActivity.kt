@@ -49,6 +49,18 @@ class KnowledgeActivity : BaseActivity() {
       StatusBarUtil.setColor(this@KnowledgeActivity,
               ContextCompat.getColor(this@KnowledgeActivity, R.color.colorPrimary), 0)
       initView()
+      initEvent()
+   }
+
+   private fun initView() {
+      intent.extras?.let {
+         toolbarTitle = it.getString(ConstantConfig.CONTENT_TITLE_KEY) ?: ""
+         it.getSerializable(ConstantConfig.CONTENT_DATA_KEY)?.let {
+
+            val data = it as KnowledgeTreeBody
+            knowledges.addAll(data.children)
+         }
+      }
       toolbar.run {
          title = toolbarTitle
          setSupportActionBar(this)
@@ -71,14 +83,9 @@ class KnowledgeActivity : BaseActivity() {
       }
    }
 
-   private fun initView() {
-      intent.extras?.let {
-         toolbarTitle = it.getString(ConstantConfig.CONTENT_TITLE_KEY) ?: ""
-         it.getSerializable(ConstantConfig.CONTENT_DATA_KEY)?.let {
-
-            val data = it as KnowledgeTreeBody
-            knowledges.addAll(data.children)
-         }
+   private fun initEvent() {
+      toolbar.setNavigationOnClickListener {
+         finish()
       }
    }
 

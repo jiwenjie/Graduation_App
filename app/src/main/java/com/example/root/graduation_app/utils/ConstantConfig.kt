@@ -20,7 +20,7 @@ object ConstantConfig {
    const val WANWANDROID_URL = "https://wanandroid.com/"
    const val GITHUB_URL = "https://github.com/jiwenjie/Graduation_App"
 
-   const val JACKSON_BASE_URL = "http://172.17.16.62:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
+   const val JACKSON_BASE_URL = "http://192.168.1.101:8080/"  // 自己搭建的后台 host 地址，需要根据当前的 ip 地址来调整
 
    const val SHARE_LOGIN_USER_NAME = "share_user"
    const val PAGE_LIMIT: Int = 20   // 分页查询的时候一次查询 20 个

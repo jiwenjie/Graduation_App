@@ -22,13 +22,13 @@ interface DoubanApi {
     * get hot movies
     */
    @GET("v2/movie/in_theaters")
-   fun getDoubanHotMovie(): Observable<DoubanMovieBean>
+   fun getDoubanHotMovie(@Query("apikey") apiKey: String): Observable<DoubanMovieBean>
 
    /**
     * get movie detail
     */
    @GET("v2/movie/subject/{id}")
-   fun getDoubanMovieDetail(@Path("id") id: String): Observable<DoubanMovieDetail>
+   fun getDoubanMovieDetail(@Path("id") id: String, @Query("apikey") apiKey: String): Observable<DoubanMovieDetail>
 
 
    /**
@@ -38,7 +38,7 @@ interface DoubanApi {
     */
    @GET("v2/movie/top250")
    fun getDoubanMovieTop250(@Query("start") start: Int,
-                            @Query("count") count: Int): Observable<DoubanMovieBean>
+                            @Query("count") count: Int, @Query("apikey") apiKey: String): Observable<DoubanMovieBean>
 
 
    /**
