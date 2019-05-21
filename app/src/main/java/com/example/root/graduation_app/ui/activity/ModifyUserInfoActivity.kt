@@ -22,7 +22,6 @@ import android.text.TextUtils
 import android.view.View
 import com.example.base_library.PermissionListener
 import com.example.base_library.RetrofitManager
-import com.example.base_library.RxBus
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
@@ -34,9 +33,6 @@ import kotlinx.android.synthetic.main.activity_modify_user_info.*
 import java.io.File
 import com.example.root.graduation_app.base.api.JacksonApi
 import com.example.root.graduation_app.bean.LoginUser
-import com.example.root.graduation_app.rxbusevent.UserInfoChangeEvent
-import java.io.FileOutputStream
-import java.io.IOException
 
 
 /**
@@ -93,10 +89,22 @@ class ModifyUserInfoActivity : BaseActivity() {
         srcDescription = App.getLoginUser()?.profile
         // todo 暂时注释，这里需要注意逻辑部分
         if (srcAvatar != null) {
-            PhoneUserUtils.loadAvatar(this@ModifyUserInfoActivity, srcAvatar!!, userAvatar)
+            val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_AVATAR)
+            if (!path.isNullOrEmpty()) {
+                userAvatar?.setImageBitmap(BitmapFactory.decodeFile(path))
+            } else {
+                PhoneUserUtils.loadAvatar(this@ModifyUserInfoActivity, srcAvatar!!, userAvatar)
+            }
+
         }
         if (srcBgImage != null) {
-            CommonUtils.displayImgAsBitmap(this@ModifyUserInfoActivity, srcBgImage!!, userBgImage)
+            val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
+            if (!path.isNullOrEmpty()) {
+                userBgImage?.setImageBitmap(BitmapFactory.decodeFile(path))
+            } else {
+                CommonUtils.displayImgAsBitmap(this@ModifyUserInfoActivity, srcBgImage!!, userBgImage)
+            }
+
         }
         userNickname.text = srcNickname
         nicknameEdit.setText(srcNickname)
@@ -256,6 +264,7 @@ class ModifyUserInfoActivity : BaseActivity() {
                             override fun onGranted() {
                                 takePhoto()
                             }
+
                             override fun onDenied(deniedPermissions: List<String>) {
                                 showDialog()
                             }
@@ -300,15 +309,15 @@ class ModifyUserInfoActivity : BaseActivity() {
         imageCropFile = FileUtil.createImageFile(true)
         imageCropFile?.let {
             val intent = Intent("com.android.camera.action.CROP")
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)  //添加这一句表示对目标应用临时授权该 Uri 所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)  // 添加这一句表示对目标应用临时授权该 Uri 所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-            intent.setDataAndType(sourceUri, "image/*")  //设置数据源
+            intent.setDataAndType(sourceUri, "image/*")  // 设置数据源
             intent.putExtra("crop", "true")
-            intent.putExtra("aspectX", 1)    //X方向上的比例
-            intent.putExtra("aspectY", 1)    //Y方向上的比例
-            intent.putExtra("outputX", 500)  //裁剪区的宽
-            intent.putExtra("outputY", 500) //裁剪区的高
-            intent.putExtra("scale ", true)  //是否保留比例
+            intent.putExtra("aspectX", 1)       // X 方向上的比例
+            intent.putExtra("aspectY", 1)       // Y 方向上的比例
+            intent.putExtra("outputX", 500)     //裁剪区的宽
+            intent.putExtra("outputY", 500)     //裁剪区的高
+            intent.putExtra("scale ", true)     //是否保留比例
             intent.putExtra("return-data", false)
             intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(it))
@@ -358,25 +367,14 @@ class ModifyUserInfoActivity : BaseActivity() {
     private fun saveAvatar() {
         // 先把内容保存到本地
         SharePreferencesUtil.saveUserImgPath(ConstantConfig.KEY_USER_AVATAR, imageCropFile?.absolutePath!!)
+        userAvatar.setImageBitmap(BitmapFactory.decodeFile(imageCropFile?.absolutePath!!))
         uploadAvatar(imageCropFile?.absolutePath!!)
     }
 
     private fun saveBg() {
         SharePreferencesUtil.saveUserImgPath(ConstantConfig.KEY_USER_BG, imageCropFile?.absolutePath!!)
+        userBgImage.setImageBitmap(BitmapFactory.decodeFile(imageCropFile?.absolutePath!!))
         uploadBgImg(imageCropFile?.absolutePath!!)
-    }
-
-    /**
-     * 某些机型直接获取会为null,在这里处理一下防止国内某些机型返回null
-     */
-    private fun getViewBitmap(view: View?): Bitmap? {
-        if (view == null) {
-            return null
-        }
-        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        view.draw(canvas)
-        return bitmap
     }
 
     // 上传头像图片
@@ -385,7 +383,6 @@ class ModifyUserInfoActivity : BaseActivity() {
             override fun uploadSuccess(user: LoginUser) {
                 ToastUtils.showToast(this@ModifyUserInfoActivity, "上传成功")
                 App.setLoginUser(user)  // 保存 loginUser
-                userAvatar.setImageBitmap(BitmapFactory.decodeFile(path))
                 LogUtils.e("上传成功")
             }
 
@@ -400,14 +397,11 @@ class ModifyUserInfoActivity : BaseActivity() {
     private fun uploadBgImg(path: String) {
         UploadUtils.uploadBgImg(App.getLoginUser()?.userid!!, path, object : UploadUtils.UploadListener {
             override fun uploadSuccess() {
-                runOnUiThread {
-                    userBgImage.setImageBitmap(BitmapFactory.decodeFile(path))
-                }
                 LogUtils.e("ModifyUserInfo 成功")
             }
 
             override fun uploadFailed(msg: String) {
-                LogUtils.e("ModifyUserInfo" + msg)
+                LogUtils.e("ModifyUserInfo$msg")
             }
         })
     }

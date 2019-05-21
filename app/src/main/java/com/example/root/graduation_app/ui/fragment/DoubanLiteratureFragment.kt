@@ -1,6 +1,5 @@
 package com.example.root.graduation_app.ui.fragment
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
@@ -80,7 +79,8 @@ class DoubanLiteratureFragment : BaseMvpFragment<DoubanContract.DoubanBookView, 
       adapter.setOnItemClickListener { position, view ->
          /** 实现共享动画 **/
          val intent = Intent(activity!!, DoubanBookDetailActivity::class.java)
-         val compat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, view.findViewById(R.id.iv_item_image), "ShareElement")
+         val compat = ActivityOptionsCompat
+            .makeSceneTransitionAnimation(activity!!, view.findViewById(R.id.iv_item_image), "ShareElement")
          intent.putExtra(DoubanBookDetailActivity.KEY_BEAN, beanList[position])
          activity!!.startActivity(intent, compat.toBundle())
       }

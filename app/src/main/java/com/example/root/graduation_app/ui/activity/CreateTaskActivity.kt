@@ -54,7 +54,6 @@ class CreateTaskActivity : BaseMvpActivity<TaskContract.View, TaskPresenter>(), 
    }
 
    override fun initActivity(savedInstanceState: Bundle?) {
-
       StatusBarUtil.setColor(this@CreateTaskActivity,
               ContextCompat.getColor(this@CreateTaskActivity, R.color.colorPrimary), 0)
 

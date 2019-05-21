@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.base_library.base_adapters.BaseFragmentPagerAdapter
 import com.example.base_library.base_mvp.BaseMvpFragment
-import com.example.base_library.base_utils.LogUtils
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.bean.WanAndroidPublicItemBean
 import com.example.root.graduation_app.mvp.constract.WanandroidContract
@@ -42,13 +41,9 @@ class WeChatFragment : BaseMvpFragment<WanandroidContract.WanandroidPublicView, 
         mPresenter.getPublicAddressList()
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_discovery
-
     override fun initFragment(savedInstanceState: Bundle?) {
 
     }
-
-    override fun initPresenter(): WanandroidPublicPresenter = WanandroidPublicPresenter(this)
 
     override fun displayPublicNumList(publicBeanList: ArrayList<WanAndroidPublicItemBean>) {
         if (titles.size == 0 && (titles.size == fragmentList.size)) {
@@ -61,4 +56,8 @@ class WeChatFragment : BaseMvpFragment<WanandroidContract.WanandroidPublicView, 
         container_vp.adapter = BaseFragmentPagerAdapter(childFragmentManager, fragmentList, titles)
         container_tab.setupWithViewPager(container_vp)
     }
+
+    override fun initPresenter(): WanandroidPublicPresenter = WanandroidPublicPresenter(this)
+
+    override fun getLayoutId(): Int = R.layout.fragment_discovery
 }

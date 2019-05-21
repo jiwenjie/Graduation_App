@@ -79,7 +79,7 @@ class HomeFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(), 
         override fun onTabSelected(tab: TabLayout.Tab?) {
             // 默认切换的时候，会有一个过渡动画，设为false后，取消动画，直接显示
             tab?.let {
-                viewPager.setCurrentItem(it.position, false)
+                viewPager.setCurrentItem(it.position, false)    //false：代表快速切换 true：表示切换速度慢
             }
         }
     }

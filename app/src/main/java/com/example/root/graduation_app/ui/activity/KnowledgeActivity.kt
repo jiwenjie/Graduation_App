@@ -74,8 +74,6 @@ class KnowledgeActivity : BaseActivity() {
       }
       tabLayout.run {
          setupWithViewPager(viewPager)
-         // TabLayoutHelper.setUpIndicatorWidth(tabLayout)
-         addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
          addOnTabSelectedListener(onTabSelectedListener)
       }
       floating_action_btn.run {

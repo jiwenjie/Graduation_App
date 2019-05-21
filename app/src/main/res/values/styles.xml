@@ -109,5 +109,4 @@
         <item name="image_tint">@color/zhihuBlue</item>
         <item name="press_color">@color/zhihuBlue50</item>
     </style>
-
 </resources>

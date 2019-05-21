@@ -33,6 +33,7 @@
                 <ImageView
                     android:id="@+id/searchBack"
                     android:layout_width="32dp"
+                    android:padding="@dimen/dp_4"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:src="@drawable/ic_arrow_back"/>

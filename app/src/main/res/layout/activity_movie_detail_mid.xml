@@ -89,6 +89,5 @@
             android:text="导演 &amp; 演员"
             android:textColor="@color/alpha_70_black"
             android:textSize="@dimen/common_sp_18"/>
-
     </LinearLayout>
 </LinearLayout>

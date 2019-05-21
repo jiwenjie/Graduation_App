@@ -125,31 +125,37 @@ class SearchActivity :
     }
 
     private fun setupSearchView() {
+        var searchWord: String? = null
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.inputType = InputType.TYPE_TEXT_FLAG_CAP_WORDS
         searchView.imeOptions = searchView.imeOptions or EditorInfo.IME_ACTION_SEARCH or
                 EditorInfo.IME_FLAG_NO_EXTRACT_UI or EditorInfo.IME_FLAG_NO_FULLSCREEN
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                searchFor(query)
+                LogUtils.e("queryQ$query")
                 return true
             }
 
             override fun onQueryTextChange(query: String): Boolean {
+                LogUtils.e("queryT$query")
+                searchWord= query
                 if (TextUtils.isEmpty(query)) {
                     clearResults()
                 }
                 return true
             }
         })
+        searchView.setOnClickListener {
+            LogUtils.e("queryEEE$searchWord")
+            if (searchWord.isNullOrEmpty()) return@setOnClickListener
+
+            page = 0
+            mPresenter.searchArticleAll(page, searchWord!!)
+        }
 
         searchBack.setOnClickListener {
             dismiss()
         }
-    }
-
-    private fun searchFor(query: String) {
-
     }
 
     private fun dismiss() {
