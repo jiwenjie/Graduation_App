@@ -70,8 +70,6 @@ class SplashActivity : BaseActivity() {
       }
    }
 
-   override fun getLayoutId(): Int = R.layout.activity_splash
-
    override fun initActivity(savedInstanceState: Bundle?) {
       fullScreen()
       val objAlphaIv = ObjectAnimator.ofFloat(ivSplash, "alpha", 0f, 1f)
@@ -94,4 +92,6 @@ class SplashActivity : BaseActivity() {
       finish()
       overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
    }
+
+   override fun getLayoutId(): Int = R.layout.activity_splash
 }

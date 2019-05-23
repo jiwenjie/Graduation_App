@@ -18,7 +18,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.base_library.RetrofitManager
-import com.example.base_library.RxBus
 import com.example.base_library.base_utils.LogUtils
 import com.example.base_library.base_utils.ToastUtils
 import com.example.base_library.base_views.BaseActivity
@@ -26,7 +25,6 @@ import com.example.root.graduation_app.App
 import com.example.root.graduation_app.R
 import com.example.root.graduation_app.base.api.JacksonApi
 import com.example.root.graduation_app.bean.LoginUser
-import com.example.root.graduation_app.rxbusevent.UserInfoChangeEvent
 import com.example.root.graduation_app.ui.fragment.WeChatFragment
 import com.example.root.graduation_app.ui.fragment.BookFragment
 import com.example.root.graduation_app.ui.fragment.KnowledgeTreeFragment
@@ -35,10 +33,8 @@ import com.example.root.graduation_app.utils.*
 import com.example.root.graduation_app.widget.SignUpDialog
 import com.jaeger.library.StatusBarUtil
 import io.reactivex.Observable
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_index_main.*
 import kotlinx.android.synthetic.main.toolbar.*
-import java.io.FileInputStream
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -115,7 +111,7 @@ class IndexMainActivity : BaseActivity() {
             // 以前使用 BottomNavigationViewHelper.disableShiftMode(this) 方法来设置底部图标和字体都显示并去掉点击动画
             // 升级到 28.0.0 之后，官方重构了 BottomNavigationView ，目前可以使用 labelVisibilityMode = 1 来替代
             // BottomNavigationViewHelper.disableShiftMode(this)
-            labelVisibilityMode = 1
+            labelVisibilityMode = 1     // 去掉点击动画
             setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         }
         floating_action_btn.run {
@@ -512,21 +508,15 @@ class IndexMainActivity : BaseActivity() {
                 introduction?.text = user?.profile
             }
 
-            if (user?.avatar != null) {
+            val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_AVATAR)
+            if (path != null) {
                 // 说明有头像存储
-                val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_AVATAR)
-                if (!path.isNullOrEmpty()) {
-                    imgAvatar?.setImageBitmap(BitmapFactory.decodeFile(path))
-                }
-//                PhoneUserUtils.loadAvatar(this@IndexMainActivity, user?.avatar!!, imgAvatar!!)
+                imgAvatar?.setImageBitmap(BitmapFactory.decodeFile(path))
             }
-            if (user?.bgimageurl != null) {
+            val pathBg = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
+            if (pathBg != null) {
                 // 说明此时有背景图片
-                val path = SharePreferencesUtil.getUserImgPath(ConstantConfig.KEY_USER_BG)
-                if (!path.isNullOrEmpty()) {
-                    bgImg?.setImageBitmap(BitmapFactory.decodeFile(path))
-                }
-//                CommonUtils.displayImgAsBitmap(this@IndexMainActivity, user?.bgimageurl!!, bgImg!!)
+                bgImg?.setImageBitmap(BitmapFactory.decodeFile(pathBg))
             }
         }
     }

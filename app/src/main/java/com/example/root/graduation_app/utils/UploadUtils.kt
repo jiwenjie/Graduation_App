@@ -54,11 +54,6 @@ object UploadUtils {
             })
     }
 
-    @SuppressLint("CheckResult")
-    fun uploadMusic(userid: String, imgPath: String, listener: UploadListener) {   // true 为上传成功，false 为上传失败
-
-    }
-
     // 上传背景图片的方法
     fun uploadBgImg(userid: String, imgPath: String, listener: UploadListener) {
         var file: File? = null
